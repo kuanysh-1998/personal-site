@@ -1,0 +1,26 @@
+<div class="ng-button">
+  <button
+    [ngClass]="buttonClasses"
+    (click)="click($event)"
+    [disabled]="disabled"
+    type="button"
+    class="ng-button__container"
+  >
+    @if (icon) {
+    <ng-svg
+      [width]="iconWidth"
+      [height]="iconHeight"
+      class="ng-button__icon"
+      [icon]="icon"
+    ></ng-svg>
+    }
+
+    {{ label }}
+
+    @if (!label) {
+    <ng-content></ng-content>
+    } @if (rightIcon) {
+    <ng-svg class="ng-button__icon" [icon]="rightIcon"></ng-svg>
+    }
+  </button>
+</div>

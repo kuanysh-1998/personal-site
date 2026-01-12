@@ -9,4 +9,6 @@ export type IconSize = keyof typeof ICON_DEFAULT_SIZE;
 export enum Icons {
   Checkmark = 'checkmark',
   CopyIcon = 'copy-icon',
+  Cross = 'i_toast_close',
+  Info = 'i_info',
 }

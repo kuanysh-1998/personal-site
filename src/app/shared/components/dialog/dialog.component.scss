@@ -1,0 +1,190 @@
+.ng-dialog {
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-index-dialog);
+    visibility: hidden;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.ng-dialog__backdrop_visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &.ng-dialog__backdrop_blurred {
+      backdrop-filter: blur(4px);
+    }
+  }
+
+  &__container {
+    position: fixed;
+    z-index: var(--z-index-dialog);
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    max-height: 98vh;
+    padding: 24px;
+    visibility: hidden;
+    background-color: #111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.ng-dialog__container_open {
+      visibility: visible;
+      opacity: 1;
+      animation: show-dialog 0.3s;
+    }
+
+    &.ng-dialog__container_closed {
+      animation: hide-dialog 0.1s;
+    }
+  }
+
+  &__container.scrollable .ng-dialog__content {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    padding-right: 8px;
+    margin-right: -20px;
+  }
+
+  &__header-wrapper {
+    font-family: 'PTRootUI', sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    min-height: 36px;
+    margin-bottom: 24px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  &__header {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  &__close-button {
+    cursor: pointer;
+    fill: var(--white);
+    transition: fill 0.2s;
+
+    &:hover {
+      fill: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  &__content {
+    overflow-y: visible;
+    font-family: 'PTRootUI', sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
+  &__footer {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  &__footer-actions {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    justify-content: end;
+    width: 100%;
+  }
+}
+
+@keyframes show-dialog {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hide-dialog {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@media (max-width: 768px) {
+  .ng-dialog {
+    &__container {
+      max-width: 93vw !important;
+      width: 93vw !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .ng-dialog {
+    &__container {
+      max-width: 95vw !important;
+      width: 95vw !important;
+      padding: 16px;
+    }
+
+    &__header-wrapper {
+      margin-bottom: 16px;
+    }
+
+    &__footer {
+      margin-top: 16px;
+    }
+  }
+}

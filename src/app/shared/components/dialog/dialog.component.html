@@ -1,0 +1,108 @@
+<ng-template #dialogTemplate>
+  <div
+    class="ng-dialog__backdrop"
+    [class.ng-dialog__backdrop_visible]="isVisible()"
+    [class.ng-dialog__backdrop_blurred]="isBlurred"
+    (click)="onBackdropClick()"
+  ></div>
+
+  <div
+    #dialogContainer
+    tabindex="-1"
+    [id]="dialogId"
+    [ngClass]="externalClass"
+    [class.ng-dialog__container_open]="isVisible()"
+    [style.width]="getDialogWidth"
+    [ngStyle]="getPositionStyles()"
+    class="ng-dialog__container"
+  >
+    @if (showBackButton || showHeader || showCloseButton) {
+    <div class="ng-dialog__header-wrapper">
+      <div class="ng-dialog__header">
+        @if (showBackButton) {
+        <ng-button
+          [icon]="arrowLeftIcon"
+          (clicked)="return()"
+          variant="default"
+          stylingMode="outlined"
+        ></ng-button>
+        } @if (showHeader) {
+        <div>{{ header }}</div>
+        }
+      </div>
+
+      <div class="ng-dialog__header">
+        <ng-container *ngTemplateOutlet="customHeaderTemplate ?? null"></ng-container>
+
+        @if (showCloseButton) {
+        <ng-svg
+          [icon]="closeIcon"
+          (click)="close()"
+          token="closeModal"
+          class="ng-dialog__close-button"
+        ></ng-svg>
+        }
+      </div>
+    </div>
+    }
+
+    <div class="ng-dialog__content" #modalContent>
+      <ng-container *ngComponentOutlet="componentType"></ng-container>
+      <ng-container *ngTemplateOutlet="templateRef"></ng-container>
+      @if (text) {
+      {{ text }}
+      }
+      <ng-content></ng-content>
+    </div>
+
+    <div class="ng-dialog__footer">
+      @if (customFooterTemplate) {
+      <ng-container *ngTemplateOutlet="customFooterTemplate"></ng-container>
+      } @else if (cancelButtonConfig || submitButtonConfig || additionalActionButtonConfig) {@if
+      (additionalActionButtonConfig) {
+      <ng-button
+        [id]="dialogId ? dialogId + '-additional' : undefined"
+        [label]="additionalActionButtonConfig.label"
+        [stylingMode]="additionalActionButtonConfig.stylingMode ?? 'outlined'"
+        [variant]="additionalActionButtonConfig.variant ?? 'default'"
+        [icon]="additionalActionButtonConfig.icon"
+        [rightIcon]="additionalActionButtonConfig.iconRight"
+        [disabled]="additionalActionButtonConfig.disabled ?? false"
+        (clicked)="action()"
+        class="ng-dialog__action-button"
+      ></ng-button>
+      }
+
+      <div class="ng-dialog__footer-actions">
+        @if (cancelButtonConfig) {
+        <ng-button
+          [id]="dialogId ? dialogId + '-cancel' : undefined"
+          [label]="cancelButtonConfig.label"
+          [stylingMode]="cancelButtonConfig.stylingMode ?? 'outlined'"
+          [variant]="cancelButtonConfig.variant ?? 'default'"
+          [icon]="cancelButtonConfig.icon"
+          [rightIcon]="cancelButtonConfig.iconRight"
+          [disabled]="cancelButtonConfig.disabled ?? false"
+          (clicked)="cancel()"
+          [active]="enableKeyboardNavigation && activeButton === 'cancel'"
+          class="ng-dialog__cancel-button"
+        ></ng-button>
+        } @if (submitButtonConfig) {
+        <ng-button
+          [id]="dialogId ? dialogId + '-submit' : undefined"
+          [label]="submitButtonConfig.label"
+          [stylingMode]="submitButtonConfig.stylingMode ?? 'contained'"
+          [variant]="submitButtonConfig.variant ?? 'default'"
+          [icon]="submitButtonConfig.icon"
+          [rightIcon]="submitButtonConfig.iconRight"
+          [disabled]="submitButtonConfig.disabled ?? false"
+          (clicked)="submit()"
+          [active]="enableKeyboardNavigation && activeButton === 'submit'"
+          class="ng-dialog__submit-button"
+        ></ng-button>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</ng-template>

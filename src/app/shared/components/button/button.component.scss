@@ -1,0 +1,144 @@
+.ng-button {
+  display: block;
+  flex-shrink: 0;
+
+  &__container {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: inherit;
+    white-space: nowrap;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-family: 'PT Root UI', sans-serif;
+
+    &_size-small {
+      height: 2rem;
+      padding: 0.375rem 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    &_size-default {
+      height: 2.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    &_size-large {
+      height: 3rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+
+    &_full-width {
+      width: 100%;
+    }
+
+    &_full-height {
+      height: 100%;
+    }
+
+    &_icon-button {
+      padding: 0.5rem;
+      aspect-ratio: 1;
+    }
+
+    &_ghost {
+      color: rgba(255, 255, 255, 0.9);
+      background: transparent;
+      border: 1px solid transparent;
+
+      &:hover:not(&_disabled) {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      &:active:not(&_disabled) {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      &.ng-button__container_disabled {
+        color: rgba(255, 255, 255, 0.3);
+        cursor: not-allowed;
+      }
+    }
+
+    &_outlined {
+      color: rgba(255, 255, 255, 0.9);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      &:hover:not(&_disabled) {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      &:active:not(&_disabled) {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      &.ng-button__container_disabled {
+        color: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.1);
+        cursor: not-allowed;
+      }
+    }
+
+    &_contained {
+      color: #000;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+
+      &:hover:not(&_disabled) {
+        background: #fff;
+        border-color: #fff;
+      }
+
+      &:active:not(&_disabled) {
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      &.ng-button__container_disabled {
+        color: rgba(0, 0, 0, 0.4);
+        background: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.3);
+        cursor: not-allowed;
+      }
+    }
+
+    &_danger {
+      &.ng-button__container_outlined {
+        color: #ef4444;
+        border-color: #ef4444;
+
+        &:hover:not(&_disabled) {
+          background: rgba(239, 68, 68, 0.1);
+        }
+      }
+
+      &.ng-button__container_contained {
+        color: #fff;
+        background: #ef4444;
+        border-color: #ef4444;
+
+        &:hover:not(&_disabled) {
+          background: #dc2626;
+        }
+      }
+    }
+
+    &_active {
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    flex-shrink: 0;
+  }
+}
