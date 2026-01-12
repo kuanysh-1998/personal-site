@@ -18,8 +18,26 @@ export const routes: Routes = [
       },
       {
         path: 'blog',
-        loadComponent: () =>
-          import('./features/blog/pages/blog.component').then((m) => m.BlogComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/blog/pages/blog-list/blog-list.component').then(
+                (m) => m.BlogListComponent
+              ),
+          },
+          {
+            path: ':slug',
+            loadComponent: () =>
+              import('./features/blog/pages/post-detail/post-detail.component').then(
+                (m) => m.PostDetailComponent
+              ),
+          },
+        ],
+      },
+      {
+        path: '**',
+        redirectTo: 'about',
       },
     ],
   },

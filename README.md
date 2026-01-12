@@ -1,59 +1,90 @@
-# PersonalSite
+# Personal Site
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+Modern personal website and blog built with Angular. Clean, minimalist design focused on content and performance.
 
-## Development server
+## 🚀 Tech Stack
 
-To start a local development server, run:
+- **Angular 21** — Latest standalone components
+- **TypeScript** — Type-safe development
+- **RxJS** — Reactive programming
+- **Signals API** — Modern state management
+- **SCSS** — Styling with PT Root UI font
+- **ngx-markdown** — Blog post rendering
+
+## 📦 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
 ng serve
+
+# Open http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🏗️ Project Structure
 
-## Code scaffolding
+```
+src/
+├── app/
+│   ├── features/
+│   │   ├── about/         # About page
+│   │   └── blog/          # Blog with markdown posts
+│   ├── shared/            # Reusable components
+│   │   ├── header/        # Navigation
+│   │   └── social-connect/# Contact links
+│   └── layouts/           # Page layouts
+├── assets/
+│   ├── posts/             # Markdown blog posts
+│   └── fonts/             # PT Root UI font files
+└── styles/                # Global styles
+```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📝 Adding Blog Posts
+
+1. Create markdown file in `src/assets/posts/`
+2. Add metadata to `src/app/features/blog/data/posts.data.ts`:
+
+```typescript
+{
+  title: 'Your Post Title',
+  date: '2025-01-12',
+  slug: 'your-post-slug',
+  description: 'Brief description'
+}
+```
+
+## 🚢 Deployment
+
+**Deploy to Vercel:**
 
 ```bash
-ng generate component component-name
+# Push to GitHub
+git push origin main
+
+# Deploy via Vercel CLI or connect GitHub repo
+vercel --prod
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+**Build for production:**
 
 ```bash
 ng build
+# Output in dist/
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🔗 Live Site
 
-## Running unit tests
+Coming soon: [kuanysh.dev](https://kuanysh.dev)
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 📬 Contact
 
-```bash
-ng test
-```
+- Email: kuanysh.aptayzhanov@mail.ru
+- LinkedIn: [linkedin.com/in/kuanyshaptaizhanov](https://linkedin.com/in/kuanyshaptaizhanov)
+- GitHub: [github.com/kuanysh-1998](https://github.com/kuanysh-1998)
+- Telegram: [@kuanysh_aptaizhanov](https://t.me/kuanysh_aptaizhanov)
 
-## Running end-to-end tests
+## 📄 License
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT © Kuanysh Aptaizhanov

@@ -53,7 +53,7 @@ export class MainLayoutComponent {
   }
 
   protected onTabChanged(tab: Tab): void {
-    this._router.navigate([tab.id], { relativeTo: this._route });
+    this._router.navigate([`/${tab.id}`]);
   }
 
   private _updateSelectedTabFromUrl(): void {

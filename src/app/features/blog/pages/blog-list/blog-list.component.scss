@@ -1,0 +1,56 @@
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: var(--white);
+}
+
+.year-group {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.year {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white);
+  padding-top: 0.5rem;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.post-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  color: var(--white);
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.post-title {
+  font-size: 1rem;
+  color: var(--white);
+}
+
+.post-date {
+  font-size: 1rem;
+  color: var(--white);
+  white-space: nowrap;
+}

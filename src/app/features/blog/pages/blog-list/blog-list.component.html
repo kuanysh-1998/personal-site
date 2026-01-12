@@ -1,0 +1,15 @@
+<div class="blog-list">
+  @for (group of postsByYear(); track group.year) {
+  <div class="year-group">
+    <div class="year">{{ group.year }}</div>
+    <div class="posts">
+      @for (post of group.posts; track post.slug) {
+      <a [routerLink]="['/blog', post.slug]" class="post-item">
+        <span class="post-title">{{ post.title }}</span>
+        <span class="post-date">{{ formatDate(post.date) }}</span>
+      </a>
+      }
+    </div>
+  </div>
+  }
+</div>
