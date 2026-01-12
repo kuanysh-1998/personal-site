@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ServiceWorkerUpdateService } from './core/services/service-worker-update/service-worker-update.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,10 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {}
+export class App implements OnInit {
+  constructor(private readonly _serviceWorkerUpdateService: ServiceWorkerUpdateService) {}
+
+  public ngOnInit(): void {
+    this._serviceWorkerUpdateService.checkForUpdates();
+  }
+}
