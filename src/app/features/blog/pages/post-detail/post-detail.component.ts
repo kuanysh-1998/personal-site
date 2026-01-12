@@ -1,21 +1,22 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+} from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { PostService } from '@app/entities/post/services/post.service';
-import { Post, PostMetadata } from '@app/entities/post/models/post.interface';
-import { Observable, switchMap } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { PostState } from '@app/entities/post/models/post.interface';
+import { fromEvent, Observable, switchMap } from 'rxjs';
+import { map, startWith, throttleTime } from 'rxjs/operators';
 import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
 import { PostNavigationComponent } from '../../components/post-navigation/post-navigation.component';
 import { CopyLinkComponent } from '@app/shared/components/copy-link/copy-link.component';
-
-type PostState = {
-  loading: boolean;
-  post: Post | null;
-  previousPost: PostMetadata | null;
-  nextPost: PostMetadata | null;
-};
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-post-detail',
@@ -31,9 +32,12 @@ type PostState = {
   styleUrl: './post-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostDetailComponent {
+export class PostDetailComponent implements AfterViewInit {
   private readonly _route = inject(ActivatedRoute);
   private readonly _postService = inject(PostService);
+  private readonly _destroyRef = inject(DestroyRef);
+
+  protected readonly showScrollTop = signal(false);
 
   protected readonly postState$: Observable<PostState> = this._route.paramMap.pipe(
     map((params) => params.get('slug') || ''),
@@ -54,6 +58,22 @@ export class PostDetailComponent {
       )
     )
   );
+
+  public ngAfterViewInit(): void {
+    fromEvent(document, 'scroll', { capture: true })
+      .pipe(throttleTime(100), takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => {
+        const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+        this.showScrollTop.set(scrollPosition > 300);
+      });
+  }
+
+  protected scrollToTop(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 
   protected formatDate(dateStr: string): string {
     const date = new Date(dateStr);

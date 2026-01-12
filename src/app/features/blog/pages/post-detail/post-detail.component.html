@@ -1,6 +1,7 @@
 @if (postState$ | async; as state) {
 <div class="post-detail">
   <a routerLink="/blog" class="back-link">← Back to blog</a>
+
   @if (state.loading) {
   <article class="post-content">
     <header class="post-header">
@@ -29,12 +30,15 @@
     </div>
   </article>
   <app-post-navigation [previousPost]="state.previousPost" [nextPost]="state.nextPost" />
-
   } @else {
   <div class="not-found">
     <h1>Post not found</h1>
     <p>The post you're looking for doesn't exist.</p>
   </div>
+  }
+
+  @if (showScrollTop()) {
+  <button class="scroll-to-top" (click)="scrollToTop()" aria-label="Scroll to top">↑</button>
   }
 </div>
 }

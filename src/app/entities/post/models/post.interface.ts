@@ -13,3 +13,10 @@ export interface PostGroup {
   readonly year: number;
   readonly posts: PostMetadata[];
 }
+
+export interface PostState {
+  loading: boolean;
+  post: Post | null;
+  previousPost: PostMetadata | null;
+  nextPost: PostMetadata | null;
+}
