@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { PostGroup } from '@app/entities/post/models/post.interface';
-import { Observable, map } from 'rxjs';
 import { PostService } from '@app/entities/post/services/post.service';
 
 @Component({
   selector: 'app-blog-list',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterLink],
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

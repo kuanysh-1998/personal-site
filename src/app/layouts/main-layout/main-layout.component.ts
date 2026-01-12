@@ -5,8 +5,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TabsComponent } from '../../shared/components/tab/tabs.component';
@@ -14,15 +13,13 @@ import { Tab } from '../../shared/components/tab/tabs.types';
 
 @Component({
   selector: 'app-main-layout',
-  standalone: true,
-  imports: [CommonModule, TabsComponent, RouterOutlet],
+  imports: [TabsComponent, RouterOutlet],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainLayoutComponent {
   private readonly _router = inject(Router);
-  private readonly _route = inject(ActivatedRoute);
   private readonly _cdr = inject(ChangeDetectorRef);
 
   protected readonly tabs: Tab[] = [

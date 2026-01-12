@@ -29,6 +29,13 @@
   gap: 0.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
 }
 
 .post-title {
@@ -36,6 +43,7 @@
   font-weight: 600;
   color: var(--white);
   margin: 0;
+  flex: 1;
 }
 
 .post-date {
@@ -59,5 +67,23 @@
 
   p {
     opacity: 0.7;
+  }
+}
+
+.post-header {
+  .ng-skeleton {
+    &:first-child {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.post-body {
+  .ng-skeleton {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }

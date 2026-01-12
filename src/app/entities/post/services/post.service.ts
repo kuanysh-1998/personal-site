@@ -11,9 +11,7 @@ export class PostService {
   private readonly _http = inject(HttpClient);
 
   public getAllPosts(): PostMetadata[] {
-    return [...POSTS].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+    return [...POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
   public getPostBySlug(slug: string): Observable<Post | null> {
@@ -39,5 +37,27 @@ export class PostService {
     });
 
     return grouped;
+  }
+
+  public getPreviousPost(currentSlug: string): PostMetadata | null {
+    const allPosts = this.getAllPosts();
+    const currentIndex = allPosts.findIndex((post) => post.slug === currentSlug);
+
+    if (currentIndex === -1 || currentIndex === allPosts.length - 1) {
+      return null;
+    }
+
+    return allPosts[currentIndex + 1];
+  }
+
+  public getNextPost(currentSlug: string): PostMetadata | null {
+    const allPosts = this.getAllPosts();
+    const currentIndex = allPosts.findIndex((post) => post.slug === currentSlug);
+
+    if (currentIndex === -1 || currentIndex === 0) {
+      return null;
+    }
+
+    return allPosts[currentIndex - 1];
   }
 }

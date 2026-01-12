@@ -14,7 +14,7 @@ import { ICON_DEFAULT_SIZE, Icons, IconSize } from './svg.config';
 export class SvgComponent {
   @Input() icon?: Icons | string;
 
-  @Input() basePath = 'assets/image';
+  @Input() basePath = 'assets/images';
 
   @Input() size: IconSize = 'default';
   @Input() color?: string;

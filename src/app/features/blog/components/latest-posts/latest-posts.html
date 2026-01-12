@@ -1,0 +1,15 @@
+<div class="latest-posts">
+  <h3>Latest Posts</h3>
+  <div class="posts-list">
+    @for (post of latestPosts(); track post.slug) {
+    <a [routerLink]="['/blog', post.slug]" class="post-item">
+      <div class="post-content">
+        <div class="post-title">{{ post.title }}</div>
+        @if (post.description) {
+        <div class="post-description">{{ post.description }}</div>
+        }
+      </div>
+    </a>
+    }
+  </div>
+</div>

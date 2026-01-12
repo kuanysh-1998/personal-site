@@ -6,4 +6,7 @@ export const ICON_DEFAULT_SIZE = {
 
 export type IconSize = keyof typeof ICON_DEFAULT_SIZE;
 
-export enum Icons {}
+export enum Icons {
+  Checkmark = 'checkmark',
+  CopyIcon = 'copy-icon',
+}

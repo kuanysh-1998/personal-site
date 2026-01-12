@@ -1,22 +1,40 @@
-@if (post$ | async; as post) {
+@if (postState$ | async; as state) {
 <div class="post-detail">
   <a routerLink="/blog" class="back-link">← Back to blog</a>
+  @if (state.loading) {
   <article class="post-content">
     <header class="post-header">
-      <h1 class="post-title">{{ post.title }}</h1>
-      <time class="post-date">{{ formatDate(post.date) }}</time>
+      <ng-skeleton height="2rem" width="100%"></ng-skeleton>
+      <ng-skeleton height="1rem" width="150px"></ng-skeleton>
     </header>
     <div class="post-body">
-      <markdown [data]="post.content"></markdown>
+      <ng-skeleton height="1rem" width="100%"></ng-skeleton>
+      <ng-skeleton height="1rem" width="100%"></ng-skeleton>
+      <ng-skeleton height="1rem" width="80%"></ng-skeleton>
+      <ng-skeleton height="1rem" width="100%"></ng-skeleton>
+      <ng-skeleton height="1rem" width="90%"></ng-skeleton>
     </div>
   </article>
-</div>
-} @else {
-<div class="post-detail">
-  <a routerLink="/blog" class="back-link">← Back to blog</a>
+  } @else if (state.post) {
+  <article class="post-content">
+    <header class="post-header">
+      <div class="post-header__top">
+        <h1 class="post-title">{{ state.post.title }}</h1>
+        <app-copy-link />
+      </div>
+      <time class="post-date">{{ formatDate(state.post.date) }}</time>
+    </header>
+    <div class="post-body">
+      <markdown [data]="state.post.content"></markdown>
+    </div>
+  </article>
+  <app-post-navigation [previousPost]="state.previousPost" [nextPost]="state.nextPost" />
+
+  } @else {
   <div class="not-found">
     <h1>Post not found</h1>
     <p>The post you're looking for doesn't exist.</p>
   </div>
+  }
 </div>
 }

@@ -1,0 +1,19 @@
+@if (previousPost || nextPost) {
+<nav class="post-navigation">
+  @if (previousPost) {
+  <a [routerLink]="['/blog', previousPost.slug]" class="nav-link nav-link--previous">
+    <span class="nav-label">← Previous</span>
+    <span class="nav-title">{{ previousPost.title }}</span>
+  </a>
+  } @else {
+  <div class="nav-link nav-link--empty"></div>
+  } @if (nextPost) {
+  <a [routerLink]="['/blog', nextPost.slug]" class="nav-link nav-link--next">
+    <span class="nav-label">Next →</span>
+    <span class="nav-title">{{ nextPost.title }}</span>
+  </a>
+  } @else {
+  <div class="nav-link nav-link--empty"></div>
+  }
+</nav>
+}
