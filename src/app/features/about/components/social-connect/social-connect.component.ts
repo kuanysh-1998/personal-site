@@ -12,6 +12,7 @@ export class SocialConnectComponent {
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/kuanyshaptaizhanov/' },
     { name: 'GitHub', url: 'https://github.com/kuanysh-1998' },
     { name: 'Telegram', url: 'https://t.me/Kuanysh_Aptaizhanov' },
+    { name: 'Strava', url: 'https://www.strava.com/athletes/139625244' },
     { name: 'Instagram', url: 'https://www.instagram.com/kuanysh_aptaizhanov/' },
   ];
 
