@@ -1,0 +1,79 @@
+.ng-tabs {
+  display: block;
+  width: 100%;
+
+  &__container {
+    position: relative;
+    display: flex;
+    gap: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    &_vertical {
+      flex-direction: column;
+      gap: 0;
+      border-bottom: none;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &__tab {
+    position: relative;
+    padding: 16px 0;
+    font-family: 'PT Root UI', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    background: none;
+    border: none;
+    transition: color 0.2s;
+
+    &:hover:not(&_selected):not(&_disabled) {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    &_selected {
+      color: #fff;
+    }
+
+    &_disabled {
+      color: rgba(255, 255, 255, 0.3);
+      cursor: not-allowed;
+    }
+
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__indicator {
+    position: absolute;
+    background: #fff;
+    transition: all 0.3s ease;
+    pointer-events: none;
+
+    // Горизонтальный
+    .ng-tabs__container:not(.ng-tabs__container_vertical) & {
+      bottom: -1px;
+      height: 2px;
+    }
+
+    // Вертикальный
+    .ng-tabs__container_vertical & {
+      left: -1px;
+      width: 2px;
+    }
+  }
+
+  &__content {
+    &_hidden {
+      display: none;
+    }
+
+    &_active {
+      display: block;
+    }
+  }
+}

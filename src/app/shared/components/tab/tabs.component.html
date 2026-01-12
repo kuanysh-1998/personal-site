@@ -1,0 +1,42 @@
+<div class="ng-tabs" [class.ng-tabs__vertical]="isVerticalTabs">
+  <div [class.ng-tabs__container_vertical]="isVerticalTabs" class="ng-tabs__container">
+    @for (tab of tabsItems; track tab.id) {
+    <div
+      #tabTmpl
+      [attr.data-token]="tab.token"
+      [ngClass]="getTabClasses(tab)"
+      (click)="changeTab(tab)"
+      (keydown.enter)="changeTab(tab)"
+      [id]="tab.id"
+      tabindex="0"
+    >
+      @if (tab.template) {
+      <ng-container
+        [ngTemplateOutlet]="tab.template"
+        [ngTemplateOutletContext]="{
+          tab: tab,
+          selected: selectedTab === tab.id
+        }"
+      ></ng-container>
+      } @else { @if (tab.icon) {
+      <ng-svg [icon]="tab.icon" class="ng-tabs__tab-icon"></ng-svg>
+      }
+      {{ tab.text }}
+      }
+    </div>
+    }
+    <div #indicator class="ng-tabs__indicator"></div>
+  </div>
+
+  <div class="ng-tabs__content-container">
+    @for (tab of tabsItems; track tab.id) { @if (tab.content) {
+    <div
+      class="ng-tabs__content"
+      [class.ng-tabs__content_active]="selectedTab === tab.id"
+      [class.ng-tabs__content_hidden]="selectedTab !== tab.id"
+    >
+      <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
+    </div>
+    } }
+  </div>
+</div>

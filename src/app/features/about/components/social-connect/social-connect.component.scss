@@ -1,0 +1,46 @@
+.social-connect {
+  margin-top: 48px;
+
+  h2 {
+    font-family: 'PT Root UI', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  &__text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  &__email {
+    color: #fff;
+    text-decoration: underline;
+    transition: color 0.2s;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__link {
+    font-size: 14px;
+    color: #fff;
+    text-decoration: underline;
+    width: fit-content;
+    transition: color 0.2s;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}

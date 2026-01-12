@@ -1,0 +1,116 @@
+markdown {
+  display: block;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'PT Root UI', sans-serif;
+
+  h1 {
+    font-size: 2rem;
+    margin: 1.5rem 0;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin: 1.2rem 0;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    margin: 1rem 0;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 1rem 0;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  code {
+    background: rgba(255, 255, 255, 0.1);
+    color: #4fc3f7;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+  }
+
+  pre {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+
+    code {
+      background: transparent;
+      color: #fff;
+      padding: 0;
+    }
+  }
+
+  a {
+    color: #4a9eff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  ul,
+  ol {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    line-height: 1.6;
+
+    li {
+      margin: 0.5rem 0;
+    }
+  }
+
+  strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  blockquote {
+    border-left: 3px solid rgba(255, 255, 255, 0.2);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 2rem 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+
+    th,
+    td {
+      padding: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 600;
+    }
+  }
+}

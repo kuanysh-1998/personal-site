@@ -1,0 +1,12 @@
+<div class="main-layout">
+  <ng-tabs
+    [tabsItems]="tabs"
+    [orientation]="'horizontal'"
+    [selectedTab]="selectedTab()"
+    (changed)="onTabChanged($event)"
+  ></ng-tabs>
+
+  <div class="content-area">
+    <router-outlet></router-outlet>
+  </div>
+</div>

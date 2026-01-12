@@ -1,0 +1,18 @@
+@if (defaultIcon; as tmpl) {
+<ng-container *ngTemplateOutlet="tmpl"></ng-container>
+} @else if (iconSrc) { @if (isSvg) {
+<svg-icon
+  [ngStyle]="{ width: iconWidth, height: iconHeight, display: 'flex' }"
+  [svgStyle]="svgStyle"
+  [src]="iconSrc"
+  [attr.data-token]="token"
+>
+</svg-icon>
+} @else {
+<img
+  [src]="iconSrc"
+  [style.width]="iconWidth"
+  [style.height]="iconHeight"
+  [attr.alt]="ariaLabel ?? ''"
+/>
+} } @else { }
