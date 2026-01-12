@@ -5,6 +5,10 @@
   color: var(--white);
 }
 
+.blog-list__search {
+  margin-bottom: 2rem;
+}
+
 .year-group {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -53,4 +57,18 @@
   font-size: 1rem;
   color: var(--white);
   white-space: nowrap;
+}
+
+.blog-list__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.blog-list__empty-text {
+  font-size: 1rem;
+  color: var(--text-muted-white);
+  margin: 0;
 }

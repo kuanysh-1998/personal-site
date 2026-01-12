@@ -1,0 +1,22 @@
+.share-post {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+}
+
+.share-post__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.share-post__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

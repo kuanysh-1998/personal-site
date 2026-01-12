@@ -1,0 +1,94 @@
+import { ChangeDetectionStrategy, Component, computed, inject, Input } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { SharePlatform } from './share-post.types';
+
+@Component({
+  selector: 'app-share-post',
+  standalone: true,
+  imports: [ButtonComponent],
+  templateUrl: './share-post.component.html',
+  styleUrl: './share-post.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class SharePostComponent {
+  private readonly _document = inject(DOCUMENT);
+
+  @Input() postTitle = '';
+  @Input() postUrl = '';
+
+  protected readonly sharePlatforms = computed<SharePlatform[]>(() => {
+    const url = this.postUrl || this._document.location.href;
+    const title = this.postTitle || this._document.title;
+    const encodedUrl = encodeURIComponent(url);
+    const encodedTitle = encodeURIComponent(title);
+
+    return [
+      {
+        name: 'Twitter',
+        url: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+      },
+      {
+        name: 'LinkedIn',
+        url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+      },
+      {
+        name: 'Facebook',
+        url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      },
+      {
+        name: 'Telegram',
+        url: `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`,
+      },
+      {
+        name: 'WhatsApp',
+        url: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
+      },
+      {
+        name: 'Reddit',
+        url: `https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`,
+      },
+      {
+        name: 'Email',
+        url: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`,
+      },
+      {
+        name: 'Instagram',
+        url: `https://www.instagram.com/`,
+      },
+    ];
+  });
+
+  protected shareOnPlatform(platform: SharePlatform): void {
+    if (platform.name === 'Instagram') {
+      const url = this.postUrl || this._document.location.href;
+      this._copyToClipboard(url);
+      alert('Link copied to clipboard! You can paste it in Instagram.');
+      return;
+    }
+
+    if (platform.name === 'Email') {
+      window.location.href = platform.url;
+      return;
+    }
+
+    const width = 600;
+    const height = 400;
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
+
+    window.open(
+      platform.url,
+      'share',
+      `width=${width},height=${height},left=${left},top=${top},toolbar=0,menubar=0,location=0,status=0`
+    );
+  }
+
+  private async _copyToClipboard(text: string): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (error) {
+      console.error('Failed to copy to clipboard:', error);
+    }
+  }
+}

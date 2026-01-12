@@ -1,0 +1,60 @@
+.post-search {
+  width: 100%;
+}
+
+.post-search__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.post-search__icon {
+  position: absolute;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted-white);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.post-search__field {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  color: var(--white);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: var(--text-muted-white);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--brand-blue);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  &:hover:not(:focus) {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &_has-clear {
+    padding-right: 3.5rem;
+  }
+}
+
+.post-search__clear {
+  position: absolute;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}

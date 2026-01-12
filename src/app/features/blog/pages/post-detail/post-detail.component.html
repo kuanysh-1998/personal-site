@@ -23,21 +23,23 @@
         <h1 class="post-title">{{ state.post.title }}</h1>
         <app-copy-link />
       </div>
-      <time class="post-date">{{ formatDate(state.post.date) }}</time>
+      <div class="post-meta">
+        <time class="post-date">{{ formatDate(state.post.date) }}</time>
+        <span class="post-reading-time">{{ state.post.content | readingTime }}</span>
+      </div>
     </header>
     <div class="post-body">
       <markdown [data]="state.post.content"></markdown>
     </div>
   </article>
+  <app-share-post [postTitle]="state.post.title" [postUrl]="getCurrentUrl()" />
   <app-post-navigation [previousPost]="state.previousPost" [nextPost]="state.nextPost" />
   } @else {
   <div class="not-found">
     <h1>Post not found</h1>
     <p>The post you're looking for doesn't exist.</p>
   </div>
-  }
-
-  @if (showScrollTop()) {
+  } @if (showScrollTop()) {
   <button class="scroll-to-top" (click)="scrollToTop()" aria-label="Scroll to top">↑</button>
   }
 </div>

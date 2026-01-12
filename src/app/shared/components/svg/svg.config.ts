@@ -11,4 +11,6 @@ export enum Icons {
   CopyIcon = 'copy-icon',
   Cross = 'i_toast_close',
   Info = 'i_info',
+  Search = 'search-icon',
+  Close = 'close-icon',
 }

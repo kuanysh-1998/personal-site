@@ -16,7 +16,10 @@ import { map, startWith, throttleTime } from 'rxjs/operators';
 import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
 import { PostNavigationComponent } from '../../components/post-navigation/post-navigation.component';
 import { CopyLinkComponent } from '@app/shared/components/copy-link/copy-link.component';
+import { SharePostComponent } from '../../components/share-post/share-post.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DOCUMENT } from '@angular/common';
+import { ReadingTimePipe } from '@app/shared/pipes/reading-time.pipe';
 
 @Component({
   selector: 'app-post-detail',
@@ -27,6 +30,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     SkeletonComponent,
     PostNavigationComponent,
     CopyLinkComponent,
+    SharePostComponent,
+    ReadingTimePipe,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
@@ -36,6 +41,7 @@ export class PostDetailComponent implements AfterViewInit {
   private readonly _route = inject(ActivatedRoute);
   private readonly _postService = inject(PostService);
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _document = inject(DOCUMENT);
 
   protected readonly showScrollTop = signal(false);
 
@@ -81,5 +87,9 @@ export class PostDetailComponent implements AfterViewInit {
     const day = date.getDate().toString().padStart(2, '0');
     const year = date.getFullYear();
     return `${month}/${day}/${year}`;
+  }
+
+  protected getCurrentUrl(): string {
+    return this._document.location.href;
   }
 }

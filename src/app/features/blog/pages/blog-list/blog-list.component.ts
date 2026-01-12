@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PostGroup } from '@app/entities/post/models/post.interface';
 import { PostService } from '@app/entities/post/services/post.service';
+import { PostSearchComponent } from '@app/features/blog/components/post-search/post-search.component';
 
 @Component({
   selector: 'app-blog-list',
-  imports: [RouterLink],
+  imports: [RouterLink, PostSearchComponent],
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,8 +14,23 @@ import { PostService } from '@app/entities/post/services/post.service';
 export class BlogListComponent {
   private readonly _postService = inject(PostService);
 
+  protected readonly searchQuery = signal<string>('');
+
+  protected readonly filteredPosts = computed(() => {
+    const query = this.searchQuery();
+    return this._postService.searchPosts(query);
+  });
+
   protected readonly postsByYear = computed(() => {
-    const grouped = this._postService.getPostsGroupedByYear();
+    const posts = this.filteredPosts();
+    const grouped = new Map<number, typeof posts>();
+
+    posts.forEach((post) => {
+      const year = new Date(post.date).getFullYear();
+      const yearPosts = grouped.get(year) || [];
+      grouped.set(year, [...yearPosts, post]);
+    });
+
     const groups: PostGroup[] = [];
     const years = Array.from(grouped.keys()).sort((a, b) => b - a);
 
@@ -27,6 +43,22 @@ export class BlogListComponent {
 
     return groups;
   });
+
+  protected readonly hasSearchResults = computed(() => {
+    return this.filteredPosts().length > 0;
+  });
+
+  protected readonly isSearching = computed(() => {
+    return this.searchQuery().trim().length > 0;
+  });
+
+  protected onSearchChange(query: string): void {
+    this.searchQuery.set(query);
+  }
+
+  protected onSearchClear(): void {
+    this.searchQuery.set('');
+  }
 
   protected formatDate(dateStr: string): string {
     const date = new Date(dateStr);

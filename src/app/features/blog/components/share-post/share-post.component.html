@@ -1,0 +1,14 @@
+<div class="share-post">
+  <h3 class="share-post__title">Share</h3>
+  <div class="share-post__buttons">
+    @for (platform of sharePlatforms(); track platform.name) {
+    <ng-button
+      [label]="platform.name"
+      stylingMode="outlined"
+      size="small"
+      (clicked)="shareOnPlatform(platform)"
+      [attr.aria-label]="'Share on ' + platform.name"
+    />
+    }
+  </div>
+</div>

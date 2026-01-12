@@ -1,5 +1,17 @@
 <div class="blog-list">
-  @for (group of postsByYear(); track group.year) {
+  <div class="blog-list__search">
+    <app-post-search
+      placeholder="Search posts by title, description..."
+      (searchChange)="onSearchChange($event)"
+      (clear)="onSearchClear()"
+    />
+  </div>
+
+  @if (isSearching() && !hasSearchResults()) {
+  <div class="blog-list__empty">
+    <p class="blog-list__empty-text">No posts found matching your search.</p>
+  </div>
+  } @else { @for (group of postsByYear(); track group.year) {
   <div class="year-group">
     <div class="year">{{ group.year }}</div>
     <div class="posts">
@@ -11,5 +23,5 @@
       }
     </div>
   </div>
-  }
+  } }
 </div>

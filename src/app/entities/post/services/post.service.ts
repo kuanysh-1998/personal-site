@@ -60,4 +60,21 @@ export class PostService {
 
     return allPosts[currentIndex - 1];
   }
+
+  public searchPosts(query: string): PostMetadata[] {
+    if (!query || query.trim().length === 0) {
+      return this.getAllPosts();
+    }
+
+    const normalizedQuery = query.toLowerCase().trim();
+    const allPosts = this.getAllPosts();
+
+    return allPosts.filter((post) => {
+      const titleMatch = post.title.toLowerCase().includes(normalizedQuery);
+      const descriptionMatch = post.description?.toLowerCase().includes(normalizedQuery) ?? false;
+      const slugMatch = post.slug.toLowerCase().includes(normalizedQuery);
+
+      return titleMatch || descriptionMatch || slugMatch;
+    });
+  }
 }
