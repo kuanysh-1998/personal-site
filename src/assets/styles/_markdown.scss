@@ -1,19 +1,22 @@
 markdown {
   display: block;
+  width: 100%;
+  max-width: 100%;
   color: rgba(255, 255, 255, 0.8);
   font-family: 'PT Root UI', sans-serif;
+  box-sizing: border-box;
 
   h1 {
     font-size: 2rem;
     margin: 1.5rem 0;
-    color: #fff;
+    color: var(--white);
     font-weight: 700;
   }
 
   h2 {
     font-size: 1.5rem;
     margin: 1.2rem 0;
-    color: #fff;
+    color: var(--white);
     font-weight: 600;
   }
 
@@ -45,6 +48,8 @@ markdown {
     border-radius: 8px;
     overflow-x: auto;
     margin: 1rem 0;
+    max-width: 100%;
+    box-sizing: border-box;
 
     code {
       background: transparent;
