@@ -151,7 +151,7 @@
               border-bottom-right-radius: 0;
             }
 
-            &:hover:not(:disabled):not(:read-only) {
+            &:hover:not(:disabled):not(:read-only):not(:focus) {
               border-color: rgba(255, 255, 255, 0.2);
             }
 
@@ -159,6 +159,10 @@
               outline: none;
               border-color: var(--brand-blue);
               background-color: rgba(255, 255, 255, 0.08);
+            }
+
+            &:focus:hover:not(:disabled):not(:read-only) {
+              border-color: var(--brand-blue);
             }
 
             &:read-only {
