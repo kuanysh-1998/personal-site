@@ -29,7 +29,7 @@
       </div>
     </header>
     <div class="post-body">
-      <markdown [data]="state.post.content"></markdown>
+      <markdown [data]="state.post.content" lineNumbers></markdown>
     </div>
   </article>
   <app-share-post [postTitle]="state.post.title" [postUrl]="getCurrentUrl()" />
