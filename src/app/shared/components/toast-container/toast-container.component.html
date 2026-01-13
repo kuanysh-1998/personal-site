@@ -1,0 +1,12 @@
+@for (msg of messages(); track msg.id) {
+<ng-toast
+  animate.enter="toast-enter"
+  animate.leave="toast-leave"
+  [message]="msg.message"
+  [header]="msg.header"
+  [type]="msg.type ?? defaultToastType"
+  (closed)="messageClose(msg.id)"
+  (mouseenter)="mouseEnter(msg.id)"
+  (mouseleave)="mouseLeave(msg.id)"
+></ng-toast>
+}

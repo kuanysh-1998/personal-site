@@ -1,0 +1,45 @@
+:host {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: var(--z-index-toast);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.toast-enter {
+  animation: toastEnter 300ms ease-out;
+}
+
+@keyframes toastEnter {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast-leave {
+  animation: toastLeave 300ms ease-in forwards;
+}
+
+@keyframes toastLeave {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+}

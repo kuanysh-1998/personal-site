@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, Input } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { ToastService } from '@app/shared/components/toast-container/toast.service';
+import { ToastType } from '@app/shared/components/toast/toast.types';
 import { SharePlatform } from './share-post.types';
 
 @Component({
@@ -13,6 +15,7 @@ import { SharePlatform } from './share-post.types';
 })
 export class SharePostComponent {
   private readonly _document = inject(DOCUMENT);
+  private readonly _toastService = inject(ToastService);
 
   @Input() postTitle = '';
   @Input() postUrl = '';
@@ -62,8 +65,7 @@ export class SharePostComponent {
   protected shareOnPlatform(platform: SharePlatform): void {
     if (platform.name === 'Instagram') {
       const url = this.postUrl || this._document.location.href;
-      this._copyToClipboard(url);
-      alert('Link copied to clipboard! You can paste it in Instagram.');
+      this._copyToClipboard(url, 'Link copied to clipboard! You can paste it in Instagram.');
       return;
     }
 
@@ -84,11 +86,23 @@ export class SharePostComponent {
     );
   }
 
-  private async _copyToClipboard(text: string): Promise<void> {
+  private async _copyToClipboard(text: string, successMessage?: string): Promise<void> {
     try {
       await navigator.clipboard.writeText(text);
+      if (successMessage) {
+        this._toastService.add({
+          type: ToastType.Success,
+          header: 'Link copied',
+          message: successMessage,
+        });
+      }
     } catch (error) {
       console.error('Failed to copy to clipboard:', error);
+      this._toastService.add({
+        type: ToastType.Error,
+        header: 'Error',
+        message: 'Failed to copy link to clipboard',
+      });
     }
   }
 }

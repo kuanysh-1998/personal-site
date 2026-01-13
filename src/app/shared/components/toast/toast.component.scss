@@ -1,0 +1,94 @@
+:host {
+  margin-bottom: 1rem;
+  display: block;
+  width: fit-content;
+}
+
+.ng-toast {
+  &__toast {
+    width: 320px;
+    padding: 1rem;
+    word-break: break-word;
+    background: rgba(20, 20, 20, 0.95);
+    border-left: 3px solid;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+
+    &_type-error {
+      border-color: #ef4444;
+
+      .ng-toast__icon {
+        color: #ef4444;
+      }
+    }
+
+    &_type-success {
+      border-color: #22c55e;
+
+      .ng-toast__icon {
+        color: #22c55e;
+      }
+    }
+
+    &_type-info {
+      border-color: #3b82f6;
+
+      .ng-toast__icon {
+        color: #3b82f6;
+      }
+    }
+
+    &_type-warning {
+      border-color: #f59e0b;
+
+      .ng-toast__icon {
+        color: #f59e0b;
+      }
+    }
+  }
+
+  &__icon-close {
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+  }
+
+  &__header-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  &__header {
+    display: flex;
+    gap: 0.5rem;
+    color: var(--white);
+    font-family: 'PT Root UI', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  &__header-title {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+  }
+
+  &__message {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'PTRootUI', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+}

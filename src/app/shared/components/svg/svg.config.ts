@@ -13,4 +13,7 @@ export enum Icons {
   Info = 'i_info',
   Search = 'search-icon',
   Close = 'close-icon',
+  Success = 'i_success',
+  Error = 'i_error',
+  Warning = 'i_warning',
 }

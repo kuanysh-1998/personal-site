@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { SvgComponent } from '../svg/svg.component';
 import { Icons } from '../svg/svg.config';
+import { ToastService } from '../toast-container/toast.service';
+import { ToastType } from '../toast/toast.types';
 
 @Component({
   selector: 'app-copy-link',
@@ -12,8 +14,8 @@ import { Icons } from '../svg/svg.config';
 })
 export class CopyLinkComponent {
   private readonly _document = inject(DOCUMENT);
+  private readonly _toastService = inject(ToastService);
 
-  protected readonly isCopied = signal<boolean>(false);
   protected readonly Icons = Icons;
 
   protected async copyLink(): Promise<void> {
@@ -21,12 +23,18 @@ export class CopyLinkComponent {
 
     try {
       await navigator.clipboard.writeText(url);
-      this.isCopied.set(true);
-      setTimeout(() => {
-        this.isCopied.set(false);
-      }, 2000);
+      this._toastService.add({
+        type: ToastType.Success,
+        header: 'Link copied',
+        message: 'Link successfully copied to clipboard',
+      });
     } catch (error) {
       console.error('Failed to copy link to clipboard:', error);
+      this._toastService.add({
+        type: ToastType.Error,
+        header: 'Error',
+        message: 'Failed to copy link to clipboard',
+      });
     }
   }
 }

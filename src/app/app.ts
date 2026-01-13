@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewContainerRef } from '@a
 import { RouterOutlet } from '@angular/router';
 import { ServiceWorkerUpdateService } from './core/services/service-worker-update/service-worker-update.service';
 import { DialogService } from './shared/components/dialog/dialog.service';
+import { ToastContainerComponent } from './shared/components/toast-container/toast-container.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ToastContainerComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

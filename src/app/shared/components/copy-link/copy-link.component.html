@@ -1,14 +1,4 @@
-<button
-  type="button"
-  class="copy-link"
-  (click)="copyLink()"
-  [attr.aria-label]="isCopied() ? 'Link copied' : 'Copy link'"
->
-  @if (isCopied()) {
-  <ng-svg [icon]="Icons.Checkmark" width="18px" height="18px" />
-  <span class="copy-link__text">Copied!</span>
-  } @else {
+<button type="button" class="copy-link" (click)="copyLink()" aria-label="Copy link">
   <ng-svg [icon]="Icons.CopyIcon" width="18px" height="18px" />
   <span class="copy-link__text">Copy link</span>
-  }
 </button>

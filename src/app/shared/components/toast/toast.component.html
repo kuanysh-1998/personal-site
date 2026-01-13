@@ -1,0 +1,14 @@
+<div class="ng-toast">
+  <div class="ng-toast__toast" [ngClass]="getToastClasses()">
+    <div class="ng-toast__header-wrapper">
+      <div class="ng-toast__header">
+        <ng-svg [icon]="iconForType" class="ng-toast__icon"></ng-svg>
+        <div class="ng-toast__header-title">{{ header }}</div>
+      </div>
+
+      <ng-svg [icon]="iconClose" (click)="onClose()" class="ng-toast__icon-close"></ng-svg>
+    </div>
+
+    <div class="ng-toast__message">{{ message }}</div>
+  </div>
+</div>
