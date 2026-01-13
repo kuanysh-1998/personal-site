@@ -1,0 +1,13 @@
+@if (download) {
+<a [href]="link" [download]="download" target="_blank" class="ng-link__content">
+  {{ text }}
+</a>
+} @else { @if (isExternalLink(link) || isPdf) {
+<a [href]="link" target="_blank" class="ng-link__content">
+  {{ text }}
+</a>
+} @else { @if (link) {
+<a [routerLink]="link" [state]="state" class="ng-link__content">{{ text }}</a>
+} @else {
+<a class="ng-link__content">{{ text }}</a>
+} } }

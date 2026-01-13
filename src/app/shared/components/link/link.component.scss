@@ -1,0 +1,47 @@
+.ng-link {
+  width: fit-content;
+  font-family: 'PT Root UI', sans-serif;
+
+  .ng-link__content {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: underline;
+    }
+  }
+
+  &.ng-link__secondary {
+    .ng-link__content {
+      color: var(--white);
+      text-decoration: underline;
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: underline;
+      }
+
+      &:active {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &.ng-link__disabled {
+    .ng-link__content {
+      color: var(--text-disabled);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+}
