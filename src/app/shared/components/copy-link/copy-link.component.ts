@@ -4,6 +4,7 @@ import { SvgComponent } from '../svg/svg.component';
 import { Icons } from '../svg/svg.config';
 import { ToastService } from '../toast-container/toast.service';
 import { ToastType } from '../toast/toast.types';
+import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-metrika.service';
 
 @Component({
   selector: 'app-copy-link',
@@ -15,6 +16,7 @@ import { ToastType } from '../toast/toast.types';
 export class CopyLinkComponent {
   private readonly _document = inject(DOCUMENT);
   private readonly _toastService = inject(ToastService);
+  private readonly _yandexMetrikaService = inject(YandexMetrikaService);
 
   protected readonly Icons = Icons;
 
@@ -23,6 +25,10 @@ export class CopyLinkComponent {
 
     try {
       await navigator.clipboard.writeText(url);
+      this._yandexMetrikaService.sendMetricsEvent('link_copy', {
+        url: url,
+        page_path: this._document.location.pathname,
+      });
       this._toastService.add({
         type: ToastType.Success,
         header: 'Link copied',

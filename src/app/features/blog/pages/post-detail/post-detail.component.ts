@@ -20,6 +20,7 @@ import { SharePostComponent } from '../../components/share-post/share-post.compo
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DOCUMENT } from '@angular/common';
 import { ReadingTimePipe } from '@app/shared/pipes/reading-time.pipe';
+import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-metrika.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -42,6 +43,7 @@ export class PostDetailComponent implements AfterViewInit {
   private readonly _postService = inject(PostService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _document = inject(DOCUMENT);
+  private readonly _yandexMetrikaService = inject(YandexMetrikaService);
 
   protected readonly showScrollTop = signal(false);
 
@@ -49,12 +51,20 @@ export class PostDetailComponent implements AfterViewInit {
     map((params) => params.get('slug') || ''),
     switchMap((slug) =>
       this._postService.getPostBySlug(slug).pipe(
-        map((post) => ({
-          loading: false,
-          post,
-          previousPost: post ? this._postService.getPreviousPost(slug) : null,
-          nextPost: post ? this._postService.getNextPost(slug) : null,
-        })),
+        map((post) => {
+          if (post) {
+            this._yandexMetrikaService.sendMetricsEvent('post_view', {
+              post_slug: post.slug,
+              post_title: post.title,
+            });
+          }
+          return {
+            loading: false,
+            post,
+            previousPost: post ? this._postService.getPreviousPost(slug) : null,
+            nextPost: post ? this._postService.getNextPost(slug) : null,
+          };
+        }),
         startWith({
           loading: true,
           post: null,

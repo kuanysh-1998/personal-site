@@ -10,6 +10,7 @@ import { filter } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TabsComponent } from '../../shared/components/tab/tabs.component';
 import { Tab } from '../../shared/components/tab/tabs.types';
+import { YandexMetrikaService } from '../../core/services/yandex-metrika/yandex-metrika.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -21,6 +22,7 @@ import { Tab } from '../../shared/components/tab/tabs.types';
 export class MainLayoutComponent {
   private readonly _router = inject(Router);
   private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _yandexMetrikaService = inject(YandexMetrikaService);
 
   protected readonly tabs: Tab[] = [
     {
@@ -50,6 +52,10 @@ export class MainLayoutComponent {
   }
 
   protected onTabChanged(tab: Tab): void {
+    this._yandexMetrikaService.sendMetricsEvent('tab_switch', {
+      tab_id: tab.id,
+      tab_name: tab.text || tab.id,
+    });
     this._router.navigate([`/${tab.id}`]);
   }
 
