@@ -22,6 +22,7 @@ import { DOCUMENT } from '@angular/common';
 import { ReadingTimePipe } from '@app/shared/pipes/reading-time.pipe';
 import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-metrika.service';
 import { LinkComponent } from '@app/shared/components/link/link.component';
+import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 
 @Component({
   selector: 'app-post-detail',
@@ -34,6 +35,7 @@ import { LinkComponent } from '@app/shared/components/link/link.component';
     SharePostComponent,
     ReadingTimePipe,
     LinkComponent,
+    TooltipDirective,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',

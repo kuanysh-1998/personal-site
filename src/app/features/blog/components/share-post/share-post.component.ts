@@ -3,12 +3,13 @@ import { DOCUMENT } from '@angular/common';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { ToastService } from '@app/shared/components/toast-container/toast.service';
 import { ToastType } from '@app/shared/components/toast/toast.types';
+import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { SharePlatform } from './share-post.types';
 
 @Component({
   selector: 'app-share-post',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, TooltipDirective],
   templateUrl: './share-post.component.html',
   styleUrl: './share-post.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,6 +62,10 @@ export class SharePostComponent {
       },
     ];
   });
+
+  protected isInstagram(platform: SharePlatform): boolean {
+    return platform.name === 'Instagram';
+  }
 
   protected shareOnPlatform(platform: SharePlatform): void {
     if (platform.name === 'Instagram') {

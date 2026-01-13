@@ -40,7 +40,14 @@
     <p>The post you're looking for doesn't exist.</p>
   </div>
   } @if (showScrollTop()) {
-  <button class="scroll-to-top" (click)="scrollToTop()" aria-label="Scroll to top">↑</button>
+  <button
+    class="scroll-to-top"
+    (click)="scrollToTop()"
+    aria-label="Scroll to top"
+    *ngTooltip="'Return to top'"
+  >
+    ↑
+  </button>
   }
 </div>
 }
