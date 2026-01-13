@@ -5,10 +5,11 @@ import { Icons } from '../svg/svg.config';
 import { ToastService } from '../toast-container/toast.service';
 import { ToastType } from '../toast/toast.types';
 import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-metrika.service';
+import { TooltipDirective } from '../tooltip/tooltip.directive';
 
 @Component({
   selector: 'app-copy-link',
-  imports: [SvgComponent],
+  imports: [SvgComponent, TooltipDirective],
   templateUrl: './copy-link.component.html',
   styleUrl: './copy-link.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

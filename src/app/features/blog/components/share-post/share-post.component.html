@@ -1,8 +1,8 @@
 <div class="share-post">
   <h3 class="share-post__title">Share</h3>
   <div class="share-post__buttons">
-    @for (platform of sharePlatforms(); track platform.name) { @if (isInstagram(platform)) {
-    <span *ngTooltip="'Ссылка будет скопирована в буфер обмена'" ngTooltipPosition="top">
+    @for (platform of sharePlatforms(); track platform.name) {
+    <span *ngTooltip="getTooltipText(platform)" ngTooltipPosition="top">
       <ng-button
         [label]="platform.name"
         stylingMode="outlined"
@@ -11,14 +11,6 @@
         [attr.aria-label]="'Share on ' + platform.name"
       />
     </span>
-    } @else {
-    <ng-button
-      [label]="platform.name"
-      stylingMode="outlined"
-      size="small"
-      (clicked)="shareOnPlatform(platform)"
-      [attr.aria-label]="'Share on ' + platform.name"
-    />
-    } }
+    }
   </div>
 </div>

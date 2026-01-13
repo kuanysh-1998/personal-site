@@ -1,4 +1,10 @@
-<button type="button" class="copy-link" (click)="copyLink()" aria-label="Copy link">
+<button
+  type="button"
+  class="copy-link"
+  (click)="copyLink()"
+  aria-label="Copy link"
+  *ngTooltip="'Copy link to the article'"
+>
   <ng-svg [icon]="Icons.CopyIcon" width="18px" height="18px" />
   <span class="copy-link__text">Copy link</span>
 </button>
