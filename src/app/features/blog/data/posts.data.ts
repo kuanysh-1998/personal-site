@@ -13,4 +13,10 @@ export const POSTS: PostMetadata[] = [
     slug: '10-qualities-better-programmer',
     description: 'Mindsets and habits that separate good programmers from great ones',
   },
+  {
+    title: 'Solving the Cache Problem with Angular Service Worker',
+    date: '2026-01-13',
+    slug: 'angular-service-worker-updates',
+    description: 'Automatically notify users about updates and handle version control gracefully',
+  },
 ];
