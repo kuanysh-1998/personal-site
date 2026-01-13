@@ -1,30 +1,12 @@
 <div class="post-search">
-  <div class="post-search__wrapper">
-    <div class="post-search__icon">
-      <ng-svg [icon]="SearchIcon" size="default" [ariaLabel]="'Search icon'" />
-    </div>
-
-    <input
-      type="text"
-      class="post-search__field"
-      [class.post-search__field_has-clear]="hasValue"
-      [placeholder]="placeholder"
-      [value]="searchValue()"
-      (input)="onInputChange($any($event.target).value)"
-      (keydown.escape)="onClear()"
-      [attr.aria-label]="ariaLabel"
-    />
-
-    @if (hasValue) {
-    <div class="post-search__clear">
-      <ng-button
-        [icon]="CloseIcon"
-        stylingMode="ghost"
-        size="small"
-        (clicked)="onClear()"
-        [attr.aria-label]="'Clear search'"
-      />
-    </div>
-    }
-  </div>
+  <ng-text-field
+    [icon]="SearchIcon"
+    [iconRight]="hasValue() ? CloseIcon : ''"
+    [placeholder]="placeholder"
+    [value]="searchValue()"
+    [offValueChanges]="true"
+    [maxLength]="1000"
+    (changed)="onInputChange($event)"
+    (iconRightClick)="onClear()"
+  />
 </div>

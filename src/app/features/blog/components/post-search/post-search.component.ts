@@ -1,20 +1,19 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  computed,
   EventEmitter,
   Input,
   Output,
   signal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { SvgComponent } from '@app/shared/components/svg/svg.component';
-import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { TextFieldComponent } from '@app/shared/components/text-field/text-field.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
 
 @Component({
   selector: 'app-post-search',
-  standalone: true,
-  imports: [FormsModule, SvgComponent, ButtonComponent],
+  imports: [TextFieldComponent],
   templateUrl: './post-search.component.html',
   styleUrl: './post-search.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,17 +30,21 @@ export class PostSearchComponent {
 
   protected readonly searchValue = signal<string>('');
 
-  protected onInputChange(value: string): void {
+  protected readonly hasValue = computed(() => this.searchValue().length > 0);
+
+  constructor(private readonly _cdr: ChangeDetectorRef) {}
+
+  protected onInputChange(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
     this.searchValue.set(value);
+    this._cdr.markForCheck();
     this.searchChange.emit(value);
   }
 
   protected onClear(): void {
     this.searchValue.set('');
+    this._cdr.markForCheck();
     this.clear.emit();
-  }
-
-  protected get hasValue(): boolean {
-    return this.searchValue().length > 0;
+    this.searchChange.emit('');
   }
 }

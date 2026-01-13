@@ -1,0 +1,93 @@
+<div [ngClass]="textfieldClasses">
+  @if (label) {
+  <ng-label
+    [required]="isRequired"
+    [label]="label"
+    [bold]="labelBold"
+    [info]="labelInfo"
+    [disabled]="isDisabled"
+    [size]="'m'"
+    (click)="inputEl.focus()"
+  ></ng-label>
+  }
+
+  <div class="ng-text-field__wrapper">
+    <div class="ng-text-field__content">
+      @if (prefix) {
+      <div
+        class="ng-text-field__prefix ng-text-field__additional-text"
+        [class.ng-text-field__additional-text-disabled]="isDisabled"
+      >
+        {{ prefix }}
+      </div>
+      }
+
+      <div class="ng-text-field__input-wrapper">
+        @if (icon) {
+        <ng-svg
+          [icon]="icon"
+          class="ng-text-field__icon"
+          [class.ng-text-field__icon-small]="isSmall"
+          [class.ng-text-field__icon-large]="isLarge"
+        ></ng-svg>
+        } @if (customInputTemplate && !isFocused()) {
+        <div class="ng-text-field__custom-content" (click)="focus()">
+          <ng-container [ngTemplateOutlet]="customInputTemplate"></ng-container>
+        </div>
+        }
+
+        <input
+          #inputEl
+          [name]="name"
+          [autocomplete]="autocomplete"
+          [value]="value"
+          [readOnly]="readOnly"
+          [disabled]="isDisabled"
+          [attr.data-token]="token"
+          [placeholder]="placeholder ? placeholder : ''"
+          [maxLength]="maxLength"
+          [ngClass]="inputClasses"
+          [type]="type === 'password' && !visiblePassword() ? 'password' : 'text'"
+          (input)="onValueChange($event)"
+          (blur)="blur(); isFocused.set(false)"
+          (focus)="focused.emit(); isFocused.set(true)"
+          [class.ng-text-field__input_with-template]="!!customInputTemplate && !isFocused()"
+          class="ng-text-field__input"
+        />
+        @if ((iconRight || type === 'password') && !isDisabled) {
+        <ng-svg
+          [icon]="rightIcon"
+          class="ng-text-field__icon ng-text-field__icon-right"
+          [class.ng-text-field__icon-small]="isSmall"
+          [class.ng-text-field__icon-large]="isLarge"
+          [class.ng-text-field__icon-password]="type === 'password'"
+          (click)="onIconRightClick()"
+        ></ng-svg>
+        }
+      </div>
+
+      @if (postfix) {
+      <div
+        class="ng-text-field__postfix ng-text-field__additional-text"
+        [class.ng-text-field__additional-text-disabled]="isDisabled"
+      >
+        {{ postfix }}
+      </div>
+      }
+    </div>
+
+    @if (!isDisabled && !readOnly && isError && errorText) {
+    <div class="ng-text-field__error-message">
+      {{ errorText }}
+    </div>
+    } @if (helperText) {
+    <div class="ng-text-field__helper-text">
+      {{ helperText }}
+    </div>
+    } @if (helperTextTemplate) {
+    <div class="ng-text-field__helper-text">
+      <ng-container *ngTemplateOutlet="helperTextTemplate"></ng-container>
+    </div>
+    }
+  </div>
+</div>
