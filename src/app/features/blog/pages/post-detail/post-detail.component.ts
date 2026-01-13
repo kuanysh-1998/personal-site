@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { PostService } from '@app/entities/post/services/post.service';
 import { PostState } from '@app/entities/post/models/post.interface';
@@ -21,18 +21,19 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DOCUMENT } from '@angular/common';
 import { ReadingTimePipe } from '@app/shared/pipes/reading-time.pipe';
 import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-metrika.service';
+import { LinkComponent } from '@app/shared/components/link/link.component';
 
 @Component({
   selector: 'app-post-detail',
   imports: [
     AsyncPipe,
-    RouterLink,
     MarkdownComponent,
     SkeletonComponent,
     PostNavigationComponent,
     CopyLinkComponent,
     SharePostComponent,
     ReadingTimePipe,
+    LinkComponent,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',

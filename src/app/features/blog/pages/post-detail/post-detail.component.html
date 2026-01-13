@@ -1,6 +1,6 @@
 @if (postState$ | async; as state) {
 <div class="post-detail">
-  <a routerLink="/blog" class="back-link">← Back to blog</a>
+  <ng-link class="back-link" [link]="'/blog'" [text]="'← Back to blog'" />
 
   @if (state.loading) {
   <article class="post-content">
