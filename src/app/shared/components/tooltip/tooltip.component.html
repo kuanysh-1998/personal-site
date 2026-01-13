@@ -1,0 +1,9 @@
+<ng-template #popoverContainer>
+  <div id="overlay-content" [ngStyle]="{ maxWidth: maxWidth + 'px' }" class="ng-tooltip__content">
+    @if (template) {
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+    } @else {
+    <span>{{ stringContent }}</span>
+    }
+  </div>
+</ng-template>

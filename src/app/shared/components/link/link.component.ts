@@ -41,6 +41,12 @@ export class LinkComponent {
     if (!url) {
       return false;
     }
-    return url.startsWith('http') || url.startsWith('https');
+    return (
+      url.startsWith('http') ||
+      url.startsWith('https') ||
+      url.startsWith('mailto:') ||
+      url.startsWith('tel:') ||
+      url.startsWith('sms:')
+    );
   }
 }

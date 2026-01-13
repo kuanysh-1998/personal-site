@@ -1,0 +1,55 @@
+.ng-label {
+  display: block;
+  width: fit-content;
+  margin-bottom: 0.125rem;
+
+  &__container {
+    font-family: 'PT Root UI', sans-serif;
+    color: rgba(255, 255, 255, 0.9);
+    user-select: none;
+
+    &.ng-label__s {
+      font-size: 0.75rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+
+      &.ng-label__bold {
+        font-weight: 700;
+      }
+    }
+
+    &.ng-label__m {
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      font-weight: 500;
+
+      &.ng-label__bold {
+        font-weight: 700;
+      }
+    }
+
+    &.ng-label__l {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      font-weight: 700;
+    }
+
+    &.ng-label__disabled {
+      color: var(--text-disabled);
+    }
+
+    .ng-label__wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .ng-label__required {
+        color: var(--error-red);
+      }
+
+      .ng-label__icon-info {
+        fill: rgba(255, 255, 255, 0.9);
+      }
+    }
+  }
+}

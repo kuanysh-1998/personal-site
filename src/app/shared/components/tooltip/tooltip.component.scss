@@ -1,0 +1,112 @@
+:host {
+  display: none;
+}
+
+.ng-tooltip {
+  position: fixed;
+  font-family: inherit;
+  color: inherit;
+  z-index: var(--z-index-tooltip);
+  animation: tooltip-fade-in 0.2s ease;
+
+  &_shake-vertical {
+    animation: shake-vertical 1.5s ease-in-out infinite;
+  }
+
+  &_shake-horizontal {
+    animation: shake-horizontal 1.5s ease-in-out infinite;
+  }
+
+  &__content {
+    padding: 0.5rem 0.75rem;
+    font-family: 'PT Root UI', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: start;
+    word-wrap: break-word;
+    white-space: pre-line;
+    background: rgba(6, 12, 31, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  &__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  }
+
+  &_top .ng-tooltip__arrow {
+    bottom: -7px;
+    left: 50%;
+    border-color: rgba(6, 12, 31, 0.95) transparent transparent;
+    border-width: 7px 7px 0;
+    transform: translateX(-50%);
+  }
+
+  &_bottom .ng-tooltip__arrow {
+    top: -7px;
+    left: 50%;
+    border-color: transparent transparent rgba(6, 12, 31, 0.95);
+    border-width: 0 7px 7px;
+    transform: translateX(-50%);
+  }
+
+  &_left .ng-tooltip__arrow {
+    top: 50%;
+    right: -7px;
+    border-color: transparent rgba(6, 12, 31, 0.95) transparent transparent;
+    border-width: 7px 7px 7px 0;
+    transform: translateY(-50%);
+  }
+
+  &_right .ng-tooltip__arrow {
+    top: 50%;
+    left: -7px;
+    border-color: transparent transparent transparent rgba(6, 12, 31, 0.95);
+    border-width: 7px 0 7px 7px;
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes tooltip-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shake-vertical {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-4px);
+  }
+}

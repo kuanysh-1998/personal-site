@@ -1,25 +1,27 @@
-<!-- <label [for]="for" [ngClass]="labelClasses">
-  <div class="wk-label__wrapper">
-    <span>
-      @for (part of secondaryTextParts; track $index) { @if (isLink(part)) {
-      <wk-link
-        [link]="getUrl(part)"
-        [text]="getText(part)"
-        [disabled]="disabled"
-        [download]="getIsDownload(part)"
-        (click)="$event.stopPropagation()"
-      ></wk-link>
-      } @else {
-      {{ part }}
-      } } @if (required && !disabled) {
-      <span class="wk-label__required">*</span>
+<div class="ng-label">
+  <label [for]="for" [ngClass]="labelClasses">
+    <div class="ng-label__wrapper">
+      <span>
+        @for (part of secondaryTextParts; track $index) { @if (isLink(part)) {
+        <ng-link
+          [link]="getUrl(part)"
+          [text]="getText(part)"
+          [disabled]="disabled"
+          [download]="getIsDownload(part)"
+          (click)="$event.stopPropagation()"
+        ></ng-link>
+        } @else {
+        {{ part }}
+        } } @if (required && !disabled) {
+        <span class="ng-label__required">*</span>
+        }
+      </span>
+
+      @if (info && !disabled) {
+      <ng-svg *ngTooltip="info" [icon]="icon.Info" class="ng-label__icon-info"></ng-svg>
       }
-    </span>
+    </div>
 
-    @if (info && !disabled) {
-    <wk-svg *wkTooltip="info" [icon]="icon.Info" class="wk-label__icon-info"></wk-svg>
-    }
-  </div>
-
-  <ng-content></ng-content>
-</label> -->
+    <ng-content></ng-content>
+  </label>
+</div>
