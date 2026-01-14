@@ -1,0 +1,23 @@
+<div class="ng-spinner">
+  @if (fullScreen) {
+  <div class="ng-spinner__backdrop">
+    <div class="ng-spinner__spinner">
+      <ng-svg
+        [icon]="icon"
+        [height]="mapSize['large']"
+        [width]="mapSize[size]"
+        class="ng-spinner__icon"
+      ></ng-svg>
+    </div>
+  </div>
+  } @else {
+  <div class="ng-spinner__spinner">
+    <ng-svg
+      [icon]="icon"
+      [height]="mapSize[size]"
+      [width]="mapSize[size]"
+      class="ng-spinner__icon"
+    ></ng-svg>
+  </div>
+  }
+</div>

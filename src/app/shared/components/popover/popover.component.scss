@@ -1,0 +1,25 @@
+.ng-popover {
+  position: fixed;
+  font-family: inherit;
+  color: inherit;
+
+  .ng-popover__content {
+    box-sizing: border-box;
+    width: fit-content;
+    min-width: inherit;
+    max-width: 400px;
+    max-height: inherit;
+    padding: 1rem;
+    overflow: auto;
+    font-family: inherit;
+    color: inherit;
+    background: var(--dark-navy);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 0px 2px 0px var(--shadow-light), 0px 8px 16px 0px var(--shadow-light);
+
+    &_small-padding {
+      padding: 0.5rem;
+    }
+  }
+}

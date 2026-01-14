@@ -1,0 +1,93 @@
+.ng-checkbox {
+  display: block;
+  width: fit-content;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__container {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    width: 2.25rem;
+
+    &-padding-none {
+      width: fit-content;
+    }
+  }
+
+  &__icon {
+    display: block;
+
+    &-default {
+      color: var(--brand-blue);
+    }
+
+    &-warning {
+      color: var(--warning-yellow-toast);
+    }
+
+    &-success {
+      color: var(--success-green);
+    }
+
+    &-empty {
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  &__checkbox {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    &:hover {
+      .ng-checkbox__icon {
+        &-default {
+          color: var(--brand-blue-hover);
+        }
+
+        &-warning {
+          color: var(--warning-yellow-toast);
+        }
+
+        &-success {
+          color: var(--success-green);
+        }
+
+        &-empty {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
+
+    &-error {
+      .ng-checkbox__icon.ng-checkbox__icon-empty {
+        color: var(--error-red);
+      }
+    }
+
+    &-disabled {
+      .ng-checkbox__icon {
+        cursor: default;
+        color: var(--text-disabled) !important;
+
+        &-empty {
+          color: var(--text-disabled);
+        }
+      }
+    }
+  }
+
+  &__label {
+    display: block;
+    margin-right: 0.75rem;
+    margin-bottom: 0;
+    margin-left: 0.25rem;
+  }
+}

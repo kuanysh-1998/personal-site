@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { SvgComponent } from '../svg/svg.component';
+import { ButtonComponent } from '../button/button.component';
 import { Icons } from '../svg/svg.config';
 import { ToastService } from '../toast-container/toast.service';
 import { ToastType } from '../toast/toast.types';
@@ -9,7 +9,7 @@ import { TooltipDirective } from '../tooltip/tooltip.directive';
 
 @Component({
   selector: 'app-copy-link',
-  imports: [SvgComponent, TooltipDirective],
+  imports: [ButtonComponent, TooltipDirective],
   templateUrl: './copy-link.component.html',
   styleUrl: './copy-link.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

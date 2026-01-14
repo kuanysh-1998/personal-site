@@ -1,0 +1,138 @@
+<div #dropdownWrapper [ngClass]="dropdownClasses">
+  @if (label) {
+  <ng-label
+    [required]="isRequired"
+    [label]="label"
+    [info]="labelInfo"
+    [disabled]="isDisabled"
+    [bold]="labelBold"
+    [size]="labelStyling === 'secondary' ? 's' : 'm'"
+    (click)="textfield.focus(); openOnClick()"
+  />
+  }
+
+  <div class="ng-dropdown__wrapper">
+    <div class="ng-dropdown__content">
+      <div #textfieldTmpl>
+        @if (hasValue) {
+        <ng-svg
+          [icon]="icons.Cross"
+          size="small"
+          (click)="clearValue()"
+          class="ng-dropdown__close-icon"
+        />
+        } @if (!isDisabled && !readOnly) {
+        <div
+          (click)="open()"
+          [class.ng-dropdown__open]="isOpen()"
+          [class.ng-dropdown__open-button-small]="size === 'small'"
+          [class.ng-dropdown__open-button-large]="size === 'large'"
+          class="ng-dropdown__open-button"
+          role="button"
+          tabindex="0"
+        >
+          <ng-svg [icon]="icons.ChevronDown" class="ng-dropdown__open-icon" />
+        </div>
+        }
+
+        <ng-text-field
+          #textfield
+          [value]="inputValue()"
+          [readOnly]="true"
+          [error]="isError"
+          [disabled]="isDisabled"
+          [attr.data-token]="token"
+          [class.with-icon]="icon"
+          [icon]="icon || optionIcon()"
+          [placeholder]="placeholder"
+          [size]="size"
+          [class.ng-dropdown__input_read-only]="readOnly"
+          [class.ng-dropdown__input_filled]="hasValue"
+          [ngClass]="size"
+          (click)="open()"
+          class="ng-dropdown__input"
+        />
+      </div>
+
+      <ng-popover
+        [for]="textfieldTmpl"
+        [isOpen]="isOpen()"
+        position="bottom"
+        [minWidth]="popoverWidth"
+        [offset]="4"
+        (closed)="close()"
+        externalClass="ng-dropdown__popover"
+      >
+        <div class="ng-dropdown__popover-list-wrapper">
+          @if (enableSearch) {
+          <ng-text-field
+            #searchTextField
+            [icon]="icons.Search"
+            [disabled]="isDisabled"
+            (changed)="changedSearch($event)"
+            placeholder="Поиск"
+            [maxLength]="255"
+            class="ng-dropdown__popover-search-input"
+          />
+          } @let filtered = options | filter: searchValue() : displayFieldName; @if (filtered.length
+          || customTemplates) {
+          <div class="ng-dropdown__popover-list-scroll">
+            <div class="ng-dropdown__popover-scroll-wrapper">
+              @if (!customTemplates) { @if (highlightSelectedItems && multiple) { @for (option of
+              selectedOptions(); track option.id) {
+              <ng-list-item
+                #listItems
+                [style.width.px]="popoverWidth - 16"
+                [checked]="true"
+                [text]="getOptionText(option)"
+                [focusStateEnabled]="focusStateEnabled"
+                [selectable]="multiple"
+                (clicked)="selectOption($event, option)"
+              />
+              }
+              <ng-divider />
+              } @for (option of filtered; track option.id) {
+              <ng-list-item
+                #listItems
+                [style.width.px]="popoverWidth - 16"
+                [checked]="!!option.selected"
+                [text]="getOptionText(option)"
+                [focusStateEnabled]="focusStateEnabled"
+                [selectable]="multiple"
+                [icon]="option.icon"
+                [class.ng-dropdown__list-item-hidden]="
+                  highlightSelectedItems && multiple && option.selected
+                "
+                class="ng-dropdown__list-item"
+                (clicked)="selectOption($event, option)"
+              />
+              } } @if (customTemplates) {
+              <ng-container *ngTemplateOutlet="customTemplates" />
+              }
+            </div>
+          </div>
+          } @else {
+          <div class="ng-dropdown__popover-empty-message">{{ emptyMessage }}</div>
+          }
+        </div>
+
+        <div class="ng-dropdown__plug"></div>
+
+        @if (buttonEnabled) {
+        <ng-button
+          [label]="buttonLabel"
+          [icon]="buttonIcon"
+          [fullWidth]="true"
+          (clicked)="buttonClicked.emit()"
+        />
+        }
+      </ng-popover>
+    </div>
+
+    @if (!isDisabled && !readOnly && isError && errorText) {
+    <div class="ng-dropdown__error-message">{{ errorText }}</div>
+    } @if (helperText) {
+    <div class="ng-dropdown__helper-text">{{ helperText }}</div>
+    }
+  </div>
+</div>

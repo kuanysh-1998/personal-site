@@ -1,0 +1,37 @@
+<div [class]="dividerClasses">
+  <div class="ng-divider__container">
+    @if (isLeftContent) {
+    <div class="ng-divider__mark"></div>
+
+    <div class="ng-divider__section">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+    }
+
+    <div class="ng-divider__line"></div>
+
+    @if (isCenterContent) {
+    <div class="ng-divider__section">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+
+    <div class="ng-divider__line"></div>
+    } @if (isRightContent) {
+    <div class="ng-divider__section">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+
+    <div class="ng-divider__mark"></div>
+    }
+  </div>
+
+  <ng-template #content>
+    @if (icon) {
+    <ng-svg [icon]="icon" class="ng-divider__icon"></ng-svg>
+    } @if (text) {
+    <div class="ng-divider__text" [class.ng-divider__text-bold]="labelBold">
+      {{ text }}
+    </div>
+    }
+  </ng-template>
+</div>

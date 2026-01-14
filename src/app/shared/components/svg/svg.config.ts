@@ -16,4 +16,12 @@ export enum Icons {
   Success = 'i_success',
   Error = 'i_error',
   Warning = 'i_warning',
+  CheckboxFilled = 'checkbox-filled',
+  CheckboxEmpty = 'checkbox-empty',
+  CheckboxIndeterminate = 'checkbox-indeterminate',
+  Spinner = 'spinner',
+  ChevronDown = 'chevron-down',
+  ChevronUp = 'chevron-up',
+  ChevronLeft = 'chevron-left',
+  ChevronRight = 'chevron-right',
 }

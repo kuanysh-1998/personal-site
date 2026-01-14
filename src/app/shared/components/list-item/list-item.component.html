@@ -1,0 +1,67 @@
+<div class="ng-list-item">
+  @if (link) {
+  <a [routerLink]="link" routerLinkActive="ng-list-item_active">
+    <ng-container *ngTemplateOutlet="itemTmpl"></ng-container>
+  </a>
+  } @else {
+  <ng-container *ngTemplateOutlet="itemTmpl"></ng-container>
+  }
+
+  <ng-template #itemTmpl>
+    <div
+      #item
+      [tabIndex]="0"
+      [class.ng-list-item_active]="active"
+      [attr.data-token]="token"
+      [class.ng-list-item_focus]="focusStateEnabled"
+      [class.ng-list-item_disable]="disable"
+      (keydown.enter)="changeCheckbox(!checked)"
+      (click)="click()"
+      role="button"
+      class="ng-list-item__item"
+    >
+      <div class="ng-list-item__label">
+        @if (withGap) {
+        <div class="ng-list-item__gap"></div>
+        } @if (selectable) {
+        <ng-checkbox
+          [value]="checked"
+          [tabIndex]="-1"
+          [padding]="'none'"
+          [disabled]="!!disable"
+          (click)="clickCheckbox($event, item)"
+          (changed)="changeCheckbox($event)"
+          class="ng-list-item__checkbox"
+        ></ng-checkbox>
+        } @if (icon) {
+        <ng-svg [icon]="icon" class="ng-list-item__icon"></ng-svg>
+        }
+
+        <div class="ng-list-item__texts-wrapper">
+          @if (headerText) {
+          <span class="ng-list-item__header-text">{{ headerText }}</span>
+          }
+
+          <span
+            [class.ng-list-item_one-rows-max]="!enableWrapTwoRows && !enableWrapAllRows"
+            [class.ng-list-item_two-rows-max]="enableWrapTwoRows && !enableWrapAllRows"
+          >
+            @if (customTemplate) {
+            <ng-container *ngTemplateOutlet="customTemplate"></ng-container>
+            } @else {
+            {{ text }}
+            }
+          </span>
+        </div>
+      </div>
+
+      @if (rightIcon) {
+      <ng-svg [icon]="rightIcon" class="ng-list-item__icon"></ng-svg>
+      }
+    </div>
+
+    @if (enableDivider) {
+    <ng-divider margin="medium"></ng-divider>
+    }
+  </ng-template>
+</div>

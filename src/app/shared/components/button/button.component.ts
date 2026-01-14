@@ -30,6 +30,7 @@ export class ButtonComponent {
   @Input() rightIcon?: string;
   @Input() iconWidth?: string;
   @Input() iconHeight?: string;
+  @Input() ariaLabel?: string;
 
   @Output() clicked = new EventEmitter<PointerEvent | MouseEvent>();
 

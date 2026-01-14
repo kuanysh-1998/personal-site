@@ -1,0 +1,63 @@
+<div class="ng-checkbox">
+  <div class="ng-checkbox__wrapper">
+    <div
+      [class.ng-checkbox__container-padding-none]="padding === 'none'"
+      class="ng-checkbox__container"
+    >
+      <div
+        [tabindex]="tabIndex"
+        [class.ng-checkbox__checkbox-disabled]="isDisabled"
+        [class.ng-checkbox__checkbox-error]="error || (control?.invalid && control?.touched)"
+        [attr.data-token]="token"
+        (click)="toggleCheckbox()"
+        (keydown.enter)="toggleCheckbox($event)"
+        role="checkbox"
+        class="ng-checkbox__checkbox"
+      >
+        @if (value && !indeterminate) {
+        <ng-svg
+          [ngClass]="{
+                  'ng-checkbox__icon-default': variant === 'default',
+                  'ng-checkbox__icon-warning': variant === 'warning',
+                  'ng-checkbox__icon-success': variant === 'success',
+                }"
+          [icon]="filledCheckboxIcon"
+          class="ng-checkbox__icon"
+        ></ng-svg>
+        } @if (!value && !indeterminate) {
+        <ng-svg
+          [ngClass]="{
+                  'ng-checkbox__icon-default': variant === 'default',
+                  'ng-checkbox__icon-warning': variant === 'warning',
+                  'ng-checkbox__icon-success': variant === 'success',
+                }"
+          [icon]="emptyCheckboxIcon"
+          class="ng-checkbox__icon ng-checkbox__icon-empty"
+        ></ng-svg>
+        } @if (indeterminate) {
+        <ng-svg
+          [ngClass]="{
+                  'ng-checkbox__icon-default': variant === 'default',
+                  'ng-checkbox__icon-warning': variant === 'warning',
+                  'ng-checkbox__icon-success': variant === 'success',
+                }"
+          [icon]="indeterminateCheckboxIcon"
+          class="ng-checkbox__icon"
+        ></ng-svg>
+        }
+      </div>
+    </div>
+
+    @if (label) {
+    <ng-label
+      [required]="isRequired"
+      [disabled]="isDisabled"
+      [label]="label"
+      [links]="links"
+      [bold]="labelBold"
+      (click)="toggleCheckbox()"
+      class="ng-checkbox__label"
+    ></ng-label>
+    }
+  </div>
+</div>
