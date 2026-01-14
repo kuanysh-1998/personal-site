@@ -1,5 +1,8 @@
 @if (postState$ | async; as state) {
 <div class="post-detail">
+  @if (state.post) {
+  <app-reading-progress-bar />
+  }
   <ng-link class="back-link" [link]="'/blog'" [text]="'← Back to blog'" />
 
   @if (state.loading) {

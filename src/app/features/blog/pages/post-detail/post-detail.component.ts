@@ -24,6 +24,7 @@ import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-m
 import { LinkComponent } from '@app/shared/components/link/link.component';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { ReadingProgressBarComponent } from '../../components/reading-progress-bar/reading-progress-bar.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -38,6 +39,7 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
     LinkComponent,
     TooltipDirective,
     ButtonComponent,
+    ReadingProgressBarComponent,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',

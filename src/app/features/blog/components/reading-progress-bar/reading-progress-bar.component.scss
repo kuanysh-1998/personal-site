@@ -1,0 +1,16 @@
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+
+  &__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--brand-blue) 0%, var(--brand-blue-hover) 100%);
+    transition: width 0.1s ease-out;
+    border-radius: 0 2px 2px 0;
+  }
+}
