@@ -1,0 +1,72 @@
+.ng-avatar {
+  display: block;
+  width: fit-content;
+  font-family: 'PT Root UI', sans-serif;
+
+  &__circle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-transform: uppercase;
+    user-select: none;
+    border-radius: 50%;
+
+    &_medium {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    &_large {
+      width: 4rem;
+      height: 4rem;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    &_default {
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.1);
+
+      .ng-avatar__icon {
+        fill: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    &_secondary {
+      color: rgba(255, 255, 255, 0.9);
+      background: var(--brand-blue);
+
+      .ng-avatar__icon {
+        fill: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    &_alternative {
+      color: rgba(255, 255, 255, 0.9);
+      background: var(--slate-blue);
+
+      .ng-avatar__icon {
+        fill: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    &_image {
+      background: transparent;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

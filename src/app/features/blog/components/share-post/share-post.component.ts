@@ -69,16 +69,16 @@ export class SharePostComponent {
 
   protected getTooltipText(platform: SharePlatform): string {
     const tooltips: Record<string, string> = {
-      Twitter: 'Поделиться в Twitter/X',
-      LinkedIn: 'Поделиться в LinkedIn',
-      Facebook: 'Поделиться в Facebook',
-      Telegram: 'Поделиться в Telegram',
-      WhatsApp: 'Поделиться в WhatsApp',
-      Reddit: 'Поделиться в Reddit',
-      Email: 'Отправить по email',
-      Instagram: 'Ссылка будет скопирована в буфер обмена',
+      Twitter: 'Share on Twitter/X',
+      LinkedIn: 'Share on LinkedIn',
+      Facebook: 'Share on Facebook',
+      Telegram: 'Share on Telegram',
+      WhatsApp: 'Share on WhatsApp',
+      Reddit: 'Share on Reddit',
+      Email: 'Send by email',
+      Instagram: 'Link will be copied to the clipboard',
     };
-    return tooltips[platform.name] || `Поделиться в ${platform.name}`;
+    return tooltips[platform.name] || `Share on ${platform.name}`;
   }
 
   protected shareOnPlatform(platform: SharePlatform): void {

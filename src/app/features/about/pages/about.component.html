@@ -1,10 +1,21 @@
 <div class="about-page">
-  <h4>Kuanysh Aptaizhanov</h4>
-  <p>
-    Frontend engineer in Astana, Kazakhstan
-    <span *ngTooltip="astanaTime">(UTC+5)</span>. I build enterprise Angular applications with focus
-    on clean architecture and scalable solutions. Stack: Angular, TypeScript, RxJS, Signals API.
-  </p>
+  <div class="about-page__header">
+    <ng-avatar
+      [src]="'/assets/images/cv.jpeg'"
+      [name]="'Kuanysh Aptaizhanov'"
+      [size]="'large'"
+      class="about-page__avatar"
+    />
+    <div class="about-page__content">
+      <p class="about-page__name">Kuanysh Aptaizhanov</p>
+      <p class="about-page__description">
+        Frontend engineer in Astana, Kazakhstan
+        <span *ngTooltip="astanaTime">(UTC+5)</span>. I build enterprise Angular applications with
+        focus on clean architecture and scalable solutions. Stack: Angular, TypeScript, RxJS,
+        Signals API.
+      </p>
+    </div>
+  </div>
   <app-latest-posts />
   <app-social-connect />
 </div>
