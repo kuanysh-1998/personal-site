@@ -163,10 +163,38 @@
 @media (max-width: 768px) {
   .ng-dialog {
     &__container {
-      max-width: 93vw !important;
-      width: 93vw !important;
+      top: 50% !important;
       left: 50% !important;
-      transform: translateX(-50%) !important;
+      transform: translate(-50%, -50%) !important;
+
+      width: 95vw !important;
+      max-width: 95vw !important;
+
+      height: auto !important;
+      min-height: 200px !important;
+      max-height: 85dvh !important;
+
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 20px !important;
+    }
+
+    &__content {
+      flex: 1 1 auto !important;
+      overflow-y: auto !important;
+      display: block !important;
+
+      margin-right: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    &__footer {
+      flex-shrink: 0 !important;
+      margin-top: 16px !important;
+    }
+
+    &__header-wrapper {
+      flex-shrink: 0 !important;
     }
   }
 }

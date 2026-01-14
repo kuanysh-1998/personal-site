@@ -11,10 +11,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TabsComponent } from '../../shared/components/tab/tabs.component';
 import { Tab } from '../../shared/components/tab/tabs.types';
 import { YandexMetrikaService } from '../../core/services/yandex-metrika/yandex-metrika.service';
+import { DialogService } from '../../shared/components/dialog/dialog.service';
+import { ContactFormComponent } from '../../shared/components/contact-form/contact-form.component';
+import { ButtonComponent } from '../../shared/components/button/button.component';
+import { Icons } from '../../shared/components/svg/svg.config';
+import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [TabsComponent, RouterOutlet],
+  imports: [TabsComponent, RouterOutlet, ButtonComponent, TooltipDirective],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +28,9 @@ export class MainLayoutComponent {
   private readonly _router = inject(Router);
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _yandexMetrikaService = inject(YandexMetrikaService);
+  private readonly _dialogService = inject(DialogService);
+
+  protected readonly contactIcon = Icons.Contact;
 
   protected readonly tabs: Tab[] = [
     {
@@ -66,5 +74,13 @@ export class MainLayoutComponent {
     } else if (url.includes('/about') || url === '/' || url === '') {
       this.selectedTab.set('about');
     }
+  }
+
+  protected openContactForm(): void {
+    this._dialogService.open(ContactFormComponent, {
+      header: 'Contact Form',
+      submitButton: 'Send',
+      cancelButton: 'Cancel',
+    });
   }
 }

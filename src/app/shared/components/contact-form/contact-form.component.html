@@ -1,0 +1,36 @@
+<div class="contact-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ng-text-field
+      formControlName="subject"
+      label="Subject"
+      placeholder="Enter subject"
+      [requiredForLabel]="true"
+      [errorMessage]="getSubjectError()"
+      [maxLength]="200"
+    />
+
+    <ng-text-field
+      formControlName="contact"
+      label="Telegram or Email"
+      placeholder="Enter @username or email"
+      [requiredForLabel]="true"
+      [errorMessage]="getContactError()"
+      [maxLength]="100"
+    />
+
+    <div class="contact-form__field">
+      <ng-label [required]="true" label="Description" [size]="'m'" />
+      <textarea
+        formControlName="description"
+        class="contact-form__textarea"
+        placeholder="Describe your request"
+        rows="6"
+        [maxLength]="2000"
+      ></textarea>
+      <ng-form-field-error [control]="form.get('description')" />
+      <div class="contact-form__helper">
+        {{ form.get('description')?.value?.length || 0 }} / 2000
+      </div>
+    </div>
+  </form>
+</div>

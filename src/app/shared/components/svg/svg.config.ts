@@ -19,9 +19,10 @@ export enum Icons {
   CheckboxFilled = 'checkbox-filled',
   CheckboxEmpty = 'checkbox-empty',
   CheckboxIndeterminate = 'checkbox-indeterminate',
-  Spinner = 'spinner',
+  Spinner = 'i_spinner',
   ChevronDown = 'chevron-down',
   ChevronUp = 'chevron-up',
   ChevronLeft = 'chevron-left',
   ChevronRight = 'chevron-right',
+  Contact = 'i_contact',
 }

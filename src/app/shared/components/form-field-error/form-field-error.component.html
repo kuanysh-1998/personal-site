@@ -1,0 +1,15 @@
+@if (control && control.invalid && control.touched) {
+<div class="form-field-error">
+  @if (control.errors?.['required']) {
+  <span>{{ requiredMessage }}</span>
+  } @if (control.errors?.['email']) {
+  <span>{{ emailMessage }}</span>
+  } @if (control.errors?.['minlength']) {
+  <span>Minimum length is {{ control.errors?.['minlength'].requiredLength }} characters</span>
+  } @if (control.errors?.['maxlength']) {
+  <span>Maximum length is {{ control.errors?.['maxlength'].requiredLength }} characters</span>
+  } @if (control.errors?.['pattern']) {
+  <span>{{ patternMessage }}</span>
+  }
+</div>
+}

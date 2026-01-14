@@ -9,4 +9,16 @@
   <div class="content-area">
     <router-outlet></router-outlet>
   </div>
+
+  <div class="main-layout__contact-button">
+    <ng-button
+      [icon]="contactIcon"
+      [ariaLabel]="'Contact'"
+      [size]="'large'"
+      [iconWidth]="'2rem'"
+      [iconHeight]="'2rem'"
+      (clicked)="openContactForm()"
+      *ngTooltip="'Contact me'"
+    />
+  </div>
 </div>

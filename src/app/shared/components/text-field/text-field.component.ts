@@ -36,7 +36,7 @@ export class TextFieldComponent implements ControlValueAccessor, AfterViewInit, 
 
   @Input() public name = '';
   @Input() public label = '';
-  @Input() public labelLocation = 'left';
+  @Input() public labelLocation = '';
   @Input() public labelInfo = '';
   @Input() public labelBold = false;
   @Input() public shortErrorMessage = '';
