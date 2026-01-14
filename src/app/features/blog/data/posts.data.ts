@@ -19,4 +19,11 @@ export const POSTS: PostMetadata[] = [
     slug: 'angular-service-worker-updates',
     description: 'Automatically notify users about updates and handle version control gracefully',
   },
+  {
+    title: 'Why You Should Update Dependencies Regularly',
+    date: '2026-01-14',
+    slug: 'keep-dependencies-updated',
+    description:
+      'The hidden cost of delayed updates and a practical strategy to stay current without pain',
+  },
 ];
