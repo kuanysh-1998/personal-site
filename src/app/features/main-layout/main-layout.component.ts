@@ -12,10 +12,10 @@ import { TabsComponent } from '../../shared/components/tab/tabs.component';
 import { Tab } from '../../shared/components/tab/tabs.types';
 import { YandexMetrikaService } from '../../core/services/yandex-metrika/yandex-metrika.service';
 import { DialogService } from '../../shared/components/dialog/dialog.service';
-import { ContactFormComponent } from '../../shared/components/contact-form/contact-form.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { Icons } from '../../shared/components/svg/svg.config';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
 
 @Component({
   selector: 'app-main-layout',

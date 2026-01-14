@@ -8,27 +8,20 @@ import {
   DestroyRef,
   ChangeDetectorRef,
 } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DialogRef } from '../dialog/dialog-ref.service';
-import { ButtonConfig } from '../dialog/dialog.types';
-import { TextFieldComponent } from '../text-field/text-field.component';
-import { LabelComponent } from '../label/label.component';
-import { EmailjsService } from '../../../core/services/emailjs/emailjs.service';
-import { ContactFormData } from '../../../core/services/emailjs/emailjs.types';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ToastService } from '../toast-container/toast.service';
-import { ToastType } from '../toast/toast.types';
-import { FormFieldErrorComponent } from '../form-field-error/form-field-error.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EmailjsService } from '@app/core/services/emailjs/emailjs.service';
+import { ContactFormData } from '@app/core/services/emailjs/emailjs.types';
+import { DialogRef } from '@app/shared/components/dialog/dialog-ref.service';
+import { ButtonConfig } from '@app/shared/components/dialog/dialog.types';
+import { TextAreaComponent } from '@app/shared/components/text-area/text-area.component';
+import { TextFieldComponent } from '@app/shared/components/text-field/text-field.component';
+import { ToastService } from '@app/shared/components/toast-container/toast.service';
+import { ToastType } from '@app/shared/components/toast/toast.types';
 
 @Component({
   selector: 'app-contact-form',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TextFieldComponent,
-    LabelComponent,
-    FormFieldErrorComponent,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, TextFieldComponent, TextAreaComponent],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,6 +59,20 @@ export class ContactFormComponent implements OnInit {
     if (control.errors['required']) return 'This field is required';
     if (control.errors['maxlength']) return 'Maximum length is 100 characters';
     return '';
+  }
+
+  protected getDescriptionError(): string {
+    const control = this.form.get('description');
+    if (!control?.touched || !control?.errors) return '';
+
+    if (control.errors['required']) return 'This field is required';
+    if (control.errors['maxlength']) return 'Maximum length is 2000 characters';
+    return '';
+  }
+
+  protected getDescriptionHelperText(): string {
+    const length = this.form.get('description')?.value?.length || 0;
+    return `${length} / 2000`;
   }
 
   public ngOnInit(): void {

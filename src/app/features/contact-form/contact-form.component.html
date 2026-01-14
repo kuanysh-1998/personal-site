@@ -18,19 +18,14 @@
       [maxLength]="100"
     />
 
-    <div class="contact-form__field">
-      <ng-label [required]="true" label="Description" [size]="'m'" />
-      <textarea
-        formControlName="description"
-        class="contact-form__textarea"
-        placeholder="Describe your request"
-        rows="6"
-        [maxLength]="2000"
-      ></textarea>
-      <ng-form-field-error [control]="form.get('description')" />
-      <div class="contact-form__helper">
-        {{ form.get('description')?.value?.length || 0 }} / 2000
-      </div>
-    </div>
+    <ng-text-area
+      formControlName="description"
+      label="Description"
+      placeholder="Describe your request"
+      [requiredForLabel]="true"
+      [errorMessage]="getDescriptionError()"
+      [helperText]="getDescriptionHelperText()"
+      [minHeight]="120"
+    />
   </form>
 </div>

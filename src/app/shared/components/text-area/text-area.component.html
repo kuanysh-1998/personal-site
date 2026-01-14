@@ -1,0 +1,40 @@
+<div [ngClass]="textareaClasses">
+  @if (label) {
+  <ng-label
+    [required]="isRequired"
+    [label]="label"
+    [bold]="labelBold"
+    [info]="labelInfo"
+    [disabled]="isDisabled"
+  ></ng-label>
+  }
+
+  <div class="ng-text-area__wrapper">
+    <textarea
+      #inputEl
+      [value]="value"
+      [readOnly]="readOnly"
+      [disabled]="isDisabled"
+      [placeholder]="placeholder"
+      [attr.data-token]="token"
+      [class.invalid]="isError"
+      [ngStyle]="textareaStyle"
+      [style.display]="'block'"
+      (input)="onValueChange($event)"
+      (blur)="blur()"
+      (focus)="focused.emit()"
+      class="ng-text-area__input"
+    >
+    </textarea>
+
+    @if (!isDisabled && !readOnly && isError) {
+    <div class="ng-text-area__error-message">
+      {{ errorText }}
+    </div>
+    } @if (helperText) {
+    <div class="ng-text-area__helper-text">
+      {{ helperText }}
+    </div>
+    }
+  </div>
+</div>
