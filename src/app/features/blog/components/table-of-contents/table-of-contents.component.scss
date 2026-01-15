@@ -1,0 +1,41 @@
+.table-of-contents {
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  padding: 1.25rem;
+  background: transparent;
+  border-right: 2px solid var(--white-10);
+  border-radius: 0;
+}
+
+.table-of-contents::-webkit-scrollbar {
+  width: 4px;
+}
+
+.table-of-contents::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-of-contents::-webkit-scrollbar-thumb {
+  background: var(--white-20);
+  border-radius: 2px;
+}
+
+.table-of-contents::-webkit-scrollbar-thumb:hover {
+  background: var(--white-30);
+}
+
+.toc-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--white-70);
+  margin: 0 0 1rem 0;
+  padding-left: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}

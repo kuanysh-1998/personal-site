@@ -11,6 +11,21 @@
   margin-top: 2rem;
 }
 
+.main-layout__toc {
+  position: fixed;
+  top: 50%;
+  left: 2rem;
+  transform: translateY(-50%);
+  width: 260px;
+  z-index: 100;
+  max-height: calc(100vh - 4rem);
+  pointer-events: none;
+
+  app-table-of-contents {
+    pointer-events: all;
+  }
+}
+
 .main-layout__contact-button {
   position: fixed;
   bottom: 14rem;
@@ -21,6 +36,12 @@
 
   &:hover {
     transform: scale(1.1);
+  }
+}
+
+@media (max-width: 1200px) {
+  .main-layout__toc {
+    display: none;
   }
 }
 

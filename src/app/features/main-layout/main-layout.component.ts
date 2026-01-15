@@ -16,10 +16,17 @@ import { ButtonComponent } from '../../shared/components/button/button.component
 import { Icons } from '../../shared/components/svg/svg.config';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { TableOfContentsComponent } from '../blog/components/table-of-contents/table-of-contents.component';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [TabsComponent, RouterOutlet, ButtonComponent, TooltipDirective],
+  imports: [
+    TabsComponent,
+    RouterOutlet,
+    ButtonComponent,
+    TooltipDirective,
+    TableOfContentsComponent,
+  ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,6 +51,7 @@ export class MainLayoutComponent {
   ];
 
   protected readonly selectedTab = signal<string>('about');
+  protected readonly isPostPage = signal<boolean>(false);
 
   constructor() {
     this._updateSelectedTabFromUrl();
@@ -69,6 +77,10 @@ export class MainLayoutComponent {
 
   private _updateSelectedTabFromUrl(): void {
     const url = this._router.url;
+    const isPost = /^\/blog\/[^\/]+$/.test(url);
+
+    this.isPostPage.set(isPost);
+
     if (url.includes('/blog')) {
       this.selectedTab.set('blog');
     } else if (url.includes('/about') || url === '/' || url === '') {

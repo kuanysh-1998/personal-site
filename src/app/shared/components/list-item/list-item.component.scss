@@ -7,7 +7,13 @@
 
     &.ng-list-item_active {
       .ng-list-item__item {
-        background-color: var(--brand-blue-10);
+        background-color: var(--white-15);
+        color: var(--white);
+        font-weight: 600;
+
+        .ng-list-item__icon {
+          fill: var(--white);
+        }
       }
     }
   }
@@ -25,15 +31,16 @@
     font-family: 'PT Root UI', sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--white-90);
+    color: var(--white-80);
     cursor: pointer;
     background-color: transparent;
     border-radius: 0.5rem;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease, color 0.2s ease;
 
     .ng-list-item__icon {
       flex-shrink: 0;
-      fill: var(--white-90);
+      fill: var(--white-80);
+      transition: fill 0.2s ease;
     }
 
     .ng-list-item__gap {
@@ -92,21 +99,30 @@
     }
 
     &:hover:not(.ng-list-item_disable) {
-      background-color: var(--white-05);
+      background-color: var(--white-10);
+      color: var(--white);
+
+      .ng-list-item__icon {
+        fill: var(--white);
+      }
     }
 
     &.ng-list-item_active:not(.ng-list-item_disable) {
-      background-color: var(--brand-blue-10);
+      background-color: var(--white-15);
+      color: var(--white);
+      font-weight: 600;
+
+      .ng-list-item__icon {
+        fill: var(--white);
+      }
     }
 
     &:active:not(.ng-list-item_disable) {
-      background-color: var(--white-10);
-    }
+      background-color: var(--white-15);
+      color: var(--white);
 
-    &.ng-list-item_focus:not(.ng-list-item_disable) {
-      &:focus {
-        background-color: var(--brand-blue-10);
-        outline: none;
+      .ng-list-item__icon {
+        fill: var(--white);
       }
     }
 

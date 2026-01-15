@@ -10,6 +10,12 @@
     <router-outlet></router-outlet>
   </div>
 
+  @if (isPostPage()) {
+  <aside class="main-layout__toc">
+    <app-table-of-contents />
+  </aside>
+  }
+
   <div class="main-layout__contact-button">
     <ng-button
       [icon]="contactIcon"
