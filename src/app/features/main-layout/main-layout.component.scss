@@ -28,15 +28,23 @@
 
 .main-layout__contact-button {
   position: fixed;
-  bottom: 14rem;
+  bottom: 8rem;
   right: 2rem;
   z-index: 1000;
-  will-change: transform;
+  transition: transform 0.2s ease;
   animation: fadeIn 0.3s ease, bounce-attention 2s ease-in-out 3s infinite;
 
   &:hover {
     transform: scale(1.1);
   }
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
 }
 
 @media (max-width: 1200px) {
@@ -45,10 +53,22 @@
   }
 }
 
+@media (max-width: 768px) {
+  .main-layout__contact-button {
+    bottom: 5rem;
+    right: 1rem;
+  }
+
+  .scroll-to-top {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;

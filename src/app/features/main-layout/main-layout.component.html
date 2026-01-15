@@ -27,4 +27,17 @@
       *ngTooltip="'Contact me'"
     />
   </div>
+
+  @if (showScrollTop()) {
+  <ng-button
+    class="scroll-to-top"
+    [icon]="'chevron-up'"
+    [size]="'large'"
+    [iconWidth]="'2rem'"
+    [iconHeight]="'2rem'"
+    (clicked)="scrollToTop()"
+    [ariaLabel]="'Scroll to top'"
+    *ngTooltip="'Return to top'"
+  ></ng-button>
+  }
 </div>

@@ -1,12 +1,14 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   inject,
   signal,
 } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, throttleTime } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TabsComponent } from '../../shared/components/tab/tabs.component';
 import { Tab } from '../../shared/components/tab/tabs.types';
@@ -17,6 +19,7 @@ import { Icons } from '../../shared/components/svg/svg.config';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { TableOfContentsComponent } from '../blog/components/table-of-contents/table-of-contents.component';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-main-layout',
@@ -31,11 +34,12 @@ import { TableOfContentsComponent } from '../blog/components/table-of-contents/t
   styleUrl: './main-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements AfterViewInit {
   private readonly _router = inject(Router);
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _yandexMetrikaService = inject(YandexMetrikaService);
   private readonly _dialogService = inject(DialogService);
+  private readonly _destroyRef = inject(DestroyRef);
 
   protected readonly contactIcon = Icons.Contact;
 
@@ -52,6 +56,7 @@ export class MainLayoutComponent {
 
   protected readonly selectedTab = signal<string>('about');
   protected readonly isPostPage = signal<boolean>(false);
+  protected readonly showScrollTop = signal(false);
 
   constructor() {
     this._updateSelectedTabFromUrl();
@@ -67,12 +72,28 @@ export class MainLayoutComponent {
       });
   }
 
+  public ngAfterViewInit(): void {
+    fromEvent(document, 'scroll', { capture: true })
+      .pipe(throttleTime(100), takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => {
+        const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+        this.showScrollTop.set(scrollPosition > 300);
+      });
+  }
+
   protected onTabChanged(tab: Tab): void {
     this._yandexMetrikaService.sendMetricsEvent('tab_switch', {
       tab_id: tab.id,
       tab_name: tab.text || tab.id,
     });
     this._router.navigate([`/${tab.id}`]);
+  }
+
+  protected scrollToTop(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 
   private _updateSelectedTabFromUrl(): void {
