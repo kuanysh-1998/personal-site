@@ -26,18 +26,21 @@ export class ViewCounterService {
   }
 
   private _markPostAsViewed(postId: string): void {
-    if (typeof window === 'undefined' || !window.localStorage) {
-      return;
-    }
+    if (typeof window === 'undefined' || !window.localStorage) return;
 
     try {
       const viewedPosts = JSON.parse(
-        window.localStorage.getItem(this._viewedPostsKey) || '[]'
-      ) as string[];
-      if (!viewedPosts.includes(postId)) {
-        viewedPosts.push(postId);
-        window.localStorage.setItem(this._viewedPostsKey, JSON.stringify(viewedPosts));
-      }
+        window.localStorage.getItem(this._viewedPostsKey) || '{}'
+      ) as Record<string, number>;
+
+      viewedPosts[postId] = Date.now();
+
+      const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+      Object.keys(viewedPosts).forEach((key) => {
+        if (viewedPosts[key] < thirtyDaysAgo) delete viewedPosts[key];
+      });
+
+      window.localStorage.setItem(this._viewedPostsKey, JSON.stringify(viewedPosts));
     } catch {}
   }
 

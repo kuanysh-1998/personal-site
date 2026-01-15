@@ -12,7 +12,7 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { PostService } from '@app/entities/post/services/post.service';
 import { PostState } from '@app/entities/post/models/post.interface';
 import { fromEvent, Observable, of, switchMap } from 'rxjs';
-import { map, startWith, throttleTime } from 'rxjs/operators';
+import { map, startWith, take, tap, throttleTime } from 'rxjs/operators';
 import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
 import { PostNavigationComponent } from '../../components/post-navigation/post-navigation.component';
 import { CopyLinkComponent } from '@app/shared/components/copy-link/copy-link.component';
@@ -26,6 +26,8 @@ import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directi
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { ReadingProgressBarComponent } from '../../components/reading-progress-bar/reading-progress-bar.component';
 import { ViewCounterService } from '../../services/view-counter.service';
+import { SvgComponent } from '@app/shared/components/svg/svg.component';
+import { Icons } from '@app/shared/components/svg/svg.config';
 
 @Component({
   selector: 'app-post-detail',
@@ -41,6 +43,7 @@ import { ViewCounterService } from '../../services/view-counter.service';
     TooltipDirective,
     ButtonComponent,
     ReadingProgressBarComponent,
+    SvgComponent,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
@@ -55,29 +58,27 @@ export class PostDetailComponent implements AfterViewInit {
   private readonly _viewCounterService = inject(ViewCounterService);
 
   protected readonly showScrollTop = signal(false);
+  protected readonly eyeIcon = Icons.Eye;
 
   protected readonly postState$: Observable<PostState> = this._route.paramMap.pipe(
     map((params) => params.get('slug') || ''),
     switchMap((slug) =>
       this._postService.getPostBySlug(slug).pipe(
-        map((post) => {
+        tap((post) => {
           if (post) {
             this._yandexMetrikaService.sendMetricsEvent('post_view', {
               post_slug: post.slug,
               post_title: post.title,
             });
-            this._viewCounterService
-              .incrementView(post.slug)
-              .pipe(takeUntilDestroyed(this._destroyRef))
-              .subscribe();
+            this._viewCounterService.incrementView(post.slug).pipe(take(1)).subscribe();
           }
-          return {
-            loading: false,
-            post,
-            previousPost: post ? this._postService.getPreviousPost(slug) : null,
-            nextPost: post ? this._postService.getNextPost(slug) : null,
-          };
         }),
+        map((post) => ({
+          loading: false,
+          post,
+          previousPost: post ? this._postService.getPreviousPost(slug) : null,
+          nextPost: post ? this._postService.getNextPost(slug) : null,
+        })),
         startWith({
           loading: true,
           post: null,

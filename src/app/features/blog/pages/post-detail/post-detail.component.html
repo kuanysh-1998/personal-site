@@ -30,7 +30,10 @@
         <time class="post-date">{{ formatDate(state.post.date) }}</time>
         <span class="post-reading-time">{{ state.post.content | readingTime }}</span>
         @if (viewCount$ | async; as viewCount) {
-        <span class="post-views"> {{ viewCount }} {{ viewCount === 1 ? 'view' : 'views' }} </span>
+        <span class="post-views">
+          <ng-svg [icon]="eyeIcon" class="post-views__icon"></ng-svg>
+          {{ viewCount }} {{ viewCount === 1 ? 'view' : 'views' }}
+        </span>
         }
       </div>
     </header>

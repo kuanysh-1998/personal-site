@@ -25,4 +25,5 @@ export enum Icons {
   ChevronLeft = 'chevron-left',
   ChevronRight = 'chevron-right',
   Contact = 'i_contact',
+  Eye = 'i_eye',
 }
