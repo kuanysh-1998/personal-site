@@ -6,13 +6,13 @@
     position: relative;
     display: flex;
     gap: 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--white-10);
 
     &_vertical {
       flex-direction: column;
       gap: 0;
       border-bottom: none;
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 1px solid var(--white-10);
     }
   }
 
@@ -22,7 +22,7 @@
     font-family: 'PT Root UI', sans-serif;
     font-weight: 500;
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--white-50);
     cursor: pointer;
     user-select: none;
     outline: none;
@@ -31,15 +31,15 @@
     transition: color 0.2s;
 
     &:hover:not(&_selected):not(&_disabled) {
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--text-muted-white);
     }
 
     &_selected {
-      color: #fff;
+      color: var(--white);
     }
 
     &_disabled {
-      color: rgba(255, 255, 255, 0.3);
+      color: var(--white-30);
       cursor: not-allowed;
     }
 
@@ -50,17 +50,15 @@
 
   &__indicator {
     position: absolute;
-    background: #fff;
+    background: var(--white);
     transition: all 0.3s ease;
     pointer-events: none;
 
-    // Горизонтальный
     .ng-tabs__container:not(.ng-tabs__container_vertical) & {
       bottom: -1px;
       height: 2px;
     }
 
-    // Вертикальный
     .ng-tabs__container_vertical & {
       left: -1px;
       width: 2px;

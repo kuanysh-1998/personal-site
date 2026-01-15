@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--white-10);
   z-index: 1000;
 
   &__fill {

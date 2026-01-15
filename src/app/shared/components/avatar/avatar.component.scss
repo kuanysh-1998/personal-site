@@ -30,29 +30,29 @@
     }
 
     &_default {
-      color: rgba(255, 255, 255, 0.9);
-      background: rgba(255, 255, 255, 0.1);
+      color: var(--white-90);
+      background: var(--white-10);
 
       .ng-avatar__icon {
-        fill: rgba(255, 255, 255, 0.9);
+        fill: var(--white-90);
       }
     }
 
     &_secondary {
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--white-90);
       background: var(--brand-blue);
 
       .ng-avatar__icon {
-        fill: rgba(255, 255, 255, 0.9);
+        fill: var(--white-90);
       }
     }
 
     &_alternative {
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--white-90);
       background: var(--slate-blue);
 
       .ng-avatar__icon {
-        fill: rgba(255, 255, 255, 0.9);
+        fill: var(--white-90);
       }
     }
 

@@ -25,7 +25,7 @@
     font-family: 'PT Root UI', sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--white-90);
     cursor: pointer;
     background-color: transparent;
     border-radius: 0.5rem;
@@ -33,7 +33,7 @@
 
     .ng-list-item__icon {
       flex-shrink: 0;
-      fill: rgba(255, 255, 255, 0.9);
+      fill: var(--white-90);
     }
 
     .ng-list-item__gap {
@@ -76,6 +76,7 @@
         word-break: break-word;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
+        line-clamp: 1;
       }
 
       .ng-list-item_two-rows-max {
@@ -86,11 +87,12 @@
         word-break: break-word;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
       }
     }
 
     &:hover:not(.ng-list-item_disable) {
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: var(--white-05);
     }
 
     &.ng-list-item_active:not(.ng-list-item_disable) {
@@ -98,7 +100,7 @@
     }
 
     &:active:not(.ng-list-item_disable) {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: var(--white-10);
     }
 
     &.ng-list-item_focus:not(.ng-list-item_disable) {

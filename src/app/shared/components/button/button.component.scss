@@ -50,90 +50,90 @@
     }
 
     &_ghost {
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--white-90);
       background: transparent;
       border: 1px solid transparent;
 
       &:hover:not(&_disabled) {
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--white-05);
       }
 
       &:active:not(&_disabled) {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--white-10);
       }
 
       &.ng-button__container_disabled {
-        color: rgba(255, 255, 255, 0.3);
+        color: var(--white-30);
         cursor: not-allowed;
       }
     }
 
     &_outlined {
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--white-90);
       background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid var(--white-20);
 
       &:hover:not(&_disabled) {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.3);
+        background: var(--white-05);
+        border-color: var(--white-30);
       }
 
       &:active:not(&_disabled) {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--white-10);
       }
 
       &.ng-button__container_disabled {
-        color: rgba(255, 255, 255, 0.3);
-        border-color: rgba(255, 255, 255, 0.1);
+        color: var(--white-30);
+        border-color: var(--white-10);
         cursor: not-allowed;
       }
     }
 
     &_contained {
       color: #000;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      background: var(--white-90);
+      border: 1px solid var(--white-90);
 
       &:hover:not(&_disabled) {
-        background: #fff;
-        border-color: #fff;
+        background: var(--white);
+        border-color: var(--white);
       }
 
       &:active:not(&_disabled) {
-        background: rgba(255, 255, 255, 0.8);
+        background: var(--white-80);
       }
 
       &.ng-button__container_disabled {
         color: rgba(0, 0, 0, 0.4);
-        background: rgba(255, 255, 255, 0.3);
-        border-color: rgba(255, 255, 255, 0.3);
+        background: var(--white-30);
+        border-color: var(--white-30);
         cursor: not-allowed;
       }
     }
 
     &_danger {
       &.ng-button__container_outlined {
-        color: #ef4444;
-        border-color: #ef4444;
+        color: var(--red-500);
+        border-color: var(--red-500);
 
         &:hover:not(&_disabled) {
-          background: rgba(239, 68, 68, 0.1);
+          background: var(--red-500-10);
         }
       }
 
       &.ng-button__container_contained {
-        color: #fff;
-        background: #ef4444;
-        border-color: #ef4444;
+        color: var(--white);
+        background: var(--red-500);
+        border-color: var(--red-500);
 
         &:hover:not(&_disabled) {
-          background: #dc2626;
+          background: var(--red-600);
         }
       }
     }
 
     &_active {
-      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 0 2px var(--white-20);
     }
   }
 

@@ -10,12 +10,12 @@
     cursor: pointer;
 
     &:hover {
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--white-80);
       text-decoration: underline;
     }
 
     &:active {
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--text-muted-white);
       text-decoration: underline;
     }
   }
@@ -26,12 +26,12 @@
       text-decoration: underline;
 
       &:hover {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--white-80);
         text-decoration: underline;
       }
 
       &:active {
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--text-muted-white);
         text-decoration: underline;
       }
     }
