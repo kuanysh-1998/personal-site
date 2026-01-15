@@ -1,30 +1,87 @@
 import { inject, Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Database, objectVal, ref, runTransaction } from '@angular/fire/database';
+import { Observable, from, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ViewCounterService {
-  private readonly _db = inject(AngularFireDatabase);
+  private readonly _db = inject(Database);
+  private readonly _viewedPostsKey = 'viewed_posts';
+
+  private _hasViewedPost(postId: string): boolean {
+    if (typeof window === 'undefined' || !window.localStorage) {
+      return false;
+    }
+
+    try {
+      const viewedPosts = JSON.parse(
+        window.localStorage.getItem(this._viewedPostsKey) || '[]'
+      ) as string[];
+      return viewedPosts.includes(postId);
+    } catch {
+      return false;
+    }
+  }
+
+  private _markPostAsViewed(postId: string): void {
+    if (typeof window === 'undefined' || !window.localStorage) {
+      return;
+    }
+
+    try {
+      const viewedPosts = JSON.parse(
+        window.localStorage.getItem(this._viewedPostsKey) || '[]'
+      ) as string[];
+      if (!viewedPosts.includes(postId)) {
+        viewedPosts.push(postId);
+        window.localStorage.setItem(this._viewedPostsKey, JSON.stringify(viewedPosts));
+      }
+    } catch {}
+  }
 
   public incrementView(postId: string): Observable<number> {
-    const viewRef = this._db.object<number>(`/post-views/${postId}`);
-    return from(viewRef.query.ref.transaction((currentViews) => (currentViews || 0) + 1)).pipe(
+    if (!postId) {
+      return of(0);
+    }
+
+    if (this._hasViewedPost(postId)) {
+      return of(0);
+    }
+
+    const viewRef = ref(this._db, `post-views/${postId}`);
+    return from(
+      runTransaction(viewRef, (currentViews: number | null) => {
+        return (currentViews || 0) + 1;
+      })
+    ).pipe(
       map((result) => {
         if (result.committed && result.snapshot.val() !== null) {
-          return result.snapshot.val();
+          return result.snapshot.val() as number;
         }
         throw new Error('Transaction failed');
+      }),
+      tap(() => {
+        this._markPostAsViewed(postId);
+      }),
+      catchError(() => {
+        return of(0);
       })
     );
   }
 
   public getViewCount(postId: string): Observable<number> {
-    return this._db
-      .object<number>(`/post-views/${postId}`)
-      .valueChanges()
-      .pipe(map((views) => views ?? 0));
+    if (!postId) {
+      return of(0);
+    }
+
+    const viewRef = ref(this._db, `post-views/${postId}`);
+    return objectVal<number>(viewRef).pipe(
+      map((views) => views ?? 0),
+      catchError(() => {
+        return of(0);
+      })
+    );
   }
 }

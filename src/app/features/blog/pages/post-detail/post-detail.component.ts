@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { PostService } from '@app/entities/post/services/post.service';
 import { PostState } from '@app/entities/post/models/post.interface';
-import { fromEvent, Observable, switchMap } from 'rxjs';
+import { fromEvent, Observable, of, switchMap } from 'rxjs';
 import { map, startWith, throttleTime } from 'rxjs/operators';
 import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
 import { PostNavigationComponent } from '../../components/post-navigation/post-navigation.component';
@@ -25,6 +25,7 @@ import { LinkComponent } from '@app/shared/components/link/link.component';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { ReadingProgressBarComponent } from '../../components/reading-progress-bar/reading-progress-bar.component';
+import { ViewCounterService } from '../../services/view-counter.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -51,6 +52,7 @@ export class PostDetailComponent implements AfterViewInit {
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _document = inject(DOCUMENT);
   private readonly _yandexMetrikaService = inject(YandexMetrikaService);
+  private readonly _viewCounterService = inject(ViewCounterService);
 
   protected readonly showScrollTop = signal(false);
 
@@ -64,6 +66,10 @@ export class PostDetailComponent implements AfterViewInit {
               post_slug: post.slug,
               post_title: post.title,
             });
+            this._viewCounterService
+              .incrementView(post.slug)
+              .pipe(takeUntilDestroyed(this._destroyRef))
+              .subscribe();
           }
           return {
             loading: false,
@@ -80,6 +86,11 @@ export class PostDetailComponent implements AfterViewInit {
         })
       )
     )
+  );
+
+  protected readonly viewCount$: Observable<number> = this._route.paramMap.pipe(
+    map((params) => params.get('slug') || ''),
+    switchMap((slug) => (slug ? this._viewCounterService.getViewCount(slug) : of(0)))
   );
 
   public ngAfterViewInit(): void {

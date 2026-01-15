@@ -29,6 +29,9 @@
       <div class="post-meta">
         <time class="post-date">{{ formatDate(state.post.date) }}</time>
         <span class="post-reading-time">{{ state.post.content | readingTime }}</span>
+        @if (viewCount$ | async; as viewCount) {
+        <span class="post-views"> {{ viewCount }} {{ viewCount === 1 ? 'view' : 'views' }} </span>
+        }
       </div>
     </header>
     <div class="post-body">
