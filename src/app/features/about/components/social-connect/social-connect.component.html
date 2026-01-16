@@ -1,14 +1,14 @@
 <div class="social-connect">
-  <h2>Connect</h2>
+  <ng-card [padding]="'large'" [stylingMode]="'default'" [header]="'Connect'">
+    <p class="social-connect__text">
+      Reach me at
+      <ng-link [link]="'mailto:' + email" [text]="email" />
+    </p>
 
-  <p class="social-connect__text">
-    Reach me at
-    <ng-link [link]="'mailto:' + email" [text]="email" />
-  </p>
-
-  <div class="social-connect__links">
-    @for (link of links; track link.name) {
-    <ng-link [link]="link.url" [text]="link.name" />
-    }
-  </div>
+    <div class="social-connect__links">
+      @for (link of links; track link.name) {
+      <ng-link [link]="link.url" [text]="link.name" />
+      }
+    </div>
+  </ng-card>
 </div>

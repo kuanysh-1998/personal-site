@@ -1,18 +1,21 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { PostGroup } from '@app/entities/post/models/post.interface';
 import { PostService } from '@app/entities/post/services/post.service';
 import { PostSearchComponent } from '@app/features/blog/components/post-search/post-search.component';
+import { CardComponent } from '@app/shared/components/card/card.component';
+import { Icons } from '@app/shared/components/svg/svg.config';
 
 @Component({
   selector: 'app-blog-list',
-  imports: [RouterLink, PostSearchComponent],
+  imports: [PostSearchComponent, CardComponent],
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogListComponent {
   private readonly _postService = inject(PostService);
+  private readonly _router = inject(Router);
 
   protected readonly searchQuery = signal<string>('');
 
@@ -65,5 +68,11 @@ export class BlogListComponent {
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
     return `${month}/${day}`;
+  }
+
+  protected readonly chevronRightIcon: string = Icons.ChevronRight;
+
+  protected onPostClick(slug: string): void {
+    this._router.navigate(['/blog', slug]);
   }
 }

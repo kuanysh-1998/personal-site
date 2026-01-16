@@ -1,20 +1,24 @@
 <div class="about-page">
-  <div class="about-page__header">
-    <ng-avatar
-      [src]="'/assets/images/cv.jpeg'"
-      [name]="'Kuanysh Aptaizhanov'"
-      [size]="'large'"
-      class="about-page__avatar"
-    />
-    <div class="about-page__content">
-      <p class="about-page__name">Kuanysh Aptaizhanov</p>
-      <p class="about-page__description">
-        Frontend engineer in Astana, Kazakhstan
-        <span *ngTooltip="astanaTime">(UTC+5)</span>. I build enterprise Angular applications with
-        focus on clean architecture and scalable solutions. Stack: Angular, TypeScript, RxJS,
-        Signals API.
-      </p>
-    </div>
+  <div class="about-page__card-wrapper">
+    <ng-card [padding]="'large'" [stylingMode]="'default'" [direction]="'horizontal'">
+      <div class="about-page__card-content">
+        <ng-avatar
+          [src]="'/assets/images/cv.jpeg'"
+          [name]="'Kuanysh Aptaizhanov'"
+          [size]="'large'"
+          class="about-page__avatar"
+        />
+        <div class="about-page__content">
+          <p class="about-page__name">Kuanysh Aptaizhanov</p>
+          <p class="about-page__description">
+            Frontend engineer in Astana, Kazakhstan
+            <span *ngTooltip="astanaTime">(UTC+5)</span>. I build enterprise Angular applications
+            with focus on clean architecture and scalable solutions. Stack: Angular, TypeScript,
+            RxJS, Signals API.
+          </p>
+        </div>
+      </div>
+    </ng-card>
   </div>
   <app-latest-posts />
   <app-social-connect />

@@ -2,14 +2,18 @@
   <h3>Latest Posts</h3>
   <div class="posts-list">
     @for (post of latestPosts(); track post.slug) {
-    <a [routerLink]="['/blog', post.slug]" class="post-item">
-      <div class="post-content">
-        <div class="post-title">{{ post.title }}</div>
-        @if (post.description) {
-        <div class="post-description">{{ post.description }}</div>
-        }
-      </div>
-    </a>
+    <ng-card
+      [padding]="'medium'"
+      [stylingMode]="'default'"
+      [header]="post.title"
+      [iconRight]="chevronRightIcon"
+      [clickable]="true"
+      (clicked)="onPostClick(post.slug)"
+    >
+      @if (post.description) {
+      <div class="post-description">{{ post.description }}</div>
+      }
+    </ng-card>
     }
   </div>
 </div>

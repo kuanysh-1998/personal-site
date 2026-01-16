@@ -1,0 +1,234 @@
+.ng-card {
+  display: block;
+  width: 100%;
+  height: fit-content;
+  background-color: transparent;
+  border-radius: 12px;
+
+  &.ng-card_full-height {
+    height: 100%;
+  }
+
+  &__container {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    background-color: var(--white-05);
+    border: 1px solid var(--white-10);
+    border-radius: 12px;
+
+    &_full-height {
+      height: 100%;
+    }
+
+    .ng-card__header {
+      display: flex;
+      flex-shrink: 0;
+      flex-wrap: nowrap;
+      gap: 8px;
+      align-items: center;
+      max-width: calc(100% - 36px);
+      min-height: 22px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .ng-card__header-text {
+      flex-shrink: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &.ng-card__container_horizontal {
+      flex-direction: row;
+
+      .ng-card__header-wrapper {
+        align-items: center;
+        height: fit-content;
+        white-space: nowrap;
+      }
+
+      .ng-card__header {
+        align-self: flex-start;
+      }
+    }
+
+    &.ng-card__container_vertical {
+      flex-direction: column;
+    }
+
+    &.ng-card__container_small {
+      padding: 8px 8px;
+      border-radius: 8px;
+    }
+
+    &.ng-card__container_medium {
+      padding: 12px 12px;
+      border-radius: 12px;
+    }
+
+    &.ng-card__container_large {
+      padding: 16px 16px;
+      border-radius: 12px;
+    }
+
+    &.ng-card__container_default {
+      background-color: var(--white-05);
+      border: 1px solid var(--white-10);
+    }
+
+    &.ng-card__container_ghost {
+      background: transparent;
+      border: none;
+    }
+
+    &.ng-card__container_secondary {
+      background: var(--white-08);
+      border-color: var(--white-15);
+    }
+
+    .ng-card__content.ng-card__content_with-header {
+      position: relative;
+
+      &.ng-card__content_vertical {
+        margin-top: 16px;
+
+        &::after {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          content: '';
+          border-top: 1px solid var(--white-10);
+        }
+
+        &:not(:has(*)) {
+          margin-top: 0;
+
+          &::after {
+            display: none;
+          }
+        }
+
+        &.ng-card__content_small {
+          padding-top: 12px;
+          margin-top: 8px;
+        }
+
+        &.ng-card__content_medium {
+          padding-top: 12px;
+          margin-top: 16px;
+        }
+
+        &.ng-card__content_large {
+          margin-top: 16px;
+        }
+      }
+
+      &.ng-card__content_horizontal {
+        margin-left: 16px;
+        border-top: none;
+
+        &.ng-card__content_small {
+          margin-left: 8px;
+        }
+
+        &.ng-card__content_large {
+          margin-left: 16px;
+        }
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &.ng-card__container_clickable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: var(--white-10);
+      }
+
+      &:focus {
+        background: var(--white-15);
+        outline: none;
+      }
+
+      &:active {
+        background: var(--white-15);
+      }
+    }
+  }
+
+  &__header-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    transition: color 0.2s;
+    font-family: 'PT Root UI', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0%;
+    color: var(--white-90);
+
+    .ng-card__chevron {
+      fill: var(--white-80);
+      transition: rotate 0.2s, fill 0.2s;
+
+      &.ng-card__chevron_open {
+        rotate: 90deg;
+      }
+    }
+
+    .ng-card__icon {
+      fill: var(--white-80);
+      transition: fill 0.2s;
+    }
+
+    &.ng-card__header-wrapper_clickable:hover {
+      cursor: pointer;
+
+      &:not(.ng-card__header-wrapper_open) {
+        color: var(--white);
+
+        .ng-card__chevron {
+          fill: var(--white);
+        }
+
+        .ng-card__icon {
+          fill: var(--white);
+        }
+      }
+    }
+  }
+
+  .ng-card__content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 200ms ease-out;
+
+    &_expanded {
+      grid-template-rows: 1fr;
+    }
+
+    > * {
+      overflow: hidden;
+    }
+  }
+
+  .ng-card__content {
+    height: 100%;
+  }
+}

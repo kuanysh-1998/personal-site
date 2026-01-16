@@ -4,12 +4,13 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 import { ToastService } from '@app/shared/components/toast-container/toast.service';
 import { ToastType } from '@app/shared/components/toast/toast.types';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
+import { CardComponent } from '@app/shared/components/card/card.component';
 import { SharePlatform } from './share-post.types';
 
 @Component({
   selector: 'app-share-post',
   standalone: true,
-  imports: [ButtonComponent, TooltipDirective],
+  imports: [ButtonComponent, TooltipDirective, CardComponent],
   templateUrl: './share-post.component.html',
   styleUrl: './share-post.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

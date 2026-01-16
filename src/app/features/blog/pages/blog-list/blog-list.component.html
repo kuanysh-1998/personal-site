@@ -16,10 +16,18 @@
     <div class="year">{{ group.year }}</div>
     <div class="posts">
       @for (post of group.posts; track post.slug) {
-      <a [routerLink]="['/blog', post.slug]" class="post-item">
-        <span class="post-title">{{ post.title }}</span>
-        <span class="post-date">{{ formatDate(post.date) }}</span>
-      </a>
+      <ng-card
+        [padding]="'small'"
+        [stylingMode]="'default'"
+        [header]="post.title"
+        [iconRight]="chevronRightIcon"
+        [clickable]="true"
+        (clicked)="onPostClick(post.slug)"
+      >
+        @if (post.description) {
+        <div class="post-description">{{ post.description }}</div>
+        }
+      </ng-card>
       }
     </div>
   </div>

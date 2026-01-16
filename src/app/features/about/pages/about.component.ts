@@ -3,10 +3,11 @@ import { SocialConnectComponent } from '../components/social-connect/social-conn
 import { LatestPosts } from '@app/features/blog/components/latest-posts/latest-posts';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { AvatarComponent } from '@app/shared/components/avatar/avatar.component';
+import { CardComponent } from '@app/shared/components/card/card.component';
 
 @Component({
   selector: 'app-about',
-  imports: [SocialConnectComponent, LatestPosts, TooltipDirective, AvatarComponent],
+  imports: [SocialConnectComponent, LatestPosts, TooltipDirective, AvatarComponent, CardComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

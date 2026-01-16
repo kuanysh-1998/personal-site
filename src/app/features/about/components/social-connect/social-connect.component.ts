@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LinkComponent } from '@app/shared/components/link/link.component';
+import { CardComponent } from '@app/shared/components/card/card.component';
 
 @Component({
   selector: 'app-social-connect',
-  imports: [LinkComponent],
+  imports: [LinkComponent, CardComponent],
   templateUrl: './social-connect.component.html',
   styleUrl: './social-connect.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
