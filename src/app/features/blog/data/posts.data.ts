@@ -26,4 +26,11 @@ export const POSTS: PostMetadata[] = [
     description:
       'The hidden cost of delayed updates and a practical strategy to stay current without pain',
   },
+  {
+    title: 'takeUntilDestroyed: Automatic Unsubscription in Angular',
+    date: '2026-01-16',
+    slug: 'takeuntildestroyed-angular',
+    description:
+      'How to prevent memory leaks with Angular native solution for RxJS subscription cleanup',
+  },
 ];

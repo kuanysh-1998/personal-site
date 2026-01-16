@@ -16,10 +16,22 @@ export class ViewCounterService {
     }
 
     try {
-      const viewedPosts = JSON.parse(
-        window.localStorage.getItem(this._viewedPostsKey) || '[]'
-      ) as string[];
-      return viewedPosts.includes(postId);
+      const stored = window.localStorage.getItem(this._viewedPostsKey);
+      if (!stored) {
+        return false;
+      }
+
+      const viewedPosts = JSON.parse(stored);
+
+      if (Array.isArray(viewedPosts)) {
+        return viewedPosts.includes(postId);
+      }
+
+      if (typeof viewedPosts === 'object' && viewedPosts !== null) {
+        return postId in viewedPosts;
+      }
+
+      return false;
     } catch {
       return false;
     }
@@ -29,15 +41,34 @@ export class ViewCounterService {
     if (typeof window === 'undefined' || !window.localStorage) return;
 
     try {
-      const viewedPosts = JSON.parse(
-        window.localStorage.getItem(this._viewedPostsKey) || '{}'
-      ) as Record<string, number>;
+      const stored = window.localStorage.getItem(this._viewedPostsKey);
+      let viewedPosts: Record<string, number>;
+
+      if (!stored) {
+        viewedPosts = {};
+      } else {
+        const parsed = JSON.parse(stored);
+
+        if (Array.isArray(parsed)) {
+          viewedPosts = {};
+          const now = Date.now();
+          parsed.forEach((id: string) => {
+            viewedPosts[id] = now;
+          });
+        } else if (typeof parsed === 'object' && parsed !== null) {
+          viewedPosts = parsed as Record<string, number>;
+        } else {
+          viewedPosts = {};
+        }
+      }
 
       viewedPosts[postId] = Date.now();
 
       const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
       Object.keys(viewedPosts).forEach((key) => {
-        if (viewedPosts[key] < thirtyDaysAgo) delete viewedPosts[key];
+        if (viewedPosts[key] < thirtyDaysAgo) {
+          delete viewedPosts[key];
+        }
       });
 
       window.localStorage.setItem(this._viewedPostsKey, JSON.stringify(viewedPosts));
