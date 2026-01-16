@@ -20,6 +20,7 @@ import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directi
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { TableOfContentsComponent } from '../blog/components/table-of-contents/table-of-contents.component';
 import { fromEvent } from 'rxjs';
+import { TAB_IDS } from './main-layout.constants';
 
 @Component({
   selector: 'app-main-layout',
@@ -45,16 +46,16 @@ export class MainLayoutComponent implements AfterViewInit {
 
   protected readonly tabs: Tab[] = [
     {
-      id: 'about',
+      id: TAB_IDS.ABOUT,
       text: 'About',
     },
     {
-      id: 'blog',
+      id: TAB_IDS.BLOG,
       text: 'Blog',
     },
   ];
 
-  protected readonly selectedTab = signal<string>('about');
+  protected readonly selectedTab = signal<string>(TAB_IDS.ABOUT);
   protected readonly isPostPage = signal<boolean>(false);
   protected readonly showScrollTop = signal(false);
 
@@ -103,9 +104,9 @@ export class MainLayoutComponent implements AfterViewInit {
     this.isPostPage.set(isPost);
 
     if (url.includes('/blog')) {
-      this.selectedTab.set('blog');
+      this.selectedTab.set(TAB_IDS.BLOG);
     } else if (url.includes('/about') || url === '/' || url === '') {
-      this.selectedTab.set('about');
+      this.selectedTab.set(TAB_IDS.ABOUT);
     }
   }
 
