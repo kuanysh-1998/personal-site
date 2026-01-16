@@ -25,18 +25,20 @@
 
     .ng-card__header {
       display: flex;
-      flex-shrink: 0;
+      flex-shrink: 1;
       flex-wrap: nowrap;
       gap: 8px;
       align-items: center;
       max-width: calc(100% - 36px);
+      min-width: 0;
       min-height: 22px;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .ng-card__header-text {
-      flex-shrink: 0;
+      flex-shrink: 1;
+      min-width: 0;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -183,6 +185,7 @@
     color: var(--white-90);
 
     .ng-card__chevron {
+      flex-shrink: 0;
       fill: var(--white-80);
       transition: rotate 0.2s, fill 0.2s;
 
@@ -192,6 +195,7 @@
     }
 
     .ng-card__icon {
+      flex-shrink: 0;
       fill: var(--white-80);
       transition: fill 0.2s;
     }
@@ -230,5 +234,29 @@
 
   .ng-card__content {
     height: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .ng-card {
+    &__container {
+      .ng-card__header {
+        max-width: calc(100% - 40px);
+      }
+    }
+
+    &__header-wrapper {
+      gap: 12px;
+
+      .ng-card__icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      .ng-card__chevron {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 }
