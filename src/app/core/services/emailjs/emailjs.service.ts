@@ -13,6 +13,7 @@ export class EmailjsService {
   private readonly _templateId = environment.emailjs.templateId;
   private readonly _publicKey = environment.emailjs.publicKey;
   private _isInitialized = false;
+
   public sendContactForm(data: ContactFormData): Observable<void> {
     this._initializeEmailjs();
 

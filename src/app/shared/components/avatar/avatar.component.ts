@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgClass, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,7 +12,7 @@ import { SvgComponent } from '../svg/svg.component';
 import { Icons } from '../svg/svg.config';
 @Component({
   selector: 'ng-avatar',
-  imports: [CommonModule, SvgComponent, NgOptimizedImage],
+  imports: [NgClass, SvgComponent, NgOptimizedImage],
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss'],
   encapsulation: ViewEncapsulation.None,
