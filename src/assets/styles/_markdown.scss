@@ -49,11 +49,37 @@ markdown {
     margin: 1rem 0;
     max-width: 100%;
     box-sizing: border-box;
+    position: relative;
 
     code {
       background: transparent;
       color: var(--white);
       padding: 0;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      cursor: pointer;
+      color: var(--white-80);
+      outline: none;
+      border: none;
+      background: none;
+
+      &:hover {
+        color: var(--white);
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--white-60);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
     }
   }
 

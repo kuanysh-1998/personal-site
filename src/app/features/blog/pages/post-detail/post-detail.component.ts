@@ -18,6 +18,7 @@ import { ReadingProgressBarComponent } from '../../components/reading-progress-b
 import { ViewCounterService } from '../../services/view-counter.service';
 import { SvgComponent } from '@app/shared/components/svg/svg.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
+import { CopyCodeDirective } from '@app/shared/directives/copy-code.directive';
 
 @Component({
   selector: 'app-post-detail',
@@ -32,6 +33,7 @@ import { Icons } from '@app/shared/components/svg/svg.config';
     LinkComponent,
     ReadingProgressBarComponent,
     SvgComponent,
+    CopyCodeDirective,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
