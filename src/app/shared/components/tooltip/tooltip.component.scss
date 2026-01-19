@@ -17,7 +17,7 @@
 
   &__content {
     padding: 0.5rem 0.75rem;
-    font-family: 'PTRootUI', sans-serif;
+    font-family: 'PT Root UI', sans-serif;
     font-weight: 500;
     font-size: 12px;
     color: var(--dark-navy);
@@ -27,7 +27,9 @@
     background: var(--white);
     border: none;
     border-radius: 0.5rem;
-    box-shadow: 0px 0px 2px 0px rgb(0 0 0 / 12%), 0px 4px 8px 0px rgb(0 0 0 / 14%);
+    box-shadow:
+      0px 0px 2px 0px rgb(0 0 0 / 12%),
+      0px 4px 8px 0px rgb(0 0 0 / 14%);
     opacity: 1;
     white-space: pre-line;
   }

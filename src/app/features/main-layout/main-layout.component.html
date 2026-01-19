@@ -1,19 +1,29 @@
 <div class="main-layout">
-  <ng-tabs
-    [tabsItems]="tabs"
-    [orientation]="'horizontal'"
-    [selectedTab]="selectedTab()"
-    (changed)="onTabChanged($event)"
-  ></ng-tabs>
+  <div class="main-layout__header">
+    <ng-tabs
+      [tabsItems]="tabs"
+      [orientation]="'horizontal'"
+      [selectedTab]="selectedTab()"
+      (changed)="onTabChanged($event)"
+    ></ng-tabs>
+    <div class="main-layout__whats-new-button">
+      <ng-button
+        [label]="'What\'s new'"
+        [ariaLabel]="'What\'s new'"
+        [size]="'default'"
+        (clicked)="openWhatsNew()"
+      />
+    </div>
+  </div>
 
   <div class="content-area">
     <router-outlet></router-outlet>
   </div>
 
   @if (isPostPage()) {
-  <aside class="main-layout__toc">
-    <app-table-of-contents />
-  </aside>
+    <aside class="main-layout__toc">
+      <app-table-of-contents />
+    </aside>
   }
 
   <div class="main-layout__contact-button">
@@ -29,15 +39,15 @@
   </div>
 
   @if (showScrollTop()) {
-  <ng-button
-    class="scroll-to-top"
-    [icon]="'chevron-up'"
-    [size]="'large'"
-    [iconWidth]="'2rem'"
-    [iconHeight]="'2rem'"
-    (clicked)="scrollToTop()"
-    [ariaLabel]="'Scroll to top'"
-    *ngTooltip="'Return to top'"
-  ></ng-button>
+    <ng-button
+      class="scroll-to-top"
+      [icon]="'chevron-up'"
+      [size]="'large'"
+      [iconWidth]="'2rem'"
+      [iconHeight]="'2rem'"
+      (clicked)="scrollToTop()"
+      [ariaLabel]="'Scroll to top'"
+      *ngTooltip="'Return to top'"
+    ></ng-button>
   }
 </div>

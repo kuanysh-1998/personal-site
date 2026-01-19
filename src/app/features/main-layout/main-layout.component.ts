@@ -14,10 +14,12 @@ import { TabsComponent } from '../../shared/components/tab/tabs.component';
 import { Tab } from '../../shared/components/tab/tabs.types';
 import { YandexMetrikaService } from '../../core/services/yandex-metrika/yandex-metrika.service';
 import { DialogService } from '../../shared/components/dialog/dialog.service';
+import { DrawerService } from '../../shared/components/drawer/drawer.service';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { Icons } from '../../shared/components/svg/svg.config';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { WhatsNewComponent } from '../whats-new/whats-new.component';
 import { TableOfContentsComponent } from '../blog/components/table-of-contents/table-of-contents.component';
 import { fromEvent } from 'rxjs';
 import { TAB_IDS } from './main-layout.constants';
@@ -40,6 +42,7 @@ export class MainLayoutComponent implements AfterViewInit {
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _yandexMetrikaService = inject(YandexMetrikaService);
   private readonly _dialogService = inject(DialogService);
+  private readonly _drawerService = inject(DrawerService);
   private readonly _destroyRef = inject(DestroyRef);
 
   protected readonly contactIcon = Icons.Contact;
@@ -65,7 +68,7 @@ export class MainLayoutComponent implements AfterViewInit {
     this._router.events
       .pipe(
         filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this._updateSelectedTabFromUrl();
@@ -115,6 +118,13 @@ export class MainLayoutComponent implements AfterViewInit {
       header: 'Contact Form',
       submitButton: 'Send',
       cancelButton: 'Cancel',
+    });
+  }
+
+  protected openWhatsNew(): void {
+    this._drawerService.open(WhatsNewComponent, {
+      header: "What's New",
+      customWidth: '500px',
     });
   }
 }

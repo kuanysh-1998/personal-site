@@ -1,0 +1,137 @@
+<div class="ng-drawer">
+  <div
+    class="ng-drawer__backdrop"
+    [class.ng-drawer__backdrop_visible]="isDrawerOpen()"
+    (click)="close()"
+  ></div>
+
+  <div
+    #drawerContainer
+    class="ng-drawer__container"
+    [class.ng-drawer__container_open]="isDrawerOpen()"
+    [style.width]="customWidth"
+    tabindex="-1"
+  >
+    <div class="ng-drawer__header">
+      <div class="ng-drawer__header-content">
+        @if (showBackButton) {
+          <ng-button
+            [icon]="iconsArrowLeft"
+            (clicked)="navigateBack()"
+            variant="default"
+            stylingMode="outlined"
+            class="ng-drawer__back-button"
+          ></ng-button>
+        }
+        <div class="ng-drawer__header-text">
+          <div class="ng-drawer__title">{{ header }}</div>
+          <div class="ng-drawer__subtitle">{{ subheader }}</div>
+        </div>
+      </div>
+
+      <div class="ng-drawer__header-actions">
+        @if (showNavigation) {
+          <ng-button-group>
+            <ng-button
+              [icon]="iconsArrowLeft"
+              (clicked)="navigatePrevious()"
+              variant="default"
+              stylingMode="outlined"
+            ></ng-button>
+
+            <ng-button
+              [icon]="iconsArrowRight"
+              (clicked)="navigateNext()"
+              variant="default"
+              stylingMode="outlined"
+            ></ng-button>
+          </ng-button-group>
+        }
+
+        <ng-button
+          [icon]="iconsCross"
+          (clicked)="close()"
+          variant="default"
+          stylingMode="outlined"
+          class="ng-drawer__close-button"
+        ></ng-button>
+      </div>
+    </div>
+
+    <ng-divider></ng-divider>
+
+    <div class="ng-drawer__content">
+      <div class="ng-drawer__scroll-wrapper">
+        <ng-container *ngComponentOutlet="componentType"></ng-container>
+        <ng-content></ng-content>
+      </div>
+    </div>
+
+    @if (customFooterTemplate) {
+      <ng-divider></ng-divider>
+      <div class="ng-drawer__footer">
+        <ng-container *ngTemplateOutlet="customFooterTemplate"></ng-container>
+      </div>
+    } @else if (additionalActionButtonConfig || cancelButtonConfig || submitButtonConfig) {
+      <ng-divider></ng-divider>
+    }
+    @if (additionalActionButtonConfig || cancelButtonConfig || submitButtonConfig) {
+      <div class="ng-drawer__footer">
+        <div>
+          @if (additionalActionButtonConfig) {
+            <ng-button
+              [label]="additionalActionButtonConfig.label"
+              [stylingMode]="additionalActionButtonConfig.stylingMode ?? 'outlined'"
+              [variant]="additionalActionButtonConfig.variant ?? 'default'"
+              [icon]="additionalActionButtonConfig.icon"
+              [rightIcon]="additionalActionButtonConfig.iconRight"
+              [iconWidth]="additionalActionButtonConfig.iconWidth"
+              [iconHeight]="additionalActionButtonConfig.iconHeight"
+              (clicked)="action()"
+            ></ng-button>
+          }
+        </div>
+
+        <div class="ng-drawer__footer-actions">
+          @if (popoverButtonConfig) {
+            <ng-button-popover
+              [label]="popoverButtonConfig.label"
+              [stylingMode]="popoverButtonConfig.stylingMode ?? 'contained'"
+              [variant]="popoverButtonConfig.variant ?? 'default'"
+              [icon]="popoverButtonConfig.icon"
+              [menuItems]="popoverButtonConfig.menuItems ?? []"
+              (clicked)="popoverButtonAction.emit($event)"
+              [menuHeader]="'Выберите вариант:'"
+              type="menu"
+            ></ng-button-popover>
+          }
+          @if (cancelButtonConfig) {
+            <ng-button
+              [label]="cancelButtonConfig.label"
+              [stylingMode]="cancelButtonConfig.stylingMode ?? 'outlined'"
+              [variant]="cancelButtonConfig.variant ?? 'default'"
+              [icon]="cancelButtonConfig.icon"
+              [rightIcon]="cancelButtonConfig.iconRight"
+              [iconWidth]="cancelButtonConfig.iconWidth"
+              [iconHeight]="cancelButtonConfig.iconHeight"
+              (clicked)="cancel()"
+            ></ng-button>
+          }
+          @if (submitButtonConfig) {
+            <ng-button
+              [label]="submitButtonConfig.label"
+              [stylingMode]="submitButtonConfig.stylingMode ?? 'contained'"
+              [variant]="submitButtonConfig.variant ?? 'default'"
+              [icon]="submitButtonConfig.icon"
+              [rightIcon]="submitButtonConfig.iconRight"
+              [iconWidth]="submitButtonConfig.iconWidth"
+              [iconHeight]="submitButtonConfig.iconHeight"
+              [disabled]="submitButtonConfig.disabled ?? false"
+              (clicked)="submit()"
+            ></ng-button>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

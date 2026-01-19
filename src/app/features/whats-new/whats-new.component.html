@@ -1,0 +1,23 @@
+<div class="whats-new">
+  <div class="whats-new__content">
+    @for (item of allItems(); track isPost(item) ? item.slug : item.title) {
+      <ng-card
+        [padding]="'medium'"
+        [stylingMode]="'default'"
+        [header]="item.title"
+        [iconRight]="isClickable(item) ? chevronRightIcon : undefined"
+        [clickable]="isClickable(item)"
+        (clicked)="onItemClick(item)"
+      >
+        <div class="whats-new__feature-content">
+          <span class="whats-new__feature-date">{{ formatDate(item.date) }}</span>
+          @if (item.description) {
+            <p class="whats-new__feature-description">
+              {{ item.description }}
+            </p>
+          }
+        </div>
+      </ng-card>
+    }
+  </div>
+</div>

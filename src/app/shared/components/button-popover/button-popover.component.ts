@@ -38,9 +38,9 @@ export class ButtonPopoverComponent implements AfterViewInit {
   @Input() public maxHeight = undefined;
   @Input() public fullWidth = false;
 
-  @Input() public menuHeader = undefined;
+  @Input() public menuHeader: string | undefined = undefined;
   @Input() public token = undefined;
-  @Input() public icon = undefined;
+  @Input() public icon: string | undefined = undefined;
 
   @Output() public closed = new EventEmitter<void>();
   @Output() public opened = new EventEmitter<void>();

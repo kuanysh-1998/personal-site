@@ -7,8 +7,29 @@
   position: relative;
 }
 
+.main-layout__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
 .content-area {
   margin-top: 2rem;
+}
+
+.main-layout__whats-new-button {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  animation:
+    fadeIn 0.3s ease,
+    pulse-attention 2s ease-in-out 3s infinite;
+
+  &:hover {
+    transform: scale(1.05);
+    animation-play-state: paused;
+  }
 }
 
 .main-layout__toc {
@@ -32,7 +53,9 @@
   right: 2rem;
   z-index: 1000;
   transition: transform 0.2s ease;
-  animation: fadeIn 0.3s ease, bounce-attention 2s ease-in-out 3s infinite;
+  animation:
+    fadeIn 0.3s ease,
+    bounce-attention 2s ease-in-out 3s infinite;
 
   &:hover {
     transform: scale(1.1);
@@ -54,6 +77,16 @@
 }
 
 @media (max-width: 768px) {
+  .main-layout__header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .main-layout__whats-new-button {
+    width: 100%;
+  }
+
   .main-layout__contact-button {
     bottom: 5rem;
     right: 1rem;
@@ -92,8 +125,24 @@
   }
 }
 
+@keyframes pulse-attention {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .main-layout__contact-button {
     animation: none;
+  }
+
+  .main-layout__whats-new-button {
+    animation: fadeIn 0.3s ease;
   }
 }
