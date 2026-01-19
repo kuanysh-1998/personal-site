@@ -1,0 +1,35 @@
+<div class="ng-menu">
+  @if (isSomeItemVisible) {
+    <ng-popover
+      [for]="for"
+      [padding]="padding"
+      [isOpen]="isOpenSignal()"
+      [position]="position"
+      [externalClass]="'ng-menu_popover-' + padding"
+      [minWidth]="minWidth"
+      [offset]="4"
+      (closed)="close()"
+    >
+      @if (header) {
+        <div class="ng-menu__header">{{ header }}</div>
+        <div class="ng-menu_divider">
+          <ng-divider></ng-divider>
+        </div>
+      }
+      @for (item of items; track index; let index = $index) {
+        @if (item.visible || item.visible === undefined) {
+          <ng-list-item
+            [icon]="item.icon"
+            [rightIcon]="item.rightIcon"
+            [text]="item.text"
+            [active]="item.active || false"
+            [link]="item.link"
+            [withGap]="item.withGap || false"
+            [class.ng-menu_disable]="item.disable"
+            (clicked)="clickItem(item, index)"
+          ></ng-list-item>
+        }
+      }
+    </ng-popover>
+  }
+</div>

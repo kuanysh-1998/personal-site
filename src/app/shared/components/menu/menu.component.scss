@@ -1,0 +1,42 @@
+.ng-menu {
+  &__header {
+    display: block;
+    align-items: center;
+    padding: 0.5rem 0.5rem 0.125rem 0.5rem;
+    overflow: hidden;
+    font-family: 'PT Root UI', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--white-80);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  &_divider {
+    padding: 0 0.375rem;
+  }
+
+  &_popover-large.ng-popover {
+    .ng-popover__content {
+      padding: 1rem 1rem;
+    }
+  }
+
+  &_popover-medium.ng-popover {
+    .ng-popover__content {
+      padding: 0.375rem 0.375rem;
+    }
+  }
+
+  &_popover-small.ng-popover {
+    .ng-popover__content {
+      padding: 0.125rem 0.125rem;
+    }
+  }
+
+  &_disable {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+}
