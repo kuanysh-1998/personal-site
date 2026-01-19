@@ -7,11 +7,17 @@
   position: relative;
 }
 
+.main-layout__top-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 .main-layout__header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
   margin-bottom: 2rem;
 }
 
@@ -77,10 +83,8 @@
 }
 
 @media (max-width: 768px) {
-  .main-layout__header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
+  .main-layout__top-header {
+    justify-content: stretch;
   }
 
   .main-layout__whats-new-button {

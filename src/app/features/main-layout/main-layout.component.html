@@ -1,11 +1,5 @@
 <div class="main-layout">
-  <div class="main-layout__header">
-    <ng-tabs
-      [tabsItems]="tabs"
-      [orientation]="'horizontal'"
-      [selectedTab]="selectedTab()"
-      (changed)="onTabChanged($event)"
-    ></ng-tabs>
+  <div class="main-layout__top-header">
     <div class="main-layout__whats-new-button">
       <ng-button
         [label]="'What\'s new'"
@@ -14,6 +8,15 @@
         (clicked)="openWhatsNew()"
       />
     </div>
+  </div>
+
+  <div class="main-layout__header">
+    <ng-tabs
+      [tabsItems]="tabs"
+      [orientation]="'horizontal'"
+      [selectedTab]="selectedTab()"
+      (changed)="onTabChanged($event)"
+    ></ng-tabs>
   </div>
 
   <div class="content-area">

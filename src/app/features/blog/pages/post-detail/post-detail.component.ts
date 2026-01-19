@@ -72,14 +72,14 @@ export class PostDetailComponent {
           post: null,
           previousPost: null,
           nextPost: null,
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 
   protected readonly viewCount$: Observable<number> = this._route.paramMap.pipe(
     map((params) => params.get('slug') || ''),
-    switchMap((slug) => (slug ? this._viewCounterService.getViewCount(slug) : of(0)))
+    switchMap((slug) => (slug ? this._viewCounterService.getViewCount(slug) : of(0))),
   );
 
   protected formatDate(dateStr: string): string {
