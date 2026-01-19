@@ -216,7 +216,7 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
     private readonly _cdr: ChangeDetectorRef,
     private readonly _dialogRef: DialogRef,
     private readonly _vcr: ViewContainerRef,
-    private readonly _renderer: Renderer2
+    private readonly _renderer: Renderer2,
   ) {}
 
   public ngAfterViewInit(): void {
@@ -400,7 +400,7 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
       this._renderer.setStyle(
         this.dialogContainer?.nativeElement,
         styleKey,
-        positionStyles[styleKey]
+        positionStyles[styleKey],
       );
     });
   }

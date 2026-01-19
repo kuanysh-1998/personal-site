@@ -1,0 +1,25 @@
+<div class="ng-scroll">
+  <div class="ng-scroll__container">
+    <div class="ng-scroll__content" #content>
+      <ng-content></ng-content>
+    </div>
+
+    <div
+      #scrollbar
+      [style.width]="thickness + 'px'"
+      (mousedown)="handleVerticalMousedown($event)"
+      class="ng-scroll__scrollbar"
+    >
+      <div class="ng-scroll__visible-scrollbar"></div>
+    </div>
+
+    <div
+      #hScrollbar
+      [style.height]="thickness + 'px'"
+      (mousedown)="handleHorizontalMousedown($event)"
+      class="ng-scroll__horizontal-scrollbar"
+    >
+      <div class="ng-scroll__visible-scrollbar"></div>
+    </div>
+  </div>
+</div>

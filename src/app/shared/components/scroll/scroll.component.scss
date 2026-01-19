@@ -1,0 +1,103 @@
+:host {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.ng-scroll {
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  &:hover {
+    .ng-scroll__visible-scrollbar {
+      background: var(--white-30);
+      transition: background 0.2s ease;
+    }
+  }
+
+  &__container {
+    position: relative;
+    flex-grow: 1;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  &__content {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &__scrollbar {
+    position: absolute;
+    top: 0;
+    right: 4px;
+    width: 4px;
+    height: 50px;
+    padding: 4px 0;
+    cursor: pointer;
+    z-index: 10;
+    pointer-events: auto;
+
+    .ng-scroll__visible-scrollbar {
+      width: 100%;
+      height: 100%;
+      background: var(--white-20);
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    &:hover {
+      .ng-scroll__visible-scrollbar {
+        background: var(--white-30);
+      }
+    }
+
+    &:active {
+      .ng-scroll__visible-scrollbar {
+        background: var(--white-30);
+      }
+    }
+  }
+
+  &__horizontal-scrollbar {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 50px;
+    height: 6px;
+    padding: 0 4px;
+    cursor: pointer;
+
+    .ng-scroll__visible-scrollbar {
+      width: 100%;
+      height: 100%;
+      background: var(--white-20);
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    &:hover {
+      .ng-scroll__visible-scrollbar {
+        background: var(--white-30);
+      }
+    }
+
+    &:active {
+      .ng-scroll__visible-scrollbar {
+        background: var(--white-30);
+      }
+    }
+  }
+}

@@ -61,10 +61,12 @@
     <ng-divider></ng-divider>
 
     <div class="ng-drawer__content">
-      <div class="ng-drawer__scroll-wrapper">
-        <ng-container *ngComponentOutlet="componentType"></ng-container>
-        <ng-content></ng-content>
-      </div>
+      <ng-scroll [thickness]="4">
+        <div class="ng-drawer__scroll-wrapper">
+          <ng-container *ngComponentOutlet="componentType"></ng-container>
+          <ng-content></ng-content>
+        </div>
+      </ng-scroll>
     </div>
 
     @if (customFooterTemplate) {

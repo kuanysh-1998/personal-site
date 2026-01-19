@@ -25,6 +25,7 @@ import { ButtonGroupComponent } from '../button-group/button-group.component';
 import { UnknownDynamicType } from '../../types/common.types';
 import { Icons } from '../svg/svg.config';
 import { DrawerRef } from './drawer-ref.service';
+import { ScrollComponent } from '../scroll/scroll.component';
 
 @Component({
   selector: 'ng-drawer',
@@ -34,6 +35,7 @@ import { DrawerRef } from './drawer-ref.service';
     ButtonComponent,
     ButtonPopoverComponent,
     ButtonGroupComponent,
+    ScrollComponent,
   ],
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
