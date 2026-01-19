@@ -32,7 +32,7 @@ export class EmailjsService {
           message: error.message,
         });
         return throwError(() => error);
-      })
+      }),
     );
   }
 
@@ -43,7 +43,7 @@ export class EmailjsService {
 
     if (!this._publicKey) {
       throw new Error(
-        'EmailJS publicKey is not configured. Please specify publicKey in environment.ts'
+        'EmailJS publicKey is not configured. Please specify publicKey in environment.ts',
       );
     }
 

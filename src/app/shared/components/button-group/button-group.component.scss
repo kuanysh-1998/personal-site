@@ -1,0 +1,52 @@
+.ng-button-group {
+  display: flex;
+  flex-wrap: nowrap;
+
+  ng-button {
+    .ng-button {
+      .ng-button__container {
+        border-radius: 0;
+      }
+    }
+
+    &:first-child {
+      .ng-button {
+        .ng-button__container {
+          border-radius: 0.5rem 0 0 0.5rem;
+        }
+      }
+    }
+
+    &:last-child {
+      .ng-button {
+        .ng-button__container {
+          border-radius: 0 0.5rem 0.5rem 0;
+        }
+      }
+    }
+
+    &:not(:last-child) {
+      .ng-button {
+        .ng-button__container {
+          border-right: none;
+        }
+
+        .ng-button__container:hover {
+          border-right: none;
+        }
+
+        .ng-button__container:focus {
+          border-right: none;
+        }
+
+        .ng-button__container:active {
+          border-right: none;
+        }
+
+        .ng-button__container:disabled {
+          border-right: none;
+        }
+      }
+    }
+  }
+}

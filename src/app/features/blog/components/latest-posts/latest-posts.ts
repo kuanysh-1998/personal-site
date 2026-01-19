@@ -19,7 +19,7 @@ export class LatestPosts {
     return this._postService.getAllPosts().slice(0, 3);
   });
 
-  protected readonly chevronRightIcon = Icons.ChevronRight as string;
+  protected readonly chevronRightIcon   = Icons.ChevronRight as string;
 
   protected onPostClick(slug: string): void {
     this._router.navigate(['/blog', slug]);
