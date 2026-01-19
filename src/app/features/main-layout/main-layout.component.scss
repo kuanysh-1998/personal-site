@@ -3,15 +3,9 @@
   width: 100%;
   margin: 0 auto;
   padding: 2rem 1rem;
+  padding-top: calc(2rem + 70px);
   box-sizing: border-box;
   position: relative;
-}
-
-.main-layout__top-header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 1rem;
 }
 
 .main-layout__header {
@@ -23,19 +17,6 @@
 
 .content-area {
   margin-top: 2rem;
-}
-
-.main-layout__whats-new-button {
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-  animation:
-    fadeIn 0.3s ease,
-    pulse-attention 2s ease-in-out 3s infinite;
-
-  &:hover {
-    transform: scale(1.05);
-    animation-play-state: paused;
-  }
 }
 
 .main-layout__toc {
@@ -83,12 +64,8 @@
 }
 
 @media (max-width: 768px) {
-  .main-layout__top-header {
-    justify-content: stretch;
-  }
-
-  .main-layout__whats-new-button {
-    width: 100%;
+  .main-layout {
+    padding-top: calc(2rem + 60px);
   }
 
   .main-layout__contact-button {
@@ -144,9 +121,5 @@
 @media (prefers-reduced-motion: reduce) {
   .main-layout__contact-button {
     animation: none;
-  }
-
-  .main-layout__whats-new-button {
-    animation: fadeIn 0.3s ease;
   }
 }

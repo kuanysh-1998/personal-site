@@ -1,0 +1,82 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-index-drawer, 1000);
+  background: oklch(14.7% 0.004 49.25 / 0.95);
+  border-bottom: 1px solid var(--white-10);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-height: 70px;
+}
+
+.header__content {
+  max-width: 768px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 70px;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__whats-new-button {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  animation:
+    fadeIn 0.3s ease,
+    pulse-attention 2s ease-in-out 3s infinite;
+
+  &:hover {
+    transform: scale(1.05);
+    animation-play-state: paused;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-attention {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 768px) {
+  .header__content {
+    padding: 0.75rem 1rem;
+  }
+
+  .header__whats-new-button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__whats-new-button {
+    animation: fadeIn 0.3s ease;
+  }
+}

@@ -1,15 +1,6 @@
-<div class="main-layout">
-  <div class="main-layout__top-header">
-    <div class="main-layout__whats-new-button">
-      <ng-button
-        [label]="'What\'s new'"
-        [ariaLabel]="'What\'s new'"
-        [size]="'default'"
-        (clicked)="openWhatsNew()"
-      />
-    </div>
-  </div>
+<app-header></app-header>
 
+<div class="main-layout">
   <div class="main-layout__header">
     <ng-tabs
       [tabsItems]="tabs"
