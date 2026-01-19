@@ -1,0 +1,9 @@
+.ng-button-popover {
+  display: flex;
+  flex-shrink: 0;
+  width: fit-content;
+
+  &_full-width {
+    width: 100%;
+  }
+}

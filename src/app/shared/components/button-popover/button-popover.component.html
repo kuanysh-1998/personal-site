@@ -1,0 +1,41 @@
+<div class="ng-button-popover">
+  <div [class.ng-button-popover_full-width]="fullWidth" #button>
+    <ng-button
+      [icon]="icon"
+      [fullWidth]="fullWidth"
+      [rightIcon]="iconRight ?? undefined"
+      [label]="label"
+      [variant]="variant"
+      [stylingMode]="stylingMode"
+      [disabled]="disabled"
+      (clicked)="toggle()"
+    ></ng-button>
+  </div>
+
+  @if (isMenu) {
+    <ng-menu
+      [isOpen]="isOpen()"
+      [minWidth]="popoverWidth()"
+      [for]="button"
+      [header]="menuHeader"
+      [padding]="padding"
+      [items]="menuItems"
+      [position]="position"
+      (clicked)="clicked.emit($event)"
+      (closed)="close()"
+    ></ng-menu>
+  } @else {
+    <ng-popover
+      [for]="button"
+      [isOpen]="isOpen()"
+      [position]="position"
+      [minWidth]="popoverWidth()"
+      [padding]="padding"
+      [maxHeight]="maxHeight"
+      [offset]="4"
+      (closed)="close()"
+    >
+      <ng-content></ng-content>
+    </ng-popover>
+  }
+</div>
