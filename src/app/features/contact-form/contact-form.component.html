@@ -9,14 +9,31 @@
       [maxLength]="200"
     />
 
-    <ng-text-field
-      formControlName="contact"
-      label="Telegram or Email"
-      placeholder="Enter @username or email"
-      [requiredForLabel]="true"
-      [errorMessage]="getContactError()"
-      [maxLength]="100"
-    />
+    <div class="contact-form__contact-wrapper">
+      <div class="contact-form__switch-container">
+        <span class="contact-form__switch-label" [class.active]="!form.get('contactType')?.value">
+          Email
+        </span>
+        <ng-switch
+          formControlName="contactType"
+          position="right"
+          [requiredForLabel]="false"
+          (changed)="onContactTypeChange($event)"
+        />
+        <span class="contact-form__switch-label" [class.active]="form.get('contactType')?.value">
+          Telegram
+        </span>
+      </div>
+
+      <ng-text-field
+        formControlName="contact"
+        [label]="getContactLabel()"
+        [placeholder]="getContactPlaceholder()"
+        [requiredForLabel]="true"
+        [errorMessage]="getContactError()"
+        [maxLength]="100"
+      />
+    </div>
 
     <ng-text-area
       formControlName="description"

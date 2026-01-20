@@ -1,0 +1,28 @@
+<div class="ng-switch">
+  <div [ngClass]="positionClass">
+    @if (label) {
+      <ng-label
+        [disabled]="isDisabled"
+        [label]="label"
+        [info]="labelInfo"
+        [required]="!!requiredForLabel"
+        (click)="switchToggle()"
+        class="ng-switch__label"
+      ></ng-label>
+    }
+
+    <div class="ng-switch__container">
+      <div
+        class="ng-switch__control"
+        [class.ng-switch__control-checked]="value"
+        [class.ng-switch__control-disabled]="isDisabled"
+        [ngClass]="variantClass"
+        (click)="switchToggle()"
+        [attr.data-token]="token"
+      >
+        <div class="ng-switch__track"></div>
+        <div class="ng-switch__thumb"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,156 @@
+.ng-switch {
+  display: block;
+  width: fit-content;
+  font-family: 'PT Root UI', sans-serif;
+
+  &__left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.5rem;
+
+    .ng-switch__label {
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.5rem;
+
+    .ng-switch__label {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    gap: 0.5rem;
+
+    .ng-switch__container {
+      align-self: flex-start;
+      justify-content: flex-start;
+    }
+  }
+
+  &__label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__control {
+    width: 2.5rem;
+    height: 1.25rem;
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    &:hover:not(&-disabled) {
+      .ng-switch__track {
+        border-color: var(--white-20);
+      }
+
+      &.ng-switch__control-checked .ng-switch__track {
+        border-color: var(--success-green);
+      }
+    }
+
+    &-checked {
+      .ng-switch__track {
+        background: var(--success-green);
+        border-color: var(--success-green);
+      }
+
+      .ng-switch__thumb {
+        transform: translateX(1.25rem);
+        background: var(--white);
+      }
+
+      &.ng-switch__control-success .ng-switch__track {
+        background: var(--success-green);
+        border-color: var(--success-green);
+      }
+
+      &.ng-switch__control-warning .ng-switch__track {
+        background: var(--warning-yellow-toast);
+        border-color: var(--warning-yellow-toast);
+      }
+
+      &.ng-switch__control-info .ng-switch__track {
+        background: var(--info-blue);
+        border-color: var(--info-blue);
+      }
+
+      &.ng-switch__control-danger .ng-switch__track {
+        background: var(--error-red);
+        border-color: var(--error-red);
+      }
+    }
+
+    &-disabled {
+      cursor: not-allowed;
+
+      .ng-switch__track {
+        background: rgba(255, 255, 255, 0.02);
+        border-color: var(--white-05);
+      }
+
+      .ng-switch__thumb {
+        background: var(--text-disabled);
+      }
+
+      &:hover {
+        .ng-switch__track {
+          border-color: var(--white-05);
+        }
+      }
+    }
+  }
+
+  &__track {
+    width: 2.5rem;
+    height: 1.25rem;
+    background: var(--white-05);
+    border: 0.0625rem solid var(--white-10);
+    border-radius: 0.75rem;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  &__thumb {
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: 50%;
+    background: var(--white-50);
+    transform: translateX(0);
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
+    will-change: transform, background;
+  }
+}
