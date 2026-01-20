@@ -1,0 +1,155 @@
+.ng-accordion {
+  display: block;
+  width: 100%;
+
+  &__header-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+    border-radius: 12px;
+    font-family: 'PT Root UI', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+
+    .ng-accordion__header {
+      color: var(--white-90);
+    }
+
+    .ng-accordion__chevron {
+      color: var(--white-80);
+    }
+
+    .ng-accordion__icon {
+      color: var(--white-80);
+    }
+
+    &:focus,
+    &:active {
+      background-color: var(--white-15);
+      outline: none;
+    }
+
+    &:hover {
+      background-color: var(--white-10);
+
+      .ng-accordion__header {
+        color: var(--white);
+      }
+
+      .ng-accordion__chevron {
+        color: var(--white);
+      }
+
+      .ng-accordion__icon {
+        color: var(--white);
+      }
+    }
+
+    &_open {
+      .ng-accordion__header {
+        color: var(--white-90);
+      }
+
+      .ng-accordion__chevron {
+        rotate: 90deg;
+        color: var(--white-80);
+      }
+
+      .ng-accordion__icon {
+        color: var(--white-80);
+      }
+    }
+
+    &_chevron-left {
+      justify-content: start;
+
+      .ng-accordion__chevron {
+        order: -1;
+      }
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    transition: fill 0.2s;
+    color: var(--white-80);
+  }
+
+  &__header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: var(--white-90);
+    transition: color 0.2s;
+  }
+
+  &__text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--white-90);
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--white-60);
+  }
+
+  &__template-wrapper {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+    color: var(--white-80);
+    transition:
+      rotate 0.2s,
+      fill 0.2s;
+  }
+
+  &__content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 250ms ease-in-out;
+
+    &_expanded {
+      grid-template-rows: 1fr;
+    }
+
+    > * {
+      min-height: 0;
+      overflow: hidden;
+    }
+  }
+
+  &__item {
+    font-family: 'PT Root UI', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--white-80);
+    transition: padding 250ms ease-in-out;
+    padding: 0 12px;
+
+    &_padding {
+      padding: 0 12px 12px;
+    }
+  }
+}

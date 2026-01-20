@@ -1,0 +1,36 @@
+<div
+  [ngClass]="accordionTitleClasses()"
+  (keydown.enter)="toggle()"
+  (keydown.space)="toggle(); $event.preventDefault()"
+  (click)="toggle()"
+  tabindex="0"
+  role="button"
+  [attr.aria-expanded]="isOpen()"
+>
+  <div class="ng-accordion__header">
+    @if (headerIcon()) {
+      <ng-svg [icon]="headerIcon()" class="ng-accordion__icon"></ng-svg>
+    }
+
+    <div class="ng-accordion__text-wrapper">
+      <span class="ng-accordion__title">{{ header() }}</span>
+      @if (subtitle()) {
+        <span class="ng-accordion__subtitle">{{ subtitle() }}</span>
+      }
+    </div>
+  </div>
+
+  @if (headerContent(); as headerContent) {
+    <div class="ng-accordion__template-wrapper">
+      <ng-container *ngTemplateOutlet="headerContent"></ng-container>
+    </div>
+  }
+
+  <ng-svg [icon]="chevronIcon" class="ng-accordion__chevron"></ng-svg>
+</div>
+
+<div [ngClass]="contentWrapperClasses()">
+  <div [ngClass]="accordionItemClasses()">
+    <ng-content></ng-content>
+  </div>
+</div>

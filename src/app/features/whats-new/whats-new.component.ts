@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DrawerRef } from '@app/shared/components/drawer/drawer-ref.service';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
-import { CardComponent } from '@app/shared/components/card/card.component';
+import { AccordionComponent } from '@app/shared/components/accordion/accordion.component';
+import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { PostService } from '@app/entities/post/services/post.service';
 import { ContactFormComponent } from '@app/features/contact-form/contact-form.component';
-import { Icons } from '@app/shared/components/svg/svg.config';
 import { WhatsNewItem, WhatsNewFeature, WhatsNewPost } from './whats-new.types';
 import { WHATS_NEW_FEATURES } from './whats-new.data';
 
 @Component({
   selector: 'app-whats-new',
   standalone: true,
-  imports: [CommonModule, CardComponent],
+  imports: [CommonModule, AccordionComponent, ButtonComponent],
   templateUrl: './whats-new.component.html',
   styleUrl: './whats-new.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,8 +39,6 @@ export class WhatsNewComponent {
     return [...featuresArray, ...postsArray].sort((a, b) => b.date.getTime() - a.date.getTime());
   });
 
-  protected readonly chevronRightIcon = Icons.ChevronRight as string;
-
   protected formatDate(date: Date): string {
     return new Intl.DateTimeFormat('ru-RU', {
       year: 'numeric',
@@ -61,17 +59,17 @@ export class WhatsNewComponent {
     return this.isPost(item) || this.isContactFormFeature(item);
   }
 
-  protected onItemClick(item: WhatsNewItem): void {
-    if (this.isPost(item)) {
-      this._router.navigate(['/blog', item.slug]);
-      this._drawerRef.close();
-    } else if (this.isContactFormFeature(item)) {
-      this._dialogService.open(ContactFormComponent, {
-        header: 'Contact Form',
-        submitButton: 'Send',
-        cancelButton: 'Cancel',
-      });
-    }
+  protected openContactForm(): void {
+    this._dialogService.open(ContactFormComponent, {
+      header: 'Contact Form',
+      submitButton: 'Send',
+      cancelButton: 'Cancel',
+    });
+  }
+
+  protected navigateToPost(slug: string): void {
+    this._router.navigate(['/blog', slug]);
+    this._drawerRef.close();
   }
 
   protected close(): void {

@@ -7,7 +7,6 @@
 .whats-new__content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   overflow-y: auto;
   flex: 1;
 }
@@ -15,17 +14,27 @@
 .whats-new__feature-content {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 12px;
 }
 
 .whats-new__feature-date {
-  font-size: 0.875rem;
-  color: var(--text-secondary-color, #757575);
+  font-family: 'PT Root UI', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--white-60);
 }
 
 .whats-new__feature-description {
   margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--text-secondary-color, #757575);
+  font-family: 'PT Root UI', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--white-80);
+}
+
+.whats-new__action-button {
+  margin-top: 8px;
+  align-self: flex-start;
 }

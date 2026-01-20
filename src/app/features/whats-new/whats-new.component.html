@@ -1,23 +1,36 @@
 <div class="whats-new">
   <div class="whats-new__content">
-    @for (item of allItems(); track isPost(item) ? item.slug : item.title) {
-      <ng-card
-        [padding]="'medium'"
-        [stylingMode]="'default'"
+    @for (item of allItems(); track isPost(item) ? item.slug : item.title; let isFirst = $first) {
+      <ng-accordion
         [header]="item.title"
-        [iconRight]="isClickable(item) ? chevronRightIcon : undefined"
-        [clickable]="isClickable(item)"
-        (clicked)="onItemClick(item)"
+        [subtitle]="formatDate(item.date)"
+        [initialState]="isFirst ? 'opened' : 'closed'"
       >
-        <div class="whats-new__feature-content">
-          <span class="whats-new__feature-date">{{ formatDate(item.date) }}</span>
-          @if (item.description) {
+        @if (item.description) {
+          <div class="whats-new__feature-content">
             <p class="whats-new__feature-description">
               {{ item.description }}
             </p>
-          }
-        </div>
-      </ng-card>
+            @if (isPost(item)) {
+              <ng-button
+                [label]="'Read Post'"
+                [stylingMode]="'contained'"
+                [size]="'default'"
+                (clicked)="navigateToPost(item.slug)"
+                class="whats-new__action-button"
+              />
+            } @else if (isContactFormFeature(item)) {
+              <ng-button
+                [label]="'Open Contact Form'"
+                [stylingMode]="'contained'"
+                [size]="'default'"
+                (clicked)="openContactForm()"
+                class="whats-new__action-button"
+              />
+            }
+          </div>
+        }
+      </ng-accordion>
     }
   </div>
 </div>
