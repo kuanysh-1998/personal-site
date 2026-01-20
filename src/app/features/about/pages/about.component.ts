@@ -28,6 +28,7 @@ export class AboutComponent {
     { name: 'RxJS', url: 'https://rxjs.dev' },
     { name: 'Signals API', url: 'https://angular.dev/guide/signals' },
   ];
+
   public get astanaTime(): string {
     const now = new Date();
     const utcTime = now.getTime() + now.getTimezoneOffset() * 60000;
