@@ -3,6 +3,7 @@ export interface PostMetadata {
   readonly date: string;
   readonly slug: string;
   readonly description?: string;
+  readonly tags?: string[];
 }
 
 export interface Post extends PostMetadata {

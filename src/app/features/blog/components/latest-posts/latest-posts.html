@@ -2,18 +2,30 @@
   <h3>Latest Posts</h3>
   <div class="posts-list">
     @for (post of latestPosts(); track post.slug) {
-    <ng-card
-      [padding]="'medium'"
-      [stylingMode]="'default'"
-      [header]="post.title"
-      [iconRight]="chevronRightIcon"
-      [clickable]="true"
-      (clicked)="onPostClick(post.slug)"
-    >
-      @if (post.description) {
-      <div class="post-description">{{ post.description }}</div>
-      }
-    </ng-card>
+      <ng-card
+        [padding]="'medium'"
+        [stylingMode]="'default'"
+        [header]="post.title"
+        [iconRight]="chevronRightIcon"
+        [clickable]="true"
+        (clicked)="onPostClick(post.slug)"
+      >
+        @if (post.tags && post.tags.length > 0) {
+          <div class="post-tags">
+            @for (tag of post.tags; track tag) {
+              <ng-badge
+                [text]="tag"
+                [size]="'small'"
+                [stylingMode]="'outlined'"
+                [variant]="'secondary'"
+              />
+            }
+          </div>
+        }
+        @if (post.description) {
+          <div class="post-description">{{ post.description }}</div>
+        }
+      </ng-card>
     }
   </div>
 </div>

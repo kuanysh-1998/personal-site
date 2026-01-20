@@ -33,4 +33,24 @@
     font-size: 0.875rem;
     line-height: 1.5;
   }
+
+  &__stack {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  &__stack-label {
+    color: oklch(70.9% 0.01 56.259);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  &__stack-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }

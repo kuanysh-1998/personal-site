@@ -8,6 +8,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { ListItemComponent } from '@app/shared/components/list-item/list-item.component';
+import { ScrollComponent } from '@app/shared/components/scroll/scroll.component';
 import { TocItem } from './table-of-contents.types';
 
 import { isPlatformBrowser } from '@angular/common';
@@ -18,7 +19,7 @@ import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-table-of-contents',
   standalone: true,
-  imports: [ListItemComponent],
+  imports: [ListItemComponent, ScrollComponent],
   templateUrl: './table-of-contents.component.html',
   styleUrl: './table-of-contents.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

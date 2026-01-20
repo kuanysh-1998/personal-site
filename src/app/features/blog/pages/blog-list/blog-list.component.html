@@ -8,28 +8,42 @@
   </div>
 
   @if (isSearching() && !hasSearchResults()) {
-  <div class="blog-list__empty">
-    <p class="blog-list__empty-text">No posts found matching your search.</p>
-  </div>
-  } @else { @for (group of postsByYear(); track group.year) {
-  <div class="year-group">
-    <div class="year">{{ group.year }}</div>
-    <div class="posts">
-      @for (post of group.posts; track post.slug) {
-      <ng-card
-        [padding]="'small'"
-        [stylingMode]="'default'"
-        [header]="post.title"
-        [iconRight]="chevronRightIcon"
-        [clickable]="true"
-        (clicked)="onPostClick(post.slug)"
-      >
-        @if (post.description) {
-        <div class="post-description">{{ post.description }}</div>
-        }
-      </ng-card>
-      }
+    <div class="blog-list__empty">
+      <p class="blog-list__empty-text">No posts found matching your search.</p>
     </div>
-  </div>
-  } }
+  } @else {
+    @for (group of postsByYear(); track group.year) {
+      <div class="year-group">
+        <div class="year">{{ group.year }}</div>
+        <div class="posts">
+          @for (post of group.posts; track post.slug) {
+            <ng-card
+              [padding]="'small'"
+              [stylingMode]="'default'"
+              [header]="post.title"
+              [iconRight]="chevronRightIcon"
+              [clickable]="true"
+              (clicked)="onPostClick(post.slug)"
+            >
+              @if (post.tags && post.tags.length > 0) {
+                <div class="post-tags">
+                  @for (tag of post.tags; track tag) {
+                    <ng-badge
+                      [text]="tag"
+                      [size]="'small'"
+                      [stylingMode]="'outlined'"
+                      [variant]="'secondary'"
+                    />
+                  }
+                </div>
+              }
+              @if (post.description) {
+                <div class="post-description">{{ post.description }}</div>
+              }
+            </ng-card>
+          }
+        </div>
+      </div>
+    }
+  }
 </div>

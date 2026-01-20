@@ -1,27 +1,12 @@
 .table-of-contents {
+  height: calc(100vh - 4rem);
   max-height: calc(100vh - 4rem);
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   padding: 1.25rem;
   background: transparent;
-  border-right: 2px solid var(--white-10);
   border-radius: 0;
-}
-
-.table-of-contents::-webkit-scrollbar {
-  width: 4px;
-}
-
-.table-of-contents::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.table-of-contents::-webkit-scrollbar-thumb {
-  background: var(--white-20);
-  border-radius: 2px;
-}
-
-.table-of-contents::-webkit-scrollbar-thumb:hover {
-  background: var(--white-30);
+  overflow: hidden;
 }
 
 .toc-title {
@@ -32,6 +17,12 @@
   padding-left: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.toc-scroll-wrapper {
+  padding: 0 0.75rem;
+  overflow: visible;
 }
 
 .toc-list {

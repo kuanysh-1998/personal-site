@@ -13,9 +13,22 @@
           <p class="about-page__description">
             Frontend engineer in Astana, Kazakhstan
             <span *ngTooltip="astanaTime">(UTC+5)</span>. I build enterprise Angular applications
-            with focus on clean architecture and scalable solutions. Stack: Angular, TypeScript,
-            RxJS, Signals API.
+            with focus on clean architecture and scalable solutions.
           </p>
+          <div class="about-page__stack">
+            <span class="about-page__stack-label">Stack:</span>
+            <div class="about-page__stack-badges">
+              @for (tech of stack; track tech.name) {
+                <ng-badge
+                  [text]="tech.name"
+                  [url]="tech.url"
+                  [size]="'small'"
+                  [stylingMode]="'outlined'"
+                  [variant]="'default'"
+                />
+              }
+            </div>
+          </div>
         </div>
       </div>
     </ng-card>

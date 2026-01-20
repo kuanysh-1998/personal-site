@@ -4,15 +4,30 @@ import { LatestPosts } from '@app/features/blog/components/latest-posts/latest-p
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { AvatarComponent } from '@app/shared/components/avatar/avatar.component';
 import { CardComponent } from '@app/shared/components/card/card.component';
+import { BadgeComponent } from '@app/shared/components/badge/badge.component';
+import { StackTechnology } from './about.types';
 
 @Component({
   selector: 'app-about',
-  imports: [SocialConnectComponent, LatestPosts, TooltipDirective, AvatarComponent, CardComponent],
+  imports: [
+    SocialConnectComponent,
+    LatestPosts,
+    TooltipDirective,
+    AvatarComponent,
+    CardComponent,
+    BadgeComponent,
+  ],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutComponent {
+  protected readonly stack: StackTechnology[] = [
+    { name: 'Angular', url: 'https://angular.dev' },
+    { name: 'TypeScript', url: 'https://www.typescriptlang.org' },
+    { name: 'RxJS', url: 'https://rxjs.dev' },
+    { name: 'Signals API', url: 'https://angular.dev/guide/signals' },
+  ];
   public get astanaTime(): string {
     const now = new Date();
     const utcTime = now.getTime() + now.getTimezoneOffset() * 60000;

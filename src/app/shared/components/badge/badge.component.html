@@ -1,0 +1,70 @@
+<div class="ng-badge">
+  @if (url) {
+    <a
+      #badgeWrapper
+      [ngClass]="badgeClasses"
+      [href]="url"
+      [target]="'_blank'"
+      [rel]="'noopener noreferrer'"
+      class="ng-badge__link"
+    >
+      @if (icon) {
+        <ng-svg
+          [icon]="icon"
+          [class.ng-badge__icon_clickable]="iconClickable"
+          (click)="clickIcon()"
+          size="small"
+          class="ng-badge__icon"
+        ></ng-svg>
+      }
+
+      <span [attr.data-token]="token" class="ng-badge__text">
+        <span #badgeText>{{ text }}</span>
+      </span>
+
+      @if (iconRight) {
+        <ng-svg
+          [icon]="iconRight"
+          [class.ng-badge__icon_clickable]="iconRightClickable"
+          (click)="clickIconRight()"
+          size="small"
+          class="ng-badge__icon"
+        ></ng-svg>
+      }
+    </a>
+  } @else {
+    <div #badgeWrapper [ngClass]="badgeClasses">
+      @if (icon) {
+        <ng-svg
+          [icon]="icon"
+          [class.ng-badge__icon_clickable]="iconClickable"
+          (click)="clickIcon()"
+          size="small"
+          class="ng-badge__icon"
+        ></ng-svg>
+      }
+
+      <span [attr.data-token]="token" class="ng-badge__text">
+        <span #badgeText>{{ text }}</span>
+      </span>
+
+      @if (iconRight) {
+        <ng-svg
+          [icon]="iconRight"
+          [class.ng-badge__icon_clickable]="iconRightClickable"
+          (click)="clickIconRight()"
+          size="small"
+          class="ng-badge__icon"
+        ></ng-svg>
+      }
+    </div>
+  }
+
+  @if (isOverflowing() && badgeWrapper) {
+    <ng-tooltip
+      [for]="badgeWrapper.nativeElement"
+      [content]="text"
+      [position]="tooltipPosition"
+    ></ng-tooltip>
+  }
+</div>

@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { Router } from '@angular/router';
 import { PostService } from '@app/entities/post/services/post.service';
 import { CardComponent } from '@app/shared/components/card/card.component';
+import { BadgeComponent } from '@app/shared/components/badge/badge.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
 
 @Component({
   selector: 'app-latest-posts',
-  imports: [CardComponent],
+  imports: [CardComponent, BadgeComponent],
   templateUrl: './latest-posts.html',
   styleUrl: './latest-posts.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,7 +20,7 @@ export class LatestPosts {
     return this._postService.getAllPosts().slice(0, 3);
   });
 
-  protected readonly chevronRightIcon   = Icons.ChevronRight as string;
+  protected readonly chevronRightIcon = Icons.ChevronRight;
 
   protected onPostClick(slug: string): void {
     this._router.navigate(['/blog', slug]);

@@ -10,7 +10,7 @@ import { CardComponent } from '@app/shared/components/card/card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SocialConnectComponent {
-  protected readonly email        = 'kuanysh.aptayzhanov@mail.ru';
+  protected readonly email = 'kuanysh.aptayzhanov@mail.ru';
 
   protected readonly links = [
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/kuanyshaptaizhanov/' },
