@@ -24,6 +24,7 @@ export class LinkComponent {
   @Input() public state: { [p: string]: any } | undefined = undefined;
 
   @Input() public variant: 'default' | 'secondary' = 'default';
+  @Input() public underlineOnHover = false;
 
   @HostBinding('class.ng-link') protected hostClass = true;
 
@@ -35,6 +36,11 @@ export class LinkComponent {
   @HostBinding(`class.ng-link__disabled`)
   protected get isDisabled(): boolean {
     return this.disabled;
+  }
+
+  @HostBinding(`class.ng-link__underline-on-hover`)
+  protected get underlineOnHoverClass(): boolean {
+    return this.underlineOnHover;
   }
 
   public isExternalLink(url: string | undefined): boolean {

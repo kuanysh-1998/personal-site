@@ -44,4 +44,18 @@
       cursor: not-allowed;
     }
   }
+
+  &.ng-link__underline-on-hover {
+    .ng-link__content {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:active {
+        text-decoration: underline;
+      }
+    }
+  }
 }

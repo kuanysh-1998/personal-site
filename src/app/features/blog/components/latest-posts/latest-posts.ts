@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { PostService } from '@app/entities/post/services/post.service';
 import { CardComponent } from '@app/shared/components/card/card.component';
 import { BadgeComponent } from '@app/shared/components/badge/badge.component';
+import { LinkComponent } from '@app/shared/components/link/link.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
 
 @Component({
   selector: 'app-latest-posts',
-  imports: [CardComponent, BadgeComponent],
+  imports: [CardComponent, BadgeComponent, LinkComponent],
   templateUrl: './latest-posts.html',
   styleUrl: './latest-posts.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

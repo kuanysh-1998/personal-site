@@ -1,5 +1,8 @@
 <div class="latest-posts">
-  <h3>Latest Posts</h3>
+  <div class="header-wrapper">
+    <h3>Latest Posts</h3>
+    <ng-link [link]="'/blog'" [text]="'View all posts →'" [underlineOnHover]="true" />
+  </div>
   <div class="posts-list">
     @for (post of latestPosts(); track post.slug) {
       <ng-card
