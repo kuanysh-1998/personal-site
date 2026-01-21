@@ -1,7 +1,6 @@
 .ng-text-area {
   display: block;
   width: 100%;
-  font-family: 'PT Root UI', sans-serif;
   background-color: transparent;
 
   &__container {
@@ -24,7 +23,6 @@
         display: block;
         width: 100%;
         padding: 0.75rem 1rem;
-        font-family: 'PT Root UI', sans-serif;
         font-size: 1rem;
         line-height: 1.5;
         color: var(--white);
@@ -67,7 +65,6 @@
         }
 
         &::placeholder {
-          font-family: 'PT Root UI', sans-serif;
           font-size: 1rem;
           color: var(--text-muted-white);
         }
@@ -75,14 +72,12 @@
 
       .ng-text-area__error-message {
         margin-top: 0.25rem;
-        font-family: 'PT Root UI', sans-serif;
         font-size: 0.75rem;
         color: var(--error-red);
       }
 
       .ng-text-area__helper-text {
         margin-top: 0.25rem;
-        font-family: 'PT Root UI', sans-serif;
         font-size: 0.75rem;
         color: var(--text-muted-white);
       }

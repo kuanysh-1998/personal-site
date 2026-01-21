@@ -32,7 +32,6 @@
       flex-wrap: nowrap;
       gap: 0.25rem;
       align-items: center;
-      font-family: 'PT Root UI', sans-serif;
       font-size: 0.75rem;
       font-weight: 500;
       white-space: nowrap;
@@ -49,7 +48,6 @@
       color: var(--white-90);
       white-space: nowrap;
       &.ng-divider__text-bold {
-        font-family: 'PT Root UI', sans-serif;
         font-size: 0.875rem;
         font-weight: 700;
       }

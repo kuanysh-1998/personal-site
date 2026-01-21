@@ -4,7 +4,9 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./features/main-layout/main-layout.component').then((m) => m.MainLayoutComponent),
+      import('./features/main-layout/pages/layout/main-layout.component').then(
+        (m) => m.MainLayoutComponent,
+      ),
     children: [
       {
         path: '',
@@ -23,14 +25,14 @@ export const routes: Routes = [
             path: '',
             loadComponent: () =>
               import('./features/blog/pages/blog-list/blog-list.component').then(
-                (m) => m.BlogListComponent
+                (m) => m.BlogListComponent,
               ),
           },
           {
             path: ':slug',
             loadComponent: () =>
               import('./features/blog/pages/post-detail/post-detail.component').then(
-                (m) => m.PostDetailComponent
+                (m) => m.PostDetailComponent,
               ),
           },
         ],

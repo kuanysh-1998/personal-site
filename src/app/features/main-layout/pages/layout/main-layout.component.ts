@@ -10,18 +10,18 @@ import {
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter, throttleTime } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TabsComponent } from '../../shared/components/tab/tabs.component';
-import { Tab } from '../../shared/components/tab/tabs.types';
-import { YandexMetrikaService } from '../../core/services/yandex-metrika/yandex-metrika.service';
-import { DialogService } from '../../shared/components/dialog/dialog.service';
-import { ButtonComponent } from '../../shared/components/button/button.component';
-import { Icons } from '../../shared/components/svg/svg.config';
-import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
-import { ContactFormComponent } from '../contact-form/contact-form.component';
-import { TableOfContentsComponent } from '../blog/components/table-of-contents/table-of-contents.component';
-import { HeaderComponent } from './components/header/header.component';
 import { fromEvent } from 'rxjs';
 import { TAB_IDS } from './main-layout.constants';
+import { TabsComponent } from '@app/shared/components/tab/tabs.component';
+import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
+import { TableOfContentsComponent } from '@app/features/blog/components/table-of-contents/table-of-contents.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-metrika.service';
+import { DialogService } from '@app/shared/components/dialog/dialog.service';
+import { Icons } from '@app/shared/components/svg/svg.config';
+import { Tab } from '@app/shared/components/tab/tabs.types';
+import { ContactFormComponent } from '@app/features/contact-form/contact-form.component';
 
 @Component({
   selector: 'app-main-layout',

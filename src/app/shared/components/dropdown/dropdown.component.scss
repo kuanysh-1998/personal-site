@@ -125,14 +125,12 @@
 
       .ng-dropdown__error-message {
         margin-top: 0.25rem;
-        font-family: 'PT Root UI', sans-serif;
         font-size: 0.75rem;
         color: var(--error-red);
       }
 
       .ng-dropdown__helper-text {
         margin-top: 0.25rem;
-        font-family: 'PT Root UI', sans-serif;
         font-size: 0.75rem;
         color: var(--text-muted-white);
       }
@@ -219,7 +217,6 @@
       justify-content: center;
       min-height: 3rem;
       padding: 1rem;
-      font-family: 'PT Root UI', sans-serif;
       font-size: 0.875rem;
       color: var(--text-muted-white);
     }
