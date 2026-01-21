@@ -1,0 +1,36 @@
+<div class="interview-page">
+  <div class="interview-page__header">
+    <h1 class="interview-page__title">Interview Questions</h1>
+    <p class="interview-page__description">
+      Collection of questions and answers on JavaScript, TypeScript and Angular for interview
+      preparation
+    </p>
+  </div>
+
+  <div class="interview-page__content">
+    <div class="interview-page__tabs">
+      <ng-tabs
+        [tabsItems]="tabs"
+        [orientation]="'horizontal'"
+        [selectedTab]="selectedCategoryId()"
+        (changed)="onCategoryChanged($event)"
+      ></ng-tabs>
+    </div>
+
+    @if (getSelectedCategory(); as selectedCategory) {
+      <div class="interview-page__questions">
+        @for (question of selectedCategory.questions; track question.id) {
+          <ng-accordion
+            [header]="question.question"
+            [chevronAlign]="'right'"
+            class="interview-page__question-accordion"
+          >
+            <div class="interview-page__answer" ngCopyCode>
+              <markdown [data]="getFullAnswer(question)"></markdown>
+            </div>
+          </ng-accordion>
+        }
+      </div>
+    }
+  </div>
+</div>

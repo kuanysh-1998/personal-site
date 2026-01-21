@@ -33,6 +33,7 @@ export class TabsComponent implements AfterViewInit, OnDestroy {
   @Input() public disabled = false;
   @Input() public token = undefined;
   @Input() public manualTabControl = false;
+  @Input() public hideBorder = false;
 
   @Output() public changed = new EventEmitter<Tab>();
 

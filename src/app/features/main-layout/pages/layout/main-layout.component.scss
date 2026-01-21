@@ -6,17 +6,11 @@
   padding-top: calc(2rem + 70px);
   box-sizing: border-box;
   position: relative;
-}
-
-.main-layout__header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 2rem;
+  min-height: 100vh;
 }
 
 .content-area {
-  margin-top: 2rem;
+  width: 100%;
 }
 
 .main-layout__toc {
@@ -65,7 +59,8 @@
 
 @media (max-width: 768px) {
   .main-layout {
-    padding-top: calc(2rem + 60px);
+    padding: 1.5rem 1rem;
+    padding-top: calc(1.5rem + 60px);
   }
 
   .main-layout__contact-button {

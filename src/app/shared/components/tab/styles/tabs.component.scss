@@ -19,6 +19,11 @@
       border-bottom: none;
       border-left: 1px solid var(--white-10);
     }
+
+    &_no-border {
+      border-bottom: none;
+      border-left: none;
+    }
   }
 
   &__tab {

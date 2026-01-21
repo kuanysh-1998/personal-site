@@ -11,20 +11,12 @@
             <p class="whats-new__feature-description">
               {{ item.description }}
             </p>
-            @if (isPost(item)) {
+            @if (hasAction(item)) {
               <ng-button
-                [label]="'Read Post'"
+                [label]="getActionLabel(item)"
                 [stylingMode]="'contained'"
                 [size]="'default'"
-                (clicked)="navigateToPost(item.slug)"
-                class="whats-new__action-button"
-              />
-            } @else if (isContactFormFeature(item)) {
-              <ng-button
-                [label]="'Open Contact Form'"
-                [stylingMode]="'contained'"
-                [size]="'default'"
-                (clicked)="openContactForm()"
+                (clicked)="handleAction(item)"
                 class="whats-new__action-button"
               />
             }

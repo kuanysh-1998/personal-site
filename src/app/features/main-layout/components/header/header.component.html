@@ -1,5 +1,14 @@
 <header class="header">
   <div class="header__content">
+    <div class="header__navigation">
+      <ng-tabs
+        [tabsItems]="tabs"
+        [orientation]="'horizontal'"
+        [selectedTab]="selectedTab"
+        [hideBorder]="true"
+        (changed)="onTabChanged($event)"
+      ></ng-tabs>
+    </div>
     <div class="header__actions">
       <div class="header__whats-new-button">
         <ng-button

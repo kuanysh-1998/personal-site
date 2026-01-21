@@ -28,8 +28,9 @@ markdown {
 
   p {
     margin: 1rem 0;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--white-80);
+    font-size: 1rem;
   }
 
   code {
@@ -95,7 +96,8 @@ markdown {
     color: var(--white-80);
     margin: 1rem 0;
     padding-left: 1.5rem;
-    line-height: 1.6;
+    line-height: 1.7;
+    font-size: 1rem;
 
     li {
       margin: 0.5rem 0;

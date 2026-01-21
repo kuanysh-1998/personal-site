@@ -38,6 +38,13 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'interview',
+        loadComponent: () =>
+          import('./features/interview/pages/interview.component').then(
+            (m) => m.InterviewComponent,
+          ),
+      },
+      {
         path: '**',
         redirectTo: 'about',
       },

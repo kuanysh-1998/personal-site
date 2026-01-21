@@ -6,8 +6,12 @@ import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { AccordionComponent } from '@app/shared/components/accordion/accordion.component';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { PostService } from '@app/entities/post/services/post.service';
-import { ContactFormComponent } from '@app/features/contact-form/contact-form.component';
-import { WhatsNewItem, WhatsNewFeature, WhatsNewPost } from './whats-new.types';
+import {
+  WhatsNewItem,
+  WhatsNewFeature,
+  WhatsNewPost,
+  WHATS_NEW_ACTION_TYPES,
+} from './whats-new.types';
 import { WHATS_NEW_FEATURES } from './whats-new.data';
 
 @Component({
@@ -51,25 +55,52 @@ export class WhatsNewComponent {
     return 'slug' in item && !!item.slug;
   }
 
-  protected isContactFormFeature(item: WhatsNewItem): boolean {
-    return !this.isPost(item) && item.title === 'Contact Form';
+  protected hasAction(item: WhatsNewItem): boolean {
+    if (this.isPost(item)) {
+      return true;
+    }
+    return !!(item as WhatsNewFeature).action;
   }
 
-  protected isClickable(item: WhatsNewItem): boolean {
-    return this.isPost(item) || this.isContactFormFeature(item);
+  protected getActionLabel(item: WhatsNewItem): string {
+    if (this.isPost(item)) {
+      return 'Read Post';
+    }
+    const feature = item as WhatsNewFeature;
+    if (feature.action?.label) {
+      return feature.action.label;
+    }
+    if (feature.action?.type === WHATS_NEW_ACTION_TYPES.ROUTE) {
+      return 'Go to';
+    }
+    if (feature.action?.type === WHATS_NEW_ACTION_TYPES.DIALOG) {
+      return 'Open';
+    }
+    return '';
   }
 
-  protected openContactForm(): void {
-    this._dialogService.open(ContactFormComponent, {
-      header: 'Contact Form',
-      submitButton: 'Send',
-      cancelButton: 'Cancel',
-    });
-  }
+  protected handleAction(item: WhatsNewItem): void {
+    if (this.isPost(item)) {
+      this._router.navigate(['/blog', item.slug]);
+      this._drawerRef.close();
+      return;
+    }
 
-  protected navigateToPost(slug: string): void {
-    this._router.navigate(['/blog', slug]);
-    this._drawerRef.close();
+    const feature = item as WhatsNewFeature;
+    if (!feature.action) {
+      return;
+    }
+
+    if (feature.action.type === WHATS_NEW_ACTION_TYPES.ROUTE) {
+      this._router.navigate([feature.action.route]);
+      this._drawerRef.close();
+    } else if (feature.action.type === WHATS_NEW_ACTION_TYPES.DIALOG) {
+      this._dialogService.open(feature.action.component, {
+        header: feature.action.config?.header || feature.title,
+        submitButton: feature.action.config?.submitButton,
+        cancelButton: feature.action.config?.cancelButton,
+      });
+    }
   }
 
   protected close(): void {
