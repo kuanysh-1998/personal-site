@@ -45,16 +45,21 @@ export class CopyCodeDirective {
       this._observer?.disconnect();
     });
   }
-
   private _addCopyButtons(): void {
     const codeBlocks = this._el.nativeElement.querySelectorAll('pre code');
 
     codeBlocks.forEach((block: HTMLElement) => {
       const pre = block.parentElement;
-      if (!pre || pre.querySelector('.copy-btn')) return;
+      if (!pre || pre.parentElement?.classList.contains('code-block-wrapper')) return;
 
-      this._loadSvgIcon(pre, block, Icons.Copy);
-      this._renderer.setStyle(pre, 'position', 'relative');
+      const wrapper = this._renderer.createElement('div');
+      this._renderer.addClass(wrapper, 'code-block-wrapper');
+
+      const parent = pre.parentElement;
+      this._renderer.insertBefore(parent, wrapper, pre);
+      this._renderer.appendChild(wrapper, pre);
+
+      this._loadSvgIcon(wrapper, block, Icons.Copy);
     });
   }
 
@@ -70,7 +75,6 @@ export class CopyCodeDirective {
 
         if (svgElement) {
           this._renderer.addClass(svgElement, 'copy-btn');
-
 
           this._renderer.listen(svgElement, 'click', () => {
             const code = codeBlock.textContent || '';

@@ -41,44 +41,39 @@ markdown {
     font-size: 0.9em;
   }
 
+  .code-block-wrapper {
+    position: relative;
+
+    .copy-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      cursor: pointer;
+      color: var(--white-80);
+      outline: none;
+      border: none;
+      padding: 0.25rem;
+      border-radius: 4px;
+      z-index: 2;
+
+      &:hover {
+        color: var(--white);
+      }
+    }
+  }
+
   pre {
     padding: 1rem;
+    padding-top: 2.5rem;
     border-radius: 8px;
     overflow-x: auto;
     margin: 1rem 0;
     max-width: 100%;
     box-sizing: border-box;
-    position: relative;
-
     code {
       background: transparent;
       color: var(--white);
       padding: 0;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      cursor: pointer;
-      color: var(--white-80);
-      outline: none;
-      border: none;
-      background: none;
-
-      &:hover {
-        color: var(--white);
-      }
-
-      &:focus {
-        outline: none;
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--white-60);
-        outline-offset: 2px;
-        border-radius: 4px;
-      }
     }
   }
 
