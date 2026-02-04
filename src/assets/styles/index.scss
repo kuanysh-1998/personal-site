@@ -1,4 +1,5 @@
 @forward 'variables/colors';
+@forward 'variables/theme';
 @forward 'variables/z-index';
 @forward 'markdown';
 
@@ -22,7 +23,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: oklch(14.7% 0.004 49.25);
+  background-color: var(--theme-bg-page);
 }
 
 @font-face {

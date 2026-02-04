@@ -6,6 +6,7 @@ import {
   DestroyRef,
   effect,
   HostListener,
+  inject,
   Input,
   OnDestroy,
   Renderer2,
@@ -13,9 +14,11 @@ import {
   TemplateRef,
   ViewChild,
   ViewContainerRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ThemeService } from '@app/core/services/theme/theme.service';
 import { Overlay } from '@app/shared/utils/overlay';
 
 @Component({
@@ -24,8 +27,10 @@ import { Overlay } from '@app/shared/utils/overlay';
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class TooltipComponent extends Overlay implements AfterViewInit, OnDestroy {
+  private readonly _themeService = inject(ThemeService);
   @Input() public content: string | number | TemplateRef<unknown> | undefined = undefined;
   @Input() public for: Element | string | number | undefined = undefined;
   @Input() public manualControl = false;
@@ -75,7 +80,7 @@ export class TooltipComponent extends Overlay implements AfterViewInit, OnDestro
   constructor(
     public override readonly renderer: Renderer2,
     public override readonly vcr: ViewContainerRef,
-    private readonly _destroyRef: DestroyRef
+    private readonly _destroyRef: DestroyRef,
   ) {
     super(renderer, vcr);
 
@@ -84,6 +89,13 @@ export class TooltipComponent extends Overlay implements AfterViewInit, OnDestro
         this.open();
       } else {
         this.close();
+      }
+    });
+
+    effect(() => {
+      this._themeService.theme();
+      if (this.popoverElement) {
+        this._applyThemeClass();
       }
     });
   }
@@ -162,6 +174,7 @@ export class TooltipComponent extends Overlay implements AfterViewInit, OnDestro
     this.popoverElement = this.renderer.createElement('div');
 
     this.renderer.addClass(this.popoverElement, 'ng-tooltip');
+    this._applyThemeClass();
 
     if (this.shakeAnimation && this.popoverElement) {
       if (this.position.startsWith('top') || this.position.startsWith('bottom')) {
@@ -245,6 +258,14 @@ export class TooltipComponent extends Overlay implements AfterViewInit, OnDestro
   private _unsubscribeTooltipSubs(): void {
     this._unsubscriber$$.next();
     this._unsubscriber$$.complete();
+  }
+
+  private _applyThemeClass(): void {
+    if (!this.popoverElement) return;
+    const theme = this._themeService.theme();
+    this.renderer.removeClass(this.popoverElement, 'ng-tooltip_theme-dark');
+    this.renderer.removeClass(this.popoverElement, 'ng-tooltip_theme-light');
+    this.renderer.addClass(this.popoverElement, `ng-tooltip_theme-${theme}`);
   }
 
   private _onDocumentClick(event: MouseEvent): void {

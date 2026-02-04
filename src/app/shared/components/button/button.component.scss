@@ -49,63 +49,61 @@
     }
 
     &_ghost {
-      color: var(--white-90);
+      color: var(--theme-text-primary);
       background: transparent;
       border: 1px solid transparent;
 
       &:hover:not(&_disabled) {
-        background: var(--white-05);
+        background: var(--theme-bg-card-hover);
       }
 
       &:active:not(&_disabled) {
-        background: var(--white-10);
+        background: var(--theme-bg-card-active);
       }
 
       &.ng-button__container_disabled {
-        color: var(--white-30);
+        color: var(--theme-text-muted);
         cursor: not-allowed;
       }
     }
 
     &_outlined {
-      color: var(--white-90);
+      color: var(--theme-text-primary);
       background: transparent;
-      border: 1px solid var(--white-20);
+      border: 1px solid var(--theme-border);
 
       &:hover:not(&_disabled) {
-        background: var(--white-05);
-        border-color: var(--white-30);
+        background: var(--theme-bg-card);
+        border-color: var(--theme-border);
       }
 
       &:active:not(&_disabled) {
-        background: var(--white-10);
+        background: var(--theme-bg-card-hover);
       }
 
       &.ng-button__container_disabled {
-        color: var(--white-30);
-        border-color: var(--white-10);
+        color: var(--theme-text-muted);
+        border-color: var(--theme-border);
         cursor: not-allowed;
       }
     }
 
     &_contained {
-      color: #000;
-      background: var(--white-90);
-      border: 1px solid var(--white-90);
+      color: var(--theme-button-contained-color);
+      background: var(--theme-button-contained-bg);
+      border: 1px solid transparent;
 
       &:hover:not(&_disabled) {
-        background: var(--white);
-        border-color: var(--white);
+        background: var(--theme-button-contained-hover);
       }
 
       &:active:not(&_disabled) {
-        background: var(--white-80);
+        background: var(--theme-button-contained-active);
       }
 
       &.ng-button__container_disabled {
-        color: rgba(0, 0, 0, 0.4);
-        background: var(--white-30);
-        border-color: var(--white-30);
+        color: var(--theme-button-contained-disabled-color);
+        background: var(--theme-button-contained-disabled-bg);
         cursor: not-allowed;
       }
     }
@@ -132,7 +130,12 @@
     }
 
     &_active {
-      box-shadow: 0 0 0 2px var(--white-20);
+      box-shadow: 0 0 0 2px var(--theme-badge-secondary-border);
+    }
+
+    &_ghost.ng-button__container_active,
+    &_outlined.ng-button__container_active {
+      background: var(--theme-bg-card-active);
     }
   }
 

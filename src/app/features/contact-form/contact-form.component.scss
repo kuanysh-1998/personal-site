@@ -21,12 +21,12 @@
   &__switch-label {
     font-size: 0.875rem;
     font-weight: 400;
-    color: var(--white-60);
+    color: var(--theme-text-muted);
     transition: color 0.2s ease;
     user-select: none;
 
     &.active {
-      color: var(--white-90);
+      color: var(--theme-text-primary);
       font-weight: 500;
     }
   }

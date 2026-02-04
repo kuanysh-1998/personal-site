@@ -65,7 +65,7 @@
 
     &:hover:not(&-disabled) {
       .ng-switch__track {
-        border-color: var(--white-20);
+        border-color: var(--theme-border);
       }
 
       &.ng-switch__control-checked .ng-switch__track {
@@ -109,17 +109,17 @@
       cursor: not-allowed;
 
       .ng-switch__track {
-        background: rgba(255, 255, 255, 0.02);
-        border-color: var(--white-05);
+        background: var(--theme-input-bg-disabled);
+        border-color: var(--theme-border);
       }
 
       .ng-switch__thumb {
-        background: var(--text-disabled);
+        background: var(--theme-text-muted);
       }
 
       &:hover {
         .ng-switch__track {
-          border-color: var(--white-05);
+          border-color: var(--theme-border);
         }
       }
     }
@@ -128,8 +128,8 @@
   &__track {
     width: 2.5rem;
     height: 1.25rem;
-    background: var(--white-05);
-    border: 0.0625rem solid var(--white-10);
+    background: var(--theme-switch-track);
+    border: 0.0625rem solid var(--theme-border);
     border-radius: 0.75rem;
     flex-shrink: 0;
     box-sizing: border-box;
@@ -145,7 +145,7 @@
     width: 0.875rem;
     height: 0.875rem;
     border-radius: 50%;
-    background: var(--white-50);
+    background: var(--theme-switch-thumb);
     transform: translateX(0);
     transition:
       transform 0.2s ease,

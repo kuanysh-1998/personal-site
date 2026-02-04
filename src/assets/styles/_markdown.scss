@@ -2,40 +2,40 @@ markdown {
   display: block;
   width: 100%;
   max-width: 100%;
-  color: var(--white-80);
+  color: var(--theme-text-secondary);
   box-sizing: border-box;
 
   h1 {
     font-size: 2rem;
     margin: 1.5rem 0;
-    color: var(--white);
+    color: var(--theme-text-primary);
     font-weight: 700;
   }
 
   h2 {
     font-size: 1.5rem;
     margin: 1.2rem 0;
-    color: var(--white);
+    color: var(--theme-text-primary);
     font-weight: 600;
   }
 
   h3 {
     font-size: 1.25rem;
     margin: 1rem 0;
-    color: var(--white);
+    color: var(--theme-text-primary);
     font-weight: 600;
   }
 
   p {
     margin: 1rem 0;
     line-height: 1.7;
-    color: var(--white-80);
+    color: var(--theme-text-secondary);
     font-size: 1rem;
   }
 
   code {
-    background: var(--white-10);
-    color: #4fc3f7;
+    background: var(--theme-code-bg);
+    color: var(--theme-code-color);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 0.9em;
@@ -43,36 +43,42 @@ markdown {
 
   .code-block-wrapper {
     position: relative;
+    margin: 1rem 0;
+    background: #111;
+    border-radius: 8px;
 
     .copy-btn {
       position: absolute;
       top: 0.5rem;
       right: 0.5rem;
       cursor: pointer;
-      color: var(--white-80);
+      color: rgba(255, 255, 255, 0.7);
       outline: none;
       border: none;
       padding: 0.25rem;
       border-radius: 4px;
       z-index: 2;
+      transition: color 0.2s ease;
 
       &:hover {
-        color: var(--white);
+        color: #ffffff;
       }
     }
   }
 
-  pre {
+  .code-block-wrapper pre {
     padding: 1rem;
     padding-top: 2.5rem;
     border-radius: 8px;
     overflow-x: auto;
-    margin: 1rem 0;
+    margin: 0;
     max-width: 100%;
     box-sizing: border-box;
+    background: transparent;
+
     code {
       background: transparent;
-      color: var(--white);
+      color: #e5e7eb;
       padding: 0;
     }
   }
@@ -88,7 +94,7 @@ markdown {
 
   ul,
   ol {
-    color: var(--white-80);
+    color: var(--theme-text-secondary);
     margin: 1rem 0;
     padding-left: 1.5rem;
     line-height: 1.7;
@@ -100,7 +106,7 @@ markdown {
   }
 
   strong {
-    color: var(--white);
+    color: var(--theme-text-primary);
     font-weight: 700;
   }
 
@@ -109,15 +115,15 @@ markdown {
   }
 
   blockquote {
-    border-left: 3px solid var(--white-20);
+    border-left: 3px solid var(--theme-border);
     padding-left: 1rem;
     margin: 1rem 0;
-    color: var(--white-60);
+    color: var(--theme-text-muted);
   }
 
   hr {
     border: none;
-    border-top: 1px solid var(--white-10);
+    border-top: 1px solid var(--theme-border);
     margin: 2rem 0;
   }
 
@@ -129,12 +135,12 @@ markdown {
     th,
     td {
       padding: 0.5rem;
-      border: 1px solid var(--white-10);
-      color: var(--white-80);
+      border: 1px solid var(--theme-border);
+      color: var(--theme-text-secondary);
     }
 
     th {
-      background: var(--white-05);
+      background: var(--theme-border);
       font-weight: 600;
     }
   }

@@ -4,8 +4,8 @@
   left: 0;
   right: 0;
   z-index: var(--z-index-drawer, 1000);
-  background: oklch(14.7% 0.004 49.25 / 0.95);
-  border-bottom: 1px solid var(--white-10);
+  background: var(--theme-bg-header);
+  border-bottom: 1px solid var(--theme-border);
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   min-height: 70px;
@@ -32,6 +32,10 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-shrink: 0;
+}
+
+.header__theme-toggle {
   flex-shrink: 0;
 }
 

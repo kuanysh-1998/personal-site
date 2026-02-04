@@ -1,6 +1,6 @@
 .latest-posts {
   margin-top: 3rem;
-  color: var(--white);
+  color: var(--theme-text-primary);
 
   .header-wrapper {
     display: flex;
@@ -13,7 +13,7 @@
     margin: 0;
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--white);
+    color: var(--theme-text-primary);
   }
 
   .posts-list {
@@ -31,7 +31,7 @@
 
   .post-description {
     font-size: 0.875rem;
-    color: oklch(70.9% 0.01 56.259);
+    color: var(--theme-text-secondary);
     margin-top: 0.5rem;
   }
 }

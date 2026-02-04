@@ -4,7 +4,7 @@
   margin-bottom: 0.125rem;
 
   &__container {
-    color: var(--white-90);
+    color: var(--theme-text-primary);
     user-select: none;
 
     &.ng-label__s {
@@ -34,7 +34,7 @@
     }
 
     &.ng-label__disabled {
-      color: var(--text-disabled);
+      color: var(--theme-text-muted);
     }
 
     .ng-label__wrapper {
@@ -47,7 +47,7 @@
       }
 
       .ng-label__icon-info {
-        fill: var(--white-90);
+        fill: var(--theme-text-primary);
       }
     }
   }

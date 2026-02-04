@@ -7,6 +7,7 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 import { TabsComponent } from '@app/shared/components/tab/tabs.component';
 import { DrawerService } from '@app/shared/components/drawer/drawer.service';
 import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-metrika.service';
+import { ThemeService } from '@app/core/services/theme/theme.service';
 import { WhatsNewComponent } from '@app/features/whats-new/whats-new.component';
 import { Tab } from '@app/shared/components/tab/tabs.types';
 import { TAB_IDS } from '../../pages/layout/main-layout.constants';
@@ -23,6 +24,7 @@ export class HeaderComponent {
   private readonly _router = inject(Router);
   private readonly _drawerService = inject(DrawerService);
   private readonly _yandexMetrikaService = inject(YandexMetrikaService);
+  protected readonly themeService = inject(ThemeService);
 
   protected readonly currentUrl = signal<string>(this._router.url);
 
@@ -69,6 +71,16 @@ export class HeaderComponent {
       tab_name: tab.text || tab.id,
     });
     this._router.navigate([`/${tab.id}`]);
+  }
+
+  protected get themeToggleIcon(): string {
+    return this.themeService.theme() === 'dark' ? 'sun' : 'moon';
+  }
+
+  protected get themeToggleAriaLabel(): string {
+    return this.themeService.theme() === 'dark'
+      ? 'Switch to light mode'
+      : 'Switch to dark mode';
   }
 
   protected openWhatsNew(): void {

@@ -73,6 +73,27 @@
     transform: translateY(-50%);
     rotate: 180deg;
   }
+
+  &_theme-light .ng-tooltip__content {
+    background: var(--dark-navy);
+    color: var(--white);
+  }
+
+  &_theme-light.ng-tooltip_top .ng-tooltip__arrow {
+    border-color: var(--dark-navy) transparent transparent;
+  }
+
+  &_theme-light.ng-tooltip_bottom .ng-tooltip__arrow {
+    border-color: transparent transparent var(--dark-navy);
+  }
+
+  &_theme-light.ng-tooltip_left .ng-tooltip__arrow {
+    border-color: transparent var(--dark-navy) transparent transparent;
+  }
+
+  &_theme-light.ng-tooltip_right .ng-tooltip__arrow {
+    border-color: transparent transparent transparent var(--dark-navy);
+  }
 }
 
 @keyframes shake-vertical {

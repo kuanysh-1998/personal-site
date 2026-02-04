@@ -3,6 +3,12 @@ import { ContactFormComponent } from '@app/features/contact-form/contact-form.co
 
 export const WHATS_NEW_FEATURES: readonly WhatsNewFeature[] = [
   {
+    title: 'Dark and Light Theme',
+    description:
+      'The site now supports two modes: dark and light. You can switch the theme with the button in the header — your choice is saved and will be used on your next visit.',
+    date: new Date('2026-02-04'),
+  },
+  {
     title: 'Interview Questions',
     description:
       'Added a new section with interview questions and answers on JavaScript, TypeScript and Angular. Use it to prepare for interviews with organized questions, code examples, and markdown-formatted answers',

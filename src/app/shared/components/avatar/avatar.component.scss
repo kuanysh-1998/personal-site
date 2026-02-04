@@ -29,11 +29,11 @@
     }
 
     &_default {
-      color: var(--white-90);
-      background: var(--white-10);
+      color: var(--theme-text-primary);
+      background: var(--theme-bg-card-secondary);
 
       .ng-avatar__icon {
-        fill: var(--white-90);
+        fill: var(--theme-text-primary);
       }
     }
 

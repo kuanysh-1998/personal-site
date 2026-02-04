@@ -37,7 +37,7 @@
 
     &-empty {
       cursor: pointer;
-      color: var(--white-50);
+      color: var(--theme-text-muted);
     }
   }
 
@@ -61,7 +61,7 @@
         }
 
         &-empty {
-          color: var(--text-muted-white);
+          color: var(--theme-text-secondary);
         }
       }
     }

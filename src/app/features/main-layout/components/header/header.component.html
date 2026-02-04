@@ -10,6 +10,16 @@
       ></ng-tabs>
     </div>
     <div class="header__actions">
+      <ng-button
+        class="header__theme-toggle"
+        [icon]="themeToggleIcon"
+        [ariaLabel]="themeToggleAriaLabel"
+        [stylingMode]="'ghost'"
+        [size]="'default'"
+        [iconWidth]="'1.25rem'"
+        [iconHeight]="'1.25rem'"
+        (clicked)="themeService.toggleTheme()"
+      />
       <div class="header__whats-new-button">
         <ng-button
           [label]="'What\'s new'"

@@ -27,8 +27,8 @@
     max-height: 98vh;
     padding: 24px;
     visibility: hidden;
-    background-color: #111;
-    border: 1px solid var(--white-10);
+    background-color: var(--theme-bg-dialog);
+    border: 1px solid var(--theme-border);
     border-radius: 12px;
     box-shadow: 0 8px 32px var(--black-60);
     opacity: 0;
@@ -61,11 +61,11 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: var(--white-20);
+      background: var(--theme-border);
       border-radius: 4px;
 
       &:hover {
-        background: var(--white-30);
+        background: var(--theme-text-muted);
       }
     }
 
@@ -86,7 +86,7 @@
     height: fit-content;
     min-height: 36px;
     margin-bottom: 24px;
-    color: var(--white-90);
+    color: var(--theme-text-primary);
   }
 
   &__header {
@@ -97,11 +97,11 @@
 
   &__close-button {
     cursor: pointer;
-    fill: var(--white);
+    fill: var(--theme-text-primary);
     transition: fill 0.2s;
 
     &:hover {
-      fill: var(--white-90);
+      fill: var(--theme-text-secondary);
     }
   }
 
@@ -111,7 +111,7 @@
     font-size: 0.875rem;
     line-height: 1.5rem;
     border: none;
-    color: var(--white-80);
+    color: var(--theme-text-secondary);
 
     display: flex;
     flex-direction: column;

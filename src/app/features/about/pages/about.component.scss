@@ -22,14 +22,14 @@
 
   &__name {
     margin: 0;
-    color: var(--white);
+    color: var(--theme-text-primary);
     font-size: 1.25rem;
     font-weight: 600;
   }
 
   &__description {
     margin: 0;
-    color: oklch(70.9% 0.01 56.259);
+    color: var(--theme-text-secondary);
     font-size: 0.875rem;
     line-height: 1.5;
   }
@@ -43,7 +43,7 @@
   }
 
   &__stack-label {
-    color: oklch(70.9% 0.01 56.259);
+    color: var(--theme-text-secondary);
     font-size: 0.875rem;
     font-weight: 500;
   }

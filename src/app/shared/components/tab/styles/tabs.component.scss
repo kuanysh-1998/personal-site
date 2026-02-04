@@ -11,13 +11,13 @@
     position: relative;
     display: flex;
     gap: 24px;
-    border-bottom: 1px solid var(--white-10);
+    border-bottom: 1px solid var(--theme-border);
 
     &_vertical {
       flex-direction: column;
       gap: 0;
       border-bottom: none;
-      border-left: 1px solid var(--white-10);
+      border-left: 1px solid var(--theme-border);
     }
 
     &_no-border {
@@ -31,7 +31,7 @@
     padding: 16px 0;
     font-weight: 500;
     font-size: 1rem;
-    color: var(--white-50);
+    color: var(--theme-text-muted);
     cursor: pointer;
     user-select: none;
     outline: none;
@@ -40,15 +40,15 @@
     transition: color 0.2s;
 
     &:hover:not(&_selected):not(&_disabled) {
-      color: var(--text-muted-white);
+      color: var(--theme-text-secondary);
     }
 
     &_selected {
-      color: var(--white);
+      color: var(--theme-text-primary);
     }
 
     &_disabled {
-      color: var(--white-30);
+      opacity: 0.5;
       cursor: not-allowed;
     }
 
@@ -59,7 +59,7 @@
 
   &__indicator {
     position: absolute;
-    background: var(--white);
+    background: var(--theme-text-primary);
     transition: all 0.3s ease;
     pointer-events: none;
 

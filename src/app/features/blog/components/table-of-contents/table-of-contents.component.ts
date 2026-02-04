@@ -7,6 +7,9 @@ import {
   computed,
   OnDestroy,
 } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ListItemComponent } from '@app/shared/components/list-item/list-item.component';
 import { ScrollComponent } from '@app/shared/components/scroll/scroll.component';
 import { TocItem } from './table-of-contents.types';
@@ -15,6 +18,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 
 import { ChangeDetectorRef } from '@angular/core';
+
+const POST_PAGE_URL_REGEX = /^\/blog\/[^/]+$/;
 
 @Component({
   selector: 'app-table-of-contents',
@@ -28,6 +33,7 @@ export class TableOfContentsComponent implements AfterViewInit, OnDestroy {
   private readonly _platformId = inject(PLATFORM_ID);
   private readonly _isBrowser = isPlatformBrowser(this._platformId);
   private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _router = inject(Router);
 
   protected readonly tocItems = signal<TocItem[]>([]);
   protected readonly activeItemId = signal<string>('');
@@ -35,6 +41,23 @@ export class TableOfContentsComponent implements AfterViewInit, OnDestroy {
 
   private _observer: MutationObserver | null = null;
   private _intersectionObserver: IntersectionObserver | null = null;
+
+  constructor() {
+    if (!this._isBrowser) return;
+
+    this._router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => {
+        this._resetToc();
+        if (POST_PAGE_URL_REGEX.test(this._router.url)) {
+          setTimeout(() => this._observeMarkdown(), 400);
+        }
+        this._cdr.markForCheck();
+      });
+  }
 
   public ngAfterViewInit(): void {
     if (!this._isBrowser) return;
@@ -47,6 +70,15 @@ export class TableOfContentsComponent implements AfterViewInit, OnDestroy {
   public ngOnDestroy(): void {
     this._observer?.disconnect();
     this._intersectionObserver?.disconnect();
+  }
+
+  private _resetToc(): void {
+    this._observer?.disconnect();
+    this._observer = null;
+    this._intersectionObserver?.disconnect();
+    this._intersectionObserver = null;
+    this.tocItems.set([]);
+    this.activeItemId.set('');
   }
 
   private _observeMarkdown(): void {
@@ -122,6 +154,8 @@ export class TableOfContentsComponent implements AfterViewInit, OnDestroy {
   }
 
   private _setupIntersectionObserver(): void {
+    this._intersectionObserver?.disconnect();
+
     const items = this.tocItems();
     if (items.length === 0) return;
 

@@ -168,12 +168,12 @@
       }
 
       &.ng-badge__container_secondary {
-        color: var(--white-70);
-        background: var(--white-10);
-        border: 1px solid var(--white-20);
+        color: var(--theme-badge-secondary-text);
+        background: var(--theme-badge-secondary-bg);
+        border: 1px solid var(--theme-badge-secondary-border);
 
         .ng-badge__icon {
-          fill: var(--white-70);
+          fill: var(--theme-badge-secondary-text);
         }
       }
 
@@ -218,10 +218,10 @@
       }
 
       &.ng-badge__container_secondary {
-        color: var(--white-70);
+        color: var(--theme-badge-secondary-text);
 
         .ng-badge__icon {
-          fill: var(--white-70);
+          fill: var(--theme-badge-secondary-text);
         }
       }
 

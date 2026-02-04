@@ -7,12 +7,12 @@
 
     &.ng-list-item_active {
       .ng-list-item__item {
-        background-color: var(--white-15);
-        color: var(--white);
+        background-color: var(--theme-bg-list-item-hover);
+        color: var(--theme-text-primary);
         font-weight: 600;
 
         .ng-list-item__icon {
-          fill: var(--white);
+          fill: var(--theme-text-primary);
         }
       }
     }
@@ -30,15 +30,17 @@
     padding: 0.375rem 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--white-80);
+    color: var(--theme-text-secondary);
     cursor: pointer;
     background-color: transparent;
     border-radius: 0.5rem;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
 
     .ng-list-item__icon {
       flex-shrink: 0;
-      fill: var(--white-80);
+      fill: var(--theme-text-secondary);
       transition: fill 0.2s ease;
     }
 
@@ -70,7 +72,7 @@
       .ng-list-item__header-text {
         font-size: 0.75rem;
         font-weight: 400;
-        color: var(--text-disabled);
+        color: var(--theme-text-muted);
       }
 
       .ng-list-item_one-rows-max {
@@ -97,30 +99,30 @@
     }
 
     &:hover:not(.ng-list-item_disable) {
-      background-color: var(--white-10);
-      color: var(--white);
+      background-color: var(--theme-bg-list-item-hover);
+      color: var(--theme-text-primary);
 
       .ng-list-item__icon {
-        fill: var(--white);
+        fill: var(--theme-text-primary);
       }
     }
 
     &.ng-list-item_active:not(.ng-list-item_disable) {
-      background-color: var(--white-15);
-      color: var(--white);
+      background-color: var(--theme-bg-list-item-active);
+      color: var(--theme-text-primary);
       font-weight: 600;
 
       .ng-list-item__icon {
-        fill: var(--white);
+        fill: var(--theme-text-primary);
       }
     }
 
     &:active:not(.ng-list-item_disable) {
-      background-color: var(--white-15);
-      color: var(--white);
+      background-color: var(--theme-bg-list-item-active);
+      color: var(--theme-text-primary);
 
       .ng-list-item__icon {
-        fill: var(--white);
+        fill: var(--theme-text-primary);
       }
     }
 

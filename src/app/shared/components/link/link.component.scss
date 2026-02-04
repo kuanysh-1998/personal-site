@@ -2,35 +2,35 @@
   width: fit-content;
 
   .ng-link__content {
-    color: var(--white);
+    color: var(--theme-text-primary);
     text-decoration: underline;
     text-underline-offset: 2px;
     transition: all 0.2s ease;
     cursor: pointer;
 
     &:hover {
-      color: var(--white-80);
+      color: var(--theme-text-secondary);
       text-decoration: underline;
     }
 
     &:active {
-      color: var(--text-muted-white);
+      color: var(--theme-text-muted);
       text-decoration: underline;
     }
   }
 
   &.ng-link__secondary {
     .ng-link__content {
-      color: var(--white);
+      color: var(--theme-text-primary);
       text-decoration: underline;
 
       &:hover {
-        color: var(--white-80);
+        color: var(--theme-text-secondary);
         text-decoration: underline;
       }
 
       &:active {
-        color: var(--text-muted-white);
+        color: var(--theme-text-muted);
         text-decoration: underline;
       }
     }

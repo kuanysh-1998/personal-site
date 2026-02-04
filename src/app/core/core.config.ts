@@ -1,6 +1,7 @@
 import { ServiceWorkerUpdateService } from './services/service-worker-update/service-worker-update.service';
 import { EmailjsService } from './services/emailjs/emailjs.service';
+import { ThemeService } from './services/theme/theme.service';
 
-const CORE_SERVICES = [ServiceWorkerUpdateService, EmailjsService];
+const CORE_SERVICES = [ServiceWorkerUpdateService, EmailjsService, ThemeService];
 
 export const coreProviders = [...CORE_SERVICES];
