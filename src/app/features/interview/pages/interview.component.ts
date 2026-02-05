@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccordionComponent } from '@app/shared/components/accordion/accordion.component';
 import { TabsComponent } from '@app/shared/components/tab/tabs.component';
 import { MarkdownComponent } from 'ngx-markdown';
@@ -16,6 +17,9 @@ import { interviewCategories } from '../data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InterviewComponent {
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+
   protected readonly categories = interviewCategories;
 
   protected readonly tabs: Tab[] = this.categories.map((category: InterviewCategory) => ({
@@ -23,7 +27,15 @@ export class InterviewComponent {
     text: category.name,
   }));
 
-  protected readonly selectedCategoryId = signal<string>(this.categories[0]?.id || '');
+  protected readonly selectedCategoryId = signal<string>(this.getInitialCategoryId());
+
+  private getInitialCategoryId(): string {
+    const tabFromUrl = this.route.snapshot.queryParamMap.get('tab');
+    const isValidCategory = this.categories.some(
+      (category: InterviewCategory) => category.id === tabFromUrl,
+    );
+    return isValidCategory ? tabFromUrl! : (this.categories[0]?.id ?? '');
+  }
 
   protected getSelectedCategory(): InterviewCategory | undefined {
     return this.categories.find(
@@ -33,6 +45,11 @@ export class InterviewComponent {
 
   protected onCategoryChanged(tab: Tab): void {
     this.selectedCategoryId.set(tab.id);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { tab: tab.id },
+      replaceUrl: true,
+    });
   }
 
   protected getFullAnswer(question: InterviewQuestion): string {

@@ -7,7 +7,7 @@ export const interviewCategories: InterviewCategory[] = [
   {
     id: 'angular',
     name: 'Angular',
-    questions: angularQuestions,
+    questions: angularQuestions.questions,
   },
   {
     id: 'typescript',
