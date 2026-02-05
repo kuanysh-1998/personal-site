@@ -1,5 +1,3 @@
-export const LOCALE_STORAGE_KEY = 'locale';
-
 export const AVAILABLE_LANGS = ['en', 'ru', 'kk'] as const;
 export type LocaleId = (typeof AVAILABLE_LANGS)[number];
 

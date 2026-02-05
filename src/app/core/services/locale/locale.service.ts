@@ -2,19 +2,19 @@ import { inject, Injectable, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { TranslocoService } from '@ngneat/transloco';
 
+import { STORAGE_KEYS } from '../../../shared/constants/storage-keys';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 import {
   AVAILABLE_LANGS,
   LOCALE_NAMES,
-  LOCALE_STORAGE_KEY,
   type LocaleId,
   type LocaleOption,
 } from './locale.types';
 
-export type { LocaleId, LocaleOption } from './locale.types';
-
 @Injectable()
 export class LocaleService {
   private readonly _transloco = inject(TranslocoService);
+  private readonly _storage = inject(LocalStorageService);
 
   private readonly _currentLang = signal<LocaleId>(this._readStoredLang());
 
@@ -28,7 +28,6 @@ export class LocaleService {
     this._restoreLang();
   }
 
-  /** Вызывается из APP_INITIALIZER для загрузки выбранного языка до первого рендера. */
   public init(): Promise<void> {
     const lang = this._readStoredLang();
     return firstValueFrom(this._transloco.load(lang)).then(() => {});
@@ -39,7 +38,7 @@ export class LocaleService {
     if (!normalized || normalized === this._transloco.getActiveLang()) {
       return;
     }
-    localStorage.setItem(LOCALE_STORAGE_KEY, normalized);
+    this._storage.set(STORAGE_KEYS.LOCALE, normalized);
     window.location.reload();
   }
 
@@ -48,7 +47,7 @@ export class LocaleService {
   }
 
   private _readStoredLang(): LocaleId {
-    const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
+    const stored = this._storage.get<string>(STORAGE_KEYS.LOCALE);
     return this._normalizeLang(stored ?? '') ?? 'en';
   }
 

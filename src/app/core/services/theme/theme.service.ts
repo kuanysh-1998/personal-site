@@ -1,11 +1,13 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, Injectable, signal } from '@angular/core';
-import { THEME_STORAGE_KEY, Theme } from './theme.types';
+import { STORAGE_KEYS } from '../../../shared/constants/storage-keys';
+import { LocalStorageService } from '../local-storage/local-storage.service';
+import { Theme } from './theme.types';
 
 @Injectable()
 export class ThemeService {
   private readonly _document = inject(DOCUMENT);
-  private readonly _storage = this._document.defaultView?.localStorage;
+  private readonly _storage = inject(LocalStorageService);
 
   public readonly theme = signal<Theme>(this._resolveInitialTheme());
 
@@ -25,7 +27,7 @@ export class ThemeService {
   }
 
   private _resolveInitialTheme(): Theme {
-    const stored = this._storage?.getItem(THEME_STORAGE_KEY);
+    const stored = this._storage.get<Theme>(STORAGE_KEYS.THEME);
     if (stored === 'light' || stored === 'dark') {
       return stored;
     }
@@ -41,6 +43,6 @@ export class ThemeService {
   }
 
   private _persist(value: Theme): void {
-    this._storage?.setItem(THEME_STORAGE_KEY, value);
+    this._storage.set(STORAGE_KEYS.THEME, value);
   }
 }

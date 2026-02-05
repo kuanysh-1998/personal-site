@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { SocialConnectComponent } from '../components/social-connect/social-connect.component';
@@ -24,8 +32,9 @@ import { StackTechnology } from './about.types';
   styleUrl: './about.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit {
   private readonly _transloco = inject(TranslocoService);
+  private readonly _destroyRef = inject(DestroyRef);
 
   private readonly _currentLang = signal(this._transloco.getActiveLang());
 
@@ -53,9 +62,9 @@ export class AboutComponent {
     return `${timeLabel} ${displayHours}:${displayMinutes} ${ampm}`;
   });
 
-  constructor() {
+  public ngOnInit(): void {
     this._transloco.langChanges$
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((lang) => this._currentLang.set(lang));
   }
 }

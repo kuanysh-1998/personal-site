@@ -46,14 +46,12 @@ export class YandexMetrikaService {
       return;
     }
 
-    // Проверка, не загружен ли уже скрипт
     for (let j = 0; j < document.scripts.length; j++) {
       if (document.scripts[j].src === this._scriptUrl) {
         return;
       }
     }
 
-    // Инициализация функции ym до загрузки скрипта
     window.ym =
       window.ym ||
       function (...args: unknown[]): void {
@@ -62,14 +60,12 @@ export class YandexMetrikaService {
 
     window.ym.l = 1 * new Date().getTime();
 
-    // Создание и добавление скрипта
     const script = document.createElement('script');
     const firstScript = document.getElementsByTagName('script')[0];
     script.async = true;
     script.src = this._scriptUrl;
     firstScript.parentNode?.insertBefore(script, firstScript);
 
-    // Инициализация счетчика с новыми параметрами
     window.ym(this._counterId, 'init', {
       ssr: true,
       webvisor: true,

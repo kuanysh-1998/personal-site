@@ -3,32 +3,29 @@ import { Database, objectVal, ref, runTransaction } from '@angular/fire/database
 import { Observable, from, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { STORAGE_KEYS } from '../../../shared/constants/storage-keys';
+import { LocalStorageService } from '../../../core/services/local-storage/local-storage.service';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ViewCounterService {
   private readonly _db = inject(Database);
-  private readonly _viewedPostsKey = 'viewed_posts';
+  private readonly _storage = inject(LocalStorageService);
 
   private _hasViewedPost(postId: string): boolean {
-    if (typeof window === 'undefined' || !window.localStorage) {
-      return false;
-    }
-
     try {
-      const stored = window.localStorage.getItem(this._viewedPostsKey);
-      if (!stored) {
+      const viewedPosts = this._storage.get<unknown>(STORAGE_KEYS.VIEWED_POSTS);
+      if (!viewedPosts) {
         return false;
       }
-
-      const viewedPosts = JSON.parse(stored);
 
       if (Array.isArray(viewedPosts)) {
         return viewedPosts.includes(postId);
       }
 
       if (typeof viewedPosts === 'object' && viewedPosts !== null) {
-        return postId in viewedPosts;
+        return postId in (viewedPosts as Record<string, unknown>);
       }
 
       return false;
@@ -38,21 +35,19 @@ export class ViewCounterService {
   }
 
   private _markPostAsViewed(postId: string): void {
-    if (typeof window === 'undefined' || !window.localStorage) return;
-
     try {
-      const stored = window.localStorage.getItem(this._viewedPostsKey);
+      const stored = this._storage.get<Record<string, number> | unknown>(STORAGE_KEYS.VIEWED_POSTS);
       let viewedPosts: Record<string, number>;
 
       if (!stored) {
         viewedPosts = {};
       } else {
-        const parsed = JSON.parse(stored);
+        const parsed = stored;
 
         if (Array.isArray(parsed)) {
           viewedPosts = {};
           const now = Date.now();
-          parsed.forEach((id: string) => {
+          (parsed as string[]).forEach((id: string) => {
             viewedPosts[id] = now;
           });
         } else if (typeof parsed === 'object' && parsed !== null) {
@@ -71,8 +66,10 @@ export class ViewCounterService {
         }
       });
 
-      window.localStorage.setItem(this._viewedPostsKey, JSON.stringify(viewedPosts));
-    } catch {}
+      this._storage.set(STORAGE_KEYS.VIEWED_POSTS, viewedPosts);
+    } catch {
+      // ignore
+    }
   }
 
   public incrementView(postId: string): Observable<number> {
