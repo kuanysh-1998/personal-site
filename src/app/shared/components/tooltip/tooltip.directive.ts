@@ -1,10 +1,13 @@
 import {
+  ChangeDetectorRef,
   ComponentRef,
   Directive,
   EmbeddedViewRef,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
@@ -15,7 +18,7 @@ import { TooltipComponent } from './tooltip.component';
   selector: '[ngTooltip]',
   standalone: true,
 })
-export class TooltipDirective implements OnInit, OnDestroy {
+export class TooltipDirective implements OnInit, OnDestroy, OnChanges {
   @Input('ngTooltip') public content: string | TemplateRef<unknown> | undefined = undefined;
   @Input('ngTooltipPosition') public position: PopoverPosition = 'top';
 
@@ -26,6 +29,13 @@ export class TooltipDirective implements OnInit, OnDestroy {
     private readonly _templateRef: TemplateRef<unknown>,
     private readonly _viewContainerRef: ViewContainerRef
   ) {}
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['content'] && this._tooltipComponentRef && this.content !== undefined) {
+      this._tooltipComponentRef.instance.content = this.content;
+      this._tooltipComponentRef.injector.get(ChangeDetectorRef).markForCheck();
+    }
+  }
 
   public ngOnInit(): void {
     if (this.content) {

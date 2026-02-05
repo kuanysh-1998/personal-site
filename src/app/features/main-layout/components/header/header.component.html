@@ -2,14 +2,26 @@
   <div class="header__content">
     <div class="header__navigation">
       <ng-tabs
-        [tabsItems]="tabs"
+        [tabsItems]="tabs()"
         [orientation]="'horizontal'"
         [selectedTab]="selectedTab"
         [hideBorder]="true"
         (changed)="onTabChanged($event)"
       ></ng-tabs>
     </div>
+
     <div class="header__actions">
+      <div class="header__lang-dropdown">
+        <ng-dropdown
+          [options]="localeService.availableOptions"
+          [value]="localeService.currentLang()"
+          [placeholder]="'common.language' | transloco"
+          [showClearButton]="false"
+          [enableSearch]="false"
+          [size]="'medium'"
+          (changed)="onLanguageChanged($event)"
+        />
+      </div>
       <ng-button
         class="header__theme-toggle"
         [icon]="themeToggleIcon"
@@ -22,12 +34,73 @@
       />
       <div class="header__whats-new-button">
         <ng-button
-          [label]="'What\'s new'"
-          [ariaLabel]="'What\'s new'"
+          [label]="'common.whatsNew' | transloco"
+          [ariaLabel]="'common.whatsNew' | transloco"
           [size]="'default'"
           (clicked)="openWhatsNew()"
         />
       </div>
+    </div>
+
+    <div class="header__mobile">
+      <div
+        class="header__menu-trigger"
+        id="header-menu-trigger"
+        [attr.aria-expanded]="mobileMenuOpen()"
+      >
+        <ng-button
+          [icon]="menuIcon"
+          [ariaLabel]="'common.menu' | transloco"
+          [stylingMode]="'ghost'"
+          [size]="'default'"
+          [iconWidth]="'1.25rem'"
+          [iconHeight]="'1.25rem'"
+          (clicked)="toggleMobileMenu()"
+        />
+      </div>
+      <ng-popover
+        [for]="'header-menu-trigger'"
+        [isOpen]="mobileMenuOpen()"
+        [position]="'bottom right'"
+        [padding]="'small'"
+        (closed)="closeMobileMenu()"
+      >
+        <div class="header-menu">
+          <div class="header-menu__section">
+            <ng-dropdown
+              class="header-menu__dropdown"
+              [options]="localeService.availableOptions"
+              [value]="localeService.currentLang()"
+              [placeholder]="'common.language' | transloco"
+              [showClearButton]="false"
+              [enableSearch]="false"
+              [size]="'medium'"
+              (changed)="onLanguageChanged($event)"
+            />
+          </div>
+          <ng-divider [margin]="'small'" />
+          <div class="header-menu__section header-menu__section_actions">
+            <ng-button
+              class="header-menu__theme-btn"
+              [icon]="themeToggleIcon"
+              [ariaLabel]="themeToggleAriaLabel"
+              [stylingMode]="'ghost'"
+              [size]="'default'"
+              [iconWidth]="'1.25rem'"
+              [iconHeight]="'1.25rem'"
+              (clicked)="themeService.toggleTheme(); closeMobileMenu()"
+            />
+            <ng-button
+              class="header-menu__whats-new-btn"
+              [label]="'common.whatsNew' | transloco"
+              [ariaLabel]="'common.whatsNew' | transloco"
+              [size]="'default'"
+              [fullWidth]="true"
+              (clicked)="openWhatsNew(); closeMobileMenu()"
+            />
+          </div>
+        </div>
+      </ng-popover>
     </div>
   </div>
 </header>

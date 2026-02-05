@@ -1,7 +1,7 @@
 <div class="latest-posts">
   <div class="header-wrapper">
-    <h3>Latest Posts</h3>
-    <ng-link [link]="'/blog'" [text]="'View all posts →'" [underlineOnHover]="true" />
+    <h3>{{ 'blog.latestPosts' | transloco }}</h3>
+    <ng-link [link]="'/blog'" [text]="'blog.viewAllPosts' | transloco" [underlineOnHover]="true" />
   </div>
   <div class="posts-list">
     @for (post of latestPosts(); track post.slug) {

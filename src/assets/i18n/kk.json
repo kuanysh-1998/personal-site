@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "about": "Мен туралы",
+    "blog": "Блог",
+    "interview": "Сұхбат"
+  },
+  "blog": {
+    "latestPosts": "Соңғы жазбалар",
+    "viewAllPosts": "Барлық жазбалар →"
+  },
+  "about": {
+    "connect": "Байланыс",
+    "reachMeAt": "Маған жазыңыз",
+    "name": "Kuanysh Aptaizhanov",
+    "roleLocation": "Frontend инженер, Астана, Қазақстан",
+    "timezone": "(UTC+5)",
+    "bio": "Angular негізінде кәсіби қолданбалар жасаймын, таза архитектура мен масштабталатын шешімдерге назар аударамын.",
+    "stackLabel": "Стек:",
+    "timeLabel": "Уақыт:"
+  },
+  "common": {
+    "whatsNew": "Жаңалықтар",
+    "language": "Тіл",
+    "menu": "Мәзір",
+    "close": "Жабу",
+    "am": "AM",
+    "pm": "PM",
+    "theme": {
+      "light": "Жарық режимге ауысу",
+      "dark": "Қараңғы режимге ауысу"
+    }
+  }
+}

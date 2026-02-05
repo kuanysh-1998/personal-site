@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { SocialConnectComponent } from '../components/social-connect/social-connect.component';
 import { LatestPosts } from '@app/features/blog/components/latest-posts/latest-posts';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
@@ -10,6 +12,7 @@ import { StackTechnology } from './about.types';
 @Component({
   selector: 'app-about',
   imports: [
+    TranslocoModule,
     SocialConnectComponent,
     LatestPosts,
     TooltipDirective,
@@ -22,6 +25,10 @@ import { StackTechnology } from './about.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutComponent {
+  private readonly _transloco = inject(TranslocoService);
+
+  private readonly _currentLang = signal(this._transloco.getActiveLang());
+
   protected readonly stack: StackTechnology[] = [
     { name: 'Angular', url: 'https://angular.dev' },
     { name: 'TypeScript', url: 'https://www.typescriptlang.org' },
@@ -29,17 +36,26 @@ export class AboutComponent {
     { name: 'Signals API', url: 'https://angular.dev/guide/signals' },
   ];
 
-  public get astanaTime(): string {
+  protected readonly astanaTime = computed(() => {
+    this._currentLang();
     const now = new Date();
     const utcTime = now.getTime() + now.getTimezoneOffset() * 60000;
-    const astanaTime = new Date(utcTime + 5 * 3600000);
+    const astanaTimeDate = new Date(utcTime + 5 * 3600000);
 
-    const hours = astanaTime.getHours();
-    const minutes = astanaTime.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const hours = astanaTimeDate.getHours();
+    const minutes = astanaTimeDate.getMinutes();
+    const ampmKey = hours >= 12 ? 'common.pm' : 'common.am';
     const displayHours = hours % 12 || 12;
     const displayMinutes = minutes.toString().padStart(2, '0');
+    const timeLabel = this._transloco.translate('about.timeLabel');
+    const ampm = this._transloco.translate(ampmKey);
 
-    return `Time: ${displayHours}:${displayMinutes} ${ampm}`;
+    return `${timeLabel} ${displayHours}:${displayMinutes} ${ampm}`;
+  });
+
+  constructor() {
+    this._transloco.langChanges$
+      .pipe(takeUntilDestroyed())
+      .subscribe((lang) => this._currentLang.set(lang));
   }
 }

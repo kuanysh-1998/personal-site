@@ -166,7 +166,7 @@ export class PopoverComponent extends Overlay implements AfterViewInit, OnDestro
     if (this.isInsideDialogOrDrawer()) {
       this.renderer.setStyle(this.popoverElement, 'z-index', '2000');
     } else {
-      this.renderer.setStyle(this.popoverElement, 'z-index', '100');
+      this.renderer.setStyle(this.popoverElement, 'z-index', '1001');
     }
 
     this.renderer.appendChild(body, this.popoverElement);

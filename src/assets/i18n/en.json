@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "about": "About",
+    "blog": "Blog",
+    "interview": "Interview"
+  },
+  "blog": {
+    "latestPosts": "Latest Posts",
+    "viewAllPosts": "View all posts →"
+  },
+  "about": {
+    "connect": "Connect",
+    "reachMeAt": "Reach me at",
+    "name": "Kuanysh Aptaizhanov",
+    "roleLocation": "Frontend engineer in Astana, Kazakhstan",
+    "timezone": "(UTC+5)",
+    "bio": "I build enterprise Angular applications with focus on clean architecture and scalable solutions.",
+    "stackLabel": "Stack:",
+    "timeLabel": "Time:"
+  },
+  "common": {
+    "whatsNew": "What's new",
+    "language": "Language",
+    "menu": "Menu",
+    "close": "Close",
+    "am": "AM",
+    "pm": "PM",
+    "theme": {
+      "light": "Switch to light mode",
+      "dark": "Switch to dark mode"
+    }
+  }
+}

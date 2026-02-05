@@ -1,7 +1,7 @@
 <div class="social-connect">
-  <ng-card [padding]="'large'" [stylingMode]="'default'" [header]="'Connect'">
+  <ng-card [padding]="'large'" [stylingMode]="'default'" [header]="'about.connect' | transloco">
     <p class="social-connect__text">
-      Reach me at
+      {{ 'about.reachMeAt' | transloco }}
       <ng-link [link]="'mailto:' + email" [text]="email" />
     </p>
 

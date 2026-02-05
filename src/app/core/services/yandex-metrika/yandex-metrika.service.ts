@@ -5,9 +5,7 @@ import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import './yandex-metrika.types';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class YandexMetrikaService {
   private readonly _router = inject(Router);
   private readonly _destroyRef = inject(DestroyRef);
@@ -88,7 +86,7 @@ export class YandexMetrikaService {
     this._router.events
       .pipe(
         filter((e: Event): e is NavigationEnd => e instanceof NavigationEnd),
-        takeUntilDestroyed(this._destroyRef)
+        takeUntilDestroyed(this._destroyRef),
       )
       .subscribe((e: NavigationEnd) => this.pageChanged(e.urlAfterRedirects, e.url));
   }

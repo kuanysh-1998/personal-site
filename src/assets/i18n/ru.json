@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "about": "Обо мне",
+    "blog": "Блог",
+    "interview": "Интервью"
+  },
+  "blog": {
+    "latestPosts": "Последние посты",
+    "viewAllPosts": "Все посты →"
+  },
+  "about": {
+    "connect": "Связаться",
+    "reachMeAt": "Напишите мне на",
+    "name": "Kuanysh Aptaizhanov",
+    "roleLocation": "Frontend-разработчик в Астане, Казахстан",
+    "timezone": "(UTC+5)",
+    "bio": "Создаю корпоративные приложения на Angular с упором на чистую архитектуру и масштабируемые решения.",
+    "stackLabel": "Стек:",
+    "timeLabel": "Время:"
+  },
+  "common": {
+    "whatsNew": "Что нового",
+    "language": "Язык",
+    "menu": "Меню",
+    "close": "Закрыть",
+    "am": "AM",
+    "pm": "PM",
+    "theme": {
+      "light": "Переключить на светлую тему",
+      "dark": "Переключить на тёмную тему"
+    }
+  }
+}
