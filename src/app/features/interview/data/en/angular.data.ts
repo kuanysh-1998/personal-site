@@ -1,6 +1,6 @@
-import { InterviewCategory } from '../types/interview.types';
+import { InterviewCategory } from '../../types/interview.types';
 
-export const angularQuestions: InterviewCategory = {
+export const angularQuestionsEn: InterviewCategory = {
   id: 'angular',
   name: 'Angular',
   icon: 'angular',
@@ -40,7 +40,7 @@ Zone.js monkey-patches async APIs (addEventListener, setTimeout, fetch, etc.). W
   \`
 })
 export class UserListComponent {
-  users = input<User[]>([]);
+  public users = input<User[]>([]);
 }`,
         },
         {
@@ -59,10 +59,12 @@ this.cdr.markForCheck();`,
         {
           language: 'typescript',
           code: `// NgZone.runOutsideAngular for performance
-constructor(private ngZone: NgZone) {}
+private _data!: Data;
 
-startHeavyAnimation() {
-  this.ngZone.runOutsideAngular(() => {
+constructor(private _ngZone: NgZone) {}
+
+public startHeavyAnimation(): void {
+  this._ngZone.runOutsideAngular(() => {
     requestAnimationFrame(function animate() {
       // ... animation logic — won't trigger CD
       requestAnimationFrame(animate);
@@ -70,9 +72,9 @@ startHeavyAnimation() {
   });
 }
 
-updateUI(data: Data) {
-  this.ngZone.run(() => {
-    this.data = data; // This triggers CD
+public updateUI(data: Data): void {
+  this._ngZone.run(() => {
+    this._data = data; // This triggers CD
   });
 }`,
         },
@@ -119,8 +121,8 @@ import { signal, computed, effect } from '@angular/core';
   \`
 })
 export class CounterComponent {
-  count = signal(0);
-  double = computed(() => this.count() * 2);
+  public count = signal(0);
+  public double = computed(() => this.count() * 2);
 
   constructor() {
     effect(() => {
@@ -128,7 +130,7 @@ export class CounterComponent {
     });
   }
 
-  increment() {
+  public increment(): void {
     this.count.update(v => v + 1);
   }
 }`,
@@ -141,10 +143,10 @@ export class CounterComponent {
   template: \`<h2>{{ user().name }}</h2>\`
 })
 export class UserCardComponent {
-  user = input.required<User>();
-  showAvatar = input(true);
+  public user = input.required<User>();
+  public showAvatar = input(true);
   
-  initials = computed(() => {
+  public initials = computed(() => {
     const u = this.user();
     return u.firstName[0] + u.lastName[0];
   });
@@ -155,12 +157,12 @@ export class UserCardComponent {
           code: `// linkedSignal (Angular 19+)
 @Component({...})
 export class ProductComponent {
-  products = input.required<Product[]>();
+  public products = input.required<Product[]>();
   
   // Resets to first product when products change
-  selectedProduct = linkedSignal(() => this.products()[0]);
+  public selectedProduct = linkedSignal(() => this.products()[0]);
   
-  selectProduct(p: Product) {
+  public selectProduct(p: Product): void {
     this.selectedProduct.set(p); // Writable!
   }
 }`,
@@ -170,12 +172,14 @@ export class ProductComponent {
           code: `// resource() for async data (Angular 19+)
 @Component({...})
 export class UserProfileComponent {
-  userId = input.required<string>();
+  public userId = input.required<string>();
   
-  userResource = resource({
+  public userResource = resource({
     request: () => this.userId(),
-    loader: ({ request: id }) => this.userService.getUser(id),
+    loader: ({ request: id }) => this._userService.getUser(id),
   });
+  
+  private _userService = inject(UserService);
   
   // userResource.value() — the data
   // userResource.isLoading() — loading state
@@ -217,7 +221,7 @@ export class AuthService { }
   providers: [FormStateService]
 })
 export class UserFormComponent {
-  private formState = inject(FormStateService);
+  private _formState = inject(FormStateService);
 }`,
         },
         {
@@ -233,10 +237,11 @@ export const appConfig: ApplicationConfig = {
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private config = inject(API_CONFIG);
+  private _config = inject(API_CONFIG);
+  private _http = inject(HttpClient);
   
-  fetch(endpoint: string) {
-    return this.http.get(\`\${this.config.baseUrl}/\${endpoint}\`);
+  public fetch(endpoint: string) {
+    return this._http.get(\`\${this._config.baseUrl}/\${endpoint}\`);
   }
 }`,
         },
@@ -316,7 +321,7 @@ provideHttpClient(withInterceptors([authInterceptor]))`,
   \`
 })
 export class UserCardComponent {
-  user = input.required<User>();
+  public user = input.required<User>();
 }`,
         },
         {
@@ -527,7 +532,8 @@ files$.pipe(
           language: 'typescript',
           code: `// Memory leak prevention
 // Option 1: takeUntilDestroyed (Angular 16+)
-user$ = this.userService.getUser().pipe(
+private _userService = inject(UserService);
+public user$ = this._userService.getUser().pipe(
   takeUntilDestroyed()
 );
 
@@ -537,11 +543,12 @@ user$ = this.userService.getUser().pipe(
 })
 
 // Option 3: DestroyRef
-private destroyRef = inject(DestroyRef);
+private _destroyRef = inject(DestroyRef);
+private _userService = inject(UserService);
 
-ngOnInit() {
-  this.userService.getUser().pipe(
-    takeUntilDestroyed(this.destroyRef)
+public ngOnInit(): void {
+  this._userService.getUser().pipe(
+    takeUntilDestroyed(this._destroyRef)
   ).subscribe();
 }`,
         },
@@ -633,17 +640,17 @@ user = toSignal(this.route.data.pipe(map(d => d['user'])));`,
           code: `// Reactive form with validation
 @Component({...})
 export class UserFormComponent {
-  private fb = inject(FormBuilder);
+  private _fb = inject(FormBuilder);
   
-  form = this.fb.group({
+  public form = this._fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: [''],
   }, {
-    validators: this.passwordMatchValidator
+    validators: this._passwordMatchValidator
   });
   
-  passwordMatchValidator(g: FormGroup) {
+  private _passwordMatchValidator(g: FormGroup) {
     const pass = g.get('password')?.value;
     const confirm = g.get('confirmPassword')?.value;
     return pass === confirm ? null : { mismatch: true };
@@ -665,30 +672,32 @@ export function uniqueUsernameValidator(userService: UserService): AsyncValidato
 }
 
 // Usage — async validators = 3rd param
-this.fb.group({
-  username: ['', [Validators.required], [uniqueUsernameValidator(this.userService)]]
+this._fb.group({
+  username: ['', [Validators.required], [uniqueUsernameValidator(this._userService)]]
 });`,
         },
         {
           language: 'typescript',
           code: `// FormArray for dynamic fields
-form = this.fb.group({
+private _fb = inject(FormBuilder);
+
+public form = this._fb.group({
   name: [''],
-  phones: this.fb.array([])
+  phones: this._fb.array([])
 });
 
-get phones() {
+public get phones(): FormArray {
   return this.form.get('phones') as FormArray;
 }
 
-addPhone() {
-  this.phones.push(this.fb.group({
+public addPhone(): void {
+  this.phones.push(this._fb.group({
     type: ['mobile'],
     number: ['', Validators.required]
   }));
 }
 
-removePhone(index: number) {
+public removePhone(index: number): void {
   this.phones.removeAt(index);
 }`,
         },
@@ -734,7 +743,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   styles: [\`.viewport { height: 400px; }\`]
 })
 export class LongListComponent {
-  items = signal<Item[]>([]);
+  public items = signal<Item[]>([]);
 }`,
         },
         {

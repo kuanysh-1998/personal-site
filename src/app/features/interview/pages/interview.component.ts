@@ -1,17 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslocoModule } from '@ngneat/transloco';
 import { AccordionComponent } from '@app/shared/components/accordion/accordion.component';
 import { TabsComponent } from '@app/shared/components/tab/tabs.component';
 import { MarkdownComponent } from 'ngx-markdown';
 import { CopyCodeDirective } from '@app/shared/directives/copy-code.directive';
 import { Tab } from '@app/shared/components/tab/tabs.types';
 import { InterviewCategory, InterviewQuestion } from '../types/interview.types';
-import { interviewCategories } from '../data';
+import { InterviewDataService } from '../services/interview-data.service';
 
 @Component({
   selector: 'app-interview',
-  imports: [CommonModule, AccordionComponent, TabsComponent, MarkdownComponent, CopyCodeDirective],
+  imports: [CommonModule, TranslocoModule, AccordionComponent, TabsComponent, MarkdownComponent, CopyCodeDirective],
   templateUrl: './interview.component.html',
   styleUrl: './interview.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,8 +20,9 @@ import { interviewCategories } from '../data';
 export class InterviewComponent {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly interviewDataService = inject(InterviewDataService);
 
-  protected readonly categories = interviewCategories;
+  protected readonly categories = this.interviewDataService.getCategories();
 
   protected readonly tabs: Tab[] = this.categories.map((category: InterviewCategory) => ({
     id: category.id,

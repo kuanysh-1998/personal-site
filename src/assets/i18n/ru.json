@@ -49,6 +49,7 @@
   "Dark and Light Theme": "Тёмная и светлая тема",
   "The site now supports two modes: dark and light. You can switch the theme with the button in the header — your choice is saved and will be used on your next visit.": "На сайте доступны тёмная и светлая темы. Переключение — кнопкой в шапке, выбор сохраняется при следующем визите.",
   "Interview Questions": "Вопросы на собеседование",
+  "Deep-dive into complex concepts and internals": "Только сложные темы — глубокий разбор без базовых вопросов",
   "Added a new section with interview questions and answers on JavaScript, TypeScript and Angular. Use it to prepare for interviews with organized questions, code examples, and markdown-formatted answers": "Добавлен раздел с вопросами и ответами по JavaScript, TypeScript и Angular для подготовки к собеседованиям — с примерами кода и ответами в markdown.",
   "Go to Interview Questions": "Перейти к вопросам",
   "Added a contact form to reach out to me. You can send a message directly from the site": "Добавлена форма обратной связи для связи со мной прямо с сайта.",

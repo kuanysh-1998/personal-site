@@ -1,6 +1,6 @@
-import { InterviewQuestion } from '../types/interview.types';
+import { InterviewQuestion } from '../../types/interview.types';
 
-export const typescriptQuestions: InterviewQuestion[] = [
+export const typescriptQuestionsEn: InterviewQuestion[] = [
   {
     id: 'ts-1',
     question: 'What is the difference between interface and type?',

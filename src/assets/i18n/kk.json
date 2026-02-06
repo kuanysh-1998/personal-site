@@ -49,6 +49,7 @@
   "Dark and Light Theme": "Қараңғы және жарық тема",
   "The site now supports two modes: dark and light. You can switch the theme with the button in the header — your choice is saved and will be used on your next visit.": "Сайт қараңғы және жарық режимдерді қолдайды. Тақырыптағы батырмамен ауыстыра аласыз — таңдау сақталады.",
   "Interview Questions": "Сұхбат сұрақтары",
+  "Deep-dive into complex concepts and internals": "Тек күрделі тақырыптар — терең зерттеу, негізгі сұрақтарсыз",
   "Added a new section with interview questions and answers on JavaScript, TypeScript and Angular. Use it to prepare for interviews with organized questions, code examples, and markdown-formatted answers": "JavaScript, TypeScript және Angular бойынша сұхбат сұрақтары мен жауаптары бар жаңа бөлім қосылды.",
   "Go to Interview Questions": "Сұхбат сұрақтарына өту",
   "Added a contact form to reach out to me. You can send a message directly from the site": "Байланыс формасы қосылды — хабарламаны сайттан жіберуге болады.",

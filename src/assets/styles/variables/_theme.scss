@@ -31,6 +31,7 @@
   --theme-code-color: #4fc3f7;
   --theme-bg-list-item-hover: rgba(255, 255, 255, 0.1);
   --theme-bg-list-item-active: rgba(255, 255, 255, 0.15);
+  --theme-tab-indicator: #ffffff;
 }
 
 [data-theme='light'] {
@@ -65,4 +66,5 @@
   --theme-code-color: #0c75af;
   --theme-bg-list-item-hover: #e9ecef;
   --theme-bg-list-item-active: #dee2e6;
+  --theme-tab-indicator: var(--brand-blue);
 }

@@ -1,6 +1,6 @@
-import { InterviewQuestion } from '../types/interview.types';
+import { InterviewQuestion } from '../../types/interview.types';
 
-export const javascriptQuestions: InterviewQuestion[] = [
+export const javascriptQuestionsEn: InterviewQuestion[] = [
   {
     id: 'js-1',
     question: 'What is a closure?',
