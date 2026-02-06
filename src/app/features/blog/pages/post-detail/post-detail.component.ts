@@ -5,7 +5,9 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { PostService } from '@app/entities/post/services/post.service';
 import { PostState } from '@app/entities/post/models/post.interface';
 import { Observable, of, switchMap } from 'rxjs';
-import { map, startWith, take, tap } from 'rxjs/operators';
+import { filter, map, shareReplay, startWith, take, tap } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BlogContentReadyService } from '../../services/blog-content-ready.service';
 import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
 import { PostNavigationComponent } from '../../components/post-navigation/post-navigation.component';
 import { CopyLinkComponent } from '@app/shared/components/copy-link/copy-link.component';
@@ -49,6 +51,7 @@ export class PostDetailComponent {
   private readonly _document = inject(DOCUMENT);
   private readonly _yandexMetrikaService = inject(YandexMetrikaService);
   private readonly _viewCounterService = inject(ViewCounterService);
+  private readonly _contentReadyService = inject(BlogContentReadyService);
 
   protected readonly eyeIcon = Icons.Eye;
 
@@ -77,6 +80,7 @@ export class PostDetailComponent {
           previousPost: null,
           nextPost: null,
         }),
+        shareReplay(1),
       ),
     ),
   );
@@ -85,6 +89,15 @@ export class PostDetailComponent {
     map((params) => params.get('slug') || ''),
     switchMap((slug) => (slug ? this._viewCounterService.getViewCount(slug) : of(0))),
   );
+
+  constructor() {
+    this.postState$
+      .pipe(
+        filter((state) => state.post !== null),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => this._contentReadyService.notify());
+  }
 
   protected formatDate(dateStr: string): string {
     const date = new Date(dateStr);

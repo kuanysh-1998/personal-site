@@ -13,10 +13,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ListItemComponent } from '@app/shared/components/list-item/list-item.component';
 import { ScrollComponent } from '@app/shared/components/scroll/scroll.component';
 import { TocItem } from './table-of-contents.types';
-
+import { BlogContentReadyService } from '../../services/blog-content-ready.service';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
-
 import { ChangeDetectorRef } from '@angular/core';
 
 const POST_PAGE_URL_REGEX = /^\/blog\/[^/]+$/;
@@ -34,6 +33,7 @@ export class TableOfContentsComponent implements AfterViewInit, OnDestroy {
   private readonly _isBrowser = isPlatformBrowser(this._platformId);
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _router = inject(Router);
+  private readonly _contentReadyService = inject(BlogContentReadyService);
 
   protected readonly tocItems = signal<TocItem[]>([]);
   protected readonly activeItemId = signal<string>('');
@@ -52,19 +52,22 @@ export class TableOfContentsComponent implements AfterViewInit, OnDestroy {
       )
       .subscribe(() => {
         this._resetToc();
-        if (POST_PAGE_URL_REGEX.test(this._router.url)) {
-          setTimeout(() => this._observeMarkdown(), 400);
-        }
+        this._cdr.markForCheck();
+      });
+
+    this._contentReadyService.contentReady$
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => {
+        setTimeout(() => this._observeMarkdown(), 0);
         this._cdr.markForCheck();
       });
   }
 
   public ngAfterViewInit(): void {
     if (!this._isBrowser) return;
-
-    setTimeout(() => {
-      this._observeMarkdown();
-    }, 200);
+    if (POST_PAGE_URL_REGEX.test(this._router.url)) {
+      setTimeout(() => this._observeMarkdown(), 100);
+    }
   }
 
   public ngOnDestroy(): void {
@@ -83,10 +86,7 @@ export class TableOfContentsComponent implements AfterViewInit, OnDestroy {
 
   private _observeMarkdown(): void {
     const markdownElement = document.querySelector('markdown');
-    if (!markdownElement) {
-      console.warn('Markdown element not found');
-      return;
-    }
+    if (!markdownElement) return;
 
     this._extractHeadings();
 
