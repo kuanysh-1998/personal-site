@@ -2,8 +2,8 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <ng-text-field
       formControlName="subject"
-      label="Subject"
-      placeholder="Enter subject"
+      [label]="'Subject' | transloco"
+      [placeholder]="'Enter subject' | transloco"
       [requiredForLabel]="true"
       [errorMessage]="getSubjectError()"
       [maxLength]="200"
@@ -12,7 +12,7 @@
     <div class="contact-form__contact-wrapper">
       <div class="contact-form__switch-container">
         <span class="contact-form__switch-label" [class.active]="!form.get('contactType')?.value">
-          Email
+          {{ 'Email' | transloco }}
         </span>
         <ng-switch
           formControlName="contactType"
@@ -21,7 +21,7 @@
           (changed)="onContactTypeChange($event)"
         />
         <span class="contact-form__switch-label" [class.active]="form.get('contactType')?.value">
-          Telegram
+          {{ 'Telegram' | transloco }}
         </span>
       </div>
 
@@ -37,8 +37,8 @@
 
     <ng-text-area
       formControlName="description"
-      label="Description"
-      placeholder="Describe your request"
+      [label]="'Description' | transloco"
+      [placeholder]="'Describe your request' | transloco"
       [requiredForLabel]="true"
       [errorMessage]="getDescriptionError()"
       [helperText]="getDescriptionHelperText()"

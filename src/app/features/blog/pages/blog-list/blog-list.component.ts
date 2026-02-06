@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { Router } from '@angular/router';
 import { PostGroup } from '@app/entities/post/models/post.interface';
 import { PostService } from '@app/entities/post/services/post.service';
+import { TranslocoModule } from '@ngneat/transloco';
 import { PostSearchComponent } from '@app/features/blog/components/post-search/post-search.component';
 import { CardComponent } from '@app/shared/components/card/card.component';
 import { BadgeComponent } from '@app/shared/components/badge/badge.component';
@@ -9,7 +10,7 @@ import { Icons } from '@app/shared/components/svg/svg.config';
 
 @Component({
   selector: 'app-blog-list',
-  imports: [PostSearchComponent, CardComponent, BadgeComponent],
+  imports: [TranslocoModule, PostSearchComponent, CardComponent, BadgeComponent],
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

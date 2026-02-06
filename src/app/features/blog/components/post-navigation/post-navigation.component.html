@@ -4,8 +4,8 @@
   <ng-list-item
     [link]="'/blog/' + previousPost.slug"
     [icon]="'chevron-left'"
-    [headerText]="'Previous'"
-    [text]="previousPost.title"
+    [headerText]="'Previous' | transloco"
+    [text]="previousPost.title | transloco"
     [enableWrapTwoRows]="true"
   />
   } @else {
@@ -14,8 +14,8 @@
   <ng-list-item
     [link]="'/blog/' + nextPost.slug"
     [rightIcon]="'chevron-right'"
-    [headerText]="'Next'"
-    [text]="nextPost.title"
+    [headerText]="'Next' | transloco"
+    [text]="nextPost.title | transloco"
     [enableWrapTwoRows]="true"
   />
   } @else {

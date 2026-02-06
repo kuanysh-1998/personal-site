@@ -3,12 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Post, PostMetadata } from '../models/post.interface';
 import { POSTS } from '@app/features/blog/data/posts.data';
+import { LocaleService } from '@app/core/services/locale/locale.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
   private readonly _http = inject(HttpClient);
+  private readonly _localeService = inject(LocaleService);
 
   public getAllPosts(): PostMetadata[] {
     return [...POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -21,9 +23,17 @@ export class PostService {
       return of(null);
     }
 
-    return this._http.get(`/assets/posts/${slug}.md`, { responseType: 'text' }).pipe(
+    const lang = this._localeService.getStoredLang();
+    const path = lang === 'en' ? `${slug}.md` : `${slug}.${lang}.md`;
+
+    return this._http.get(`/assets/posts/${path}`, { responseType: 'text' }).pipe(
       map((content) => ({ ...metadata, content })),
-      catchError(() => of(null))
+      catchError(() =>
+        lang === 'en' ? of(null) : this._http.get(`/assets/posts/${slug}.md`, { responseType: 'text' }).pipe(
+          map((content) => ({ ...metadata, content })),
+          catchError(() => of(null))
+        )
+      )
     );
   }
 

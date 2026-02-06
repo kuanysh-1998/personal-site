@@ -18,6 +18,7 @@ import { ReadingProgressBarComponent } from '../../components/reading-progress-b
 import { ViewCounterService } from '../../services/view-counter.service';
 import { SvgComponent } from '@app/shared/components/svg/svg.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
+import { TranslocoModule } from '@ngneat/transloco';
 import { CopyCodeDirective } from '@app/shared/directives/copy-code.directive';
 import { BadgeComponent } from '@app/shared/components/badge/badge.component';
 
@@ -25,6 +26,7 @@ import { BadgeComponent } from '@app/shared/components/badge/badge.component';
   selector: 'app-post-detail',
   imports: [
     AsyncPipe,
+    TranslocoModule,
     MarkdownComponent,
     SkeletonComponent,
     PostNavigationComponent,

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, Input } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { ToastService } from '@app/shared/components/toast-container/toast.service';
 import { ToastType } from '@app/shared/components/toast/toast.types';
@@ -10,7 +11,7 @@ import { SharePlatform } from './share-post.types';
 @Component({
   selector: 'app-share-post',
   standalone: true,
-  imports: [ButtonComponent, TooltipDirective, CardComponent],
+  imports: [TranslocoModule, ButtonComponent, TooltipDirective, CardComponent],
   templateUrl: './share-post.component.html',
   styleUrl: './share-post.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +19,7 @@ import { SharePlatform } from './share-post.types';
 export class SharePostComponent {
   private readonly _document = inject(DOCUMENT);
   private readonly _toastService = inject(ToastService);
+  private readonly _transloco = inject(TranslocoService);
 
   @Input() postTitle = '';
   @Input() postUrl = '';
@@ -69,7 +71,7 @@ export class SharePostComponent {
   }
 
   protected getTooltipText(platform: SharePlatform): string {
-    const tooltips: Record<string, string> = {
+    const tooltipKeys: Record<string, string> = {
       Twitter: 'Share on Twitter/X',
       LinkedIn: 'Share on LinkedIn',
       Facebook: 'Share on Facebook',
@@ -79,13 +81,14 @@ export class SharePostComponent {
       Email: 'Send by email',
       Instagram: 'Link will be copied to the clipboard',
     };
-    return tooltips[platform.name] || `Share on ${platform.name}`;
+    const key = tooltipKeys[platform.name];
+    return key ? this._transloco.translate(key) : this._transloco.translate('Share on Twitter/X').replace('Twitter/X', platform.name);
   }
 
   protected shareOnPlatform(platform: SharePlatform): void {
     if (platform.name === 'Instagram') {
       const url = this.postUrl || this._document.location.href;
-      this._copyToClipboard(url, 'Link copied to clipboard! You can paste it in Instagram.');
+      this._copyToClipboard(url, this._transloco.translate('Link copied to clipboard! You can paste it in Instagram.'));
       return;
     }
 
@@ -112,7 +115,7 @@ export class SharePostComponent {
       if (successMessage) {
         this._toastService.add({
           type: ToastType.Success,
-          header: 'Link copied',
+          header: this._transloco.translate('Link copied'),
           message: successMessage,
         });
       }
@@ -120,8 +123,8 @@ export class SharePostComponent {
       console.error('Failed to copy to clipboard:', error);
       this._toastService.add({
         type: ToastType.Error,
-        header: 'Error',
-        message: 'Failed to copy link to clipboard',
+        header: this._transloco.translate('Error'),
+        message: this._transloco.translate('Failed to copy link to clipboard'),
       });
     }
   }

@@ -24,6 +24,7 @@ import { ButtonConfig } from '@app/shared/components/dialog/dialog.types';
 import { TextAreaComponent } from '@app/shared/components/text-area/text-area.component';
 import { TextFieldComponent } from '@app/shared/components/text-field/text-field.component';
 import { SwitchComponent } from '@app/shared/components/switch/switch.component';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { ToastService } from '@app/shared/components/toast-container/toast.service';
 import { ToastType } from '@app/shared/components/toast/toast.types';
 
@@ -32,6 +33,7 @@ import { ToastType } from '@app/shared/components/toast/toast.types';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    TranslocoModule,
     TextFieldComponent,
     TextAreaComponent,
     SwitchComponent,
@@ -44,6 +46,7 @@ export class ContactFormComponent implements OnInit {
   private readonly _fb = inject(FormBuilder);
   private readonly _dialogRef = inject(DialogRef);
   private readonly _emailjsService = inject(EmailjsService);
+  private readonly _transloco = inject(TranslocoService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _toastService = inject(ToastService);
   private readonly _cdr = inject(ChangeDetectorRef);
@@ -66,11 +69,15 @@ export class ContactFormComponent implements OnInit {
   }
 
   protected getContactLabel(): string {
-    return this.form.get('contactType')?.value ? 'Telegram' : 'Email';
+    return this.form.get('contactType')?.value
+      ? this._transloco.translate('Telegram')
+      : this._transloco.translate('Email');
   }
 
   protected getContactPlaceholder(): string {
-    return this.form.get('contactType')?.value ? 'Enter @username' : 'Enter email address';
+    return this.form.get('contactType')?.value
+      ? this._transloco.translate('Enter @username')
+      : this._transloco.translate('Enter email address');
   }
 
   protected onContactTypeChange(value: boolean): void {
@@ -135,8 +142,9 @@ export class ContactFormComponent implements OnInit {
     const control = this.form.get('subject');
     if (!control?.touched || !control?.errors) return '';
 
-    if (control.errors['required']) return 'This field is required';
-    if (control.errors['maxlength']) return 'Maximum length is 200 characters';
+    if (control.errors['required']) return this._transloco.translate('This field is required');
+    if (control.errors['maxlength'])
+      return this._transloco.translate('Maximum length is 200 characters');
     return '';
   }
 
@@ -144,11 +152,14 @@ export class ContactFormComponent implements OnInit {
     const control = this.form.get('contact');
     if (!control?.touched || !control?.errors) return '';
 
-    if (control.errors['required']) return 'This field is required';
-    if (control.errors['maxlength']) return 'Maximum length is 100 characters';
-    if (control.errors['email']) return 'Invalid email address';
+    if (control.errors['required']) return this._transloco.translate('This field is required');
+    if (control.errors['maxlength'])
+      return this._transloco.translate('Maximum length is 100 characters');
+    if (control.errors['email']) return this._transloco.translate('Invalid email address');
     if (control.errors['telegram']) {
-      return 'Invalid Telegram username. Use @username or username (5-32 characters, letters, numbers, underscore)';
+      return this._transloco.translate(
+        'Invalid Telegram username. Use @username or username (5-32 characters, letters, numbers, underscore)',
+      );
     }
     return '';
   }
@@ -157,8 +168,9 @@ export class ContactFormComponent implements OnInit {
     const control = this.form.get('description');
     if (!control?.touched || !control?.errors) return '';
 
-    if (control.errors['required']) return 'This field is required';
-    if (control.errors['maxlength']) return 'Maximum length is 2000 characters';
+    if (control.errors['required']) return this._transloco.translate('This field is required');
+    if (control.errors['maxlength'])
+      return this._transloco.translate('Maximum length is 2000 characters');
     return '';
   }
 
@@ -173,8 +185,8 @@ export class ContactFormComponent implements OnInit {
       this._cdr.markForCheck();
       this._toastService.add({
         type: ToastType.Error,
-        header: 'Error',
-        message: 'Please fill in all required fields',
+        header: this._transloco.translate('Error'),
+        message: this._transloco.translate('Please fill in all required fields'),
       });
       return;
     }
@@ -192,8 +204,8 @@ export class ContactFormComponent implements OnInit {
           this.form.reset();
           this._toastService.add({
             type: ToastType.Success,
-            header: 'Success',
-            message: 'Your message has been sent',
+            header: this._transloco.translate('Success'),
+            message: this._transloco.translate('Your message has been sent'),
           });
           this._dialogRef.close();
         },

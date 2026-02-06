@@ -53,10 +53,10 @@ export class AboutComponent implements OnInit {
 
     const hours = astanaTimeDate.getHours();
     const minutes = astanaTimeDate.getMinutes();
-    const ampmKey = hours >= 12 ? 'common.pm' : 'common.am';
+    const ampmKey = hours >= 12 ? 'PM' : 'AM';
     const displayHours = hours % 12 || 12;
     const displayMinutes = minutes.toString().padStart(2, '0');
-    const timeLabel = this._transloco.translate('about.timeLabel');
+    const timeLabel = this._transloco.translate('Time:');
     const ampm = this._transloco.translate(ampmKey);
 
     return `${timeLabel} ${displayHours}:${displayMinutes} ${ampm}`;

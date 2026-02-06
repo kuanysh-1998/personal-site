@@ -50,9 +50,9 @@ export class HeaderComponent {
   protected readonly tabs = computed<Tab[]>(() => {
     this.localeService.currentLang();
     return [
-      { id: TAB_IDS.ABOUT, text: this._transloco.translate('nav.about') },
-      { id: TAB_IDS.BLOG, text: this._transloco.translate('nav.blog') },
-      { id: TAB_IDS.INTERVIEW, text: this._transloco.translate('nav.interview') },
+      { id: TAB_IDS.ABOUT, text: this._transloco.translate('About') },
+      { id: TAB_IDS.BLOG, text: this._transloco.translate('Blog') },
+      { id: TAB_IDS.INTERVIEW, text: this._transloco.translate('Interview') },
     ];
   });
 
@@ -102,8 +102,8 @@ export class HeaderComponent {
   protected get themeToggleAriaLabel(): string {
     const key =
       this.themeService.theme() === 'dark'
-        ? 'common.theme.light'
-        : 'common.theme.dark';
+        ? 'Switch to light mode'
+        : 'Switch to dark mode';
     return this._transloco.translate(key);
   }
 
@@ -115,8 +115,8 @@ export class HeaderComponent {
   }
 
   protected openWhatsNew(): void {
-    const header = this._transloco.translate('common.whatsNew');
-    const closeLabel = this._transloco.translate('common.close');
+    const header = this._transloco.translate("What's new");
+    const closeLabel = this._transloco.translate('Close');
     const drawerRef = this._drawerService.open(WhatsNewComponent, {
       header,
       customWidth: '500px',

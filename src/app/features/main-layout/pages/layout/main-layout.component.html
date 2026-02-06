@@ -14,12 +14,12 @@
   <div class="main-layout__contact-button">
     <ng-button
       [icon]="contactIcon"
-      [ariaLabel]="'Contact'"
+      [ariaLabel]="'Contact' | transloco"
       [size]="'large'"
       [iconWidth]="'2rem'"
       [iconHeight]="'2rem'"
       (clicked)="openContactForm()"
-      *ngTooltip="'Contact me'"
+      *ngTooltip="'Contact me' | transloco"
     />
   </div>
 
@@ -31,8 +31,8 @@
       [iconWidth]="'2rem'"
       [iconHeight]="'2rem'"
       (clicked)="scrollToTop()"
-      [ariaLabel]="'Scroll to top'"
-      *ngTooltip="'Return to top'"
+      [ariaLabel]="'Scroll to top' | transloco"
+      *ngTooltip="'Return to top' | transloco"
     ></ng-button>
   }
 </div>

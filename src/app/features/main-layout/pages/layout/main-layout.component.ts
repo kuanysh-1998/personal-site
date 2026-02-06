@@ -15,6 +15,7 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { TableOfContentsComponent } from '@app/features/blog/components/table-of-contents/table-of-contents.component';
 import { HeaderComponent } from '../../components/header/header.component';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { Icons } from '@app/shared/components/svg/svg.config';
 import { ContactFormComponent } from '@app/features/contact-form/contact-form.component';
@@ -23,6 +24,7 @@ import { ContactFormComponent } from '@app/features/contact-form/contact-form.co
   selector: 'app-main-layout',
   imports: [
     RouterOutlet,
+    TranslocoModule,
     ButtonComponent,
     TooltipDirective,
     TableOfContentsComponent,
@@ -36,6 +38,7 @@ export class MainLayoutComponent implements AfterViewInit {
   private readonly _router = inject(Router);
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _dialogService = inject(DialogService);
+  private readonly _transloco = inject(TranslocoService);
   private readonly _destroyRef = inject(DestroyRef);
 
   protected readonly contactIcon = Icons.Contact;
@@ -81,9 +84,10 @@ export class MainLayoutComponent implements AfterViewInit {
 
   protected openContactForm(): void {
     this._dialogService.open(ContactFormComponent, {
-      header: 'Contact Form',
-      submitButton: 'Send',
-      cancelButton: 'Cancel',
+      header: this._transloco.translate('Contact Form'),
+      submitButton: this._transloco.translate('Send'),
+      cancelButton: this._transloco.translate('Cancel'),
+      hideOnOutsideClick: true,
     });
   }
 }

@@ -15,7 +15,7 @@
         <ng-dropdown
           [options]="localeService.availableOptions"
           [value]="localeService.currentLang()"
-          [placeholder]="'common.language' | transloco"
+          [placeholder]="'Language' | transloco"
           [showClearButton]="false"
           [enableSearch]="false"
           [size]="'medium'"
@@ -34,8 +34,8 @@
       />
       <div class="header__whats-new-button">
         <ng-button
-          [label]="'common.whatsNew' | transloco"
-          [ariaLabel]="'common.whatsNew' | transloco"
+          [label]="'What\'s new' | transloco"
+          [ariaLabel]="'What\'s new' | transloco"
           [size]="'default'"
           (clicked)="openWhatsNew()"
         />
@@ -50,7 +50,7 @@
       >
         <ng-button
           [icon]="menuIcon"
-          [ariaLabel]="'common.menu' | transloco"
+          [ariaLabel]="'Menu' | transloco"
           [stylingMode]="'ghost'"
           [size]="'default'"
           [iconWidth]="'1.25rem'"
@@ -71,7 +71,7 @@
               class="header-menu__dropdown"
               [options]="localeService.availableOptions"
               [value]="localeService.currentLang()"
-              [placeholder]="'common.language' | transloco"
+              [placeholder]="'Language' | transloco"
               [showClearButton]="false"
               [enableSearch]="false"
               [size]="'medium'"
@@ -92,8 +92,8 @@
             />
             <ng-button
               class="header-menu__whats-new-btn"
-              [label]="'common.whatsNew' | transloco"
-              [ariaLabel]="'common.whatsNew' | transloco"
+              [label]="'What\'s new' | transloco"
+              [ariaLabel]="'What\'s new' | transloco"
               [size]="'default'"
               [fullWidth]="true"
               (clicked)="openWhatsNew(); closeMobileMenu()"

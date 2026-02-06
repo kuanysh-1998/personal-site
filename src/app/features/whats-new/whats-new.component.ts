@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { TranslocoService } from '@ngneat/transloco';
 import { DrawerRef } from '@app/shared/components/drawer/drawer-ref.service';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { AccordionComponent } from '@app/shared/components/accordion/accordion.component';
@@ -27,6 +28,7 @@ export class WhatsNewComponent {
   private readonly _postService = inject(PostService);
   private readonly _router = inject(Router);
   private readonly _dialogService = inject(DialogService);
+  private readonly _transloco = inject(TranslocoService);
 
   protected readonly features = WHATS_NEW_FEATURES;
 
@@ -43,8 +45,26 @@ export class WhatsNewComponent {
     return [...featuresArray, ...postsArray].sort((a, b) => b.date.getTime() - a.date.getTime());
   });
 
+  protected getItemHeader(item: WhatsNewItem): string {
+    if (this.isPost(item)) {
+      return this._transloco.translate((item as WhatsNewPost).title);
+    }
+    return this._transloco.translate((item as WhatsNewFeature).title);
+  }
+
+  protected getItemDescription(item: WhatsNewItem): string {
+    if (this.isPost(item)) {
+      const description = (item as WhatsNewPost).description ?? '';
+      return description ? this._transloco.translate(description) : '';
+    }
+    const description = (item as WhatsNewFeature).description;
+    return description ? this._transloco.translate(description) : '';
+  }
+
   protected formatDate(date: Date): string {
-    return new Intl.DateTimeFormat('ru-RU', {
+    const lang = this._transloco.getActiveLang();
+    const locale = lang === 'kk' ? 'kk-KZ' : lang === 'ru' ? 'ru-RU' : 'en-US';
+    return new Intl.DateTimeFormat(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -64,17 +84,17 @@ export class WhatsNewComponent {
 
   protected getActionLabel(item: WhatsNewItem): string {
     if (this.isPost(item)) {
-      return 'Read Post';
+      return this._transloco.translate('Read Post');
     }
     const feature = item as WhatsNewFeature;
     if (feature.action?.label) {
-      return feature.action.label;
+      return this._transloco.translate(feature.action.label);
     }
     if (feature.action?.type === WHATS_NEW_ACTION_TYPES.ROUTE) {
-      return 'Go to';
+      return this._transloco.translate('Go to');
     }
     if (feature.action?.type === WHATS_NEW_ACTION_TYPES.DIALOG) {
-      return 'Open';
+      return this._transloco.translate('Open');
     }
     return '';
   }
@@ -95,10 +115,17 @@ export class WhatsNewComponent {
       this._router.navigate([feature.action.route]);
       this._drawerRef.close();
     } else if (feature.action.type === WHATS_NEW_ACTION_TYPES.DIALOG) {
+      const config = feature.action.config;
       this._dialogService.open(feature.action.component, {
-        header: feature.action.config?.header || feature.title,
-        submitButton: feature.action.config?.submitButton,
-        cancelButton: feature.action.config?.cancelButton,
+        header: config?.header
+          ? this._transloco.translate(config.header)
+          : this._transloco.translate(feature.title),
+        submitButton: config?.submitButton
+          ? this._transloco.translate(config.submitButton)
+          : undefined,
+        cancelButton: config?.cancelButton
+          ? this._transloco.translate(config.cancelButton)
+          : undefined,
       });
     }
   }

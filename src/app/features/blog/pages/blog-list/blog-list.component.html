@@ -1,7 +1,7 @@
 <div class="blog-list">
   <div class="blog-list__search">
     <app-post-search
-      placeholder="Search posts by title, description..."
+      [placeholder]="'Search posts by title, description...' | transloco"
       (searchChange)="onSearchChange($event)"
       (clear)="onSearchClear()"
     />
@@ -9,7 +9,7 @@
 
   @if (isSearching() && !hasSearchResults()) {
     <div class="blog-list__empty">
-      <p class="blog-list__empty-text">No posts found matching your search.</p>
+      <p class="blog-list__empty-text">{{ 'No posts found matching your search.' | transloco }}</p>
     </div>
   } @else {
     @for (group of postsByYear(); track group.year) {
@@ -20,7 +20,7 @@
             <ng-card
               [padding]="'small'"
               [stylingMode]="'default'"
-              [header]="post.title"
+              [header]="post.title | transloco"
               [iconRight]="chevronRightIcon"
               [clickable]="true"
               (clicked)="onPostClick(post.slug)"
@@ -29,7 +29,7 @@
                 <div class="post-tags">
                   @for (tag of post.tags; track tag) {
                     <ng-badge
-                      [text]="tag"
+                      [text]="tag | transloco"
                       [size]="'small'"
                       [stylingMode]="'outlined'"
                       [variant]="'secondary'"
@@ -38,7 +38,7 @@
                 </div>
               }
               @if (post.description) {
-                <div class="post-description">{{ post.description }}</div>
+                <div class="post-description">{{ post.description | transloco }}</div>
               }
             </ng-card>
           }

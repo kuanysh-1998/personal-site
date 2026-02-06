@@ -1,14 +1,14 @@
 <div class="latest-posts">
   <div class="header-wrapper">
-    <h3>{{ 'blog.latestPosts' | transloco }}</h3>
-    <ng-link [link]="'/blog'" [text]="'blog.viewAllPosts' | transloco" [underlineOnHover]="true" />
+    <h3>{{ 'Latest Posts' | transloco }}</h3>
+    <ng-link [link]="'/blog'" [text]="'View all posts →' | transloco" [underlineOnHover]="true" />
   </div>
   <div class="posts-list">
     @for (post of latestPosts(); track post.slug) {
       <ng-card
         [padding]="'medium'"
         [stylingMode]="'default'"
-        [header]="post.title"
+        [header]="post.title | transloco"
         [iconRight]="chevronRightIcon"
         [clickable]="true"
         (clicked)="onPostClick(post.slug)"
@@ -17,7 +17,7 @@
           <div class="post-tags">
             @for (tag of post.tags; track tag) {
               <ng-badge
-                [text]="tag"
+                [text]="tag | transloco"
                 [size]="'small'"
                 [stylingMode]="'outlined'"
                 [variant]="'secondary'"
@@ -26,7 +26,7 @@
           </div>
         }
         @if (post.description) {
-          <div class="post-description">{{ post.description }}</div>
+          <div class="post-description">{{ post.description | transloco }}</div>
         }
       </ng-card>
     }

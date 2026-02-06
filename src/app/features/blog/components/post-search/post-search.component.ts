@@ -13,12 +13,13 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { TranslocoModule } from '@ngneat/transloco';
 import { TextFieldComponent } from '@app/shared/components/text-field/text-field.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
 
 @Component({
   selector: 'app-post-search',
-  imports: [TextFieldComponent],
+  imports: [TranslocoModule, TextFieldComponent],
   templateUrl: './post-search.component.html',
   styleUrl: './post-search.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

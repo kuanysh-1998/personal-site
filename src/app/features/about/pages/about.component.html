@@ -4,19 +4,19 @@
       <div class="about-page__card-content">
         <ng-avatar
           [src]="'/assets/images/cv.jpeg'"
-          [name]="'about.name' | transloco"
+          [name]="'Kuanysh Aptaizhanov' | transloco"
           [size]="'large'"
           class="about-page__avatar"
         />
         <div class="about-page__content">
-          <p class="about-page__name">{{ 'about.name' | transloco }}</p>
+          <p class="about-page__name">{{ 'Kuanysh Aptaizhanov' | transloco }}</p>
           <p class="about-page__description">
-            {{ 'about.roleLocation' | transloco }}
-            <span *ngTooltip="astanaTime()">{{ 'about.timezone' | transloco }}</span>.
-            {{ 'about.bio' | transloco }}
+            {{ 'Frontend engineer in Astana, Kazakhstan' | transloco }}
+            <span *ngTooltip="astanaTime()">{{ '(UTC+5)' | transloco }}</span>.
+            {{ 'I build enterprise Angular applications with focus on clean architecture and scalable solutions.' | transloco }}
           </p>
           <div class="about-page__stack">
-            <span class="about-page__stack-label">{{ 'about.stackLabel' | transloco }}</span>
+            <span class="about-page__stack-label">{{ 'Stack:' | transloco }}</span>
             <div class="about-page__stack-badges">
               @for (tech of stack; track tech.name) {
                 <ng-badge

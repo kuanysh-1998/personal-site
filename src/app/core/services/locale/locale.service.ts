@@ -46,6 +46,10 @@ export class LocaleService {
     return this._normalizeLang(this._transloco.getActiveLang()) ?? 'en';
   }
 
+  public getStoredLang(): LocaleId {
+    return this._readStoredLang();
+  }
+
   private _readStoredLang(): LocaleId {
     const stored = this._storage.get<string>(STORAGE_KEYS.LOCALE);
     return this._normalizeLang(stored ?? '') ?? 'en';

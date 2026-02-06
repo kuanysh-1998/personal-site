@@ -2,14 +2,14 @@
   <div class="whats-new__content">
     @for (item of allItems(); track isPost(item) ? item.slug : item.title; let isFirst = $first) {
       <ng-accordion
-        [header]="item.title"
+        [header]="getItemHeader(item)"
         [subtitle]="formatDate(item.date)"
         [initialState]="isFirst ? 'opened' : 'closed'"
       >
-        @if (item.description) {
+        @if (getItemDescription(item)) {
           <div class="whats-new__feature-content">
             <p class="whats-new__feature-description">
-              {{ item.description }}
+              {{ getItemDescription(item) }}
             </p>
             @if (hasAction(item)) {
               <ng-button

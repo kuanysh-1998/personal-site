@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { ButtonComponent } from '../button/button.component';
 import { Icons } from '../svg/svg.config';
 import { ToastService } from '../toast-container/toast.service';
@@ -9,7 +10,7 @@ import { TooltipDirective } from '../tooltip/tooltip.directive';
 
 @Component({
   selector: 'app-copy-link',
-  imports: [ButtonComponent, TooltipDirective],
+  imports: [TranslocoModule, ButtonComponent, TooltipDirective],
   templateUrl: './copy-link.component.html',
   styleUrl: './copy-link.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +18,7 @@ import { TooltipDirective } from '../tooltip/tooltip.directive';
 export class CopyLinkComponent {
   private readonly _document = inject(DOCUMENT);
   private readonly _toastService = inject(ToastService);
+  private readonly _transloco = inject(TranslocoService);
   private readonly _yandexMetrikaService = inject(YandexMetrikaService);
 
   protected readonly Icons = Icons;
@@ -32,15 +34,15 @@ export class CopyLinkComponent {
       });
       this._toastService.add({
         type: ToastType.Success,
-        header: 'Link copied',
-        message: 'Link successfully copied to clipboard',
+        header: this._transloco.translate('Link copied'),
+        message: this._transloco.translate('Link successfully copied to clipboard'),
       });
     } catch (error) {
       console.error('Failed to copy link to clipboard:', error);
       this._toastService.add({
         type: ToastType.Error,
-        header: 'Error',
-        message: 'Failed to copy link to clipboard',
+        header: this._transloco.translate('Error'),
+        message: this._transloco.translate('Failed to copy link to clipboard'),
       });
     }
   }
