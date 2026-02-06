@@ -14,7 +14,7 @@ export abstract class Overlay {
   protected popoverElement: HTMLElement | undefined;
   protected targetElement: HTMLElement | undefined;
 
-  protected scrollListeners: Array<() => void> = [];
+  private _scrollListeners: Array<() => void> = [];
 
   private readonly _two = 2;
   private readonly _gap = 5;
@@ -351,7 +351,7 @@ export abstract class Overlay {
           this.close();
         };
         currentElement.addEventListener('scroll', listener);
-        this.scrollListeners.push(() => {
+        this._scrollListeners.push(() => {
           currentElement.removeEventListener('scroll', listener);
         });
       }
@@ -385,13 +385,13 @@ export abstract class Overlay {
     };
 
     window.addEventListener('scroll', windowScrollListener, true);
-    this.scrollListeners.push(() => {
+    this._scrollListeners.push(() => {
       window.removeEventListener('scroll', windowScrollListener, true);
     });
   }
   protected removeScrollListeners(): void {
-    this.scrollListeners.forEach((removeListener) => removeListener());
-    this.scrollListeners = [];
+    this._scrollListeners.forEach((removeListener) => removeListener());
+    this._scrollListeners.length = 0;
   }
 
   protected isInsideDialogOrDrawer(): boolean {

@@ -10,7 +10,7 @@ When a component subscribes to an Observable and doesn't unsubscribe, the subscr
 // Memory leak waiting to happen
 @Component({...})
 export class UserProfileComponent implements OnInit {
-  ngOnInit() {
+  public ngOnInit(): void {
     this.userService.getUser().subscribe(user => {
       this.user = user; // Still fires after component destroyed
     });
@@ -29,16 +29,16 @@ Before Angular 16, we had several ways to handle this. None were ideal.
 ```typescript
 @Component({...})
 export class UserProfileComponent implements OnInit, OnDestroy {
-  private subscription: Subscription;
+  private _subscription!: Subscription;
 
-  ngOnInit() {
-    this.subscription = this.userService.getUser().subscribe(user => {
+  public ngOnInit(): void {
+    this._subscription = this._userService.getUser().subscribe(user => {
       this.user = user;
     });
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  public ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 }
 ```
@@ -50,17 +50,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 ```typescript
 @Component({...})
 export class UserProfileComponent implements OnInit, OnDestroy {
-  private readonly destroy$ = new Subject<void>();
+  private readonly _destroy$ = new Subject<void>();
 
-  ngOnInit() {
-    this.userService.getUser()
-      .pipe(takeUntil(this.destroy$))
+  public ngOnInit(): void {
+    this._userService.getUser()
+      .pipe(takeUntil(this._destroy$))
       .subscribe(user => this.user = user);
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }
 ```
@@ -74,7 +74,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 @UntilDestroy()
 @Component({...})
 export class UserProfileComponent implements OnInit {
-  ngOnInit() {
+  public ngOnInit(): void {
     this.userService.getUser()
       .pipe(untilDestroyed(this))
       .subscribe(user => this.user = user);
@@ -89,12 +89,16 @@ export class UserProfileComponent implements OnInit {
 Angular 16 added `takeUntilDestroyed()` to `@angular/core/rxjs-interop`. Native. Zero dependencies. Just works.
 
 ```typescript
+import { inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({...})
-export class UserProfileComponent implements OnInit {
-  ngOnInit() {
-    this.userService.getUser()
+export class UserProfileComponent {
+  private readonly _userService = inject(UserService);
+  protected user: User | null = null;
+
+  constructor() {
+    this._userService.getUser()
       .pipe(takeUntilDestroyed())
       .subscribe(user => this.user = user);
   }
@@ -129,15 +133,19 @@ function takeUntilDestroyed(destroyRef = inject(DestroyRef)) {
 ### In Components
 
 ```typescript
+import { inject } from '@angular/core';
+
 @Component({
   selector: 'app-dashboard',
   template: `<div>{{ data }}</div>`
 })
 export class DashboardComponent {
-  data: string;
+  protected data = '';
+
+  private readonly _dataService = inject(DataService);
 
   constructor() {
-    this.dataService.getData()
+    this._dataService.getData()
       .pipe(takeUntilDestroyed())
       .subscribe(data => this.data = data);
   }
@@ -151,14 +159,17 @@ export class DashboardComponent {
 Works the same way. When the service is destroyed (e.g., a component-provided service), subscriptions clean up automatically.
 
 ```typescript
+import { inject } from '@angular/core';
+
 @Injectable()
 export class FeatureService {
-  private state = signal<Data | null>(null);
+  private readonly _state = signal<Data | null>(null);
+  private readonly _api = inject(ApiService);
 
   constructor() {
-    this.api.fetchData()
+    this._api.fetchData()
       .pipe(takeUntilDestroyed())
-      .subscribe(data => this.state.set(data));
+      .subscribe(data => this._state.set(data));
   }
 }
 ```
@@ -169,17 +180,17 @@ No arrays, no tracking — just use it on each Observable:
 
 ```typescript
 constructor() {
-  this.userService.currentUser$
+  this._userService.currentUser$
     .pipe(takeUntilDestroyed())
     .subscribe(user => this.user = user);
 
-  this.notificationService.notifications$
+  this._notificationService.notifications$
     .pipe(takeUntilDestroyed())
     .subscribe(notifications => this.notifications = notifications);
 
-  this.themeService.theme$
+  this._themeService.theme$
     .pipe(takeUntilDestroyed())
-    .subscribe(theme => this.applyTheme(theme));
+    .subscribe(theme => this._applyTheme(theme));
 }
 ```
 
@@ -190,14 +201,19 @@ Sometimes you need to subscribe outside the injection context — in `ngOnInit`,
 ### In Lifecycle Hooks
 
 ```typescript
+import { inject } from '@angular/core';
+
 @Component({...})
 export class SearchComponent implements OnInit {
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _searchService = inject(SearchService);
 
-  ngOnInit() {
-    // Outside injection context — pass destroyRef
-    this.searchService.results$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+  protected results: Result[] = [];
+
+  public ngOnInit(): void {
+    // Outside injection context — pass _destroyRef
+    this._searchService.results$
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(results => this.results = results);
   }
 }
@@ -206,14 +222,21 @@ export class SearchComponent implements OnInit {
 ### In Methods
 
 ```typescript
+import { inject } from '@angular/core';
+
 @Component({...})
 export class ChartComponent {
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _chartService = inject(ChartService);
 
-  onFilterChange(filter: Filter) {
-    this.chartService.getData(filter)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(data => this.renderChart(data));
+  protected onFilterChange(filter: Filter): void {
+    this._chartService.getData(filter)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(data => this._renderChart(data));
+  }
+
+  private _renderChart(data: ChartData): void {
+    // ...
   }
 }
 ```
@@ -236,13 +259,16 @@ export function poll<T>(
 }
 
 // Usage in component
+import { inject } from '@angular/core';
+
 export class StatusComponent {
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _api = inject(ApiService);
   
-  status$ = poll(
-    () => this.api.getStatus(),
+  protected readonly status$ = poll(
+    () => this._api.getStatus(),
     30000,
-    this.destroyRef
+    this._destroyRef
   );
 }
 ```
@@ -261,49 +287,49 @@ import { timer, EMPTY } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UpdateService {
-  private readonly swUpdate = inject(SwUpdate);
-  private readonly router = inject(Router);
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly _swUpdate = inject(SwUpdate);
+  private readonly _router = inject(Router);
+  private readonly _destroyRef = inject(DestroyRef);
   
-  private updateAvailable = false;
+  private _updateAvailable = false;
 
-  checkForUpdates(): void {
-    if (!this.swUpdate.isEnabled) return;
+  public checkForUpdates(): void {
+    if (!this._swUpdate.isEnabled) return;
 
     // Listen for version updates
-    this.swUpdate.versionUpdates
+    this._swUpdate.versionUpdates
       .pipe(
         filter((e): e is VersionReadyEvent => e.type === 'VERSION_READY'),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this._destroyRef)
       )
       .subscribe(() => {
-        this.updateAvailable = true;
-        this.promptUpdate();
+        this._updateAvailable = true;
+        this._promptUpdate();
       });
 
     // Check periodically
     timer(0, 60 * 60 * 1000)
       .pipe(
-        switchMap(() => this.swUpdate.checkForUpdate()),
+        switchMap(() => this._swUpdate.checkForUpdate()),
         catchError(() => EMPTY),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this._destroyRef)
       )
       .subscribe();
 
     // Check on navigation
-    this.router.events
+    this._router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this._destroyRef)
       )
       .subscribe(() => {
-        if (this.updateAvailable) {
-          this.promptUpdate();
+        if (this._updateAvailable) {
+          this._promptUpdate();
         }
       });
   }
 
-  private promptUpdate(): void {
+  private _promptUpdate(): void {
     // Show update dialog
   }
 }
@@ -338,8 +364,11 @@ The `async` pipe handles subscription lifecycle automatically:
     }
   `
 })
+import { inject } from '@angular/core';
+
 export class ListComponent {
-  items$ = this.itemService.getItems(); // No manual subscription
+  private readonly _itemService = inject(ItemService);
+  protected readonly items$ = this._itemService.getItems();
 }
 ```
 
@@ -349,8 +378,11 @@ export class ListComponent {
 
 ```typescript
 @Component({...})
+import { inject } from '@angular/core';
+
 export class UserComponent {
-  user = toSignal(this.userService.currentUser$);
+  private readonly _userService = inject(UserService);
+  protected readonly user = toSignal(this._userService.currentUser$);
   // Automatically cleaned up
 }
 ```
@@ -366,7 +398,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 @UntilDestroy()
 @Component({...})
 export class MyComponent implements OnInit {
-  ngOnInit() {
+  public ngOnInit(): void {
     this.data$.pipe(untilDestroyed(this)).subscribe();
   }
 }
@@ -376,12 +408,14 @@ export class MyComponent implements OnInit {
 ```typescript
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { inject } from '@angular/core';
+
 @Component({...})
 export class MyComponent {
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly _destroyRef = inject(DestroyRef);
 
-  ngOnInit() {
-    this.data$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+  public ngOnInit(): void {
+    this.data$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
   }
 }
 ```
@@ -409,7 +443,7 @@ export class MyComponent {
 
 ```typescript
 // Error: takeUntilDestroyed() called outside injection context
-ngOnInit() {
+public ngOnInit(): void {
   this.data$.pipe(takeUntilDestroyed()).subscribe(); // Throws!
 }
 ```
@@ -417,10 +451,10 @@ ngOnInit() {
 **Fix:** Inject `DestroyRef` and pass it:
 
 ```typescript
-private readonly destroyRef = inject(DestroyRef);
+private readonly _destroyRef = inject(DestroyRef);
 
-ngOnInit() {
-  this.data$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+public ngOnInit(): void {
+  this.data$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
 }
 ```
 

@@ -1,0 +1,11 @@
+# В C:\Users\User\.gitconfig
+[user]
+    email = kuanysh.aptaizhanov@samgau.com
+    name = Kuanysh Aptaizhanov
+
+[includeIf "gitdir:C:/Users/User/Desktop/personal-site/"]
+    path = ~/.gitconfig-personal
+
+# Создай C:\Users\User\.gitconfig-personal
+[user]
+    email = kuanysh.aptayzhanov@mail.ru

@@ -23,13 +23,13 @@ export class PostService {
       return of(null);
     }
 
-    const lang = this._localeService.getStoredLang();
-    const path = lang === 'en' ? `${slug}.md` : `${slug}.${lang}.md`;
+    const lang = this._localeService.getActiveLang();
+    const path = `/assets/posts/${lang}/${slug}.md`;
 
-    return this._http.get(`/assets/posts/${path}`, { responseType: 'text' }).pipe(
+    return this._http.get(path, { responseType: 'text' }).pipe(
       map((content) => ({ ...metadata, content })),
       catchError(() =>
-        lang === 'en' ? of(null) : this._http.get(`/assets/posts/${slug}.md`, { responseType: 'text' }).pipe(
+        lang === 'en' ? of(null) : this._http.get(`/assets/posts/en/${slug}.md`, { responseType: 'text' }).pipe(
           map((content) => ({ ...metadata, content })),
           catchError(() => of(null))
         )

@@ -21,8 +21,8 @@ export class SharePostComponent {
   private readonly _toastService = inject(ToastService);
   private readonly _transloco = inject(TranslocoService);
 
-  @Input() postTitle = '';
-  @Input() postUrl = '';
+  @Input() public postTitle = '';
+  @Input() public postUrl = '';
 
   protected readonly sharePlatforms = computed<SharePlatform[]>(() => {
     const url = this.postUrl || this._document.location.href;

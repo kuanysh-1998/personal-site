@@ -147,7 +147,7 @@ export class TableOfContentsComponent implements AfterViewInit, OnDestroy {
   private _generateId(title: string): string {
     return title
       .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
+      .replace(/[^\p{L}\p{N}\s-]/gu, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
       .trim();

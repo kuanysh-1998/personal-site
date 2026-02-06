@@ -12,21 +12,21 @@ import { ICON_DEFAULT_SIZE, Icons, IconSize } from './svg.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgComponent {
-  @Input() icon?: Icons | string;
+  @Input() public icon?: Icons | string;
 
-  @Input() basePath = 'assets/images';
+  @Input() public basePath = 'assets/images';
 
-  @Input() size: IconSize = 'default';
-  @Input() color?: string;
-  @Input() token?: string;
+  @Input() public size: IconSize = 'default';
+  @Input() public color?: string;
+  @Input() public token?: string;
 
-  @Input() width?: string;
-  @Input() height?: string;
+  @Input() public width?: string;
+  @Input() public height?: string;
 
-  @Input() wrapperWidth?: string;
-  @Input() wrapperHeight?: string;
+  @Input() public wrapperWidth?: string;
+  @Input() public wrapperHeight?: string;
 
-  @Input() ariaLabel?: string;
+  @Input() public ariaLabel?: string;
   @HostBinding('attr.role') role = 'img';
   @HostBinding('attr.aria-hidden') get ariaHidden() {
     return this.ariaLabel ? null : 'true';
@@ -83,7 +83,7 @@ export class SvgComponent {
     return this._resolvedHeight;
   }
 
-  private get iconName(): string | null {
+  private get _iconName(): string | null {
     return this.icon ? String(this.icon) : null;
   }
 
@@ -94,7 +94,7 @@ export class SvgComponent {
   }
 
   public get iconSrc(): string | null {
-    const name = this.iconName;
+    const name = this._iconName;
     if (!name) return null;
     const hasExt = /\.[a-z0-9]+$/i.test(name);
     const file = hasExt ? name : `${name}.svg`;

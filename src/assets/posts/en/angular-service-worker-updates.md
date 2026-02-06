@@ -9,10 +9,6 @@ After deploying updates, users continue running outdated code until they manuall
 - "Have you tried Ctrl+F5?" becomes your standard response
 - Lost productivity from users stuck on broken versions
 
-**The breaking point:** A customer missed a deadline because their app crashed due to incompatible cached assets after our deployment.
-
-Time to fix this properly with Angular Service Worker.
-
 ## Why Service Workers?
 
 Service Workers sit between your app and the network, controlling cache behavior. With Angular's Service Worker:
@@ -210,14 +206,14 @@ export class ServiceWorkerUpdateService {
 ```typescript
 // app.component.ts
 export class AppComponent implements OnInit, OnDestroy {
-  constructor(private swUpdateService: ServiceWorkerUpdateService) {}
+  constructor(private readonly _swUpdateService: ServiceWorkerUpdateService) {}
 
-  ngOnInit() {
-    this.swUpdateService.checkForUpdates();
+  public ngOnInit(): void {
+    this._swUpdateService.checkForUpdates();
   }
 
-  ngOnDestroy() {
-    this.swUpdateService.destroy();
+  public ngOnDestroy(): void {
+    this._swUpdateService.destroy();
   }
 }
 ```

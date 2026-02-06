@@ -111,16 +111,16 @@ button = viewChild<ElementRef>('myButton');
 
 ```typescript
 // ❌ Bad: No cleanup
-ngOnInit() {
+public ngOnInit(): void {
   this.data$.subscribe(data => this.process(data));
 }
 
 // ✅ Good: Auto cleanup with DestroyRef
-private destroyRef = inject(DestroyRef);
+private readonly _destroyRef = inject(DestroyRef);
 
-ngOnInit() {
+public ngOnInit(): void {
   this.data$
-    .pipe(takeUntilDestroyed(this.destroyRef))
+    .pipe(takeUntilDestroyed(this._destroyRef))
     .subscribe(data => this.process(data));
 }
 
@@ -137,14 +137,16 @@ constructor() {
 ### Type Your Reactive Forms
 
 ```typescript
+private readonly _fb = inject(FormBuilder);
+
 // ❌ Untyped
-form = new FormGroup({
-  title: new FormControl(),
+form = this._fb.group({
+  title: [''],
 });
 
 // ✅ Typed
-form = new FormGroup({
-  title: new FormControl<string>('', { nonNullable: true }),
+form = this._fb.group({
+  title: this._fb.nonNullable.control<string>(''),
 });
 
 // ✅ Access controls safely
@@ -192,7 +194,7 @@ const routes: Routes = [
 
 ```typescript
 // ❌ Bad: Recalculated on every check
-get fullName() {
+public get fullName(): string {
   return `${this.firstName()} ${this.lastName()}`;
 }
 
@@ -239,7 +241,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ```typescript
 // ❌ Load in component
-ngOnInit() {
+public ngOnInit(): void {
   this.http.get(`/users/${this.userId()}`)
     .subscribe(user => this.user.set(user));
 }
@@ -271,7 +273,7 @@ export const authenticatedGuard: CanMatchFn = () => {
 
 ## Testing Essentials
 
-**Current State (2025):** Angular testing ecosystem is in transition.
+**Current State (2026):** Angular testing ecosystem is in transition.
 
 - **Karma/Jasmine** — deprecated but still default
 - **Vitest** — fast, experimental Angular support

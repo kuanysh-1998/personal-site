@@ -22,10 +22,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldErrorComponent implements OnInit, OnChanges {
-  @Input() control: AbstractControl | null = null;
-  @Input() requiredMessage = 'This field is required';
-  @Input() emailMessage = 'Invalid email address';
-  @Input() patternMessage = 'Invalid format';
+  @Input() public control: AbstractControl | null = null;
+  @Input() public requiredMessage = 'This field is required';
+  @Input() public emailMessage = 'Invalid email address';
+  @Input() public patternMessage = 'Invalid format';
 
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _destroyRef = inject(DestroyRef);

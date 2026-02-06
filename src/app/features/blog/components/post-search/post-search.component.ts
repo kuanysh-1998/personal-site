@@ -32,13 +32,13 @@ export class PostSearchComponent {
   protected readonly SearchIcon = Icons.Search;
   protected readonly CloseIcon = Icons.Close;
 
-  @Input() placeholder = 'Search posts...';
-  @Input() ariaLabel = 'Search posts';
-  @Input() minSearchLength = 3;
-  @Input() debounceTime = 300;
+  @Input() public placeholder = 'Search posts...';
+  @Input() public ariaLabel = 'Search posts';
+  @Input() public minSearchLength = 3;
+  @Input() public debounceTime = 300;
 
-  @Output() searchChange = new EventEmitter<string>();
-  @Output() clear = new EventEmitter<void>();
+  @Output() public searchChange = new EventEmitter<string>();
+  @Output() public clear = new EventEmitter<void>();
 
   protected readonly searchValue = signal<string>('');
 

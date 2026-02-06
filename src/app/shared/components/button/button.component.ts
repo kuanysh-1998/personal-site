@@ -18,21 +18,21 @@ import { ButtonSize, ButtonVariant, StylingMode } from './button.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Input() label = '';
-  @Input() stylingMode: StylingMode = 'ghost';
-  @Input() variant: ButtonVariant = 'default';
-  @Input() size: ButtonSize = 'default';
-  @Input() fullWidth = false;
-  @Input() fullHeight = false;
-  @Input() disabled = false;
-  @Input() active = false;
-  @Input() icon?: string;
-  @Input() rightIcon?: string;
-  @Input() iconWidth?: string;
-  @Input() iconHeight?: string;
-  @Input() ariaLabel?: string;
+  @Input() public label = '';
+  @Input() public stylingMode: StylingMode = 'ghost';
+  @Input() public variant: ButtonVariant = 'default';
+  @Input() public size: ButtonSize = 'default';
+  @Input() public fullWidth = false;
+  @Input() public fullHeight = false;
+  @Input() public disabled = false;
+  @Input() public active = false;
+  @Input() public icon?: string;
+  @Input() public rightIcon?: string;
+  @Input() public iconWidth?: string;
+  @Input() public iconHeight?: string;
+  @Input() public ariaLabel?: string;
 
-  @Output() clicked = new EventEmitter<PointerEvent | MouseEvent>();
+  @Output() public clicked = new EventEmitter<PointerEvent | MouseEvent>();
 
   @HostBinding('style.width')
   protected get widthStyle(): string | null {
