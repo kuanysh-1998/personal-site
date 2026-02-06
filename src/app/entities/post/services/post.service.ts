@@ -12,6 +12,11 @@ export class PostService {
   private readonly _http = inject(HttpClient);
   private readonly _localeService = inject(LocaleService);
 
+  private static _isHtmlResponse(text: string): boolean {
+    const trimmed = text.trim().toLowerCase();
+    return trimmed.startsWith('<!doctype') || trimmed.startsWith('<html');
+  }
+
   public getAllPosts(): PostMetadata[] {
     return [...POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
@@ -27,7 +32,18 @@ export class PostService {
     const path = `/assets/posts/${lang}/${slug}.md`;
 
     return this._http.get(path, { responseType: 'text' }).pipe(
-      map((content) => ({ post: { ...metadata, content }, unavailableInLanguage: false })),
+      map((content) => {
+        if (PostService._isHtmlResponse(content)) {
+          if (lang === 'en') {
+            return { post: null };
+          }
+          return {
+            post: { ...metadata, content: '' },
+            unavailableInLanguage: true,
+          };
+        }
+        return { post: { ...metadata, content }, unavailableInLanguage: false };
+      }),
       catchError(() => {
         if (lang === 'en') {
           return of({ post: null });
