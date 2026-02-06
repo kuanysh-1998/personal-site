@@ -31,9 +31,6 @@ export class ThemeService {
     if (stored === 'light' || stored === 'dark') {
       return stored;
     }
-    if (this._document.defaultView?.matchMedia?.('(prefers-color-scheme: light)').matches) {
-      return 'light';
-    }
     return 'dark';
   }
 

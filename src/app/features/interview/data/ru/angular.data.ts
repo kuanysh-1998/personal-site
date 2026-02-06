@@ -8,75 +8,75 @@ export const angularQuestionsRu: InterviewCategory = {
     {
       id: 'ng-1',
       question: 'Как работает Change Detection в Angular?',
-      answer: `Change Detection (CD) синхронизирует состояние компонента с DOM. Angular проверяет дерево компонентов и обновляет представления там, где данные изменились.
-
-**Механизм запуска:**
-Zone.js перехватывает (monkey-patch) асинхронные API (addEventListener, setTimeout, fetch и т.д.). Когда любая асинхронная операция завершается, Zone.js уведомляет Angular → запускается CD.
-
-**Две стратегии:**
-
-1. **Default** — проверяет ВСЕ компоненты сверху вниз при каждом асинхронном событии. Просто, но затратно.
-
-2. **OnPush** — проверяет компонент только когда:
-   - Изменилась ссылка @Input (не мутация!)
-   - Событие произошло в ЭТОМ компоненте или его дочерних
-   - async pipe получил новое значение
-   - Ручной вызов: markForCheck() или detectChanges()
-
-**Ключевое различие:**
-- markForCheck() — помечает компонент и его предков как «грязные», ждёт следующего цикла CD
-- detectChanges() — запускает CD немедленно для этого компонента и его потомков
-
-**Лучшая практика:** OnPush везде + иммутабельные данные.`,
+      answer: `Change Detection (CD) — это механизм, который держит DOM в синхронизации с данными компонентов. Когда данные меняются, Angular проходит по дереву компонентов и перерисовывает те части, которые нужно обновить.
+    
+    **Как запускается:**
+    Angular использует библиотеку Zone.js, которая оборачивает все асинхронные API (обработчики кликов, setTimeout, HTTP-запросы и т.д.). Когда любая асинхронная операция завершается, Zone.js говорит Angular: «что-то могло измениться» → Angular запускает CD по всему дереву компонентов.
+    
+    **Две стратегии:**
+    
+    1. **Default** — при каждом асинхронном событии Angular проверяет ВСЕ компоненты сверху вниз. Просто в использовании, но дорого: даже компоненты с неизменёнными данными проверяются.
+    
+    2. **OnPush** — Angular пропускает компонент, если не произошло одно из четырёх:
+       - В @Input пришла новая ссылка на объект (мутация существующего объекта не сработает!)
+       - DOM-событие произошло в этом компоненте или его дочерних (click, input и т.д.)
+       - async pipe получил новое значение
+       - Ты вручную вызвал markForCheck() или detectChanges()
+    
+    **markForCheck() vs detectChanges():**
+    - markForCheck() — помечает компонент и всех его предков как «грязные». Они будут проверены в следующем цикле CD (не запускается сразу).
+    - detectChanges() — запускает CD прямо сейчас, но только для этого компонента и его потомков. Полезно, когда нужно мгновенное обновление UI.
+    
+    **Лучшая практика:** Ставь OnPush на каждый компонент + работай с данными иммутабельно (всегда создавай новые ссылки вместо мутации).`,
       codeSnippets: [
         {
           language: 'typescript',
           code: `// Настройка OnPush
-@Component({
-  selector: 'app-user-list',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: \`
-    <div *ngFor="let user of users()">{{ user.name }}</div>
-  \`
-})
-export class UserListComponent {
-  public users = input<User[]>([]);
-}`,
+    @Component({
+      selector: 'app-user-list',
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      template: \`
+        <div *ngFor="let user of users()">{{ user.name }}</div>
+      \`
+    })
+    export class UserListComponent {
+      public users = input<User[]>([]);
+    }`,
         },
         {
           language: 'typescript',
           code: `// Типичная ловушка OnPush — мутация
-// ❌ НЕПРАВИЛЬНО — мутация не запустит CD с OnPush
-this.items.push('new'); // Та же ссылка — view не обновится
-
-// ✅ ПРАВИЛЬНО — новая ссылка
-this.items = [...this.items, 'new'];
-
-// ✅ ИЛИ ручной вызов (крайний случай)
-this.items.push('new');
-this.cdr.markForCheck();`,
+    // ❌ НЕПРАВИЛЬНО — мутация не запустит CD с OnPush
+    this.items.push('new'); // Та же ссылка — view не обновится
+    
+    // ✅ ПРАВИЛЬНО — новая ссылка
+    this.items = [...this.items, 'new'];
+    
+    // ✅ ИЛИ ручной вызов (крайний случай)
+    this.items.push('new');
+    this.cdr.markForCheck();`,
         },
         {
           language: 'typescript',
           code: `// NgZone.runOutsideAngular для производительности
-private _data!: Data;
-
-constructor(private _ngZone: NgZone) {}
-
-public startHeavyAnimation(): void {
-  this._ngZone.runOutsideAngular(() => {
-    requestAnimationFrame(function animate() {
-      // ... логика анимации — не запустит CD
-      requestAnimationFrame(animate);
-    });
-  });
-}
-
-public updateUI(data: Data): void {
-  this._ngZone.run(() => {
-    this._data = data; // Это запустит CD
-  });
-}`,
+    private _data!: Data;
+    
+    constructor(private _ngZone: NgZone) {}
+    
+    public startHeavyAnimation(): void {
+      this._ngZone.runOutsideAngular(() => {
+        requestAnimationFrame(function animate() {
+          // ... логика анимации — не запустит CD
+          requestAnimationFrame(animate);
+        });
+      });
+    }
+    
+    public updateUI(data: Data): void {
+      this._ngZone.run(() => {
+        this._data = data; // Это запустит CD
+      });
+    }`,
         },
       ],
     },

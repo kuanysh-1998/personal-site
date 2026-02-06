@@ -8,75 +8,75 @@ export const angularQuestionsEn: InterviewCategory = {
     {
       id: 'ng-1',
       question: 'How does Change Detection work in Angular?',
-      answer: `Change Detection (CD) synchronizes component state with DOM. Angular checks the component tree and updates views where data changed.
-
-**Trigger mechanism:**
-Zone.js monkey-patches async APIs (addEventListener, setTimeout, fetch, etc.). When any async operation completes, Zone.js notifies Angular → CD runs.
-
-**Two strategies:**
-
-1. **Default** — checks ALL components top-down on every async event. Simple but expensive.
-
-2. **OnPush** — checks component only when:
-   - @Input reference changed (not mutation!)
-   - Event fired from THIS component or its children
-   - Async pipe received new value
-   - Manual trigger: markForCheck() or detectChanges()
-
-**Key difference:**
-- markForCheck() — marks component and ancestors as dirty, waits for next CD cycle
-- detectChanges() — runs CD immediately for this component and children
-
-**Best practice:** OnPush everywhere + immutable data.`,
+      answer: `Change Detection (CD) is the mechanism that keeps the DOM in sync with your component data. Whenever data changes, Angular walks through the component tree and re-renders the parts that need updating.
+    
+    **How it gets triggered:**
+    Angular relies on Zone.js, a library that wraps all async APIs (click handlers, setTimeout, HTTP requests, etc.). When any async operation finishes, Zone.js tells Angular: "something might have changed" → Angular runs CD across the entire component tree.
+    
+    **Two strategies:**
+    
+    1. **Default** — on every async event Angular checks ALL components from top to bottom. Simple to use, but expensive: even components with unchanged data get checked.
+    
+    2. **OnPush** — Angular skips the component unless one of these happens:
+       - An @Input received a new object reference (mutating the existing object won't work!)
+       - A DOM event was fired from this component or its children (click, input, etc.)
+       - The async pipe emitted a new value
+       - You manually called markForCheck() or detectChanges()
+    
+    **markForCheck() vs detectChanges():**
+    - markForCheck() — flags the component and all its ancestors as "dirty". They will be checked on the next CD cycle (doesn't run immediately).
+    - detectChanges() — runs CD right now, but only for this component and its children. Useful when you need an instant UI update.
+    
+    **Best practice:** Use OnPush on every component + treat data as immutable (always create new references instead of mutating).`,
       codeSnippets: [
         {
           language: 'typescript',
           code: `// OnPush setup
-@Component({
-  selector: 'app-user-list',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: \`
-    <div *ngFor="let user of users()">{{ user.name }}</div>
-  \`
-})
-export class UserListComponent {
-  public users = input<User[]>([]);
-}`,
+    @Component({
+      selector: 'app-user-list',
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      template: \`
+        <div *ngFor="let user of users()">{{ user.name }}</div>
+      \`
+    })
+    export class UserListComponent {
+      public users = input<User[]>([]);
+    }`,
         },
         {
           language: 'typescript',
           code: `// Common OnPush trap — mutation
-// ❌ WRONG — mutation doesn't trigger CD with OnPush
-this.items.push('new'); // Same reference — view won't update
-
-// ✅ CORRECT — new reference
-this.items = [...this.items, 'new'];
-
-// ✅ OR manual trigger (last resort)
-this.items.push('new');
-this.cdr.markForCheck();`,
+    // ❌ WRONG — mutation doesn't trigger CD with OnPush
+    this.items.push('new'); // Same reference — view won't update
+    
+    // ✅ CORRECT — new reference
+    this.items = [...this.items, 'new'];
+    
+    // ✅ OR manual trigger (last resort)
+    this.items.push('new');
+    this.cdr.markForCheck();`,
         },
         {
           language: 'typescript',
           code: `// NgZone.runOutsideAngular for performance
-private _data!: Data;
-
-constructor(private _ngZone: NgZone) {}
-
-public startHeavyAnimation(): void {
-  this._ngZone.runOutsideAngular(() => {
-    requestAnimationFrame(function animate() {
-      // ... animation logic — won't trigger CD
-      requestAnimationFrame(animate);
-    });
-  });
-}
-
-public updateUI(data: Data): void {
-  this._ngZone.run(() => {
-    this._data = data; // This triggers CD
-  });
-}`,
+    private _data!: Data;
+    
+    constructor(private _ngZone: NgZone) {}
+    
+    public startHeavyAnimation(): void {
+      this._ngZone.runOutsideAngular(() => {
+        requestAnimationFrame(function animate() {
+          // ... animation logic — won't trigger CD
+          requestAnimationFrame(animate);
+        });
+      });
+    }
+    
+    public updateUI(data: Data): void {
+      this._ngZone.run(() => {
+        this._data = data; // This triggers CD
+      });
+    }`,
         },
       ],
     },
