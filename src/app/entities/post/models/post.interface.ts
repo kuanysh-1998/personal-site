@@ -20,4 +20,10 @@ export interface PostState {
   post: Post | null;
   previousPost: PostMetadata | null;
   nextPost: PostMetadata | null;
+  unavailableInLanguage?: boolean;
+}
+
+export interface GetPostResult {
+  post: Post | null;
+  unavailableInLanguage?: boolean;
 }

@@ -59,20 +59,21 @@ export class PostDetailComponent {
     map((params) => params.get('slug') || ''),
     switchMap((slug) =>
       this._postService.getPostBySlug(slug).pipe(
-        tap((post) => {
-          if (post) {
+        tap((result) => {
+          if (result.post && !result.unavailableInLanguage) {
             this._yandexMetrikaService.sendMetricsEvent('post_view', {
-              post_slug: post.slug,
-              post_title: post.title,
+              post_slug: result.post.slug,
+              post_title: result.post.title,
             });
-            this._viewCounterService.incrementView(post.slug).pipe(take(1)).subscribe();
+            this._viewCounterService.incrementView(result.post.slug).pipe(take(1)).subscribe();
           }
         }),
-        map((post) => ({
+        map((result) => ({
           loading: false,
-          post,
-          previousPost: post ? this._postService.getPreviousPost(slug) : null,
-          nextPost: post ? this._postService.getNextPost(slug) : null,
+          post: result.post,
+          previousPost: result.post ? this._postService.getPreviousPost(slug) : null,
+          nextPost: result.post ? this._postService.getNextPost(slug) : null,
+          unavailableInLanguage: result.unavailableInLanguage,
         })),
         startWith({
           loading: true,

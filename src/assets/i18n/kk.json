@@ -23,6 +23,8 @@
   "Enter 3 or more characters": "3 немесе одан көп символ енгізіңіз",
   "Search posts by title, description...": "Жазбаларды тақырып пен сипаттама бойынша іздеу...",
   "No posts found matching your search.": "Сіздің сұранысыңыз бойынша жазбалар табылмады.",
+  "This post is not yet available in the selected language.": "Бұл жазба таңдалған тілде әзірше қол жетімсіз.",
+  "We're working on translations and will add it soon.": "Аудармалар бойынша жұмыс істеп жатырмыз, жақында қосамыз.",
   "Contact Form": "Байланыс формасы",
   "Send": "Жіберу",
   "Cancel": "Болдырмау",

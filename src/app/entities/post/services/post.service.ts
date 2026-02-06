@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
-import { Post, PostMetadata } from '../models/post.interface';
+import { GetPostResult, Post, PostMetadata } from '../models/post.interface';
 import { POSTS } from '@app/features/blog/data/posts.data';
 import { LocaleService } from '@app/core/services/locale/locale.service';
 
@@ -16,24 +16,27 @@ export class PostService {
     return [...POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
-  public getPostBySlug(slug: string): Observable<Post | null> {
+  public getPostBySlug(slug: string): Observable<GetPostResult> {
     const metadata = POSTS.find((p) => p.slug === slug);
 
     if (!metadata) {
-      return of(null);
+      return of({ post: null });
     }
 
     const lang = this._localeService.getActiveLang();
     const path = `/assets/posts/${lang}/${slug}.md`;
 
     return this._http.get(path, { responseType: 'text' }).pipe(
-      map((content) => ({ ...metadata, content })),
-      catchError(() =>
-        lang === 'en' ? of(null) : this._http.get(`/assets/posts/en/${slug}.md`, { responseType: 'text' }).pipe(
-          map((content) => ({ ...metadata, content })),
-          catchError(() => of(null))
-        )
-      )
+      map((content) => ({ post: { ...metadata, content }, unavailableInLanguage: false })),
+      catchError(() => {
+        if (lang === 'en') {
+          return of({ post: null });
+        }
+        return of({
+          post: { ...metadata, content: '' },
+          unavailableInLanguage: true,
+        });
+      }),
     );
   }
 

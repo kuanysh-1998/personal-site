@@ -96,6 +96,28 @@
   color: var(--theme-text-primary);
 }
 
+.post-unavailable {
+  padding: 2rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  background: var(--theme-bg-card-secondary);
+  border: 1px solid var(--theme-border);
+  text-align: center;
+
+  &__message {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--theme-text-primary);
+    margin: 0 0 0.5rem;
+  }
+
+  &__hint {
+    font-size: 1rem;
+    color: var(--theme-text-muted);
+    margin: 0;
+  }
+}
+
 .not-found {
   text-align: center;
   padding: 3rem 0;

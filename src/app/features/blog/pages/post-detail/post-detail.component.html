@@ -20,41 +20,57 @@
         </div>
       </article>
     } @else if (state.post) {
-      <article class="post-content">
-        <header class="post-header">
-          <div class="post-header__top">
+      @if (state.unavailableInLanguage) {
+        <article class="post-content">
+          <header class="post-header">
             <h3 class="post-title">{{ state.post.title | transloco }}</h3>
-            <app-copy-link />
+            <div class="post-meta">
+              <time class="post-date">{{ formatDate(state.post.date) }}</time>
+            </div>
+          </header>
+          <div class="post-unavailable" role="status">
+            <p class="post-unavailable__message">{{ 'This post is not yet available in the selected language.' | transloco }}</p>
+            <p class="post-unavailable__hint">{{ "We're working on translations and will add it soon." | transloco }}</p>
           </div>
-          <div class="post-meta">
-            <time class="post-date">{{ formatDate(state.post.date) }}</time>
-            <span class="post-reading-time">{{ state.post.content | readingTime }}</span>
-            @if (viewCount$ | async; as viewCount) {
-              <span class="post-views">
-                <ng-svg [icon]="eyeIcon" class="post-views__icon"></ng-svg>
-                {{ viewCount }} {{ (viewCount === 1 ? 'view' : 'views') | transloco }}
-              </span>
-            }
-          </div>
-          @if (state.post.tags && state.post.tags.length > 0) {
-            <div class="post-tags">
-              @for (tag of state.post.tags; track tag) {
-                <ng-badge
-                  [text]="tag | transloco"
-                  [size]="'small'"
-                  [stylingMode]="'outlined'"
-                  [variant]="'default'"
-                />
+        </article>
+        <app-post-navigation [previousPost]="state.previousPost" [nextPost]="state.nextPost" />
+      } @else {
+        <article class="post-content">
+          <header class="post-header">
+            <div class="post-header__top">
+              <h3 class="post-title">{{ state.post.title | transloco }}</h3>
+              <app-copy-link />
+            </div>
+            <div class="post-meta">
+              <time class="post-date">{{ formatDate(state.post.date) }}</time>
+              <span class="post-reading-time">{{ state.post.content | readingTime }}</span>
+              @if (viewCount$ | async; as viewCount) {
+                <span class="post-views">
+                  <ng-svg [icon]="eyeIcon" class="post-views__icon"></ng-svg>
+                  {{ viewCount }} {{ (viewCount === 1 ? 'view' : 'views') | transloco }}
+                </span>
               }
             </div>
-          }
-        </header>
-        <div class="post-body" ngCopyCode>
-          <markdown [data]="state.post.content" lineNumbers></markdown>
-        </div>
-      </article>
-      <app-share-post [postTitle]="state.post.title | transloco" [postUrl]="getCurrentUrl()" />
-      <app-post-navigation [previousPost]="state.previousPost" [nextPost]="state.nextPost" />
+            @if (state.post.tags && state.post.tags.length > 0) {
+              <div class="post-tags">
+                @for (tag of state.post.tags; track tag) {
+                  <ng-badge
+                    [text]="tag | transloco"
+                    [size]="'small'"
+                    [stylingMode]="'outlined'"
+                    [variant]="'default'"
+                  />
+                }
+              </div>
+            }
+          </header>
+          <div class="post-body" ngCopyCode>
+            <markdown [data]="state.post.content" lineNumbers></markdown>
+          </div>
+        </article>
+        <app-share-post [postTitle]="state.post.title | transloco" [postUrl]="getCurrentUrl()" />
+        <app-post-navigation [previousPost]="state.previousPost" [nextPost]="state.nextPost" />
+      }
     } @else {
       <div class="not-found">
         <h1>Post not found</h1>

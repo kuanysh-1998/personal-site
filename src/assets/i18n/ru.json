@@ -23,6 +23,8 @@
   "Enter 3 or more characters": "Введите 3 или более символов",
   "Search posts by title, description...": "Поиск по названию и описанию постов...",
   "No posts found matching your search.": "По запросу ничего не найдено.",
+  "This post is not yet available in the selected language.": "Этот пост пока недоступен на выбранном языке.",
+  "We're working on translations and will add it soon.": "Мы работаем над переводами и скоро добавим.",
   "Contact Form": "Форма обратной связи",
   "Send": "Отправить",
   "Cancel": "Отмена",
