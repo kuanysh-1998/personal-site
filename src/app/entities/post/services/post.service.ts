@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
+import { TranslocoService } from '@ngneat/transloco';
 import { GetPostResult, Post, PostMetadata } from '../models/post.interface';
 import { POSTS } from '@app/features/blog/data/posts.data';
 import { LocaleService } from '@app/core/services/locale/locale.service';
@@ -11,6 +12,7 @@ import { LocaleService } from '@app/core/services/locale/locale.service';
 export class PostService {
   private readonly _http = inject(HttpClient);
   private readonly _localeService = inject(LocaleService);
+  private readonly _transloco = inject(TranslocoService);
 
   private static _isHtmlResponse(text: string): boolean {
     const trimmed = text.trim().toLowerCase();
@@ -95,15 +97,25 @@ export class PostService {
       return this.getAllPosts();
     }
 
-    const normalizedQuery = query.toLowerCase().trim();
+    const normalizedQuery = this._normalizeSearchString(query.trim());
     const allPosts = this.getAllPosts();
 
     return allPosts.filter((post) => {
-      const titleMatch = post.title.toLowerCase().includes(normalizedQuery);
-      const descriptionMatch = post.description?.toLowerCase().includes(normalizedQuery) ?? false;
-      const slugMatch = post.slug.toLowerCase().includes(normalizedQuery);
+      const translatedTitle = this._transloco.translate(post.title);
+      const translatedDescription = post.description
+        ? this._transloco.translate(post.description)
+        : '';
+      const titleMatch = this._normalizeSearchString(translatedTitle).includes(normalizedQuery);
+      const descriptionMatch =
+        translatedDescription.length > 0 &&
+        this._normalizeSearchString(translatedDescription).includes(normalizedQuery);
+      const slugMatch = this._normalizeSearchString(post.slug).includes(normalizedQuery);
 
       return titleMatch || descriptionMatch || slugMatch;
     });
+  }
+
+  private _normalizeSearchString(value: string): string {
+    return value.toLowerCase().trim();
   }
 }

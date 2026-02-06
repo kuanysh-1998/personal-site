@@ -28,8 +28,8 @@ export class App implements OnInit {
 
   public ngOnInit(): void {
     this._serviceWorkerUpdateService.checkForUpdates();
+    this._yandexMetrikaService.initMetrika();
     this._dialogService.setViewContainerRef(this._viewContainerRef);
     this._drawerService.setViewContainerRef(this._viewContainerRef);
-    this._yandexMetrikaService.initMetrika();
   }
 }
