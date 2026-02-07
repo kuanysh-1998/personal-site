@@ -52,7 +52,6 @@ export class HeaderComponent {
     return [
       { id: TAB_IDS.ABOUT, text: this._transloco.translate('About') },
       { id: TAB_IDS.BLOG, text: this._transloco.translate('Blog') },
-      { id: TAB_IDS.INTERVIEW, text: this._transloco.translate('Interview') },
     ];
   });
 
@@ -71,9 +70,6 @@ export class HeaderComponent {
     const url = this.currentUrl();
     if (url.includes('/blog')) {
       return TAB_IDS.BLOG;
-    }
-    if (url.includes('/interview')) {
-      return TAB_IDS.INTERVIEW;
     }
     return TAB_IDS.ABOUT;
   }

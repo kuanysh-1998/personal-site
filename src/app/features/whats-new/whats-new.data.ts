@@ -15,17 +15,6 @@ export const WHATS_NEW_FEATURES: readonly WhatsNewFeature[] = [
     date: new Date('2026-02-04'),
   },
   {
-    title: 'Interview Questions',
-    description:
-      'Added a new section with interview questions and answers on JavaScript, TypeScript and Angular. Use it to prepare for interviews with organized questions, code examples, and markdown-formatted answers',
-    date: new Date('2026-01-21'),
-    action: {
-      type: WHATS_NEW_ACTION_TYPES.ROUTE,
-      route: '/interview',
-      label: 'Go to Interview Questions',
-    },
-  },
-  {
     title: 'Contact Form',
     description:
       'Added a contact form to reach out to me. You can send a message directly from the site',
