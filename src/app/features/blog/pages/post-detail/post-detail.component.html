@@ -69,6 +69,7 @@
           </div>
         </article>
         <app-share-post [postTitle]="state.post.title | transloco" [postUrl]="getCurrentUrl()" />
+        <app-related-posts [currentSlug]="state.post.slug" />
         <app-post-navigation [previousPost]="state.previousPost" [nextPost]="state.nextPost" />
       }
     } @else {

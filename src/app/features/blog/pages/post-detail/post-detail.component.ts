@@ -23,6 +23,7 @@ import { Icons } from '@app/shared/components/svg/svg.config';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CopyCodeDirective } from '@app/shared/directives/copy-code.directive';
 import { BadgeComponent } from '@app/shared/components/badge/badge.component';
+import { RelatedPostsComponent } from '../../components/related-posts/related-posts.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -40,6 +41,7 @@ import { BadgeComponent } from '@app/shared/components/badge/badge.component';
     SvgComponent,
     CopyCodeDirective,
     BadgeComponent,
+    RelatedPostsComponent,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',

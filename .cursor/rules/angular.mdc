@@ -1,0 +1,13 @@
+---
+alwaysApply: true
+---
+
+# Angular rules
+
+- Use **standalone** components, directives, pipes. No `NgModule` unless required by a library.
+- Prefer **inject()** over constructor DI for new code.
+- Use **signals** for local component state when it simplifies code; keep using RxJS for async/API streams.
+- **Routes**: define in `app.routes.ts` or feature `*-routes.ts`; lazy load with `loadComponent` / `loadChildren`.
+- **Change detection**: default OnPush where possible; avoid manual `detectChanges()` unless necessary.
+- **Forms**: reactive forms only; validators in `shared/validators` or component.
+- **Templates**: one main element in root; use `@if` / `@for` (control flow), avoid `*ngIf`/`*ngFor` in new code.

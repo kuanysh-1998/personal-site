@@ -1,0 +1,15 @@
+---
+alwaysApply: true
+---
+
+# Services rules
+
+- **Entity services** live in `src/app/entities/<entity>/services/`. One service per entity/domain area.
+- **Core services** (theme, locale, emailjs, yandex-metrika, etc.) in `src/app/core/services/`.
+- Use **HttpClient** via `inject(HttpClient)` when calling external APIs; base URL via environment or config if needed.
+- Return **Observables** from API methods; avoid subscribing inside services (subscribe in components or use `async` pipe).
+- **Caching**: use BehaviorSubject/ReplaySubject when the same data is reused; clear or refresh when needed.
+- **Error handling**: use `catchError` in services for domain-specific handling; surface errors to consumers via Observable.
+- **Cleanup**: in components that subscribe, use `takeUntilDestroyed()` from `@angular/core/rxjs-interop` so subscriptions are cleared when the component is destroyed.
+- **Naming**: `<entity>.service.ts`, methods in camelCase (e.g. getPost, getRelatedPosts).
+- **Types**: all methods typed, return `Observable<T>`, avoid `any`.

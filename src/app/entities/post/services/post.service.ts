@@ -115,6 +115,30 @@ export class PostService {
     });
   }
 
+  public getRelatedPosts(currentSlug: string, limit: number = 3): PostMetadata[] {
+    const currentPost = POSTS.find((p) => p.slug === currentSlug);
+
+    if (!currentPost || !currentPost.tags || currentPost.tags.length === 0) {
+      return [];
+    }
+
+    const allPosts = this.getAllPosts().filter((post) => post.slug !== currentSlug);
+
+    const postsWithScore = allPosts
+      .map((post) => {
+        if (!post.tags || post.tags.length === 0) {
+          return { post, score: 0 };
+        }
+
+        const commonTags = post.tags.filter((tag) => currentPost.tags?.includes(tag));
+        return { post, score: commonTags.length };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score);
+
+    return postsWithScore.slice(0, limit).map((item) => item.post);
+  }
+
   private _normalizeSearchString(value: string): string {
     return value.toLowerCase().trim();
   }

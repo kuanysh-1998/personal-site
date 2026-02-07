@@ -1,0 +1,25 @@
+---
+alwaysApply: true
+---
+
+## Stack
+Angular 21, TypeScript 5.9, RxJS, **Transloco** (i18n), Firebase, ngx-markdown, Prism.js, angular-svg-icon, SCSS, PWA (service worker), EmailJS.
+
+## Key Rules
+1. **Standalone components only** — no NgModules.
+2. **State via RxJS services** — BehaviorSubject/Subject, no NgRx.
+3. **Lazy-loaded features** — each feature in `src/app/features/` with own route file; routes in `app.routes.ts` or feature `*-routes.ts`.
+4. **i18n** — Transloco, 3 locales: en (default), ru, kk; translation files in `src/assets/i18n/`.
+5. **Cleanup** — `takeUntilDestroyed()` from `@angular/core/rxjs-interop` for subscriptions in components (inject `DestroyRef` if needed in injection context).
+6. **Code in English, comments/commits in Russian.**
+
+## Structure
+- `src/app/core/` — singleton services (theme, locale, emailjs, yandex-metrika, service-worker-update), Transloco loader.
+- `src/app/shared/` — reusable components, pipes, directives, constants.
+- `src/app/features/` — lazy-loaded feature areas (about, blog, contact-form, main-layout, whats-new).
+- `src/app/entities/` — domain entities with `models/` and `services/` (e.g. post).
+
+## Style
+- SCSS with CSS custom properties; global styles in `src/assets/styles/`.
+- Component prefix: `app-`.
+- File naming: kebab-case.
