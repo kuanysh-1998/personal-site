@@ -30,7 +30,7 @@ markdown {
     margin: 1rem 0;
     line-height: 1.7;
     color: var(--theme-text-secondary);
-    font-size: 1rem;
+    font-size: 1.125rem;
   }
 
   code {
@@ -98,7 +98,7 @@ markdown {
     margin: 1rem 0;
     padding-left: 1.5rem;
     line-height: 1.7;
-    font-size: 1rem;
+    font-size: 1.125rem;
 
     li {
       margin: 0.5rem 0;
@@ -119,6 +119,7 @@ markdown {
     padding-left: 1rem;
     margin: 1rem 0;
     color: var(--theme-text-muted);
+    font-size: 1.125rem;
   }
 
   hr {
@@ -137,6 +138,7 @@ markdown {
       padding: 0.5rem;
       border: 1px solid var(--theme-border);
       color: var(--theme-text-secondary);
+      font-size: 1.125rem;
     }
 
     th {

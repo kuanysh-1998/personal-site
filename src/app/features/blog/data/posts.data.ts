@@ -38,4 +38,11 @@ export const POSTS: PostMetadata[] = [
       'How to prevent memory leaks with Angular native solution for RxJS subscription cleanup',
     tags: ['Angular', 'RxJS', 'Performance'],
   },
+  {
+    title: 'Angular Signals State Management',
+    date: '2026-02-07',
+    slug: 'angular-signals-state-management',
+    description: 'How to manage state in Angular using signals',
+    tags: ['Angular', 'Signals', 'State Management'],
+  },
 ];
