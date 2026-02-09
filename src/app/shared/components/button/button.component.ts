@@ -6,6 +6,7 @@ import {
   HostBinding,
   Input,
   Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { SvgComponent } from '../svg/svg.component';
 import { ButtonSize, ButtonVariant, StylingMode } from './button.types';
@@ -15,6 +16,7 @@ import { ButtonSize, ButtonVariant, StylingMode } from './button.types';
   imports: [CommonModule, SvgComponent],
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {

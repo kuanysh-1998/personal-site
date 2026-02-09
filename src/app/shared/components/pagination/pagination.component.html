@@ -1,0 +1,50 @@
+<div class="pagination">
+  <ng-button
+    [stylingMode]="'outlined'"
+    [size]="'default'"
+    [icon]="chevronLeftIcon"
+    [disabled]="!hasPrevious()"
+    [ariaLabel]="'Previous page'"
+    (clicked)="previousPage()"
+  />
+
+  @if (showFirstPage()) {
+    <ng-button
+      [stylingMode]="'outlined'"
+      [size]="'default'"
+      [label]="'1'"
+      (clicked)="goToPage(1)"
+    />
+    <span class="pagination__ellipsis">...</span>
+  }
+
+  @for (page of visiblePages(); track page) {
+    <ng-button
+      [stylingMode]="isCurrentPage(page) ? 'contained' : 'outlined'"
+      [size]="'default'"
+      [label]="page.toString()"
+      [active]="isCurrentPage(page)"
+      [disabled]="isCurrentPage(page)"
+      (clicked)="goToPage(page)"
+    />
+  }
+
+  @if (showLastPage()) {
+    <span class="pagination__ellipsis">...</span>
+    <ng-button
+      [stylingMode]="'outlined'"
+      [size]="'default'"
+      [label]="totalPages().toString()"
+      (clicked)="goToPage(totalPages())"
+    />
+  }
+
+  <ng-button
+    [stylingMode]="'outlined'"
+    [size]="'default'"
+    [icon]="chevronRightIcon"
+    [disabled]="!hasNext()"
+    [ariaLabel]="'Next page'"
+    (clicked)="nextPage()"
+  />
+</div>

@@ -7,10 +7,18 @@ import { PostSearchComponent } from '@app/features/blog/components/post-search/p
 import { CardComponent } from '@app/shared/components/card/card.component';
 import { BadgeComponent } from '@app/shared/components/badge/badge.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
+import { PaginationComponent } from '@app/shared/components/pagination/pagination.component';
+import { PageChangeEvent } from '@app/shared/components/pagination/pagination.types';
 
 @Component({
   selector: 'app-blog-list',
-  imports: [TranslocoModule, PostSearchComponent, CardComponent, BadgeComponent],
+  imports: [
+    TranslocoModule,
+    PostSearchComponent,
+    CardComponent,
+    BadgeComponent,
+    PaginationComponent,
+  ],
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,14 +28,29 @@ export class BlogListComponent {
   private readonly _router = inject(Router);
 
   protected readonly searchQuery = signal<string>('');
+  protected readonly currentPage = signal<number>(1);
+  protected readonly itemsPerPage = signal<number>(5);
 
   protected readonly filteredPosts = computed(() => {
     const query = this.searchQuery();
     return this._postService.searchPosts(query);
   });
 
-  protected readonly postsByYear = computed(() => {
+  protected readonly paginatedPosts = computed(() => {
     const posts = this.filteredPosts();
+    const page = this.currentPage();
+    const perPage = this.itemsPerPage();
+    const startIndex = (page - 1) * perPage;
+    const endIndex = startIndex + perPage;
+    return posts.slice(startIndex, endIndex);
+  });
+
+  protected readonly totalFilteredPosts = computed(() => {
+    return this.filteredPosts().length;
+  });
+
+  protected readonly postsByYear = computed(() => {
+    const posts = this.paginatedPosts();
     const grouped = new Map<number, typeof posts>();
 
     posts.forEach((post) => {
@@ -59,10 +82,17 @@ export class BlogListComponent {
 
   protected onSearchChange(query: string): void {
     this.searchQuery.set(query);
+    this.currentPage.set(1);
   }
 
   protected onSearchClear(): void {
     this.searchQuery.set('');
+    this.currentPage.set(1);
+  }
+
+  protected onPageChange(event: PageChangeEvent): void {
+    this.currentPage.set(event.page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   protected formatDate(dateStr: string): string {

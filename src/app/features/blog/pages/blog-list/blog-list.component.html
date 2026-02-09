@@ -45,5 +45,17 @@
         </div>
       </div>
     }
+
+    @if (totalFilteredPosts() > itemsPerPage()) {
+      <div class="blog-list__pagination">
+        <ng-pagination
+          [currentPage]="currentPage()"
+          [totalItems]="totalFilteredPosts()"
+          [itemsPerPage]="itemsPerPage()"
+          [maxVisiblePages]="5"
+          (pageChange)="onPageChange($event)"
+        />
+      </div>
+    }
   }
 </div>
