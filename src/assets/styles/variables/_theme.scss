@@ -25,7 +25,7 @@
   --theme-button-contained-hover: #ffffff;
   --theme-button-contained-active: rgba(255, 255, 255, 0.8);
   --theme-button-contained-disabled-bg: rgba(255, 255, 255, 0.3);
-  --theme-button-contained-disabled-color: rgba(0, 0, 0, 0.4);
+  --theme-button-contained-disabled-color: #ffffff;
   --theme-button-focus-ring: rgba(255, 255, 255, 0.2);
   --theme-code-bg: rgba(255, 255, 255, 0.1);
   --theme-code-color: #4fc3f7;
@@ -60,7 +60,7 @@
   --theme-button-contained-hover: var(--brand-blue-hover);
   --theme-button-contained-active: var(--brand-blue-active);
   --theme-button-contained-disabled-bg: #c1c7d1;
-  --theme-button-contained-disabled-color: #ffffff;
+  --theme-button-contained-disabled-color: rgba(0, 0, 0, 0.5);
   --theme-button-focus-ring: rgba(49, 120, 198, 0.4);
   --theme-code-bg: #e9ecef;
   --theme-code-color: #0c75af;

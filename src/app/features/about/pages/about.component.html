@@ -13,22 +13,8 @@
           <p class="about-page__description">
             {{ 'Frontend engineer in Astana, Kazakhstan' | transloco }}
             <span *ngTooltip="astanaTime()">{{ '(UTC+5)' | transloco }}</span>.
-            {{ 'I build enterprise Angular applications with focus on clean architecture and scalable solutions.' | transloco }}
+            {{ 'Writing about building Angular apps — from architecture patterns to everyday trade-offs.' | transloco }}
           </p>
-          <div class="about-page__stack">
-            <span class="about-page__stack-label">{{ 'Stack:' | transloco }}</span>
-            <div class="about-page__stack-badges">
-              @for (tech of stack; track tech.name) {
-                <ng-badge
-                  [text]="tech.name"
-                  [url]="tech.url"
-                  [size]="'small'"
-                  [stylingMode]="'outlined'"
-                  [variant]="'default'"
-                />
-              }
-            </div>
-          </div>
         </div>
       </div>
     </ng-card>
