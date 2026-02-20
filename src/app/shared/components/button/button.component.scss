@@ -64,6 +64,12 @@
       &.ng-button__container_disabled {
         color: var(--theme-text-muted);
         cursor: not-allowed;
+
+        &:hover,
+        &:active {
+          color: var(--theme-text-muted);
+          background: transparent;
+        }
       }
     }
 
@@ -85,6 +91,13 @@
         color: var(--theme-text-muted);
         border-color: var(--theme-border);
         cursor: not-allowed;
+
+        &:hover,
+        &:active {
+          color: var(--theme-text-muted);
+          background: transparent;
+          border-color: var(--theme-border);
+        }
       }
     }
 
@@ -105,6 +118,12 @@
         color: var(--theme-button-contained-disabled-color);
         background: var(--theme-button-contained-disabled-bg);
         cursor: not-allowed;
+
+        &:hover,
+        &:active {
+          color: var(--theme-button-contained-disabled-color);
+          background: var(--theme-button-contained-disabled-bg);
+        }
       }
     }
 
