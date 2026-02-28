@@ -69,6 +69,19 @@
           </div>
         </article>
         <app-share-post [postTitle]="state.post.title | transloco" [postUrl]="getCurrentUrl()" />
+        <div class="post-like">
+          <ng-button
+            [icon]="heartIcon"
+            [label]="(isLiked() ? 'Liked' : 'Like') | transloco"
+            [stylingMode]="isLiked() ? 'contained' : 'outlined'"
+            (clicked)="toggleLike(state.post.slug)"
+          />
+          @if (displayedLikeCount() > 0) {
+            <span class="post-like__count">
+              {{ displayedLikeCount() }} {{ (displayedLikeCount() === 1 ? 'like' : 'likes') | transloco }}
+            </span>
+          }
+        </div>
         <app-related-posts [currentSlug]="state.post.slug" />
         <app-post-navigation [previousPost]="state.previousPost" [nextPost]="state.nextPost" />
       }

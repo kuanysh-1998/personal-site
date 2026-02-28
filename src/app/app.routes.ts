@@ -5,7 +5,7 @@ export const routes: Routes = [
     path: '',
     loadComponent: () =>
       import('./features/main-layout/pages/layout/main-layout.component').then(
-        (m) => m.MainLayoutComponent,
+        (c) => c.MainLayoutComponent,
       ),
     children: [
       {
@@ -16,7 +16,7 @@ export const routes: Routes = [
       {
         path: 'about',
         loadComponent: () =>
-          import('./features/about/pages/about.component').then((m) => m.AboutComponent),
+          import('./features/about/pages/about.component').then((c) => c.AboutComponent),
       },
       {
         path: 'blog',
@@ -25,21 +25,22 @@ export const routes: Routes = [
             path: '',
             loadComponent: () =>
               import('./features/blog/pages/blog-list/blog-list.component').then(
-                (m) => m.BlogListComponent,
+                (c) => c.BlogListComponent,
               ),
           },
           {
             path: ':slug',
             loadComponent: () =>
               import('./features/blog/pages/post-detail/post-detail.component').then(
-                (m) => m.PostDetailComponent,
+                (c) => c.PostDetailComponent,
               ),
           },
         ],
       },
       {
         path: '**',
-        redirectTo: 'about',
+        loadComponent: () =>
+          import('./features/not-found/not-found.component').then((c) => c.NotFoundComponent),
       },
     ],
   },

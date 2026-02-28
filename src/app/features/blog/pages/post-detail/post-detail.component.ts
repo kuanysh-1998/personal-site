@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
@@ -18,7 +26,9 @@ import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-m
 import { LinkComponent } from '@app/shared/components/link/link.component';
 import { ReadingProgressBarComponent } from '../../components/reading-progress-bar/reading-progress-bar.component';
 import { ViewCounterService } from '../../services/view-counter.service';
+import { LikeCounterService } from '../../services/like-counter.service';
 import { SvgComponent } from '@app/shared/components/svg/svg.component';
+import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CopyCodeDirective } from '@app/shared/directives/copy-code.directive';
@@ -39,6 +49,7 @@ import { RelatedPostsComponent } from '../../components/related-posts/related-po
     LinkComponent,
     ReadingProgressBarComponent,
     SvgComponent,
+    ButtonComponent,
     CopyCodeDirective,
     BadgeComponent,
     RelatedPostsComponent,
@@ -47,15 +58,24 @@ import { RelatedPostsComponent } from '../../components/related-posts/related-po
   styleUrl: './post-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostDetailComponent {
+export class PostDetailComponent implements OnInit {
   private readonly _route = inject(ActivatedRoute);
   private readonly _postService = inject(PostService);
   private readonly _document = inject(DOCUMENT);
   private readonly _yandexMetrikaService = inject(YandexMetrikaService);
   private readonly _viewCounterService = inject(ViewCounterService);
+  private readonly _likeCounterService = inject(LikeCounterService);
   private readonly _contentReadyService = inject(BlogContentReadyService);
+  private readonly _destroyRef = inject(DestroyRef);
 
   protected readonly eyeIcon = Icons.Eye;
+  protected readonly heartIcon = Icons.Heart;
+
+  protected readonly isLiked = signal<boolean>(false);
+  protected readonly likeCount = signal<number>(0);
+  protected readonly displayedLikeCount = computed(() =>
+    Math.max(this.likeCount(), this.isLiked() ? 1 : 0),
+  );
 
   protected readonly postState$: Observable<PostState> = this._route.paramMap.pipe(
     map((params) => params.get('slug') || ''),
@@ -93,13 +113,41 @@ export class PostDetailComponent {
     switchMap((slug) => (slug ? this._viewCounterService.getViewCount(slug) : of(0))),
   );
 
-  constructor() {
+  public ngOnInit(): void {
+    this.subscribeToContentReady();
+    this.subscribeToLikeCount();
+  }
+
+  private subscribeToContentReady(): void {
     this.postState$
       .pipe(
         filter((state) => state.post !== null),
-        takeUntilDestroyed(),
+        takeUntilDestroyed(this._destroyRef),
       )
       .subscribe(() => this._contentReadyService.notify());
+  }
+
+  private subscribeToLikeCount(): void {
+    this._route.paramMap
+      .pipe(
+        map((params) => params.get('slug') || ''),
+        tap((slug) => {
+          this.isLiked.set(this._likeCounterService.hasLikedPost(slug));
+          this.likeCount.set(0);
+        }),
+        switchMap((slug) => (slug ? this._likeCounterService.getLikeCount(slug) : of(0))),
+        takeUntilDestroyed(this._destroyRef),
+      )
+      .subscribe((count) => {
+        this.likeCount.update((current) => Math.max(current, count));
+      });
+  }
+
+  protected toggleLike(slug: string): void {
+    if (this.isLiked()) return;
+    this._likeCounterService.incrementLike(slug).pipe(take(1)).subscribe();
+    this.isLiked.set(true);
+    this.likeCount.update((count) => count + 1);
   }
 
   protected formatDate(dateStr: string): string {

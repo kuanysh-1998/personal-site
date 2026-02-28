@@ -107,5 +107,13 @@
   "Send by email": "Отправить по email",
   "Link will be copied to the clipboard": "Ссылка будет скопирована в буфер обмена",
   "Link copied to clipboard! You can paste it in Instagram.": "Ссылка скопирована! Вставьте её в Instagram.",
-  "Related Posts": "Похожие статьи"
+  "Related Posts": "Похожие статьи",
+  "All": "Все",
+  "Page not found": "Страница не найдена",
+  "The page you are looking for does not exist.": "Запрашиваемая страница не существует.",
+  "Go to Blog": "Перейти в блог",
+  "Like": "Нравится",
+  "Liked": "Понравилось",
+  "like": "лайк",
+  "likes": "лайков"
 }

@@ -20,14 +20,14 @@ import { ButtonSize, ButtonVariant, StylingMode } from './button.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Input() public label = '';
+  @Input() public label: string | undefined = '';
   @Input() public stylingMode: StylingMode = 'ghost';
   @Input() public variant: ButtonVariant = 'default';
   @Input() public size: ButtonSize = 'default';
-  @Input() public fullWidth = false;
-  @Input() public fullHeight = false;
-  @Input() public disabled = false;
-  @Input() public active = false;
+  @Input() public fullWidth: boolean = false;
+  @Input() public fullHeight: boolean = false;
+  @Input() public disabled: boolean = false;
+  @Input() public active: boolean = false;
   @Input() public icon?: string;
   @Input() public rightIcon?: string;
   @Input() public iconWidth?: string;

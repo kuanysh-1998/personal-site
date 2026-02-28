@@ -117,6 +117,18 @@
   }
 }
 
+.post-like {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+
+  &__count {
+    font-size: 0.875rem;
+    color: var(--theme-text-secondary);
+  }
+}
+
 .not-found {
   text-align: center;
   padding: 3rem 0;

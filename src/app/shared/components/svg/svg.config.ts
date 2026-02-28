@@ -28,4 +28,5 @@ export enum Icons {
   Contact = 'i_contact',
   Eye = 'i_eye',
   Copy = 'i_copy',
+  Heart = 'i_heart',
 }

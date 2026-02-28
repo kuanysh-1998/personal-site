@@ -107,5 +107,13 @@
   "Send by email": "Email арқылы жіберу",
   "Link will be copied to the clipboard": "Сілтеме алмасу буферіне көшіріледі",
   "Link copied to clipboard! You can paste it in Instagram.": "Сілтеме көшірілді! Оны Instagram-да қойыңыз.",
-  "Related Posts": "Ұқсас жазбалар"
+  "Related Posts": "Ұқсас жазбалар",
+  "All": "Барлығы",
+  "Page not found": "Бет табылмады",
+  "The page you are looking for does not exist.": "Іздеген бетіңіз жоқ.",
+  "Go to Blog": "Блогқа өту",
+  "Like": "Ұнайды",
+  "Liked": "Ұнады",
+  "like": "лайк",
+  "likes": "лайк"
 }
