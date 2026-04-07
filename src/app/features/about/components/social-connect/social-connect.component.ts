@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TranslocoModule } from '@ngneat/transloco';
 import { LinkComponent } from '@app/shared/components/link/link.component';
-import { CardComponent } from '@app/shared/components/card/card.component';
 
 @Component({
   selector: 'app-social-connect',
-  imports: [TranslocoModule, LinkComponent, CardComponent],
+  imports: [TranslocoModule, LinkComponent],
   templateUrl: './social-connect.component.html',
   styleUrl: './social-connect.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
