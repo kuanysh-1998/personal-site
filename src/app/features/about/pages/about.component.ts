@@ -12,6 +12,7 @@ import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { SocialConnectComponent } from '../components/social-connect/social-connect.component';
 import { LatestPosts } from '@app/features/blog/components/latest-posts/latest-posts';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
+import { AvatarComponent } from '@app/shared/components/avatar/avatar.component';
 
 @Component({
   selector: 'app-about',
@@ -20,6 +21,7 @@ import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directi
     SocialConnectComponent,
     LatestPosts,
     TooltipDirective,
+    AvatarComponent,
   ],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
