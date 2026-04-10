@@ -34,6 +34,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { CopyCodeDirective } from '@app/shared/directives/copy-code.directive';
 import { BadgeComponent } from '@app/shared/components/badge/badge.component';
 import { RelatedPostsComponent } from '../../components/related-posts/related-posts.component';
+import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 
 @Component({
   selector: 'app-post-detail',
@@ -53,6 +54,7 @@ import { RelatedPostsComponent } from '../../components/related-posts/related-po
     CopyCodeDirective,
     BadgeComponent,
     RelatedPostsComponent,
+    TooltipDirective,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
@@ -70,6 +72,7 @@ export class PostDetailComponent implements OnInit {
 
   protected readonly eyeIcon = Icons.Eye;
   protected readonly heartIcon = Icons.Heart;
+  protected readonly printIcon = Icons.Print;
 
   protected readonly isLiked = signal<boolean>(false);
   protected readonly likeCount = signal<number>(0);
@@ -160,5 +163,9 @@ export class PostDetailComponent implements OnInit {
 
   protected getCurrentUrl(): string {
     return this._document.location.href;
+  }
+
+  protected printPost(): void {
+    this._document.defaultView?.print();
   }
 }

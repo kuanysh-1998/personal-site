@@ -29,4 +29,5 @@ export enum Icons {
   Eye = 'i_eye',
   Copy = 'i_copy',
   Heart = 'i_heart',
+  Print = 'i_print',
 }

@@ -3,6 +3,12 @@ import { ContactFormComponent } from '@app/features/contact-form/contact-form.co
 
 export const WHATS_NEW_FEATURES: readonly WhatsNewFeature[] = [
   {
+    title: 'Print or save posts as PDF',
+    description:
+      'From a blog post, use the printer button next to Copy link to open the system dialog — you can print or save as PDF. The layout hides the site chrome, long code lines wrap to fit the page, and colors are tuned for paper or PDF.',
+    date: new Date('2026-04-10'),
+  },
+  {
     title: 'Localization (EN, RU, KK)',
     description:
       'The site is now available in English, Russian and Kazakh. Switch the language using the dropdown in the header — your choice is saved. If you notice a section without translation yet, don\'t worry: we\'re gradually adding more translations and will cover everything soon.',
@@ -29,12 +35,6 @@ export const WHATS_NEW_FEATURES: readonly WhatsNewFeature[] = [
       },
       label: 'Open Contact Form',
     },
-  },
-  {
-    title: 'Table of Contents',
-    description:
-      'Added navigation through post content with automatic tracking of the current section',
-    date: new Date('2026-01-16'),
   },
   {
     title: 'Share to Social Networks',

@@ -39,7 +39,19 @@
           <header class="post-header">
             <div class="post-header__top">
               <h3 class="post-title">{{ state.post.title | transloco }}</h3>
-              <app-copy-link />
+              <div class="post-header__tools no-print">
+                <ng-button
+                  [icon]="printIcon"
+                  [ariaLabel]="'Print or save as PDF' | transloco"
+                  [stylingMode]="'ghost'"
+                  [size]="'default'"
+                  [iconWidth]="'1.25rem'"
+                  [iconHeight]="'1.25rem'"
+                  (clicked)="printPost()"
+                  *ngTooltip="'Print or save as PDF' | transloco"
+                />
+                <app-copy-link />
+              </div>
             </div>
             <div class="post-meta">
               <time class="post-date">{{ formatDate(state.post.date) }}</time>
@@ -68,6 +80,7 @@
             <markdown [data]="state.post.content" lineNumbers></markdown>
           </div>
         </article>
+        <p class="post-print-footer">{{ getCurrentUrl() }}</p>
         <app-share-post [postTitle]="state.post.title | transloco" [postUrl]="getCurrentUrl()" />
         <div class="post-like">
           <ng-button

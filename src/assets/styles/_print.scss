@@ -1,0 +1,176 @@
+@media print {
+  @page {
+    margin: 14mm 12mm;
+    size: auto;
+  }
+
+  body {
+    background: var(--white) !important;
+    color: var(--black) !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  app-header,
+  app-reading-progress-bar,
+  .main-layout__toc,
+  .main-layout__contact-button,
+  .scroll-to-top,
+  ng-toast-container,
+  app-share-post,
+  app-related-posts,
+  app-post-navigation,
+  .post-like,
+  .back-link,
+  .no-print {
+    display: none !important;
+  }
+
+  .main-layout {
+    max-width: 100% !important;
+    padding: 0 !important;
+    padding-top: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .post-detail {
+    color: var(--black) !important;
+  }
+
+  .post-header {
+    padding-bottom: 1rem !important;
+    border-bottom: 1px solid var(--silver-gray) !important;
+  }
+
+  .post-title {
+    color: var(--black) !important;
+  }
+
+  .post-meta,
+  .post-date,
+  .post-reading-time,
+  .post-views {
+    color: var(--neutral-800) !important;
+  }
+
+  markdown {
+    color: var(--gray-dark) !important;
+
+    h1,
+    h2,
+    h3 {
+      color: var(--black) !important;
+    }
+
+    p,
+    li {
+      color: var(--gray-dark) !important;
+    }
+
+    a {
+      color: var(--black) !important;
+      text-decoration: underline !important;
+    }
+
+    strong {
+      color: var(--black) !important;
+    }
+
+    .code-block-wrapper {
+      background: var(--gray-100) !important;
+      border: 1px solid var(--light-gray) !important;
+      max-width: 100% !important;
+      overflow: visible !important;
+      break-inside: auto;
+      page-break-inside: auto;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .code-block-wrapper .copy-btn {
+      display: none !important;
+    }
+
+    .code-block-wrapper pre {
+      background: transparent !important;
+      overflow: visible !important;
+      overflow-x: visible !important;
+      max-width: 100% !important;
+      white-space: pre-wrap !important;
+      word-wrap: break-word !important;
+      overflow-wrap: anywhere !important;
+      word-break: break-word !important;
+      font-family:
+        ui-monospace, 'Cascadia Code', 'Segoe UI Mono', 'Roboto Mono', Menlo, Monaco, Consolas,
+        'Liberation Mono', 'Courier New', monospace !important;
+      font-size: 10.5pt !important;
+      line-height: 1.45 !important;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    .code-block-wrapper pre code {
+      color: var(--dark-gray) !important;
+      text-shadow: none !important;
+      white-space: pre-wrap !important;
+      word-wrap: break-word !important;
+      overflow-wrap: anywhere !important;
+    }
+
+    .code-block-wrapper .token {
+      color: var(--dark-gray) !important;
+      background: transparent !important;
+      text-shadow: none !important;
+      font-style: normal !important;
+    }
+
+    .code-block-wrapper .token.comment,
+    .code-block-wrapper .token.prolog,
+    .code-block-wrapper .token.doctype,
+    .code-block-wrapper .token.cdata {
+      color: var(--neutral-650) !important;
+    }
+
+    .code-block-wrapper .token.keyword,
+    .code-block-wrapper .token.function,
+    .code-block-wrapper .token.class-name,
+    .code-block-wrapper .token.constant {
+      font-weight: 600 !important;
+      color: var(--black) !important;
+    }
+
+    code:not(pre code) {
+      background: var(--gray-pale) !important;
+      color: var(--dark-gray) !important;
+    }
+
+    blockquote {
+      border-left-color: var(--gray-light) !important;
+      color: var(--neutral-650) !important;
+    }
+
+    table th,
+    table td {
+      border-color: var(--silver-gray) !important;
+      color: var(--gray-dark) !important;
+    }
+
+    table th {
+      background: var(--gray-pale) !important;
+    }
+
+    hr {
+      border-top-color: var(--silver-gray) !important;
+    }
+  }
+
+  .post-print-footer {
+    display: block !important;
+    margin-top: 0.75rem;
+    padding-top: 0;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    color: var(--neutral-650) !important;
+    word-break: break-all;
+  }
+}
