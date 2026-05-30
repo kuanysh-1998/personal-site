@@ -3,20 +3,20 @@
     @if (state.post) {
       <app-reading-progress-bar />
     }
-    <ng-link class="back-link" [link]="'/blog'" [text]="'← Back to blog' | transloco" />
+    <app-link class="back-link" [link]="'/blog'" [text]="'← Back to blog' | transloco" />
 
     @if (state.loading) {
       <article class="post-content">
         <header class="post-header">
-          <ng-skeleton height="2rem" width="100%"></ng-skeleton>
-          <ng-skeleton height="1rem" width="150px"></ng-skeleton>
+          <app-skeleton height="2rem" width="100%"></app-skeleton>
+          <app-skeleton height="1rem" width="150px"></app-skeleton>
         </header>
         <div class="post-body">
-          <ng-skeleton height="1rem" width="100%"></ng-skeleton>
-          <ng-skeleton height="1rem" width="100%"></ng-skeleton>
-          <ng-skeleton height="1rem" width="80%"></ng-skeleton>
-          <ng-skeleton height="1rem" width="100%"></ng-skeleton>
-          <ng-skeleton height="1rem" width="90%"></ng-skeleton>
+          <app-skeleton height="1rem" width="100%"></app-skeleton>
+          <app-skeleton height="1rem" width="100%"></app-skeleton>
+          <app-skeleton height="1rem" width="80%"></app-skeleton>
+          <app-skeleton height="1rem" width="100%"></app-skeleton>
+          <app-skeleton height="1rem" width="90%"></app-skeleton>
         </div>
       </article>
     } @else if (state.post) {
@@ -29,8 +29,12 @@
             </div>
           </header>
           <div class="post-unavailable" role="status">
-            <p class="post-unavailable__message">{{ 'This post is not yet available in the selected language.' | transloco }}</p>
-            <p class="post-unavailable__hint">{{ "We're working on translations and will add it soon." | transloco }}</p>
+            <p class="post-unavailable__message">
+              {{ 'This post is not yet available in the selected language.' | transloco }}
+            </p>
+            <p class="post-unavailable__hint">
+              {{ "We're working on translations and will add it soon." | transloco }}
+            </p>
           </div>
         </article>
         <app-post-navigation [previousPost]="state.previousPost" [nextPost]="state.nextPost" />
@@ -40,7 +44,7 @@
             <div class="post-header__top">
               <h3 class="post-title">{{ state.post.title | transloco }}</h3>
               <div class="post-header__tools no-print">
-                <ng-button
+                <app-button
                   [icon]="printIcon"
                   [ariaLabel]="'Print or save as PDF' | transloco"
                   [stylingMode]="'ghost'"
@@ -58,7 +62,7 @@
               <span class="post-reading-time">{{ state.post.content | readingTime }}</span>
               @if (viewCount$ | async; as viewCount) {
                 <span class="post-views">
-                  <ng-svg [icon]="eyeIcon" class="post-views__icon"></ng-svg>
+                  <app-svg [icon]="eyeIcon" class="post-views__icon"></app-svg>
                   {{ viewCount }} {{ (viewCount === 1 ? 'view' : 'views') | transloco }}
                 </span>
               }
@@ -66,7 +70,7 @@
             @if (state.post.tags && state.post.tags.length > 0) {
               <div class="post-tags">
                 @for (tag of state.post.tags; track tag) {
-                  <ng-badge
+                  <app-badge
                     [text]="tag | transloco"
                     [size]="'small'"
                     [stylingMode]="'outlined'"
@@ -83,7 +87,7 @@
         <p class="post-print-footer">{{ getCurrentUrl() }}</p>
         <app-share-post [postTitle]="state.post.title | transloco" [postUrl]="getCurrentUrl()" />
         <div class="post-like">
-          <ng-button
+          <app-button
             [icon]="heartIcon"
             [label]="(isLiked() ? 'Liked' : 'Like') | transloco"
             [stylingMode]="isLiked() ? 'contained' : 'outlined'"
@@ -91,7 +95,8 @@
           />
           @if (displayedLikeCount() > 0) {
             <span class="post-like__count">
-              {{ displayedLikeCount() }} {{ (displayedLikeCount() === 1 ? 'like' : 'likes') | transloco }}
+              {{ displayedLikeCount() }}
+              {{ (displayedLikeCount() === 1 ? 'like' : 'likes') | transloco }}
             </span>
           }
         </div>

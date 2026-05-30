@@ -21,7 +21,7 @@ import { ControlValueAccessor, FormControl, NgControl, Validators } from '@angul
 import { LabelComponent } from '../label/label.component';
 
 @Component({
-  selector: 'ng-text-area',
+  selector: 'app-text-area',
   imports: [CommonModule, LabelComponent],
   templateUrl: './text-area.component.html',
   styleUrls: ['./text-area.component.scss'],
@@ -31,9 +31,9 @@ import { LabelComponent } from '../label/label.component';
 export class TextAreaComponent implements ControlValueAccessor, AfterViewInit, DoCheck {
   @Input() public label: string | undefined = '';
   @Input() public labelLocation: 'left' | 'top' = 'top';
-  @Input() public labelInfo: string = '';
+  @Input() public labelInfo = '';
   @Input() public labelBold = false;
-  @Input() public placeholder: string = '';
+  @Input() public placeholder = '';
   @Input() public requiredForLabel: boolean | undefined = undefined;
   @Input() public disabled = false;
   @Input() public readOnly = false;
@@ -61,7 +61,7 @@ export class TextAreaComponent implements ControlValueAccessor, AfterViewInit, D
   public onTouched?: () => void;
 
   public get control(): FormControl | undefined {
-    return <FormControl<unknown>>this._ngControl?.control;
+    return this._ngControl?.control as FormControl<unknown>;
   }
 
   public get isError(): boolean {
@@ -97,8 +97,8 @@ export class TextAreaComponent implements ControlValueAccessor, AfterViewInit, D
     };
   }
 
-  protected get textareaStyle(): { [key: string]: string | number } {
-    const styles: { [key: string]: string | number } = {};
+  protected get textareaStyle(): Record<string, string | number> {
+    const styles: Record<string, string | number> = {};
 
     if (this.minHeight !== undefined) {
       styles['min-height'] = `${this.minHeight}px`;
@@ -119,7 +119,7 @@ export class TextAreaComponent implements ControlValueAccessor, AfterViewInit, D
 
   constructor(
     private readonly _cdr: ChangeDetectorRef,
-    @Self() @Optional() private readonly _ngControl?: NgControl
+    @Self() @Optional() private readonly _ngControl?: NgControl,
   ) {
     if (this._ngControl) {
       this._ngControl.valueAccessor = this;

@@ -30,7 +30,8 @@ import { LikeCounterService } from '../../services/like-counter.service';
 import { SvgComponent } from '@app/shared/components/svg/svg.component';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { SeoService } from '@app/core/services/seo/seo.service';
 import { CopyCodeDirective } from '@app/shared/directives/copy-code.directive';
 import { BadgeComponent } from '@app/shared/components/badge/badge.component';
 import { RelatedPostsComponent } from '../../components/related-posts/related-posts.component';
@@ -69,6 +70,8 @@ export class PostDetailComponent implements OnInit {
   private readonly _likeCounterService = inject(LikeCounterService);
   private readonly _contentReadyService = inject(BlogContentReadyService);
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _transloco = inject(TranslocoService);
+  private readonly _seo = inject(SeoService);
 
   protected readonly eyeIcon = Icons.Eye;
   protected readonly heartIcon = Icons.Heart;
@@ -85,6 +88,9 @@ export class PostDetailComponent implements OnInit {
     switchMap((slug) =>
       this._postService.getPostBySlug(slug).pipe(
         tap((result) => {
+          if (result.post) {
+            this._updateSeo(result.post.slug, result.post.title, result.post.description);
+          }
           if (result.post && !result.unavailableInLanguage) {
             this._yandexMetrikaService.sendMetricsEvent('post_view', {
               post_slug: result.post.slug,
@@ -151,6 +157,15 @@ export class PostDetailComponent implements OnInit {
     this._likeCounterService.incrementLike(slug).pipe(take(1)).subscribe();
     this.isLiked.set(true);
     this.likeCount.update((count) => count + 1);
+  }
+
+  private _updateSeo(slug: string, titleKey: string, descriptionKey?: string): void {
+    this._seo.update({
+      title: this._transloco.translate(titleKey),
+      description: descriptionKey ? this._transloco.translate(descriptionKey) : '',
+      path: `/blog/${slug}`,
+      type: 'article',
+    });
   }
 
   protected formatDate(dateStr: string): string {

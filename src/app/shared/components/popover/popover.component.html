@@ -2,9 +2,9 @@
   <div
     [class.ng-popover__content_small-padding]="padding === 'small'"
     [ngStyle]="{
-          height: height ? height + 'px' : undefined,
-          maxHeight: maxHeight ? maxHeight + 'px' : undefined,
-        }"
+      height: height ? height + 'px' : undefined,
+      maxHeight: maxHeight ? maxHeight + 'px' : undefined,
+    }"
     (scroll)="$event.stopPropagation(); $event.preventDefault()"
     id="overlay-content"
     class="ng-popover__content"

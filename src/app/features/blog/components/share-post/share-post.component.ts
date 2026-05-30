@@ -82,13 +82,18 @@ export class SharePostComponent {
       Instagram: 'Link will be copied to the clipboard',
     };
     const key = tooltipKeys[platform.name];
-    return key ? this._transloco.translate(key) : this._transloco.translate('Share on Twitter/X').replace('Twitter/X', platform.name);
+    return key
+      ? this._transloco.translate(key)
+      : this._transloco.translate('Share on Twitter/X').replace('Twitter/X', platform.name);
   }
 
   protected shareOnPlatform(platform: SharePlatform): void {
     if (platform.name === 'Instagram') {
       const url = this.postUrl || this._document.location.href;
-      this._copyToClipboard(url, this._transloco.translate('Link copied to clipboard! You can paste it in Instagram.'));
+      this._copyToClipboard(
+        url,
+        this._transloco.translate('Link copied to clipboard! You can paste it in Instagram.'),
+      );
       return;
     }
 
@@ -105,7 +110,7 @@ export class SharePostComponent {
     window.open(
       platform.url,
       'share',
-      `width=${width},height=${height},left=${left},top=${top},toolbar=0,menubar=0,location=0,status=0`
+      `width=${width},height=${height},left=${left},top=${top},toolbar=0,menubar=0,location=0,status=0`,
     );
   }
 

@@ -15,13 +15,13 @@
     <div class="ng-drawer__header">
       <div class="ng-drawer__header-content">
         @if (showBackButton) {
-          <ng-button
+          <app-button
             [icon]="iconsArrowLeft"
             (clicked)="navigateBack()"
             variant="default"
             stylingMode="outlined"
             class="ng-drawer__back-button"
-          ></ng-button>
+          ></app-button>
         }
         <div class="ng-drawer__header-text">
           <div class="ng-drawer__title">{{ header }}</div>
@@ -31,57 +31,57 @@
 
       <div class="ng-drawer__header-actions">
         @if (showNavigation) {
-          <ng-button-group>
-            <ng-button
+          <app-button-group>
+            <app-button
               [icon]="iconsArrowLeft"
               (clicked)="navigatePrevious()"
               variant="default"
               stylingMode="outlined"
-            ></ng-button>
+            ></app-button>
 
-            <ng-button
+            <app-button
               [icon]="iconsArrowRight"
               (clicked)="navigateNext()"
               variant="default"
               stylingMode="outlined"
-            ></ng-button>
-          </ng-button-group>
+            ></app-button>
+          </app-button-group>
         }
 
-        <ng-button
+        <app-button
           [icon]="iconsCross"
           (clicked)="close()"
           variant="default"
           stylingMode="outlined"
           class="ng-drawer__close-button"
-        ></ng-button>
+        ></app-button>
       </div>
     </div>
 
-    <ng-divider></ng-divider>
+    <app-divider></app-divider>
 
     <div class="ng-drawer__content">
-      <ng-scroll [thickness]="4">
+      <app-scroll [thickness]="4">
         <div class="ng-drawer__scroll-wrapper">
           <ng-container *ngComponentOutlet="componentType"></ng-container>
           <ng-content></ng-content>
         </div>
-      </ng-scroll>
+      </app-scroll>
     </div>
 
     @if (customFooterTemplate) {
-      <ng-divider></ng-divider>
+      <app-divider></app-divider>
       <div class="ng-drawer__footer">
         <ng-container *ngTemplateOutlet="customFooterTemplate"></ng-container>
       </div>
     } @else if (additionalActionButtonConfig || cancelButtonConfig || submitButtonConfig) {
-      <ng-divider></ng-divider>
+      <app-divider></app-divider>
     }
     @if (additionalActionButtonConfig || cancelButtonConfig || submitButtonConfig) {
       <div class="ng-drawer__footer">
         <div>
           @if (additionalActionButtonConfig) {
-            <ng-button
+            <app-button
               [label]="additionalActionButtonConfig.label"
               [stylingMode]="additionalActionButtonConfig.stylingMode ?? 'outlined'"
               [variant]="additionalActionButtonConfig.variant ?? 'default'"
@@ -90,13 +90,13 @@
               [iconWidth]="additionalActionButtonConfig.iconWidth"
               [iconHeight]="additionalActionButtonConfig.iconHeight"
               (clicked)="action()"
-            ></ng-button>
+            ></app-button>
           }
         </div>
 
         <div class="ng-drawer__footer-actions">
           @if (popoverButtonConfig) {
-            <ng-button-popover
+            <app-button-popover
               [label]="popoverButtonConfig.label"
               [stylingMode]="popoverButtonConfig.stylingMode ?? 'contained'"
               [variant]="popoverButtonConfig.variant ?? 'default'"
@@ -105,10 +105,10 @@
               (clicked)="popoverButtonAction.emit($event)"
               [menuHeader]="'Выберите вариант:'"
               type="menu"
-            ></ng-button-popover>
+            ></app-button-popover>
           }
           @if (cancelButtonConfig) {
-            <ng-button
+            <app-button
               [label]="cancelButtonConfig.label"
               [stylingMode]="cancelButtonConfig.stylingMode ?? 'outlined'"
               [variant]="cancelButtonConfig.variant ?? 'default'"
@@ -117,10 +117,10 @@
               [iconWidth]="cancelButtonConfig.iconWidth"
               [iconHeight]="cancelButtonConfig.iconHeight"
               (clicked)="cancel()"
-            ></ng-button>
+            ></app-button>
           }
           @if (submitButtonConfig) {
-            <ng-button
+            <app-button
               [label]="submitButtonConfig.label"
               [stylingMode]="submitButtonConfig.stylingMode ?? 'contained'"
               [variant]="submitButtonConfig.variant ?? 'default'"
@@ -130,7 +130,7 @@
               [iconHeight]="submitButtonConfig.iconHeight"
               [disabled]="submitButtonConfig.disabled ?? false"
               (clicked)="submit()"
-            ></ng-button>
+            ></app-button>
           }
         </div>
       </div>

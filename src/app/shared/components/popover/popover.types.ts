@@ -12,11 +12,11 @@ export type PopoverPosition =
   | 'right'
   | 'left';
 
-export type PopoverSettings = {
+export interface PopoverSettings {
   externalClass: string;
   minWidth: number | undefined;
   height: number | undefined;
   maxHeight: number | undefined;
   padding: 'small' | 'default';
   hideOnOutsideClick: ((event: any) => boolean) | boolean;
-};
+}

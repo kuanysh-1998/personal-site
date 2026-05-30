@@ -3,7 +3,7 @@ import { ButtonVariant, StylingMode } from '../button/button.types';
 
 export const DIALOG_DATA = new InjectionToken('DialogData');
 
-export type DialogConfig = {
+export interface DialogConfig {
   id?: string;
   data?: unknown;
   size?: 'small' | 'medium' | 'large';
@@ -39,13 +39,13 @@ export type DialogConfig = {
     injector: Injector;
     tokens: ProviderToken<unknown>[];
   };
-};
+}
 
-export type ButtonConfig = {
+export interface ButtonConfig {
   stylingMode?: StylingMode;
   variant?: ButtonVariant;
   label: string;
   icon?: string;
   iconRight?: string;
   disabled?: boolean;
-};
+}

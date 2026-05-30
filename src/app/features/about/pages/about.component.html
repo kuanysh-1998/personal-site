@@ -2,24 +2,34 @@
   <div class="about-page__hero">
     <div class="about-page__intro">
       <div class="about-page__avatar" aria-hidden="true">
-        <ng-avatar
-          [name]="'Kuanysh Aptaizhanov' | transloco"
-          size="large"
-          variant="secondary"
-        />
+        <app-avatar [name]="'Kuanysh Aptaizhanov' | transloco" size="large" variant="secondary" />
       </div>
       <div class="about-page__intro-text">
         <h1 class="about-page__name">{{ 'Kuanysh Aptaizhanov' | transloco }}</h1>
         <p class="about-page__tagline">
           {{ 'Frontend engineer in Astana, Kazakhstan' | transloco }}
-          <span *ngTooltip="astanaTime()">{{ '(UTC+5)' | transloco }}</span>.
-          {{ 'Writing about building Angular apps — from architecture patterns to everyday trade-offs.' | transloco }}
+          <span *ngTooltip="astanaTime()">{{ '(UTC+5)' | transloco }}</span
+          >.
+          {{
+            'Writing about building Angular apps — from architecture patterns to everyday trade-offs.'
+              | transloco
+          }}
         </p>
       </div>
     </div>
     <div class="about-page__bio">
-      <p>{{ "I've been building web applications for several years, mostly in the Angular ecosystem. I care about clean architecture, readable code, and the small decisions that make software easier to change over time." | transloco }}</p>
-      <p>{{ "Outside of work I run and read. This blog is where I write about things I learn or find interesting — usually Angular-related, sometimes broader." | transloco }}</p>
+      <p>
+        {{
+          "I've been building web applications for several years, mostly in the Angular ecosystem. I care about clean architecture, readable code, and the small decisions that make software easier to change over time."
+            | transloco
+        }}
+      </p>
+      <p>
+        {{
+          'Outside of work I run and read. This blog is where I write about things I learn or find interesting — usually Angular-related, sometimes broader.'
+            | transloco
+        }}
+      </p>
     </div>
   </div>
   <app-latest-posts />

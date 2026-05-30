@@ -1,12 +1,12 @@
 <div [ngClass]="textareaClasses">
   @if (label) {
-  <ng-label
-    [required]="isRequired"
-    [label]="label"
-    [bold]="labelBold"
-    [info]="labelInfo"
-    [disabled]="isDisabled"
-  ></ng-label>
+    <app-label
+      [required]="isRequired"
+      [label]="label"
+      [bold]="labelBold"
+      [info]="labelInfo"
+      [disabled]="isDisabled"
+    ></app-label>
   }
 
   <div class="ng-text-area__wrapper">
@@ -28,13 +28,14 @@
     </textarea>
 
     @if (!isDisabled && !readOnly && isError) {
-    <div class="ng-text-area__error-message">
-      {{ errorText }}
-    </div>
-    } @if (helperText) {
-    <div class="ng-text-area__helper-text">
-      {{ helperText }}
-    </div>
+      <div class="ng-text-area__error-message">
+        {{ errorText }}
+      </div>
+    }
+    @if (helperText) {
+      <div class="ng-text-area__helper-text">
+        {{ helperText }}
+      </div>
     }
   </div>
 </div>

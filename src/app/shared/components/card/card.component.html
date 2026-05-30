@@ -1,27 +1,38 @@
 <div class="ng-card" [class.ng-card_full-height]="isFullHeight">
-  <div #card [attr.data-token]="token" [ngClass]="cardClasses" (click)="click()">
+  <div
+    #card
+    [attr.data-token]="token"
+    [ngClass]="cardClasses"
+    [attr.role]="clickable ? 'button' : null"
+    [attr.tabindex]="clickable ? 0 : null"
+    (click)="click()"
+    (keydown)="handleKeydown($event)"
+  >
     @if (header || icon || iconRight || templateHeader || isClickableHeader) {
-    <div [ngClass]="headerClasses" (click)="toggleContent()">
-      <div class="ng-card__header">
-        @if (icon) {
-        <ng-svg [icon]="icon" class="ng-card__icon"></ng-svg>
+      <div [ngClass]="headerClasses" (click)="toggleContent()">
+        <div class="ng-card__header">
+          @if (icon) {
+            <app-svg [icon]="icon" class="ng-card__icon"></app-svg>
+          }
+
+          <span class="ng-card__header-text">{{ header }}</span>
+        </div>
+
+        @if (templateHeader) {
+          <ng-container *ngTemplateOutlet="templateHeader"></ng-container>
         }
-
-        <span class="ng-card__header-text">{{ header }}</span>
+        @if (iconRight || isClickableHeader) {
+          @if (isClickableHeader) {
+            <app-svg
+              [icon]="'i_ng_chevron_right'"
+              [class.ng-card__chevron_open]="isExpandedSignal()"
+              class="ng-card__chevron"
+            ></app-svg>
+          } @else {
+            <app-svg [icon]="iconRight!" class="ng-card__icon"></app-svg>
+          }
+        }
       </div>
-
-      @if (templateHeader) {
-      <ng-container *ngTemplateOutlet="templateHeader"></ng-container>
-      } @if (iconRight || isClickableHeader) { @if (isClickableHeader) {
-      <ng-svg
-        [icon]="'i_ng_chevron_right'"
-        [class.ng-card__chevron_open]="isExpandedSignal()"
-        class="ng-card__chevron"
-      ></ng-svg>
-      } @else {
-      <ng-svg [icon]="iconRight!" class="ng-card__icon"></ng-svg>
-      } }
-    </div>
     }
 
     <div

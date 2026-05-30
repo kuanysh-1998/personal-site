@@ -1,4 +1,4 @@
-export type ListItem = {
+export interface ListItem {
   id?: number;
   text: string;
   visible?: boolean;
@@ -10,4 +10,4 @@ export type ListItem = {
   withGap?: boolean;
   link?: string;
   token?: string;
-};
+}

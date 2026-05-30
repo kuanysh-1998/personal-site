@@ -11,7 +11,6 @@ import { DIALOG_DATA, DialogConfig } from './dialog.types';
 import { DialogComponent } from './dialog.component';
 import { DialogRef } from './dialog-ref.service';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -30,7 +29,7 @@ export class DialogService {
 
   public open<T = unknown>(
     componentOrElement: Type<T> | TemplateRef<any> | null,
-    config?: DialogConfig
+    config?: DialogConfig,
   ): DialogComponent {
     const dialogRef = new DialogRef();
     const modalComponentRef = this._createComponent(dialogRef, config);
@@ -97,7 +96,7 @@ export class DialogService {
 
   private _createComponent(
     dialogRef: DialogRef,
-    config?: DialogConfig
+    config?: DialogConfig,
   ): ComponentRef<DialogComponent> {
     const modalInjector = Injector.create({
       providers: [

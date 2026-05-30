@@ -1,3 +1,3 @@
-export type ToastContainerSettings = {
+export interface ToastContainerSettings {
   life: number;
-};
+}

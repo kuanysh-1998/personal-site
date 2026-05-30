@@ -2,11 +2,11 @@
   <h3 class="social-connect__title">{{ 'Connect' | transloco }}</h3>
   <p class="social-connect__text">
     {{ 'Reach me at' | transloco }}
-    <ng-link [link]="'mailto:' + email" [text]="email" />
+    <app-link [link]="'mailto:' + email" [text]="email" />
   </p>
   <div class="social-connect__links">
     @for (link of links; track link.name) {
-      <ng-link [link]="link.url" [text]="link.name" />
+      <app-link [link]="link.url" [text]="link.name" />
     }
   </div>
 </div>

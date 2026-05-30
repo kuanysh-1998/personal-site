@@ -115,7 +115,7 @@ export class PostService {
     });
   }
 
-  public getRelatedPosts(currentSlug: string, limit: number = 3): PostMetadata[] {
+  public getRelatedPosts(currentSlug: string, limit = 3): PostMetadata[] {
     const currentPost = POSTS.find((p) => p.slug === currentSlug);
 
     if (!currentPost || !currentPost.tags || currentPost.tags.length === 0) {

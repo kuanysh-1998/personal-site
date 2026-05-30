@@ -12,7 +12,7 @@
   }
 
   <div class="main-layout__contact-button">
-    <ng-button
+    <app-button
       [icon]="contactIcon"
       [ariaLabel]="'Contact' | transloco"
       [size]="'large'"
@@ -24,7 +24,7 @@
   </div>
 
   @if (showScrollTop()) {
-    <ng-button
+    <app-button
       class="scroll-to-top"
       [icon]="'chevron-up'"
       [size]="'large'"
@@ -33,6 +33,6 @@
       (clicked)="scrollToTop()"
       [ariaLabel]="'Scroll to top' | transloco"
       *ngTooltip="'Return to top' | transloco"
-    ></ng-button>
+    ></app-button>
   }
 </div>

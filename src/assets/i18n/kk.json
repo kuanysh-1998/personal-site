@@ -118,5 +118,6 @@
   "like": "лайк",
   "likes": "лайк",
   "I've been building web applications for several years, mostly in the Angular ecosystem. I care about clean architecture, readable code, and the small decisions that make software easier to change over time.": "Бірнеше жыл бойы веб-қолданбалар жасаумен айналысамын, негізінен Angular экожүйесінде. Маған таза архитектура, оқылатын код және бағдарламалық жасақтаманы өзгертуді жеңілдететін шағын шешімдер маңызды.",
-  "Outside of work I run and read. This blog is where I write about things I learn or find interesting — usually Angular-related, sometimes broader.": "Жұмыстан тыс — жүгіремін және кітап оқимын. Бұл блог — үйренгенім немесе қызықты деп тапқанымды жазатын орным: көбінесе Angular туралы, кейде кеңірек."
+  "Outside of work I run and read. This blog is where I write about things I learn or find interesting — usually Angular-related, sometimes broader.": "Жұмыстан тыс — жүгіремін және кітап оқимын. Бұл блог — үйренгенім немесе қызықты деп тапқанымды жазатын орным: көбінесе Angular туралы, кейде кеңірек.",
+  "Found": "Табылды"
 }

@@ -11,7 +11,7 @@ export const WHATS_NEW_FEATURES: readonly WhatsNewFeature[] = [
   {
     title: 'Localization (EN, RU, KK)',
     description:
-      'The site is now available in English, Russian and Kazakh. Switch the language using the dropdown in the header — your choice is saved. If you notice a section without translation yet, don\'t worry: we\'re gradually adding more translations and will cover everything soon.',
+      "The site is now available in English, Russian and Kazakh. Switch the language using the dropdown in the header — your choice is saved. If you notice a section without translation yet, don't worry: we're gradually adding more translations and will cover everything soon.",
     date: new Date('2026-02-05'),
   },
   {

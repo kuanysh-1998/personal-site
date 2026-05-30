@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 
-export type Tab = {
+export interface Tab {
   id: string;
   text?: string;
   icon?: string;
@@ -9,4 +9,4 @@ export type Tab = {
   token?: string;
   template?: TemplateRef<any>;
   content?: TemplateRef<any>;
-};
+}

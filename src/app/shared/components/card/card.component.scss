@@ -152,19 +152,42 @@
     &.ng-card__container_clickable {
       cursor: pointer;
       user-select: none;
-      transition: background-color 0.2s;
+      transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 
       &:hover {
         background: var(--theme-bg-card-hover);
+        border-color: var(--brand-blue-40);
+        box-shadow: 0 6px 20px var(--shadow-light);
+        transform: translateY(-2px);
       }
 
       &:focus {
-        background: var(--theme-bg-card-active);
         outline: none;
+      }
+
+      // Кольцо фокуса только для клавиатуры
+      &:focus-visible {
+        outline: 2px solid var(--brand-blue);
+        outline-offset: 2px;
+        background: var(--theme-bg-card-active);
       }
 
       &:active {
         background: var(--theme-bg-card-active);
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: background-color 0.2s ease;
+
+        &:hover,
+        &:active {
+          transform: none;
+        }
       }
     }
   }
@@ -186,7 +209,9 @@
     .ng-card__chevron {
       flex-shrink: 0;
       fill: var(--theme-text-secondary);
-      transition: rotate 0.2s, fill 0.2s;
+      transition:
+        rotate 0.2s,
+        fill 0.2s;
 
       &.ng-card__chevron_open {
         rotate: 90deg;

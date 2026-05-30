@@ -1,6 +1,6 @@
 <div class="contact-form">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <ng-text-field
+    <app-text-field
       formControlName="subject"
       [label]="'Subject' | transloco"
       [placeholder]="'Enter subject' | transloco"
@@ -14,7 +14,7 @@
         <span class="contact-form__switch-label" [class.active]="!form.get('contactType')?.value">
           {{ 'Email' | transloco }}
         </span>
-        <ng-switch
+        <app-switch
           formControlName="contactType"
           position="right"
           [requiredForLabel]="false"
@@ -25,7 +25,7 @@
         </span>
       </div>
 
-      <ng-text-field
+      <app-text-field
         formControlName="contact"
         [label]="getContactLabel()"
         [placeholder]="getContactPlaceholder()"
@@ -35,7 +35,7 @@
       />
     </div>
 
-    <ng-text-area
+    <app-text-area
       formControlName="description"
       [label]="'Description' | transloco"
       [placeholder]="'Describe your request' | transloco"

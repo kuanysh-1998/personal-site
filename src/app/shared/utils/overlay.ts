@@ -1,7 +1,7 @@
 import { Component, Input, Renderer2, ViewContainerRef } from '@angular/core';
 
 @Component({
-  selector: 'ng-overlay',
+  selector: 'app-overlay',
   template: '',
   standalone: false,
 })
@@ -14,12 +14,15 @@ export abstract class Overlay {
   protected popoverElement: HTMLElement | undefined;
   protected targetElement: HTMLElement | undefined;
 
-  private _scrollListeners: Array<() => void> = [];
+  private _scrollListeners: (() => void)[] = [];
 
   private readonly _two = 2;
   private readonly _gap = 5;
 
-  constructor(public readonly renderer: Renderer2, public readonly vcr: ViewContainerRef) {}
+  constructor(
+    public readonly renderer: Renderer2,
+    public readonly vcr: ViewContainerRef,
+  ) {}
 
   public setPosition(): void {
     if (!this.targetElement || !this.popoverElement) {
@@ -312,7 +315,7 @@ export abstract class Overlay {
             targetRect.left +
             targetRect.width / this._two -
             this.popoverElement.getBoundingClientRect().left
-          }px`
+          }px`,
         );
       } else {
         if (right) this.renderer.addClass(this.popoverElement, 'ng-tooltip_left');
@@ -326,7 +329,7 @@ export abstract class Overlay {
             targetRect.height / this._two -
             this.popoverElement.getBoundingClientRect().top -
             12
-          }px`
+          }px`,
         );
       }
     }
@@ -363,7 +366,7 @@ export abstract class Overlay {
       if (!this.popoverElement) return;
 
       const overlayContent = this.popoverElement.querySelector(
-        '.ng-popover__content'
+        '.ng-popover__content',
       ) as HTMLElement | null;
 
       const eventTargetNode = event.target as Node;

@@ -1,17 +1,17 @@
 <div class="share-post">
-  <ng-card [padding]="'small'" [stylingMode]="'default'" [header]="'Share' | transloco">
+  <app-card [padding]="'small'" [stylingMode]="'default'" [header]="'Share' | transloco">
     <div class="share-post__buttons">
       @for (platform of sharePlatforms(); track platform.name) {
-      <span *ngTooltip="getTooltipText(platform)" ngTooltipPosition="top">
-        <ng-button
-          [label]="platform.name"
-          stylingMode="outlined"
-          size="small"
-          (clicked)="shareOnPlatform(platform)"
-          [attr.aria-label]="getTooltipText(platform)"
-        />
-      </span>
+        <span *ngTooltip="getTooltipText(platform)" ngTooltipPosition="top">
+          <app-button
+            [label]="platform.name"
+            stylingMode="outlined"
+            size="small"
+            (clicked)="shareOnPlatform(platform)"
+            [attr.aria-label]="getTooltipText(platform)"
+          />
+        </span>
       }
     </div>
-  </ng-card>
+  </app-card>
 </div>

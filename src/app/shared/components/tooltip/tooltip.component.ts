@@ -22,7 +22,7 @@ import { ThemeService } from '@app/core/services/theme/theme.service';
 import { Overlay } from '@app/shared/utils/overlay';
 
 @Component({
-  selector: 'ng-tooltip',
+  selector: 'app-tooltip',
   imports: [CommonModule],
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],

@@ -8,20 +8,21 @@
     [attr.aria-label]="ariaLabel"
   >
     @if (icon) {
-    <ng-svg
-      [width]="iconWidth"
-      [height]="iconHeight"
-      class="ng-button__icon"
-      [icon]="icon"
-    ></ng-svg>
+      <app-svg
+        [width]="iconWidth"
+        [height]="iconHeight"
+        class="ng-button__icon"
+        [icon]="icon"
+      ></app-svg>
     }
 
     {{ label }}
 
     @if (!label) {
-    <ng-content></ng-content>
-    } @if (rightIcon) {
-    <ng-svg class="ng-button__icon" [icon]="rightIcon"></ng-svg>
+      <ng-content></ng-content>
+    }
+    @if (rightIcon) {
+      <app-svg class="ng-button__icon" [icon]="rightIcon"></app-svg>
     }
   </button>
 </div>

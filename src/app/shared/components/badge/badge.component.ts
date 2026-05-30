@@ -17,7 +17,7 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
 import { SvgComponent } from '../svg/svg.component';
 
 @Component({
-  selector: 'ng-badge',
+  selector: 'app-badge',
   imports: [CommonModule, SvgComponent, TooltipComponent],
   templateUrl: './badge.component.html',
   styleUrls: ['./badge.component.scss'],

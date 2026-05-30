@@ -6,15 +6,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm start                      # ng serve — dev server at http://localhost:4200
-npm run build                  # production build (default config) → dist/
+npm run build                  # production build → dist/ (prebuild regenerates sitemap.xml)
 npm run watch                  # development build in watch mode
-npm test                       # ng test — Vitest via @angular/build:unit-test
+npm test -- --watch=false      # ng test once — Vitest via @angular/build:unit-test
+npm run lint                   # eslint . (flat config, ts + html)
+npm run lint:fix               # eslint . --fix
 npm run format                 # prettier --write over src/**/*.{ts,html,scss,json}
+npm run format:check           # prettier --check (used by CI)
+npm run generate:sitemap       # regenerate src/sitemap.xml from posts.data.ts
 ```
 
-Run a single test file: `npm test -- src/app/.../foo.spec.ts` (Vitest passthrough after `--`).
+Run a single test file: `npm test -- --watch=false src/app/.../foo.spec.ts`. `ng test` errors if **zero** spec files match, so keep at least one.
 
-Prettier config: `.prettierrc.json` (single quotes, 100 print width, 2-space tabs). There is no ESLint setup; type safety is enforced by TypeScript `strict` + Angular `strictTemplates`.
+Linting/formatting: ESLint flat config in `eslint.config.js` (angular-eslint, rules mirror `.cursor/rules`). Legacy-pattern rules (`prefer-inject`, template a11y, `no-explicit-any`, …) are set to **warn** so they surface without blocking CI — tighten them to `error` as the code is refactored. Prettier config: `.prettierrc.json` (single quotes, 100 print width). Type safety also enforced by TS `strict` + Angular `strictTemplates`.
+
+CI: `.github/workflows/ci.yml` runs lint → format:check → test → build on push/PR to `main`.
 
 ## Conventions (from .cursor/rules — these are binding)
 
@@ -56,6 +62,7 @@ Posts are **not** in a CMS or database — they are static markdown files plus a
 
 ### Other integrations
 
+- **SeoService** (`core/services/seo`) — sets `Title`/`Meta`/Open Graph/Twitter/canonical per route; page components call `seo.update({...})` in `ngOnInit` and re-run on `langChanges$`. Post pages use `type: 'article'`. `sitemap.xml` is generated from `posts.data.ts` by `scripts/generate-sitemap.mjs` (runs on `prebuild`) — do not hand-edit it. Note: still a client-rendered SPA (no SSR/prerender yet), so tags are set at runtime.
 - **Firebase** (`@angular/fire`) — Realtime Database, configured from `environment.firebaseConfig`.
 - **EmailjsService** — contact form submission via `@emailjs/browser`; ids in `environment.emailjs`.
 - **PWA** — service worker via `ngsw-config.json`, registered `registerWhenStable:3000`; `ServiceWorkerUpdateService` handles update prompts.

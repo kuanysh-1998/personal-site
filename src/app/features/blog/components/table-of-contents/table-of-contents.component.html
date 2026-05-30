@@ -1,11 +1,11 @@
 @if (hasItems()) {
   <nav class="table-of-contents" aria-label="Table of contents">
     <h3 class="toc-title">Table of contents</h3>
-    <ng-scroll [thickness]="4">
+    <app-scroll [thickness]="4">
       <div class="toc-scroll-wrapper">
         <div class="toc-list">
           @for (item of tocItems(); track item.id) {
-            <ng-list-item
+            <app-list-item
               [text]="item.title"
               [active]="activeItemId() === item.id"
               [withGap]="item.level > 2"
@@ -15,6 +15,6 @@
           }
         </div>
       </div>
-    </ng-scroll>
+    </app-scroll>
   </nav>
 }

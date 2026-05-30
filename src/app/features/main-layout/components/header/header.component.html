@@ -1,18 +1,18 @@
 <header class="header">
   <div class="header__content">
     <div class="header__navigation">
-      <ng-tabs
+      <app-tabs
         [tabsItems]="tabs()"
         [orientation]="'horizontal'"
         [selectedTab]="selectedTab"
         [hideBorder]="true"
         (changed)="onTabChanged($event)"
-      ></ng-tabs>
+      ></app-tabs>
     </div>
 
     <div class="header__actions">
       <div class="header__lang-dropdown">
-        <ng-dropdown
+        <app-dropdown
           [options]="localeService.availableOptions"
           [value]="localeService.currentLang()"
           [placeholder]="'Language' | transloco"
@@ -22,7 +22,7 @@
           (changed)="onLanguageChanged($event)"
         />
       </div>
-      <ng-button
+      <app-button
         class="header__theme-toggle"
         [icon]="themeToggleIcon"
         [ariaLabel]="themeToggleAriaLabel"
@@ -33,7 +33,7 @@
         (clicked)="themeService.toggleTheme()"
       />
       <div class="header__whats-new-button">
-        <ng-button
+        <app-button
           [label]="'What\'s new' | transloco"
           [ariaLabel]="'What\'s new' | transloco"
           [size]="'default'"
@@ -48,7 +48,7 @@
         id="header-menu-trigger"
         [attr.aria-expanded]="mobileMenuOpen()"
       >
-        <ng-button
+        <app-button
           [icon]="menuIcon"
           [ariaLabel]="'Menu' | transloco"
           [stylingMode]="'ghost'"
@@ -58,7 +58,7 @@
           (clicked)="toggleMobileMenu()"
         />
       </div>
-      <ng-popover
+      <app-popover
         [for]="'header-menu-trigger'"
         [isOpen]="mobileMenuOpen()"
         [position]="'bottom right'"
@@ -67,7 +67,7 @@
       >
         <div class="header-menu">
           <div class="header-menu__section">
-            <ng-dropdown
+            <app-dropdown
               class="header-menu__dropdown"
               [options]="localeService.availableOptions"
               [value]="localeService.currentLang()"
@@ -78,9 +78,9 @@
               (changed)="onLanguageChanged($event)"
             />
           </div>
-          <ng-divider [margin]="'small'" />
+          <app-divider [margin]="'small'" />
           <div class="header-menu__section header-menu__section_actions">
-            <ng-button
+            <app-button
               class="header-menu__theme-btn"
               [icon]="themeToggleIcon"
               [ariaLabel]="themeToggleAriaLabel"
@@ -90,7 +90,7 @@
               [iconHeight]="'1.25rem'"
               (clicked)="themeService.toggleTheme(); closeMobileMenu()"
             />
-            <ng-button
+            <app-button
               class="header-menu__whats-new-btn"
               [label]="'What\'s new' | transloco"
               [ariaLabel]="'What\'s new' | transloco"
@@ -100,7 +100,7 @@
             />
           </div>
         </div>
-      </ng-popover>
+      </app-popover>
     </div>
   </div>
 </header>

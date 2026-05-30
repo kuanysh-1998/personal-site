@@ -1,6 +1,6 @@
 import { Links } from '../link/link.types';
 
-export type CheckboxSettings = {
+export interface CheckboxSettings {
   label: string;
   labelBold: boolean;
   disabled: boolean;
@@ -12,4 +12,4 @@ export type CheckboxSettings = {
   token: string | undefined;
   links: Links | undefined;
   indeterminate: boolean;
-};
+}

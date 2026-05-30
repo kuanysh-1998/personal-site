@@ -3,9 +3,11 @@ import {
   Component,
   computed,
   DestroyRef,
+  HostListener,
   inject,
   OnInit,
   signal,
+  ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -14,7 +16,7 @@ import { take } from 'rxjs/operators';
 import { PostGroup } from '@app/entities/post/models/post.interface';
 import { PostService } from '@app/entities/post/services/post.service';
 import { ViewCounterService } from '@app/features/blog/services/view-counter.service';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { PostSearchComponent } from '@app/features/blog/components/post-search/post-search.component';
 import { CardComponent } from '@app/shared/components/card/card.component';
 import { BadgeComponent } from '@app/shared/components/badge/badge.component';
@@ -23,6 +25,7 @@ import { SvgComponent } from '@app/shared/components/svg/svg.component';
 import { Icons } from '@app/shared/components/svg/svg.config';
 import { PaginationComponent } from '@app/shared/components/pagination/pagination.component';
 import { PageChangeEvent } from '@app/shared/components/pagination/pagination.types';
+import { SeoService } from '@app/core/services/seo/seo.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -44,6 +47,24 @@ export class BlogListComponent implements OnInit {
   private readonly _router = inject(Router);
   private readonly _viewCounterService = inject(ViewCounterService);
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _transloco = inject(TranslocoService);
+  private readonly _seo = inject(SeoService);
+
+  @ViewChild(PostSearchComponent) private readonly _search?: PostSearchComponent;
+
+  @HostListener('document:keydown', ['$event'])
+  protected handleGlobalKeydown(event: KeyboardEvent): void {
+    if (event.key !== '/' || event.defaultPrevented) {
+      return;
+    }
+    const target = event.target as HTMLElement | null;
+    const tag = target?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || target?.isContentEditable) {
+      return;
+    }
+    event.preventDefault();
+    this._search?.focusInput();
+  }
 
   protected readonly searchQuery = signal<string>('');
   protected readonly currentPage = signal<number>(1);
@@ -117,6 +138,20 @@ export class BlogListComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initializeViewCounts();
+    this._updateSeo();
+    this._transloco.langChanges$
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => this._updateSeo());
+  }
+
+  private _updateSeo(): void {
+    this._seo.update({
+      title: this._transloco.translate('Blog'),
+      description: this._transloco.translate(
+        'Writing about building Angular apps — from architecture patterns to everyday trade-offs.',
+      ),
+      path: '/blog',
+    });
   }
 
   private initializeViewCounts(): void {
@@ -126,7 +161,7 @@ export class BlogListComponent implements OnInit {
       (acc, post) => ({ ...acc, [post.slug]: 0 }),
       {} as Record<string, number>,
     );
-    
+
     this.viewCounts.set(initialCounts);
 
     allPosts.forEach((post) => {

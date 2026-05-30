@@ -14,7 +14,7 @@ import { Message, ToastType } from '../toast/toast.types';
 import { ToastService } from './toast.service';
 
 @Component({
-  selector: 'ng-toast-container',
+  selector: 'app-toast-container',
   templateUrl: './toast-container.component.html',
   imports: [ToastComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,9 +29,12 @@ export class ToastContainerComponent {
 
   protected messages = signal<(Message & { id: number; remainingLife: number })[]>([]);
 
-  private _timeouts: { [key: number]: number } = {};
+  private _timeouts: Record<number, number> = {};
 
-  constructor(private readonly _toastService: ToastService, injector: Injector) {
+  constructor(
+    private readonly _toastService: ToastService,
+    injector: Injector,
+  ) {
     runInInjectionContext(injector, () => {
       effect(() => {
         this._toastService.messageSource.subscribe(({ message, delay }) => {
@@ -77,7 +80,7 @@ export class ToastContainerComponent {
   private _startTimer(message: Message & { id: number; remainingLife: number }): void {
     this._timeouts[message.id] = setTimeout(
       () => this.messageClose(message.id),
-      message.remainingLife
+      message.remainingLife,
     );
   }
 }

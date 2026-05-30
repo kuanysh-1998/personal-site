@@ -9,7 +9,7 @@
 >
   <div class="ng-accordion__header">
     @if (headerIcon()) {
-      <ng-svg [icon]="headerIcon()" class="ng-accordion__icon"></ng-svg>
+      <app-svg [icon]="headerIcon()" class="ng-accordion__icon"></app-svg>
     }
 
     <div class="ng-accordion__text-wrapper">
@@ -26,7 +26,7 @@
     </div>
   }
 
-  <ng-svg [icon]="chevronIcon" class="ng-accordion__chevron"></ng-svg>
+  <app-svg [icon]="chevronIcon" class="ng-accordion__chevron"></app-svg>
 </div>
 
 <div [ngClass]="contentWrapperClasses()">

@@ -37,7 +37,7 @@ import {
 } from './dropdown.types';
 
 @Component({
-  selector: 'ng-dropdown',
+  selector: 'app-dropdown',
   imports: [
     CommonModule,
     ListItemComponent,
@@ -102,7 +102,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
           this._processOptions(this.options ?? []).map((option) => ({
             ...option,
             selected: false,
-          }))
+          })),
         );
         this.selectedOptions.set([]);
       }
@@ -120,7 +120,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
       this.inputValue.set(
         normalizedValue.length === 1
           ? this._getDisplayValue(normalizedValue[0])
-          : this._formatMultipleDisplay(normalizedValue.length)
+          : this._formatMultipleDisplay(normalizedValue.length),
       );
 
       if (this.highlightSelectedItems) {
@@ -146,7 +146,7 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
         processed.map((option) => ({
           ...option,
           selected: this._value.includes(option.id),
-        }))
+        })),
       );
       if (this.highlightSelectedItems) {
         this.selectedOptions.set(this.options.filter((o) => o.selected));
@@ -332,8 +332,8 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
       mod10 === 1 && mod100 !== 11
         ? 'элемент'
         : mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)
-        ? 'элемента'
-        : 'элементов';
+          ? 'элемента'
+          : 'элементов';
 
     return `${count} ${word} выбрано`;
   }

@@ -16,7 +16,7 @@ export class ServiceWorkerUpdateService {
   constructor(
     private readonly _swUpdate: SwUpdate,
     private readonly _router: Router,
-    private readonly _dialogService: DialogService
+    private readonly _dialogService: DialogService,
   ) {}
 
   public checkForUpdates(): void {
@@ -27,7 +27,7 @@ export class ServiceWorkerUpdateService {
     this._swUpdate.versionUpdates
       .pipe(
         filter((e): e is VersionReadyEvent => e.type === 'VERSION_READY'),
-        takeUntil(this._destroy$)
+        takeUntil(this._destroy$),
       )
       .subscribe(() => {
         this._updateAvailable = true;
@@ -38,14 +38,14 @@ export class ServiceWorkerUpdateService {
       .pipe(
         switchMap(() => this._swUpdate.checkForUpdate()),
         catchError(() => EMPTY),
-        takeUntil(this._destroy$)
+        takeUntil(this._destroy$),
       )
       .subscribe();
 
     this._router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
-        takeUntil(this._destroy$)
+        takeUntil(this._destroy$),
       )
       .subscribe(() => {
         if (this._updateAvailable) {

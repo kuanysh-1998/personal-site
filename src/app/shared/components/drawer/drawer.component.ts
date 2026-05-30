@@ -28,7 +28,7 @@ import { DrawerRef } from './drawer-ref.service';
 import { ScrollComponent } from '../scroll/scroll.component';
 
 @Component({
-  selector: 'ng-drawer',
+  selector: 'app-drawer',
   imports: [
     CommonModule,
     DividerComponent,

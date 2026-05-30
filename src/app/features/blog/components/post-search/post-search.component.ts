@@ -9,6 +9,7 @@ import {
   Input,
   Output,
   signal,
+  ViewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
@@ -40,9 +41,15 @@ export class PostSearchComponent {
   @Output() public searchChange = new EventEmitter<string>();
   @Output() public clear = new EventEmitter<void>();
 
+  @ViewChild(TextFieldComponent) private readonly _textField?: TextFieldComponent;
+
   protected readonly searchValue = signal<string>('');
 
   protected readonly hasValue = computed(() => this.searchValue().length > 0);
+
+  public focusInput(): void {
+    this._textField?.focus();
+  }
 
   constructor() {
     this._searchSubject
@@ -50,7 +57,7 @@ export class PostSearchComponent {
         debounceTime(this.debounceTime),
         distinctUntilChanged(),
         filter((value) => value.length === 0 || value.length >= this.minSearchLength),
-        takeUntilDestroyed(this._destroyRef)
+        takeUntilDestroyed(this._destroyRef),
       )
       .subscribe((value) => {
         this.searchChange.emit(value);

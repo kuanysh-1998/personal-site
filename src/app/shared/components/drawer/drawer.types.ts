@@ -6,7 +6,7 @@ import { ButtonVariant, StylingMode } from '../button/button.types';
 
 export const DRAWER_DATA = new InjectionToken('DrawerData');
 
-export type DrawerConfig = {
+export interface DrawerConfig {
   data?: unknown;
   header?: string;
   subheader?: string;
@@ -24,9 +24,9 @@ export type DrawerConfig = {
     injector: Injector;
     tokens: ProviderToken<unknown>[];
   };
-};
+}
 
-export type ButtonConfig = {
+export interface ButtonConfig {
   stylingMode?: StylingMode;
   variant?: ButtonVariant;
   label: string;
@@ -35,4 +35,4 @@ export type ButtonConfig = {
   iconWidth?: string;
   iconHeight?: string;
   disabled?: boolean;
-};
+}

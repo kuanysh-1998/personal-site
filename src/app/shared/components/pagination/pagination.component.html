@@ -1,5 +1,5 @@
 <div class="pagination">
-  <ng-button
+  <app-button
     [stylingMode]="'outlined'"
     [size]="'default'"
     [icon]="chevronLeftIcon"
@@ -9,7 +9,7 @@
   />
 
   @if (showFirstPage()) {
-    <ng-button
+    <app-button
       [stylingMode]="'outlined'"
       [size]="'default'"
       [label]="'1'"
@@ -19,7 +19,7 @@
   }
 
   @for (page of visiblePages(); track page) {
-    <ng-button
+    <app-button
       [stylingMode]="isCurrentPage(page) ? 'contained' : 'outlined'"
       [size]="'default'"
       [label]="page.toString()"
@@ -31,7 +31,7 @@
 
   @if (showLastPage()) {
     <span class="pagination__ellipsis">...</span>
-    <ng-button
+    <app-button
       [stylingMode]="'outlined'"
       [size]="'default'"
       [label]="totalPages().toString()"
@@ -39,7 +39,7 @@
     />
   }
 
-  <ng-button
+  <app-button
     [stylingMode]="'outlined'"
     [size]="'default'"
     [icon]="chevronRightIcon"

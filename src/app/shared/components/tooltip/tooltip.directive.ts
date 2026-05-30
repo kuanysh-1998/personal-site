@@ -27,7 +27,7 @@ export class TooltipDirective implements OnInit, OnDestroy, OnChanges {
 
   constructor(
     private readonly _templateRef: TemplateRef<unknown>,
-    private readonly _viewContainerRef: ViewContainerRef
+    private readonly _viewContainerRef: ViewContainerRef,
   ) {}
 
   public ngOnChanges(changes: SimpleChanges): void {

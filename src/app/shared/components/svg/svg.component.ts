@@ -4,7 +4,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ICON_DEFAULT_SIZE, Icons, IconSize } from './svg.config';
 
 @Component({
-  selector: 'ng-svg',
+  selector: 'app-svg',
   standalone: true,
   imports: [CommonModule, AngularSvgIconModule],
   templateUrl: './svg.component.html',

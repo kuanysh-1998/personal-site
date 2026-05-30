@@ -21,7 +21,7 @@ import { Tab } from './tabs.types';
 import { SvgComponent } from '../svg/svg.component';
 
 @Component({
-  selector: 'ng-tabs',
+  selector: 'app-tabs',
   imports: [CommonModule, SvgComponent],
   templateUrl: './tabs.component.html',
   styleUrls: ['./styles/tabs.component.scss'],
@@ -128,7 +128,7 @@ export class TabsComponent implements AfterViewInit, OnDestroy {
     }, 50);
   }
 
-  protected getTabClasses(tab: Tab): { [key: string]: boolean } {
+  protected getTabClasses(tab: Tab): Record<string, boolean> {
     return {
       'ng-tabs__tab_disabled': !!(this.disabled || tab.disabled),
       'ng-tabs__tab_selected': this.selectedTab === tab.id,

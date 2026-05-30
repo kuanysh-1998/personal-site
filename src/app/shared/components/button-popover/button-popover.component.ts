@@ -19,7 +19,7 @@ import { ButtonVariant, StylingMode } from '../button/button.types';
 import { ListItem } from '../list-item/list-item.component.types';
 
 @Component({
-  selector: 'ng-button-popover',
+  selector: 'app-button-popover',
   templateUrl: './button-popover.component.html',
   imports: [ButtonComponent, MenuComponent, PopoverComponent],
   styleUrls: ['./button-popover.component.scss'],
@@ -28,8 +28,8 @@ import { ListItem } from '../list-item/list-item.component.types';
 export class ButtonPopoverComponent implements AfterViewInit {
   @Input() public stylingMode: StylingMode = 'contained';
   @Input() public variant: ButtonVariant = 'default';
-  @Input() public disabled: boolean = false;
-  @Input() public label: string = '';
+  @Input() public disabled = false;
+  @Input() public label = '';
   @Input() public position: PopoverPosition = 'bottom left';
   @Input() public type = 'content';
   @Input() public iconRight = null;

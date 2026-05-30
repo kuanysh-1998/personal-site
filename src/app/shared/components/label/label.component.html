@@ -2,23 +2,26 @@
   <label [for]="for" [ngClass]="labelClasses">
     <div class="ng-label__wrapper">
       <span>
-        @for (part of secondaryTextParts; track $index) { @if (isLink(part)) {
-        <ng-link
-          [link]="getUrl(part)"
-          [text]="getText(part)"
-          [disabled]="disabled"
-          [download]="getIsDownload(part)"
-          (click)="$event.stopPropagation()"
-        ></ng-link>
-        } @else {
-        {{ part }}
-        } } @if (required && !disabled) {
-        <span class="ng-label__required">*</span>
+        @for (part of secondaryTextParts; track $index) {
+          @if (isLink(part)) {
+            <app-link
+              [link]="getUrl(part)"
+              [text]="getText(part)"
+              [disabled]="disabled"
+              [download]="getIsDownload(part)"
+              (click)="$event.stopPropagation()"
+            ></app-link>
+          } @else {
+            {{ part }}
+          }
+        }
+        @if (required && !disabled) {
+          <span class="ng-label__required">*</span>
         }
       </span>
 
       @if (info && !disabled) {
-      <ng-svg *ngTooltip="info" [icon]="icon.Info" class="ng-label__icon-info"></ng-svg>
+        <app-svg *ngTooltip="info" [icon]="icon.Info" class="ng-label__icon-info"></app-svg>
       }
     </div>
 

@@ -16,7 +16,7 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { DividerComponent } from '../divider/divider.component';
 
 @Component({
-  selector: 'ng-list-item',
+  selector: 'app-list-item',
   imports: [
     CommonModule,
     SvgComponent,

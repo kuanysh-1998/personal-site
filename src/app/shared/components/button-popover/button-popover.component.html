@@ -1,6 +1,6 @@
 <div class="ng-button-popover">
   <div [class.ng-button-popover_full-width]="fullWidth" #button>
-    <ng-button
+    <app-button
       [icon]="icon"
       [fullWidth]="fullWidth"
       [rightIcon]="iconRight ?? undefined"
@@ -9,11 +9,11 @@
       [stylingMode]="stylingMode"
       [disabled]="disabled"
       (clicked)="toggle()"
-    ></ng-button>
+    ></app-button>
   </div>
 
   @if (isMenu) {
-    <ng-menu
+    <app-menu
       [isOpen]="isOpen()"
       [minWidth]="popoverWidth()"
       [for]="button"
@@ -23,9 +23,9 @@
       [position]="position"
       (clicked)="clicked.emit($event)"
       (closed)="close()"
-    ></ng-menu>
+    ></app-menu>
   } @else {
-    <ng-popover
+    <app-popover
       [for]="button"
       [isOpen]="isOpen()"
       [position]="position"
@@ -36,6 +36,6 @@
       (closed)="close()"
     >
       <ng-content></ng-content>
-    </ng-popover>
+    </app-popover>
   }
 </div>

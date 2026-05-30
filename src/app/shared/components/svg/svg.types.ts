@@ -1,6 +1,6 @@
 import { Icons } from './svg.config';
 
-export type SvgSettings = {
+export interface SvgSettings {
   icon: Icons | string | undefined;
   size: 'small' | 'default' | 'large';
   color: string | undefined;
@@ -9,4 +9,4 @@ export type SvgSettings = {
   height: string | null | undefined;
   wrapperWidth: string | null | undefined;
   wrapperHeight: string | null | undefined;
-};
+}

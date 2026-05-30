@@ -1,9 +1,11 @@
 <div [ngClass]="avatarClasses">
   @if (src) {
-  <img [ngSrc]="src" alt="" class="ng-avatar__image" priority fill />
-  } @else { @if (initials) {
-  <div>{{ initials }}</div>
+    <img [ngSrc]="src" alt="" class="ng-avatar__image" priority fill />
   } @else {
-  <ng-svg [icon]="avatarIcon" [size]="svgSize" class="ng-avatar__icon"></ng-svg>
-  } }
+    @if (initials) {
+      <div>{{ initials }}</div>
+    } @else {
+      <app-svg [icon]="avatarIcon" [size]="svgSize" class="ng-avatar__icon"></app-svg>
+    }
+  }
 </div>

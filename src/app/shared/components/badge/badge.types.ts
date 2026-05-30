@@ -2,7 +2,7 @@ import { PopoverPosition } from '../popover/popover.types';
 
 export type VariantBadge = 'default' | 'secondary' | 'warning' | 'error' | 'success';
 
-export type BadgeSettings = {
+export interface BadgeSettings {
   size: 'small' | 'medium' | 'large';
   stylingMode: 'contained' | 'outlined' | 'ghost';
   variant: VariantBadge;
@@ -15,4 +15,4 @@ export type BadgeSettings = {
   icon: string | undefined;
   iconRight: string | undefined;
   token: string | undefined;
-};
+}

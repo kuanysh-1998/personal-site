@@ -9,14 +9,14 @@
 
   @if (allTags().length > 0) {
     <div class="blog-list__tags">
-      <ng-button
+      <app-button
         [label]="'All' | transloco"
         [stylingMode]="selectedTag() === null ? 'contained' : 'outlined'"
         [size]="'small'"
         (clicked)="onClearTag()"
       />
       @for (tag of allTags(); track tag) {
-        <ng-button
+        <app-button
           [label]="tag | transloco"
           [stylingMode]="selectedTag() === tag ? 'contained' : 'outlined'"
           [size]="'small'"
@@ -24,6 +24,10 @@
         />
       }
     </div>
+  }
+
+  @if (isFiltering() && hasSearchResults()) {
+    <div class="blog-list__count">{{ 'Found' | transloco }}: {{ totalFilteredPosts() }}</div>
   }
 
   @if (isFiltering() && !hasSearchResults()) {
@@ -36,7 +40,7 @@
         <div class="year">{{ group.year }}</div>
         <div class="posts">
           @for (post of group.posts; track post.slug) {
-            <ng-card
+            <app-card
               [padding]="'small'"
               [stylingMode]="'default'"
               [header]="post.title | transloco"
@@ -47,7 +51,7 @@
               @if (post.tags && post.tags.length > 0) {
                 <div class="post-tags">
                   @for (tag of post.tags; track tag) {
-                    <ng-badge
+                    <app-badge
                       [text]="tag | transloco"
                       [size]="'small'"
                       [stylingMode]="'outlined'"
@@ -62,11 +66,11 @@
               <div class="post-card-footer">
                 <span class="post-date">{{ formatDate(post.date) }}</span>
                 <span class="post-views">
-                  <ng-svg [icon]="eyeIcon" [size]="'small'" />
+                  <app-svg [icon]="eyeIcon" [size]="'small'" />
                   {{ viewCounts()[post.slug] }}
                 </span>
               </div>
-            </ng-card>
+            </app-card>
           }
         </div>
       </div>
@@ -74,7 +78,7 @@
 
     @if (totalFilteredPosts() > itemsPerPage()) {
       <div class="blog-list__pagination">
-        <ng-pagination
+        <app-pagination
           [currentPage]="currentPage()"
           [totalItems]="totalFilteredPosts()"
           [itemsPerPage]="itemsPerPage()"

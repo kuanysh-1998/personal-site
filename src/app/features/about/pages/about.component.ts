@@ -13,6 +13,7 @@ import { SocialConnectComponent } from '../components/social-connect/social-conn
 import { LatestPosts } from '@app/features/blog/components/latest-posts/latest-posts';
 import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { AvatarComponent } from '@app/shared/components/avatar/avatar.component';
+import { SeoService } from '@app/core/services/seo/seo.service';
 
 @Component({
   selector: 'app-about',
@@ -30,6 +31,7 @@ import { AvatarComponent } from '@app/shared/components/avatar/avatar.component'
 export class AboutComponent implements OnInit {
   private readonly _transloco = inject(TranslocoService);
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _seo = inject(SeoService);
 
   private readonly _currentLang = signal(this._transloco.getActiveLang());
 
@@ -51,8 +53,18 @@ export class AboutComponent implements OnInit {
   });
 
   public ngOnInit(): void {
-    this._transloco.langChanges$
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((lang) => this._currentLang.set(lang));
+    this._updateSeo();
+    this._transloco.langChanges$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang) => {
+      this._currentLang.set(lang);
+      this._updateSeo();
+    });
+  }
+
+  private _updateSeo(): void {
+    this._seo.update({
+      title: this._transloco.translate('About'),
+      description: this._transloco.translate('Frontend engineer in Astana, Kazakhstan'),
+      path: '/about',
+    });
   }
 }

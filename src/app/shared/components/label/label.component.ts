@@ -8,7 +8,7 @@ import { SvgComponent } from '../svg/svg.component';
 import { Icons } from '../svg/svg.config';
 
 @Component({
-  selector: 'ng-label',
+  selector: 'app-label',
   imports: [CommonModule, SvgComponent, LinkComponent, TooltipDirective],
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.scss'],

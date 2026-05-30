@@ -9,13 +9,13 @@
       class="ng-badge__link"
     >
       @if (icon) {
-        <ng-svg
+        <app-svg
           [icon]="icon"
           [class.ng-badge__icon_clickable]="iconClickable"
           (click)="clickIcon()"
           size="small"
           class="ng-badge__icon"
-        ></ng-svg>
+        ></app-svg>
       }
 
       <span [attr.data-token]="token" class="ng-badge__text">
@@ -23,25 +23,25 @@
       </span>
 
       @if (iconRight) {
-        <ng-svg
+        <app-svg
           [icon]="iconRight"
           [class.ng-badge__icon_clickable]="iconRightClickable"
           (click)="clickIconRight()"
           size="small"
           class="ng-badge__icon"
-        ></ng-svg>
+        ></app-svg>
       }
     </a>
   } @else {
     <div #badgeWrapper [ngClass]="badgeClasses">
       @if (icon) {
-        <ng-svg
+        <app-svg
           [icon]="icon"
           [class.ng-badge__icon_clickable]="iconClickable"
           (click)="clickIcon()"
           size="small"
           class="ng-badge__icon"
-        ></ng-svg>
+        ></app-svg>
       }
 
       <span [attr.data-token]="token" class="ng-badge__text">
@@ -49,22 +49,22 @@
       </span>
 
       @if (iconRight) {
-        <ng-svg
+        <app-svg
           [icon]="iconRight"
           [class.ng-badge__icon_clickable]="iconRightClickable"
           (click)="clickIconRight()"
           size="small"
           class="ng-badge__icon"
-        ></ng-svg>
+        ></app-svg>
       }
     </div>
   }
 
   @if (isOverflowing() && badgeWrapper) {
-    <ng-tooltip
+    <app-tooltip
       [for]="badgeWrapper.nativeElement"
       [content]="text"
       [position]="tooltipPosition"
-    ></ng-tooltip>
+    ></app-tooltip>
   }
 </div>

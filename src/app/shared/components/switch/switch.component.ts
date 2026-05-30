@@ -15,7 +15,7 @@ import { LabelComponent } from '../label/label.component';
 import { VariantSwitch } from './switch.types';
 
 @Component({
-  selector: 'ng-switch',
+  selector: 'app-switch',
   imports: [CommonModule, LabelComponent],
   templateUrl: './switch.component.html',
   styleUrls: ['./switch.component.scss'],
@@ -29,10 +29,10 @@ import { VariantSwitch } from './switch.types';
   ],
 })
 export class SwitchComponent implements ControlValueAccessor {
-  @Input() public label: string = '';
+  @Input() public label = '';
   @Input() public labelInfo: string | TemplateRef<unknown> = '';
   @Input() public position: 'left' | 'right' | 'top' = 'right';
-  @Input() public disabled: boolean = false;
+  @Input() public disabled = false;
   @Input() public variant: VariantSwitch = 'default';
   @Input() public requiredForLabel: boolean | undefined = undefined;
   @Input() public token: string | undefined = undefined;

@@ -5,6 +5,7 @@ import { EmailjsService } from './services/emailjs/emailjs.service';
 import { ThemeService } from './services/theme/theme.service';
 import { LocaleService } from './services/locale/locale.service';
 import { YandexMetrikaService } from './services/yandex-metrika/yandex-metrika.service';
+import { SeoService } from './services/seo/seo.service';
 
 const API_SERVICES = [];
 const UTIL_SERVICES = [];
@@ -15,6 +16,7 @@ const CORE_SERVICES = [
   ThemeService,
   LocaleService,
   YandexMetrikaService,
+  SeoService,
 ];
 const CORE_LOADERS = [TranslocoHttpLoader];
 

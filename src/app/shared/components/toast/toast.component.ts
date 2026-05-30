@@ -6,7 +6,7 @@ import { SvgComponent } from '../svg/svg.component';
 import { Icons } from '../svg/svg.config';
 
 @Component({
-  selector: 'ng-toast',
+  selector: 'app-toast',
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss'],
   imports: [CommonModule, SvgComponent],
@@ -36,7 +36,7 @@ export class ToastComponent {
     this.closed.emit();
   }
 
-  protected getToastClasses(): { [key: string]: boolean } {
+  protected getToastClasses(): Record<string, boolean> {
     return {
       'ng-toast__toast_type-success': this.type === ToastType.Success,
       'ng-toast__toast_type-error': this.type === ToastType.Error,

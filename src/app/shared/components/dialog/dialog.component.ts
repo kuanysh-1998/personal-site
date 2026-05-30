@@ -28,7 +28,7 @@ import { SvgComponent } from '../svg/svg.component';
 import { Icons } from '../svg/svg.config';
 
 @Component({
-  selector: 'ng-dialog',
+  selector: 'app-dialog',
   imports: [CommonModule, ButtonComponent, SvgComponent],
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],

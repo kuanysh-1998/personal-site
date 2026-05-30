@@ -1,6 +1,6 @@
 <div class="ng-menu">
   @if (isSomeItemVisible) {
-    <ng-popover
+    <app-popover
       [for]="for"
       [padding]="padding"
       [isOpen]="isOpenSignal()"
@@ -13,12 +13,12 @@
       @if (header) {
         <div class="ng-menu__header">{{ header }}</div>
         <div class="ng-menu_divider">
-          <ng-divider></ng-divider>
+          <app-divider></app-divider>
         </div>
       }
       @for (item of items; track index; let index = $index) {
         @if (item.visible || item.visible === undefined) {
-          <ng-list-item
+          <app-list-item
             [icon]="item.icon"
             [rightIcon]="item.rightIcon"
             [text]="item.text"
@@ -27,9 +27,9 @@
             [withGap]="item.withGap || false"
             [class.ng-menu_disable]="item.disable"
             (clicked)="clickItem(item, index)"
-          ></ng-list-item>
+          ></app-list-item>
         }
       }
-    </ng-popover>
+    </app-popover>
   }
 </div>

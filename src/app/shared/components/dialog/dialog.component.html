@@ -20,12 +20,12 @@
       <div class="ng-dialog__header-wrapper">
         <div class="ng-dialog__header">
           @if (showBackButton) {
-            <ng-button
+            <app-button
               [icon]="arrowLeftIcon"
               (clicked)="return()"
               variant="default"
               stylingMode="outlined"
-            ></ng-button>
+            ></app-button>
           }
           @if (showHeader) {
             <div>{{ header }}</div>
@@ -36,12 +36,12 @@
           <ng-container *ngTemplateOutlet="customHeaderTemplate ?? null"></ng-container>
 
           @if (showCloseButton) {
-            <ng-svg
+            <app-svg
               [icon]="closeIcon"
               (click)="close()"
               token="closeModal"
               class="ng-dialog__close-button"
-            ></ng-svg>
+            ></app-svg>
           }
         </div>
       </div>
@@ -61,7 +61,7 @@
         <ng-container *ngTemplateOutlet="customFooterTemplate"></ng-container>
       } @else if (cancelButtonConfig || submitButtonConfig || additionalActionButtonConfig) {
         @if (additionalActionButtonConfig) {
-          <ng-button
+          <app-button
             [id]="dialogId ? dialogId + '-additional' : undefined"
             [label]="additionalActionButtonConfig.label"
             [stylingMode]="additionalActionButtonConfig.stylingMode ?? 'outlined'"
@@ -71,12 +71,12 @@
             [disabled]="additionalActionButtonConfig.disabled ?? false"
             (clicked)="action()"
             class="ng-dialog__action-button"
-          ></ng-button>
+          ></app-button>
         }
 
         <div class="ng-dialog__footer-actions">
           @if (cancelButtonConfig) {
-            <ng-button
+            <app-button
               [id]="dialogId ? dialogId + '-cancel' : undefined"
               [label]="cancelButtonConfig.label"
               [stylingMode]="cancelButtonConfig.stylingMode ?? 'outlined'"
@@ -87,10 +87,10 @@
               (clicked)="cancel()"
               [active]="enableKeyboardNavigation && activeButton === 'cancel'"
               class="ng-dialog__cancel-button"
-            ></ng-button>
+            ></app-button>
           }
           @if (submitButtonConfig) {
-            <ng-button
+            <app-button
               [id]="dialogId ? dialogId + '-submit' : undefined"
               [label]="submitButtonConfig.label"
               [stylingMode]="submitButtonConfig.stylingMode ?? 'contained'"
@@ -101,7 +101,7 @@
               (clicked)="submit()"
               [active]="enableKeyboardNavigation && activeButton === 'submit'"
               class="ng-dialog__submit-button"
-            ></ng-button>
+            ></app-button>
           }
         </div>
       }

@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 
 export type VariantSwitch = 'default' | 'warning' | 'danger' | 'success' | 'info';
 
-export type SwitchSettings = {
+export interface SwitchSettings {
   label: string;
   labelInfo: string | TemplateRef<any>;
   position: 'left' | 'right' | 'top';
@@ -10,4 +10,4 @@ export type SwitchSettings = {
   variant: VariantSwitch;
   requiredForLabel: boolean | undefined;
   token: string | undefined;
-};
+}

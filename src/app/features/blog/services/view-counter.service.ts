@@ -85,7 +85,7 @@ export class ViewCounterService {
     return from(
       runTransaction(viewRef, (currentViews: number | null) => {
         return (currentViews || 0) + 1;
-      })
+      }),
     ).pipe(
       map((result) => {
         if (result.committed && result.snapshot.val() !== null) {
@@ -98,7 +98,7 @@ export class ViewCounterService {
       }),
       catchError(() => {
         return of(0);
-      })
+      }),
     );
   }
 
@@ -112,7 +112,7 @@ export class ViewCounterService {
       map((views) => views ?? 0),
       catchError(() => {
         return of(0);
-      })
+      }),
     );
   }
 }

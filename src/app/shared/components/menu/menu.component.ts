@@ -13,7 +13,7 @@ import { DividerComponent } from '../divider/divider.component';
 import { ListItem } from '../list-item/list-item.component.types';
 
 @Component({
-  selector: 'ng-menu',
+  selector: 'app-menu',
   imports: [ListItemComponent, PopoverComponent, DividerComponent],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
@@ -23,7 +23,7 @@ export class MenuComponent {
   @Input() public for: Element | string | number | undefined = undefined;
   @Input() public items: ListItem[] = [];
   @Input() public padding: 'small' | 'medium' | 'large' = 'medium';
-  @Input() public position: string = 'left bottom';
+  @Input() public position = 'left bottom';
 
   @Input() public header: string | undefined = undefined;
   @Input() public minWidth: number | undefined = undefined;

@@ -12,7 +12,7 @@ import {
 import { SvgComponent } from '../svg/svg.component';
 
 @Component({
-  selector: 'ng-card',
+  selector: 'app-card',
   imports: [CommonModule, SvgComponent],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
@@ -105,5 +105,13 @@ export class CardComponent {
   protected click(): void {
     if (!this.clickable) return;
     this.clicked.emit();
+  }
+
+  protected handleKeydown(event: KeyboardEvent): void {
+    if (!this.clickable) return;
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.clicked.emit();
+    }
   }
 }

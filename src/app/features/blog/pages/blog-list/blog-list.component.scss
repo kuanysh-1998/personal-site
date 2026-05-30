@@ -23,6 +23,12 @@
   margin-bottom: 2rem;
 }
 
+.blog-list__count {
+  font-size: 0.8125rem;
+  color: var(--theme-text-muted);
+  margin-bottom: 1.5rem;
+}
+
 .year-group {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -66,7 +72,7 @@
   justify-content: space-between;
   margin-top: 0.75rem;
   padding-top: 0.5rem;
-  border-top: 1px solid var(--theme-divider);
+  border-top: 1px solid var(--theme-border);
 }
 
 .post-date {
@@ -101,7 +107,7 @@
   justify-content: center;
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--theme-divider);
+  border-top: 1px solid var(--theme-border);
 }
 
 @media (max-width: 768px) {

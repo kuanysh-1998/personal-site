@@ -55,12 +55,10 @@ export class TableOfContentsComponent implements AfterViewInit, OnDestroy {
         this._cdr.markForCheck();
       });
 
-    this._contentReadyService.contentReady$
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => {
-        setTimeout(() => this._observeMarkdown(), 0);
-        this._cdr.markForCheck();
-      });
+    this._contentReadyService.contentReady$.pipe(takeUntilDestroyed()).subscribe(() => {
+      setTimeout(() => this._observeMarkdown(), 0);
+      this._cdr.markForCheck();
+    });
   }
 
   public ngAfterViewInit(): void {

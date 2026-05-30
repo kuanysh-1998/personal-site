@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SvgComponent } from '../svg/svg.component';
 
 @Component({
-  selector: 'ng-divider',
+  selector: 'app-divider',
   imports: [CommonModule, SvgComponent],
   templateUrl: './divider.component.html',
   styleUrls: ['./divider.component.scss'],

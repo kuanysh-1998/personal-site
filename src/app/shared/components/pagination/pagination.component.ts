@@ -12,7 +12,7 @@ import { Icons } from '../svg/svg.config';
 import { PageChangeEvent } from './pagination.types';
 
 @Component({
-  selector: 'ng-pagination',
+  selector: 'app-pagination',
   imports: [ButtonComponent],
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
@@ -56,7 +56,7 @@ export class PaginationComponent {
 
     const halfVisible = Math.floor(max / 2);
     let startPage = Math.max(1, current - halfVisible);
-    let endPage = Math.min(total, startPage + max - 1);
+    const endPage = Math.min(total, startPage + max - 1);
 
     if (endPage - startPage < max - 1) {
       startPage = Math.max(1, endPage - max + 1);

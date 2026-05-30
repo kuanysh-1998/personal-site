@@ -97,9 +97,7 @@ export class HeaderComponent {
 
   protected get themeToggleAriaLabel(): string {
     const key =
-      this.themeService.theme() === 'dark'
-        ? 'Switch to light mode'
-        : 'Switch to dark mode';
+      this.themeService.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
     return this._transloco.translate(key);
   }
 

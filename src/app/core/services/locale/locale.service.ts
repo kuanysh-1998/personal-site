@@ -4,12 +4,7 @@ import { TranslocoService } from '@ngneat/transloco';
 
 import { STORAGE_KEYS } from '../../../shared/constants/storage-keys';
 import { LocalStorageService } from '../local-storage/local-storage.service';
-import {
-  AVAILABLE_LANGS,
-  LOCALE_NAMES,
-  type LocaleId,
-  type LocaleOption,
-} from './locale.types';
+import { AVAILABLE_LANGS, LOCALE_NAMES, type LocaleId, type LocaleOption } from './locale.types';
 
 @Injectable()
 export class LocaleService {

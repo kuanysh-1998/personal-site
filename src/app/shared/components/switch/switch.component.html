@@ -1,14 +1,14 @@
 <div class="ng-switch">
   <div [ngClass]="positionClass">
     @if (label) {
-      <ng-label
+      <app-label
         [disabled]="isDisabled"
         [label]="label"
         [info]="labelInfo"
         [required]="!!requiredForLabel"
         (click)="switchToggle()"
         class="ng-switch__label"
-      ></ng-label>
+      ></app-label>
     }
 
     <div class="ng-switch__container">

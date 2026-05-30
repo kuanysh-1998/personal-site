@@ -18,7 +18,7 @@ import { Icons } from '../svg/svg.config';
 import { SvgComponent } from '../svg/svg.component';
 
 @Component({
-  selector: 'ng-checkbox',
+  selector: 'app-checkbox',
   imports: [CommonModule, SvgComponent, LabelComponent],
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
@@ -67,7 +67,7 @@ export class CheckboxComponent implements ControlValueAccessor, DoCheck {
   }
 
   public get control(): FormControl | undefined {
-    return <FormControl<unknown>>this._ngControl?.control;
+    return this._ngControl?.control as FormControl<unknown>;
   }
 
   public get isRequired(): boolean {
@@ -79,7 +79,7 @@ export class CheckboxComponent implements ControlValueAccessor, DoCheck {
 
   constructor(
     private readonly _cdr: ChangeDetectorRef,
-    @Self() @Optional() private readonly _ngControl?: NgControl
+    @Self() @Optional() private readonly _ngControl?: NgControl,
   ) {
     if (this._ngControl) {
       this._ngControl.valueAccessor = this;

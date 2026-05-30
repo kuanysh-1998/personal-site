@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'ng-skeleton',
+  selector: 'app-skeleton',
   templateUrl: './skeleton.component.html',
   styleUrls: ['./skeleton.component.scss'],
   encapsulation: ViewEncapsulation.None,

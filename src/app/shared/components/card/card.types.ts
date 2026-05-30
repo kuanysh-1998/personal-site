@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 
-export type CardSettings = {
+export interface CardSettings {
   padding: 'none' | 'small' | 'medium' | 'large';
   direction: 'horizontal' | 'vertical';
   enableExpand: boolean;
@@ -13,4 +13,4 @@ export type CardSettings = {
   iconRight: string | undefined;
   token: string | undefined;
   isExpanded: boolean;
-};
+}

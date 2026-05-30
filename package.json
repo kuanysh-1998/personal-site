@@ -4,10 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "npm run generate:sitemap",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "format": "prettier --write \"src/**/*.{ts,html,scss,json}\""
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,html,scss,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,html,scss,json}\"",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs"
   },
   "private": true,
   "packageManager": "npm@10.8.2",
@@ -33,9 +38,13 @@
     "@angular/build": "^21.2.7",
     "@angular/cli": "^21.2.7",
     "@angular/compiler-cli": "^21.2.8",
+    "@eslint/js": "^10.0.1",
+    "angular-eslint": "^21.4.0",
+    "eslint": "^10.4.1",
     "jsdom": "^27.1.0",
     "prettier": "^3.8.0",
     "typescript": "~5.9.2",
+    "typescript-eslint": "^8.60.0",
     "vitest": "^4.0.8"
   }
 }

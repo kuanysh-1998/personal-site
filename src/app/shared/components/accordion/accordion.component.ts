@@ -18,7 +18,7 @@ import { Icons } from '../svg/svg.config';
 @Component({
   imports: [CommonModule, SvgComponent],
   encapsulation: ViewEncapsulation.None,
-  selector: 'ng-accordion',
+  selector: 'app-accordion',
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.scss'],
 })

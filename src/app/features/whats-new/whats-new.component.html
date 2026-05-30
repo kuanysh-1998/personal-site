@@ -1,7 +1,7 @@
 <div class="whats-new">
   <div class="whats-new__content">
     @for (item of allItems(); track isPost(item) ? item.slug : item.title; let isFirst = $first) {
-      <ng-accordion
+      <app-accordion
         [header]="getItemHeader(item)"
         [subtitle]="formatDate(item.date)"
         [initialState]="isFirst ? 'opened' : 'closed'"
@@ -12,7 +12,7 @@
               {{ getItemDescription(item) }}
             </p>
             @if (hasAction(item)) {
-              <ng-button
+              <app-button
                 [label]="getActionLabel(item)"
                 [stylingMode]="'contained'"
                 [size]="'default'"
@@ -22,7 +22,7 @@
             }
           </div>
         }
-      </ng-accordion>
+      </app-accordion>
     }
   </div>
 </div>

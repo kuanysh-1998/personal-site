@@ -3,7 +3,7 @@
     <h3>{{ 'Related Posts' | transloco }}</h3>
     <div class="posts-grid">
       @for (post of relatedPosts(); track post.slug) {
-        <ng-card
+        <app-card
           [padding]="'medium'"
           [stylingMode]="'default'"
           [header]="post.title | transloco"
@@ -14,7 +14,7 @@
           @if (post.tags && post.tags.length > 0) {
             <div class="post-tags">
               @for (tag of post.tags; track tag) {
-                <ng-badge
+                <app-badge
                   [text]="tag | transloco"
                   [size]="'small'"
                   [stylingMode]="'outlined'"
@@ -26,7 +26,7 @@
           @if (post.description) {
             <div class="post-description">{{ post.description | transloco }}</div>
           }
-        </ng-card>
+        </app-card>
       }
     </div>
   </div>

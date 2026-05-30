@@ -11,7 +11,7 @@ import {
 import { SvgComponent } from '../svg/svg.component';
 import { Icons } from '../svg/svg.config';
 @Component({
-  selector: 'ng-avatar',
+  selector: 'app-avatar',
   imports: [NgClass, SvgComponent, NgOptimizedImage],
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss'],
@@ -19,7 +19,7 @@ import { Icons } from '../svg/svg.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarComponent implements OnInit {
-  @Input() public name: string = '';
+  @Input() public name = '';
   @Input() public size: 'medium' | 'large' = 'medium';
   @Input() public variant: 'default' | 'secondary' | 'alternative' = 'default';
 

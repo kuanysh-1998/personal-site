@@ -1,4 +1,4 @@
-export type SkeletonSettings = {
+export interface SkeletonSettings {
   height: string;
   width: string;
-};
+}

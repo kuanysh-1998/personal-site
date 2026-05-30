@@ -18,7 +18,7 @@ import {
 import { Overlay } from '../../utils/overlay';
 
 @Component({
-  selector: 'ng-popover',
+  selector: 'app-popover',
   imports: [CommonModule],
   templateUrl: './popover.component.html',
   styleUrls: ['./popover.component.scss'],
@@ -76,7 +76,7 @@ export class PopoverComponent extends Overlay implements AfterViewInit, OnDestro
 
   constructor(
     public override readonly renderer: Renderer2,
-    public override readonly vcr: ViewContainerRef
+    public override readonly vcr: ViewContainerRef,
   ) {
     super(renderer, vcr);
   }

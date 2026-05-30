@@ -24,7 +24,7 @@ import { SvgComponent } from '../svg/svg.component';
 import { Icons } from '../svg/svg.config';
 
 @Component({
-  selector: 'ng-text-field',
+  selector: 'app-text-field',
   imports: [CommonModule, LabelComponent, SvgComponent],
   templateUrl: './text-field.component.html',
   styleUrls: ['./text-field.component.scss'],
@@ -115,7 +115,7 @@ export class TextFieldComponent implements ControlValueAccessor, AfterViewInit, 
   }
 
   public get control(): FormControl | undefined {
-    return <FormControl<unknown>>this._ngControl?.control;
+    return this._ngControl?.control as FormControl<unknown>;
   }
 
   public get isSmall(): boolean {
@@ -158,7 +158,7 @@ export class TextFieldComponent implements ControlValueAccessor, AfterViewInit, 
 
   constructor(
     private readonly _cdr: ChangeDetectorRef,
-    @Self() @Optional() private readonly _ngControl?: NgControl
+    @Self() @Optional() private readonly _ngControl?: NgControl,
   ) {
     if (this._ngControl) {
       this._ngControl.valueAccessor = this;

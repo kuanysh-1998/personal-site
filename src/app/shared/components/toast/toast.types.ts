@@ -1,8 +1,8 @@
-export type Message = {
+export interface Message {
   type?: ToastType;
   header: string;
   message: string;
-};
+}
 
 export enum ToastType {
   Success = 'success',

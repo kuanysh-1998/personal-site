@@ -8,7 +8,7 @@ import {
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'ng-link',
+  selector: 'app-link',
   imports: [RouterLink],
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.scss'],
@@ -21,7 +21,7 @@ export class LinkComponent {
   @Input() public disabled = false;
   @Input() public isPdf = false;
   @Input() public download: string | undefined = undefined;
-  @Input() public state: { [p: string]: any } | undefined = undefined;
+  @Input() public state: Record<string, any> | undefined = undefined;
 
   @Input() public variant: 'default' | 'secondary' = 'default';
   @Input() public underlineOnHover = false;

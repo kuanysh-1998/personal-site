@@ -2,7 +2,7 @@ import { ButtonVariant, StylingMode } from '../button/button.types';
 import { ListItem } from '../list-item/list-item.component.types';
 import { PopoverPosition } from '../popover/popover.types';
 
-export type ButtonPopoverSettings = {
+export interface ButtonPopoverSettings {
   stylingMode: StylingMode;
   variant: ButtonVariant;
   disabled: boolean;
@@ -16,4 +16,4 @@ export type ButtonPopoverSettings = {
   menuHeader: string | undefined;
   token: string | undefined;
   icon: string | undefined;
-};
+}
