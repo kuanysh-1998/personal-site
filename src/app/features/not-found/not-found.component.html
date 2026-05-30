@@ -14,9 +14,11 @@
       <ul class="not-found__list">
         @for (post of recentPosts; track post.slug) {
           <li>
-            <a class="not-found__link" [routerLink]="['/blog', post.slug]">
-              {{ post.title | transloco }}
-            </a>
+            <app-link
+              [link]="'/blog/' + post.slug"
+              [text]="post.title | transloco"
+              [underlineOnHover]="true"
+            />
           </li>
         }
       </ul>

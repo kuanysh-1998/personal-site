@@ -6,7 +6,7 @@
   </p>
   <div class="social-connect__links">
     @for (link of links; track link.name) {
-      <app-link [link]="link.url" [text]="link.name" />
+      <app-link [link]="link.url" [text]="link.name" [icon]="link.icon" [underlineOnHover]="true" />
     }
   </div>
 </div>

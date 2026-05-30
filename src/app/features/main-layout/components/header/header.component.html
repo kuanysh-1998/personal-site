@@ -1,14 +1,17 @@
 <header class="header">
   <div class="header__content">
-    <div class="header__navigation">
-      <app-tabs
-        [tabsItems]="tabs()"
-        [orientation]="'horizontal'"
-        [selectedTab]="selectedTab"
-        [hideBorder]="true"
-        (changed)="onTabChanged($event)"
-      ></app-tabs>
-    </div>
+    <nav class="header__nav" aria-label="Main navigation">
+      @for (link of navLinks; track link.id) {
+        <a
+          class="header__nav-link"
+          [routerLink]="link.path"
+          routerLinkActive="header__nav-link_active"
+          (click)="trackNav(link)"
+        >
+          {{ link.label | transloco }}
+        </a>
+      }
+    </nav>
 
     <div class="header__actions">
       <div class="header__lang-dropdown">

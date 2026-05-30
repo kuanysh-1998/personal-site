@@ -5,11 +5,14 @@ import {
   Input,
   ViewEncapsulation,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { SvgComponent } from '@app/shared/components/svg/svg.component';
+import { IconSize } from '@app/shared/components/svg/svg.config';
 
 @Component({
   selector: 'app-link',
-  imports: [RouterLink],
+  imports: [RouterLink, NgTemplateOutlet, SvgComponent],
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -22,6 +25,9 @@ export class LinkComponent {
   @Input() public isPdf = false;
   @Input() public download: string | undefined = undefined;
   @Input() public state: Record<string, any> | undefined = undefined;
+
+  @Input() public icon: string | undefined = undefined;
+  @Input() public iconSize: IconSize = 'small';
 
   @Input() public variant: 'default' | 'secondary' = 'default';
   @Input() public underlineOnHover = false;

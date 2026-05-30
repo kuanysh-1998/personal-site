@@ -6,10 +6,14 @@
       </div>
       <div class="about-page__intro-text">
         <h1 class="about-page__name">{{ 'Kuanysh Aptaizhanov' | transloco }}</h1>
+        <div class="about-page__meta">
+          <span class="about-page__chip">
+            <app-svg [icon]="clockIcon" size="small" />
+            {{ astanaTime() }} · {{ 'Astana' | transloco }}
+          </span>
+        </div>
         <p class="about-page__tagline">
-          {{ 'Frontend engineer in Astana, Kazakhstan' | transloco }}
-          <span *ngTooltip="astanaTime()">{{ '(UTC+5)' | transloco }}</span
-          >.
+          {{ 'Frontend engineer in Astana, Kazakhstan' | transloco }} {{ '(UTC+5)' | transloco }}.
           {{
             'Writing about building Angular apps — from architecture patterns to everyday trade-offs.'
               | transloco

@@ -10,6 +10,13 @@ import {
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
+
+import 'prismjs';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-json';
 import { PostService } from '@app/entities/post/services/post.service';
 import { PostState } from '@app/entities/post/models/post.interface';
 import { Observable, of, switchMap } from 'rxjs';

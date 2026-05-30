@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { LinkComponent } from '@app/shared/components/link/link.component';
 import { SeoService } from '@app/core/services/seo/seo.service';
 import { PostService } from '@app/entities/post/services/post.service';
 import { PostMetadata } from '@app/entities/post/models/post.interface';
 
 @Component({
   selector: 'app-not-found',
-  imports: [TranslocoModule, ButtonComponent, RouterLink],
+  imports: [TranslocoModule, ButtonComponent, LinkComponent],
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,11 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { filter } from 'rxjs/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
-import { TabsComponent } from '@app/shared/components/tab/tabs.component';
 import { DropdownComponent } from '@app/shared/components/dropdown/dropdown.component';
 import { PopoverComponent } from '@app/shared/components/popover/popover.component';
 import { DividerComponent } from '@app/shared/components/divider/divider.component';
@@ -14,18 +12,18 @@ import { YandexMetrikaService } from '@app/core/services/yandex-metrika/yandex-m
 import { ThemeService } from '@app/core/services/theme/theme.service';
 import { LocaleService } from '@app/core/services/locale/locale.service';
 import { WhatsNewComponent } from '@app/features/whats-new/whats-new.component';
-import { Tab } from '@app/shared/components/tab/tabs.types';
 import { DropdownChangeEvent } from '@app/shared/components/dropdown/dropdown.types';
 import { TAB_IDS } from '../../pages/layout/main-layout.constants';
 import { Icons } from '@app/shared/components/svg/svg.config';
-import { take } from 'rxjs';
+import { NavLink } from './header.types';
 
 @Component({
   selector: 'app-header',
   imports: [
     CommonModule,
+    RouterLink,
+    RouterLinkActive,
     ButtonComponent,
-    TabsComponent,
     DropdownComponent,
     PopoverComponent,
     DividerComponent,
@@ -36,51 +34,25 @@ import { take } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  private readonly _router = inject(Router);
   private readonly _drawerService = inject(DrawerService);
   private readonly _yandexMetrikaService = inject(YandexMetrikaService);
   private readonly _transloco = inject(TranslocoService);
   protected readonly themeService = inject(ThemeService);
   protected readonly localeService = inject(LocaleService);
 
-  protected readonly currentUrl = signal<string>(this._router.url);
+  protected readonly navLinks: NavLink[] = [
+    { id: TAB_IDS.ABOUT, path: '/about', label: 'About' },
+    { id: TAB_IDS.BLOG, path: '/blog', label: 'Blog' },
+  ];
+
   protected readonly mobileMenuOpen = signal(false);
   protected readonly menuIcon = Icons.Menu;
 
-  protected readonly tabs = computed<Tab[]>(() => {
-    this.localeService.currentLang();
-    return [
-      { id: TAB_IDS.ABOUT, text: this._transloco.translate('About') },
-      { id: TAB_IDS.BLOG, text: this._transloco.translate('Blog') },
-    ];
-  });
-
-  constructor() {
-    this._router.events
-      .pipe(
-        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-        takeUntilDestroyed(),
-      )
-      .subscribe((event: NavigationEnd) => {
-        this.currentUrl.set(event.url);
-      });
-  }
-
-  protected get selectedTab(): string {
-    const url = this.currentUrl();
-    if (url.includes('/blog')) {
-      return TAB_IDS.BLOG;
-    }
-    return TAB_IDS.ABOUT;
-  }
-
-  protected onTabChanged(tab: Tab): void {
+  protected trackNav(link: NavLink): void {
     this._yandexMetrikaService.sendMetricsEvent('tab_switch', {
-      tab_id: tab.id,
-      tab_name: tab.text || tab.id,
+      tab_id: link.id,
+      tab_name: link.label,
     });
-    this._router.navigate([`/${tab.id}`]);
-    this.mobileMenuOpen.set(false);
   }
 
   protected toggleMobileMenu(): void {

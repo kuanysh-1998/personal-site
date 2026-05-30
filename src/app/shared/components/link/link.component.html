@@ -1,17 +1,32 @@
+<ng-template #body>
+  @if (icon) {
+    <app-svg [icon]="icon" class="ng-link__icon" [size]="iconSize" />
+  }
+  <span class="ng-link__text">{{ text }}</span>
+</ng-template>
+
 @if (download) {
-  <a [href]="link" [download]="download" target="_blank" class="ng-link__content">
-    {{ text }}
+  <a
+    [href]="link"
+    [download]="download"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="ng-link__content"
+  >
+    <ng-container [ngTemplateOutlet]="body" />
   </a>
 } @else {
   @if (isExternalLink(link) || isPdf) {
-    <a [href]="link" target="_blank" class="ng-link__content">
-      {{ text }}
+    <a [href]="link" target="_blank" rel="noopener noreferrer" class="ng-link__content">
+      <ng-container [ngTemplateOutlet]="body" />
     </a>
   } @else {
     @if (link) {
-      <a [routerLink]="link" [state]="state" class="ng-link__content">{{ text }}</a>
+      <a [routerLink]="link" [state]="state" class="ng-link__content">
+        <ng-container [ngTemplateOutlet]="body" />
+      </a>
     } @else {
-      <a class="ng-link__content">{{ text }}</a>
+      <a class="ng-link__content"><ng-container [ngTemplateOutlet]="body" /></a>
     }
   }
 }

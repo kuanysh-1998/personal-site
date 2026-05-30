@@ -30,4 +30,11 @@ export enum Icons {
   Copy = 'i_copy',
   Heart = 'i_heart',
   Print = 'i_print',
+  Clock = 'clock',
+  Mail = 'mail',
+  LinkedIn = 'linkedin',
+  GitHub = 'github',
+  Telegram = 'telegram',
+  Strava = 'strava',
+  Instagram = 'instagram',
 }

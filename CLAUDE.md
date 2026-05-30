@@ -66,5 +66,6 @@ Posts are **not** in a CMS or database — they are static markdown files plus a
 - **Firebase** (`@angular/fire`) — Realtime Database, configured from `environment.firebaseConfig`.
 - **EmailjsService** — contact form submission via `@emailjs/browser`; ids in `environment.emailjs`.
 - **PWA** — service worker via `ngsw-config.json`, registered `registerWhenStable:3000`; `ServiceWorkerUpdateService` handles update prompts.
-- **ngx-markdown + Prism.js** — markdown rendering with syntax highlighting (Prism theme/components wired in `angular.json` styles/scripts).
+- **ngx-markdown + Prism.js** — markdown rendering with syntax highlighting. Prism theme is a global style in `angular.json`; the Prism JS + language components are imported inside the lazy `post-detail` component (not global `scripts[]`) so they stay out of the initial bundle. Add a language → add its `import 'prismjs/components/prism-<lang>'` there.
+- **Deploy (Vercel)** — `vercel.json` rewrites non-file routes to `/index.html` (SPA deep-link support). Output is the Angular application builder's `dist/personal-site/browser`.
 - Environment config is a single `src/environments/environment.ts` (no separate prod file); it contains live service ids/keys, so treat it as sensitive.

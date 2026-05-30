@@ -2,12 +2,21 @@
   width: fit-content;
 
   .ng-link__content {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     color: var(--theme-text-primary);
     text-decoration: underline;
     text-underline-offset: 2px;
     transition: all 0.2s ease;
     cursor: pointer;
+  }
 
+  .ng-link__icon {
+    flex-shrink: 0;
+  }
+
+  .ng-link__content {
     &:hover {
       color: var(--theme-text-secondary);
       text-decoration: underline;

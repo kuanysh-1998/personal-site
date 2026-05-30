@@ -9,21 +9,17 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { interval } from 'rxjs';
 import { SocialConnectComponent } from '../components/social-connect/social-connect.component';
 import { LatestPosts } from '@app/features/blog/components/latest-posts/latest-posts';
-import { TooltipDirective } from '@app/shared/components/tooltip/tooltip.directive';
 import { AvatarComponent } from '@app/shared/components/avatar/avatar.component';
+import { SvgComponent } from '@app/shared/components/svg/svg.component';
+import { Icons } from '@app/shared/components/svg/svg.config';
 import { SeoService } from '@app/core/services/seo/seo.service';
 
 @Component({
   selector: 'app-about',
-  imports: [
-    TranslocoModule,
-    SocialConnectComponent,
-    LatestPosts,
-    TooltipDirective,
-    AvatarComponent,
-  ],
+  imports: [TranslocoModule, SocialConnectComponent, LatestPosts, AvatarComponent, SvgComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,9 +30,13 @@ export class AboutComponent implements OnInit {
   private readonly _seo = inject(SeoService);
 
   private readonly _currentLang = signal(this._transloco.getActiveLang());
+  private readonly _clockTick = signal(0);
+
+  protected readonly clockIcon = Icons.Clock;
 
   protected readonly astanaTime = computed(() => {
     this._currentLang();
+    this._clockTick();
     const now = new Date();
     const utcTime = now.getTime() + now.getTimezoneOffset() * 60000;
     const astanaTimeDate = new Date(utcTime + 5 * 3600000);
@@ -46,13 +46,16 @@ export class AboutComponent implements OnInit {
     const ampmKey = hours >= 12 ? 'PM' : 'AM';
     const displayHours = hours % 12 || 12;
     const displayMinutes = minutes.toString().padStart(2, '0');
-    const timeLabel = this._transloco.translate('Time:');
     const ampm = this._transloco.translate(ampmKey);
 
-    return `${timeLabel} ${displayHours}:${displayMinutes} ${ampm}`;
+    return `${displayHours}:${displayMinutes} ${ampm}`;
   });
 
   public ngOnInit(): void {
+    interval(30000)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => this._clockTick.update((v) => v + 1));
+
     this._updateSeo();
     this._transloco.langChanges$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((lang) => {
       this._currentLang.set(lang);
